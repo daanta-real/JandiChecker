@@ -2,6 +2,7 @@ package main;
 
 import javax.security.auth.login.LoginException;
 
+import main.data.SecretData;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -17,7 +18,7 @@ class Main extends ListenerAdapter {
         // 기본 jda를 만들고
         JDA jda = null;
 		try {
-			jda = JDABuilder.createDefault("ODkzODY3NDAxNTg4OTI4NTQy.YVhs4w.kQLCuciULqzxL5fK88zvcPiq-2E").build();
+			jda = JDABuilder.createDefault(SecretData.TOKEN).build();
 		} catch (LoginException e) { e.printStackTrace(); }
 
         // jda에 이벤트를 감지하는 리스너를 넣는다.
