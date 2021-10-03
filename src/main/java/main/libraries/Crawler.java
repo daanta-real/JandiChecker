@@ -1,4 +1,4 @@
-package main.crawler;
+package main.libraries;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

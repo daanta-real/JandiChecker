@@ -14,7 +14,7 @@ import $.$;
 public class Crawler {
 
 	// ID 주면 전체 HTML 리턴해줌
-	static String getHTML(String id) throws Exception {
+	public static String getHTML(String id) throws Exception {
 		// 필요변수 정의
 		URL url = new URL("https://github.com/" + id);
 	    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
@@ -29,7 +29,7 @@ public class Crawler {
 	}
 
 	// 수신된 웹 데이터 1차 trim (불필요 태그들 제거)
-	static String trim(String str) {
+	public static String trim(String str) {
 		int st = str.indexOf("js-calendar-graph-svg") + 26;
 		int ed = str.indexOf("<text ");
 		str = str.substring(st, ed);
@@ -38,7 +38,7 @@ public class Crawler {
 	}
 
 	// 수신된 웹 데이터 2차 trim (내부 태그 정돈)
-	static String makeDataCSV(String str) {
+	public static String makeDataCSV(String str) {
 
 		return str.toString()
 

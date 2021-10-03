@@ -1,4 +1,4 @@
-package _tdd.d211003_showGithubMap;
+package main.libraries;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -8,7 +8,6 @@ import java.util.Iterator;
 import java.util.Map;
 
 import $.$;
-import main.libraries.Crawler;
 
 public class GithubMap {
 
