@@ -6,7 +6,6 @@ import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -60,30 +59,29 @@ public class Crawler {
 
 	}
 
-	// 완성된 String CSV를 Split해서 Map으로 변환 후 리턴
-	static Map<Calendar, Boolean> CSVtoHashMap(String csv) {
+	// 완성된 CSV를 배열로 변환 후 리턴
+	static Map<String, Boolean> CSVtoHashMap(String csv) {
 
 		String list[] = csv.split("\n");
-		Map<Calendar, Boolean> map = new TreeMap<>();
+		Map<String, Boolean> map = new TreeMap<>();
 		for(int i = 0; i < list.length; i++) {
 			String[] keyValStr = list[i].split(",");
-			// 날짜 선언
-			String[] dateStr = keyValStr[0].split("-");
-			int[] dateInt = Arrays.stream(dateStr).mapToInt(Integer::parseInt).toArray();
-			Calendar key = $.getCalendar(dateInt[0], dateInt[1], dateInt[2]);
-			// 잔디여부 선언
-			Boolean val = Boolean.valueOf(keyValStr[1]);
-			map.put(key, val);
+			$.pn(Arrays.toString(keyValStr));
+			// 날짜 찾기
+			String dateStr = keyValStr[0];
+			// 잔디여부 찾기
+			Boolean val = !keyValStr[1].equals("0");
+			map.put(dateStr, val);
 		}
 		return map;
 	}
 
 	// ID를 넘기면 일일 잔디현황을 Map으로 리턴
-	static Map<Calendar, Boolean> getGithubMap(String githubId) throws Exception {
-		String str                 = getHTML     (githubId);
-		String trimmed             = trim        (str)     ;
-		String csv                 = makeDataCSV (trimmed) ;
-		Map<Calendar, Boolean> map = CSVtoHashMap(csv);
+	static Map<String, Boolean> getGithubMap(String githubId) throws Exception {
+		String str               = getHTML     (githubId);
+		String trimmed           = trim        (str)     ;
+		String csv               = makeDataCSV (trimmed) ;
+		Map<String, Boolean> map = CSVtoHashMap(csv);
 		return map;
 	}
 }

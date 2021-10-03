@@ -50,6 +50,7 @@ class Main extends ListenerAdapter {
         // 명령의 실행
     	switch(cmd) {
     		case "!목표": send("저는 매일 저녁과 자정, 잔디를 심지 않은 사람들을 찾아내 그 명단을 발표할 것입니다."); break;
+    		case "!확인": break;
     	}
 
     }

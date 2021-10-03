@@ -1,17 +1,12 @@
 package main.cmd;
 
-import java.util.Calendar;
-import java.util.Map;
-import java.util.TreeMap;
-
 import main.crawler.Crawler;
 
 public class Cmd {
 
-	public static Map<Calendar, Boolean> chkGitActivities(String id) throws Exception {
-		Map<Calendar, Boolean> map = new TreeMap<>();
-		map = Crawler.getGithubMap(id);
-		return map;
+	// 1명의 깃헙 정보를 출력
+	public static void showJandiMap(String id) throws Exception {
+		Crawler.getGithubMap(id);
 	}
 
 }
