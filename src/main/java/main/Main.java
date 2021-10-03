@@ -1,5 +1,8 @@
 package main;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.security.auth.login.LoginException;
 
 import main.data.DataSystem;
@@ -9,6 +12,8 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 class Main extends ListenerAdapter {
+
+	private static MessageReceivedEvent ev;
 
 	// 서버의 실행
 	public static void main(String[] args) {
@@ -26,14 +31,26 @@ class Main extends ListenerAdapter {
 
 	}
 
+	// 메세지 보냄
+	public void send(String msg) { ev.getChannel().sendMessage(msg).queue(); }
+
 	// 명령어에 따른 응답 부분
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
 
-        // 받은 메세지 내용이 !ping이라면
-        if (event.getMessage().getContentRaw().equals("!목표")) {
-            // pong라는 내용을 보낸다.
-            event.getChannel().sendMessage("저는 오늘 잔디를 심지 않은 사람들의 명단을 발굴하여 이를 공개할 것입니다.").queue();
-        }
+    	// 이벤트 저장
+    	ev = event;
+
+    	// 커맨드 분석하기. 첫 번째 String은 cmd, 이후 String은 args이므로 List자료형 opt에 저장.
+    	String[] cmds = event.getMessage().getContentRaw().split(" ");
+    	String cmd = cmds[0];
+    	List<String> opt = new ArrayList<>();
+    	for(int i = 1; i < cmds.length; i++) opt.add(cmds[i]);
+
+        // 명령의 실행
+    	switch(cmd) {
+    		case "!목표": send("저는 매일 저녁과 자정, 잔디를 심지 않은 사람들을 찾아내 그 명단을 발표할 것입니다."); break;
+    	}
+
     }
 }
