@@ -14,7 +14,13 @@ public class Cmd {
 	// 1명의 깃헙 정보를 출력
 	public static String showJandiMap(String name) throws Exception {
 		String id = getGithubID(name);
-		return GithubMap.getGithubInfoString(name, id);
+		if(id == null) return "없는 스터디원입니다.";
+		else return GithubMap.getGithubInfoString(name, id);
+	}
+
+	// 특정 ID의 깃헙 정보를 출력
+	public static String showJandiMapById(String id) throws Exception {
+		return GithubMap.getGithubInfoString("http://github.com/" + id + "/", id);
 	}
 
 	// 어제 커밋 안 한 스터디원 목록을 출력

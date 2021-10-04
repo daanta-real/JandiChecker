@@ -54,7 +54,8 @@ class BotMain extends ListenerAdapter {
     		case "$$도움말": case "$$help": case "$$도와줘": case "$$도우미": case "$$도움": case "$$도움!": case "$$소개":
     			send("```md\n_**저는 매일 저녁과 자정, 잔디를 심지 않은 사람들을 찾아내 그 명단을 발표할 것입니다.**_\n"
 					+ "$$목표: 이 봇이 제작된 목표를 설명합니다.\n"
-					+ "$$정보 [사람이름]: 특정인의 최근 1년 간 및 근 30일 간의 Github 잔디 정보를 가져옵니다. 이때 성은 생략해도 무관합니다.\n"
+					+ "$$정보 [사람이름]: 특정인의 최근 1년 간 및 근 30일 간의 Github 잔디 정보를 가져옵니다. 이때 관리목록에 이름이 서로 겹치는 인원이 없을 경우, 성은 생략해도 무관합니다.\n"
+					+ "$$id [id]: 특정 id의 최근 1년 간 및 근 30일 간의 Github 잔디 정보를 가져옵니다.\n"
 					+ "$$어제: 어제 잔디를 제출하지 않은 사람들의 명단을 공개합니다.\n"
 					+ "$$오늘: 오늘 잔디를 제출하지 않은 사람들의 명단을 공개합니다.\n"
 					+ "$$확인 [날짜(yyyy-MM-dd 형식)]: 특정 날짜에 잔디를 제출하지 않은 사람들의 명단을 출력합니다.\n"
@@ -69,6 +70,14 @@ class BotMain extends ListenerAdapter {
     				String option = opt.get(0);
     				$.pn(option + "님 (ID: " + Cmd.getGithubID(option) + ")의 정보 호출을 명령받았습니다.");
     				send(Cmd.showJandiMap(option));
+				} catch (Exception e) { e.printStackTrace(); }
+    		break;
+    		case "$$id":
+    			try {
+    				if(opt.size() == 0) { send("정확히 입력해 주세요."); break; } // 미입력 걸러내기
+    				String option = opt.get(0);
+    				$.pn("ID " + option + " 의 정보 호출을 명령받았습니다.");
+    				send(Cmd.showJandiMapById(option));
 				} catch (Exception e) { e.printStackTrace(); }
     		break;
     		case "$$어제":
