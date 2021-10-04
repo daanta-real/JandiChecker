@@ -99,7 +99,7 @@ public class GithubMap {
 	public static String getGithubInfoString(String name, String id) throws Exception {
 		Map<String, Object> map = getGithubMapInfo(id);
 		StringBuilder sb = new StringBuilder();
-		sb.append("```md\n# " + name + "님의 최근 커밋 근황\n");
+		sb.append("```md\n# " + name + "님 ( http://github.com/" + id + "/ )의 최근 커밋 현황\n");
 		int count = (int) map.get("recentCount");
 		float total = (int) map.get("recentTotal");
 		float perc = count / total;
@@ -109,7 +109,7 @@ public class GithubMap {
 		$.pn("30일 간의 총 날짜 수: " + total);
 		$.pn("30일 간의 커밋률(계산 전): " + perc);
 		$.pn("30일 간의 커밋률(계산 후): " + perc);
-		sb.append("# 상세 커밋 현황\n");
+		sb.append("# 최근 1년 간 커밋 상세:\n");
 		sb.append(map.get("totalMap"));
 		sb.append("```");
 		return sb.toString();
