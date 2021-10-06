@@ -4,7 +4,13 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -86,6 +92,80 @@ public class $ {
     	Calendar c = Calendar.getInstance();
     	c.set(y, m, d);
     	return c;
+    }
+
+ // Return the String table map from the ResultSet
+    public static String getTableStrFromResultTable(ResultSet rs) throws SQLException {
+
+    	// 1. Get the basic informations
+    	ResultSetMetaData meta = rs.getMetaData();
+    	int colCount = meta.getColumnCount();
+
+    	// 2. Save all datas to array
+
+    	// Declaration of the array which is used for save all datas of the ResultSet instance
+    	List<String[]> table = new ArrayList<>();
+    	// Declaration of the array which has the maximum length of the all data Strings of each columns
+    	int[] colNameMaxLens = new int[colCount];
+    	Arrays.fill(colNameMaxLens, 0);
+    	// Save the maximum lengths
+    	for(int i = 0; i < colCount; i++) {
+    		String columnName = meta.getColumnName(i + 1);
+    		int colNameLen = Integer.valueOf(columnName.length());
+    		colNameMaxLens[i] = colNameLen;
+    	}
+
+    	// Save the whole ResultSet datas to the array
+    	while(rs.next()) {
+    		String[] cols = new String[colCount]; // Column datas
+    		for(int i = 0; i < colCount; i++) {   // for all of the columns
+    			String val = rs.getString(i + 1);   // Get a String of the one column
+    			cols[i] = val;                      // Save the each vals to the cols array
+    			int valLength = val.length();
+    			if(colNameMaxLens[i] < valLength) colNameMaxLens[i] = valLength;
+    		}
+    		table.add(cols); // save the whole datas of one row to a table
+    	}
+
+    	// Declare the final output String
+    	StringBuilder sb = new StringBuilder();
+
+    	// Print the headers
+    	for(int i = 0; i < colCount; i++) {
+    		int printWidth = colNameMaxLens[i] + 2;
+    		String val = meta.getColumnName(i + 1);
+    		String printContent = String.format("%-" + printWidth + "s", val);
+    		sb.append(printContent);
+    		sb.append("\t");
+    	}
+    	sb.append('\n');
+
+    	// Print the '======'s next row of the header Strings
+    	for(int i = 0; i < colNameMaxLens.length; i++) {
+    		int len = colNameMaxLens[i];
+    		String eq     = new String(new char[len]).replace("\0", "=");
+    		String spaces = new String(new char[2]  ).replace("\0", " ");
+    		sb.append(eq);
+    		sb.append(spaces);
+    		sb.append("\t");
+    	}
+    	sb.append('\n');
+
+    	// Print the table datas
+    	for(int i = 1; i < table.size(); i++) {
+    		String[] row = table.get(i);
+    		for(int j = 0; j < row.length; j++) {
+    			int printWidth = colNameMaxLens[j] + 1;
+    			String val = row[j];
+    			String printContent = String.format("%-" + printWidth + "s", val);
+    			sb.append(printContent);
+    			sb.append("\t");
+    		}
+    		sb.append('\n');
+    	}
+
+    	// Returns the final output
+    	return sb.toString();
     }
 
 	// 구글 번역 안내 달기 스트링
