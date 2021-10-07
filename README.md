@@ -23,13 +23,17 @@ $$확인 [날짜(yyyy-MM-dd 형식)]: 특정 날짜에 잔디를 제출하지 �
 
 
 # Example
-![작동모습02](https://user-images.githubusercontent.com/84055731/135766952-617be278-4179-4d30-a6a6-b6bbd18867d0.png)
+![jandi00](https://user-images.githubusercontent.com/84055731/136304466-0af117c0-da6e-4215-b650-f50bfb62b895.png)
 
-![작동모습01](https://user-images.githubusercontent.com/84055731/135766951-ecac9a7a-90a2-40f9-a4e2-dcab590ae762.png)
+![jandi01](https://user-images.githubusercontent.com/84055731/136304471-7f8c9466-6f6f-4282-8558-5bcaf4a68bd6.png)
 
-![작동모습03](https://user-images.githubusercontent.com/84055731/135766949-e95e7491-1fb5-47fb-ac12-210278440bc4.png)
+![jandi02](https://user-images.githubusercontent.com/84055731/136304472-d5393372-285c-4e06-a846-e4964b6aa47c.png)
 
-![작동모습04](https://user-images.githubusercontent.com/84055731/135766950-9b7976e9-0e01-48de-9a2c-a0a366511c8b.png)
+![jandi03](https://user-images.githubusercontent.com/84055731/136304474-a7057759-b237-4dfe-9dea-82def4e662d6.png)
+
+![jandi04](https://user-images.githubusercontent.com/84055731/136304477-e6c4621c-af01-4cc1-bf80-4b255bc07651.png)
+
+![jandi05](https://user-images.githubusercontent.com/84055731/136304495-6c695b3b-e397-4bdd-8794-40813d9c295b.png)
 
 
 
