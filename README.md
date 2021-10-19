@@ -1,25 +1,24 @@
 ![img](https://user-images.githubusercontent.com/84055731/135766694-09a6cfb2-4cc5-4bb4-bc4a-d8d89102bd19.png)
 
 # JandiChecker
-_**저는 매일 저녁과 자정, 잔디를 심지 않은 사람들을 찾아내 그 명단을 발표할 것입니다.**_
+_**"저는 매일 저녁과 자정, 잔디를 심지 않은 사람들을 찾아내 그 명단을 발표할 것입니다."**_
 
-A Discord Bot for digging and revealing a list of who has forgotten to commit to Github daily in my study group
-
-
+This is a Discord Bot for digging and revealing a list of who has forgotten to commit to Github yesterday in my study group.
+이 디스코드 봇은 제 스터디그룹에서 전날 커밋하지 않은 사람의 명단을 출력해 줍니다.
 
 
 # How to Use
-$$목표: 이 봇이 제작된 목표를 설명합니다.
+&목표: 이 봇이 제작된 목표를 설명합니다.
 
-$$정보 [사람이름]: 특정인의 최근 1년 간 및 근 30일 간의 Github 잔디 정보를 가져옵니다. 이때 관리목록에 이름이 서로 겹치는 인원이 없을 경우, 성은 생략해도 무관합니다.
+&정보 [사람이름]: 특정인의 최근 1년 간 및 근 30일 간의 Github 잔디 정보를 가져옵니다. 이때 관리목록에 이름이 서로 겹치는 인원이 없을 경우, 성은 생략해도 무관합니다.
 
-$$id [id]: 특정 id의 최근 1년 간 및 근 30일 간의 Github 잔디 정보를 가져옵니다.
+&id [id]: 특정 id의 최근 1년 간 및 근 30일 간의 Github 잔디 정보를 가져옵니다.
 
-$$어제: 어제 잔디를 제출하지 않은 사람들의 명단을 공개합니다.
+&어제: 어제 잔디를 제출하지 않은 사람들의 명단을 공개합니다.
 
-$$오늘: 오늘 잔디를 제출하지 않은 사람들의 명단을 공개합니다.
+&오늘: 오늘 잔디를 제출하지 않은 사람들의 명단을 공개합니다.
 
-$$확인 [날짜(yyyy-MM-dd 형식)]: 특정 날짜에 잔디를 제출하지 않은 사람들의 명단을 출력합니다.
+&확인 [날짜(yyyy-MM-dd 형식)]: 특정 날짜에 잔디를 제출하지 않은 사람들의 명단을 출력합니다.
 
 
 # Example
