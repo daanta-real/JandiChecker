@@ -4,6 +4,7 @@
 _**"저는 매일 저녁과 자정, 잔디를 심지 않은 사람들을 찾아내 그 명단을 발표할 것입니다."**_
 
 This is a Discord Bot for digging and revealing a list of who has forgotten to commit to Github yesterday in my study group.
+
 이 디스코드 봇은 제 스터디그룹에서 전날 커밋하지 않은 사람의 명단을 출력해 줍니다.
 
 
