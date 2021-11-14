@@ -18,7 +18,7 @@ public class FileOpen {
 
 
     // 파일이름을 넣으면 파일내용을 String으로 돌려주는 메소드
-    private static String getFileContents(String fileName) {
+    private static String getFileContents(String fileName) throws Exception {
     	StringBuilder sb = null;
     	String result = "";
         try {
@@ -42,12 +42,19 @@ public class FileOpen {
         return result;
     }
 
-	// 파일불러오기
-	ObjectInputStream i = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File(DataSystem.PATH, "lotto.txt"))));
-	@SuppressWarnings("unchecked")
-	Set<Integer> sRead = (Set<Integer>) i.readObject();
+    public static Object getFileContents() throws Exception {
 
-	i.close();
-	$.pn("읽기완료: " + sRead.toString());
+    	// 파일불러오기
+    	ObjectInputStream i
+    		= new ObjectInputStream(
+    		  new BufferedInputStream(
+    		  new FileInputStream(
+    		  new File(DataSystem.PATH, "lotto.txt"))));
+    	@SuppressWarnings("unchecked")
+		Set<Integer> sRead = (Set<Integer>) i.readObject();
+    	i.close();
+    	$.pn("읽기완료: " + sRead.toString());
+		return sRead;
+    }
 
 }
