@@ -43,11 +43,10 @@ public class FileOpen {
     }
 
 	// 파일불러오기
-	ObjectInputStream i = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File(DataSystem.PATH, "lotto.txt"))));
+	ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(new File(DataSystem.PATH, "lotto.txt"))));
 	@SuppressWarnings("unchecked")
-	Set<Integer> sRead = (Set<Integer>) i.readObject();
-
-	i.close();
-	$.pn("읽기완료: " + sRead.toString());
+	Set<Integer> sRead = (Set<Integer>) ois.readObject(); // Integer형으로 불러옴
+	$.pn("읽어온 Integer 값: " + sRead);
+	ois.close();
 
 }
