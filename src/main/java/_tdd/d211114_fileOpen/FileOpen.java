@@ -49,8 +49,7 @@ public class FileOpen {
     		= new ObjectInputStream(
     		  new BufferedInputStream(
     		  new FileInputStream(
-    		  new File(DataSystem.PATH, "lotto.txt"))));
-    	@SuppressWarnings("unchecked")
+    		  new File(DataSystem.PATH, "int.txt"))));
 		Set<Integer> sRead = (Set<Integer>) i.readObject();
     	i.close();
     	$.pn("읽기완료: " + sRead.toString());
