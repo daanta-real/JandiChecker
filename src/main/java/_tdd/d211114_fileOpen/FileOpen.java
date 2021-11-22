@@ -18,7 +18,8 @@ public class FileOpen {
 
 
     // 파일이름을 넣으면 파일내용을 String으로 돌려주는 메소드
-    private static String getFileContents(String fileName) throws Exception {
+    @SuppressWarnings("unused")
+	private static String getFileContents(String fileName) throws Exception {
     	StringBuilder sb = null;
     	String result = "";
         try {
@@ -42,7 +43,8 @@ public class FileOpen {
         return result;
     }
 
-    public static Object getFileContents() throws Exception {
+    @SuppressWarnings("unchecked")
+	public static Object getFileContents() throws Exception {
 
     	// 파일불러오기
     	ObjectInputStream i
