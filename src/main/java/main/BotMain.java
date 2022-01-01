@@ -1,9 +1,19 @@
 package main;
 
+import static org.quartz.CronScheduleBuilder.cronSchedule;
+import static org.quartz.JobBuilder.newJob;
+import static org.quartz.TriggerBuilder.newTrigger;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.security.auth.login.LoginException;
+
+import org.quartz.JobDetail;
+import org.quartz.Scheduler;
+import org.quartz.SchedulerFactory;
+import org.quartz.Trigger;
+import org.quartz.impl.StdSchedulerFactory;
 
 import $.$;
 import main.data.DataSystem;
@@ -24,17 +34,39 @@ class BotMain extends ListenerAdapter {
 
         // 기본 jda를 만들고
         JDA jda = null;
-		try {
-			jda = JDABuilder.createDefault(DataSystem.TOKEN).build();
-		} catch (LoginException e) { e.printStackTrace(); }
+		try { jda = JDABuilder.createDefault(DataSystem.TOKEN).build(); }
+		catch (LoginException e) { e.printStackTrace(); }
 
         // jda에 이벤트를 감지하는 리스너를 넣는다.
         jda.addEventListener(new BotMain());
 
-	}
+        // 스케쥴러 팩토리 생성
+        SchedulerFactory schedulerFactory = new StdSchedulerFactory();
+
+        // 스케쥴러 등록 시도
+        try {
+
+        	// 스케쥴러 인스턴스 생성
+            Scheduler scheduler = schedulerFactory.getScheduler();
+
+            JobDetail job = newJob(TestJob.class)
+                .withIdentity("jobName", Scheduler.DEFAULT_GROUP)
+                .build();
+
+            Trigger trigger = newTrigger()
+                .withIdentity("trggerName", Scheduler.DEFAULT_GROUP)
+                .withSchedule(cronSchedule("0 0 0 1 1 *")) // 0초 0분 0시 0일 0월
+                .build();
+
+            scheduler.scheduleJob(job, trigger);
+            scheduler.start();
+        }
+        catch(Exception e) { e.printStackTrace(); }
+
+    }
 
 	// 메세지 보냄
-	public void send(String msg) { ev.getChannel().sendMessage(msg).queue(); }
+	public static void send(String msg) { ev.getChannel().sendMessage(msg).queue(); }
 
 	// 명령어에 따른 응답 부분
     @Override
@@ -46,7 +78,7 @@ class BotMain extends ListenerAdapter {
     	// 커맨드 분석하기. 첫 번째 String은 cmd, 이후 String은 args이므로 List자료형 opt에 저장.
     	String[] cmds = event.getMessage().getContentRaw().split(" ");
     	String cmd = cmds[0];
-    	List<String> opt = new ArrayList<>();
+    	List<String> opt = new ArrayList<String>();
     	for(int i = 1; i < cmds.length; i++) opt.add(cmds[i]);
 
         // 명령의 실행
