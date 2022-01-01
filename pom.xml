@@ -4,20 +4,33 @@
   <artifactId>Discord_bot_JandiChecker</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 	 
- <dependencies> 
+ <dependencies>
+ 
+ 	<!-- 디스코드 봇 라이브러리 --> 
 	<dependency>
 	    <groupId>net.dv8tion</groupId>
 	    <artifactId>JDA</artifactId>
 	    <version>4.2.0_228</version>
 	</dependency>
+	
+	<!-- 스케쥴러 라이브러리 -->
+	<!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
+	<dependency>
+	    <groupId>org.quartz-scheduler</groupId>
+	    <artifactId>quartz</artifactId>
+	    <version>2.3.2</version>
+	</dependency>
+	
 </dependencies>
 	
 <repositories>
+
 	<repository>
 	    <id>jcenter</id>
 	    <name>jcenter-bintray</name>
 	    <url>https://jcenter.bintray.com</url>
 	</repository>
+	
 </repositories>
 
 </project>
