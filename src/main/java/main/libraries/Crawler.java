@@ -11,6 +11,7 @@ import java.util.TreeMap;
 
 import $.$;
 
+// 깃헙 긁어오기 관련 모든 소스코드. 크롤링 및 데이터 획득
 public class Crawler {
 
 	// ID 주면 전체 HTML 리턴해줌

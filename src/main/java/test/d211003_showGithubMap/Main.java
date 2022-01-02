@@ -1,4 +1,4 @@
-package _tdd.d211003_showGithubMap;
+package test.d211003_showGithubMap;
 
 import $.$;
 

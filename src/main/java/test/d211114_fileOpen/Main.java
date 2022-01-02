@@ -1,4 +1,4 @@
-package _tdd.d211114_fileOpen;
+package test.d211114_fileOpen;
 
 public class Main {
 

@@ -3,10 +3,15 @@
   <groupId>Group</groupId>
   <artifactId>Discord_bot_JandiChecker</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-	 
+
+ <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+
  <dependencies>
  
- 	<!-- 디스코드 봇 라이브러리 --> 
+ 	<!-- 자바 디스코드 봇 JDA 라이브러리 --> 
 	<dependency>
 	    <groupId>net.dv8tion</groupId>
 	    <artifactId>JDA</artifactId>

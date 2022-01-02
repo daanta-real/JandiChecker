@@ -1,11 +1,11 @@
-package _tdd.d211003_checker;
+package test.d211003_checker;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import $.$;
-import _tdd.d211003_crawling.Crawler;
 import main.data.DataSystem;
+import test.d211003_crawling.Crawler;
 
 public class Checker {
 

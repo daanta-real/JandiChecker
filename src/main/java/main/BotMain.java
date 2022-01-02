@@ -1,134 +1,64 @@
 package main;
 
-import static org.quartz.CronScheduleBuilder.cronSchedule;
-import static org.quartz.JobBuilder.newJob;
-import static org.quartz.TriggerBuilder.newTrigger;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.security.auth.login.LoginException;
-
-import org.quartz.JobDetail;
-import org.quartz.Scheduler;
-import org.quartz.SchedulerFactory;
-import org.quartz.Trigger;
-import org.quartz.impl.StdSchedulerFactory;
 
 import $.$;
 import main.data.DataSystem;
 import main.libraries.Cmd;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.entities.GuildChannel;
+import net.dv8tion.jda.api.entities.PrivateChannel;
+import net.dv8tion.jda.api.entities.StoreChannel;
+import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 class BotMain extends ListenerAdapter {
 
-	private static MessageReceivedEvent ev;
+	// 어디서든 호출 있는 JDA 생성
+    public static JDA jda_obj = null;
+
+	// 명령어에 따른 응답 부분
+    @Override
+    public void onMessageReceived(MessageReceivedEvent event) { Cmd.command(event); }
 
 	// 서버의 실행
 	public static void main(String[] args) {
 
-		// 서버의 실행
+		// 인스턴스 잡기
+		JDA inst = JdaObj.instance;
+		// 기본 jda를 만든다
+		try {
+			inst = JDABuilder.createDefault(DataSystem.TOKEN).build(); // 봇을 만들어 로그인시킨 뒤, JdaObj의 인스턴스 값으로 할당
+			$.pn("JDA 인스턴스 생성 완료:" + inst.toString() );
+		} catch (LoginException e) { e.printStackTrace(); }
 
-        // 기본 jda를 만들고
-        JDA jda = null;
-		try { jda = JDABuilder.createDefault(DataSystem.TOKEN).build(); }
-		catch (LoginException e) { e.printStackTrace(); }
+		// 개인채널 a에 메세지 보내보기
+		String channelId = "874887127463252028";
+		int count = 1;
+		TextChannel targetChannel_text = null;
+        PrivateChannel targetChannel_private = null;
+        GuildChannel targetChannel_guild = null;
+        StoreChannel targetChannel_store = null;
 
-        // jda에 이벤트를 감지하는 리스너를 넣는다.
-        jda.addEventListener(new BotMain());
+        targetChannel_text = inst.getTextChannelById(channelId);
+        $.pr(count++); $.pn(targetChannel_text); $.pn(targetChannel_text == null);
+		if(targetChannel_text == null) targetChannel_private = inst.getPrivateChannelById(channelId);
+        $.pr(count++); $.pn(targetChannel_private); $.pn(targetChannel_private == null);
+        if(targetChannel_private == null) targetChannel_guild = inst.getGuildChannelById(channelId);
+        $.pr(count++); $.pn(targetChannel_guild); $.pn(targetChannel_guild == null);
+        if(targetChannel_guild == null) targetChannel_store = inst.getStoreChannelById(channelId);
+        $.pr(count++); $.pn(targetChannel_store); $.pn(targetChannel_store == null);
+        /*Cmd.send(targetChannel, "Your message here.");
+        $.pn("채널명:" + targetChannel);*/
 
-        // 스케쥴러 팩토리 생성
-        SchedulerFactory schedulerFactory = new StdSchedulerFactory();
+        // jda에 이벤트를 감지하는 리스너 봇을 넣는다.
+		ListenerAdapter bot = new BotMain(); // 리스너 봇
+		inst.addEventListener(bot); // 만들어진 리스너 봇을 JdaObj의 인스턴스 내부에 할당
+		$.pn("이벤트 리스너 생성: " + bot.toString());
 
-        // 스케쥴러 등록 시도
-        try {
-
-        	// 스케쥴러 인스턴스 생성
-            Scheduler scheduler = schedulerFactory.getScheduler();
-
-            JobDetail job = newJob(TestJob.class)
-                .withIdentity("jobName", Scheduler.DEFAULT_GROUP)
-                .build();
-
-            Trigger trigger = newTrigger()
-                .withIdentity("trggerName", Scheduler.DEFAULT_GROUP)
-                .withSchedule(cronSchedule("0 0 0 1 1 *")) // 0초 0분 0시 0일 0월
-                .build();
-
-            scheduler.scheduleJob(job, trigger);
-            scheduler.start();
-        }
-        catch(Exception e) { e.printStackTrace(); }
-
-    }
-
-	// 메세지 보냄
-	public static void send(String msg) { ev.getChannel().sendMessage(msg).queue(); }
-
-	// 명령어에 따른 응답 부분
-    @Override
-    public void onMessageReceived(MessageReceivedEvent event) {
-
-    	// 이벤트 저장
-    	ev = event;
-
-    	// 커맨드 분석하기. 첫 번째 String은 cmd, 이후 String은 args이므로 List자료형 opt에 저장.
-    	String[] cmds = event.getMessage().getContentRaw().split(" ");
-    	String cmd = cmds[0];
-    	List<String> opt = new ArrayList<String>();
-    	for(int i = 1; i < cmds.length; i++) opt.add(cmds[i]);
-
-        // 명령의 실행
-    	switch(cmd) {
-    		case "&도움말": case "&help": case "&도와줘": case "&도우미": case "&도움": case "&도움!": case "&소개":
-    			send("```md\n_**저는 매일 저녁과 자정, 잔디를 심지 않은 사람들을 찾아내 그 명단을 발표할 것입니다.**_\n"
-					+ "&목표: 이 봇이 제작된 목표를 설명합니다.\n"
-					+ "&정보 [사람이름]: 특정인의 최근 1년 간 및 근 30일 간의 Github 잔디 정보를 가져옵니다. 이때 관리목록에 이름이 서로 겹치는 인원이 없을 경우, 성은 생략해도 무관합니다.\n"
-					+ "&id [id]: 특정 id의 최근 1년 간 및 근 30일 간의 Github 잔디 정보를 가져옵니다.\n"
-					+ "&어제: 어제 잔디를 제출하지 않은 사람들의 명단을 공개합니다.\n"
-					+ "&오늘: 오늘 잔디를 제출하지 않은 사람들의 명단을 공개합니다.\n"
-					+ "&확인 [날짜(yyyy-MM-dd 형식)]: 특정 날짜에 잔디를 제출하지 않은 사람들의 명단을 출력합니다.\n"
-					+ "\n"
-					+ "잔디체커(JandiChecker) v1.0\n제작 by 단타(박준성)\ne-mail: daanta@naver.com\nGithub: http://github.com/daanta-real```");
-    			break;
-    		case "&목표": send("저는 매일 저녁과 자정, 잔디를 심지 않은 사람들을 찾아내 그 명단을 발표할 것입니다.");
-    			break;
-    		case "&정보":
-    			try {
-    				if(opt.size() == 0) { send("정확히 입력해 주세요."); break; } // 미입력 걸러내기
-    				String option = opt.get(0);
-    				$.pn(option + "님 (ID: " + Cmd.getGithubID(option) + ")의 정보 호출을 명령받았습니다.");
-    				send(Cmd.showJandiMap(option));
-				} catch (Exception e) { e.printStackTrace(); }
-    		break;
-    		case "&id":
-    			try {
-    				if(opt.size() == 0) { send("정확히 입력해 주세요."); break; } // 미입력 걸러내기
-    				String option = opt.get(0);
-    				$.pn("ID " + option + " 의 정보 호출을 명령받았습니다.");
-    				send(Cmd.showJandiMapById(option));
-				} catch (Exception e) { e.printStackTrace(); }
-    		break;
-    		case "&어제":
-    			try { send(Cmd.showNotCommitedYesterday()); }
-    			catch (Exception e) { e.printStackTrace(); }
-			break;
-    		case "&오늘":
-    			try { send(Cmd.showNotCommitedToday()); }
-    			catch (Exception e) { e.printStackTrace(); }
-			break;
-    		case "&확인":
-    			try {
-    				if(opt.size() == 0) { send("정확히 입력해 주세요."); break; } // 미입력 걸러내기
-    				String option = opt.get(0);
-    				send(Cmd.showNotCommitedSomeday(option));
-    			} catch (Exception e) { e.printStackTrace(); }
-			break;
-			default: break;
-    	}
 
     }
+
 }

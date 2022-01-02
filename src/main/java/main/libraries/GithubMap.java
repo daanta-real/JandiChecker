@@ -9,6 +9,7 @@ import java.util.Map;
 
 import $.$;
 
+// 크롤러에서 읽어온 데이터에서 특정 정보를 빼내오거나, 특정 인원들의 깃헙 정보를 출력해줌
 public class GithubMap {
 
 	private static final boolean DEBUG = true;
@@ -17,9 +18,9 @@ public class GithubMap {
 	private static Calendar getDate(String dateStr) {
 		String[] dayStrArr = dateStr.split("-");
 		return $.getCalendar(
-				Integer.valueOf(dayStrArr[0]),
-				Integer.valueOf(dayStrArr[1]) - 1,
-				Integer.valueOf(dayStrArr[2])
+			Integer.valueOf(dayStrArr[0]),
+			Integer.valueOf(dayStrArr[1]) - 1,
+			Integer.valueOf(dayStrArr[2])
 		);
 	}
 
@@ -96,6 +97,7 @@ public class GithubMap {
 
 	}
 
+	// 특정 인원에 대한 잔디 정보를 최종 출력해줌
 	public static String getGithubInfoString(String name, String id) throws Exception {
 		Map<String, Object> map = getGithubMapInfo(id);
 		StringBuilder sb = new StringBuilder();

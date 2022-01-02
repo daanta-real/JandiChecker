@@ -4,9 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import $.$;
-import _tdd.d211003_crawling.Crawler;
 import main.data.DataSystem;
+import test.d211003_crawling.Crawler;
 
+// 깃헙 제출한 사람과 안 한 사람들의 정보를 정리
 public class Checker {
 
 	private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

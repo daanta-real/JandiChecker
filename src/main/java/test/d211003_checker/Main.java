@@ -1,4 +1,4 @@
-package _tdd.d211003_checker;
+package test.d211003_checker;
 
 import $.$;
 
