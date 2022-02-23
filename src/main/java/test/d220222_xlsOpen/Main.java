@@ -3,6 +3,7 @@ package test.d220222_xlsOpen;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.Iterator;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -11,16 +12,17 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import $.$;
-import main.data.DataSystem;
 
 public class Main {
 	public static void main(String[] args) {
 
-		String fileName = "a.xls";
+		final String PATH = Paths.get("").toAbsolutePath().toString();
 
         try {
 
-            FileInputStream file = new FileInputStream(new File(DataSystem.PATH, fileName));
+        	$.pn("[잔디체커를 실행합니다.]");
+        	System.out.println("현재 경로: " + PATH);
+            FileInputStream file = new FileInputStream(new File(PATH, "★settings.xlsx"));
 
             // Workbook instance 생성 후 첫 번째 시트를 가져옴
             // 특정 시트를 불러올 경우 getSheetAt() 안에 시트명을 넣으면 되고
