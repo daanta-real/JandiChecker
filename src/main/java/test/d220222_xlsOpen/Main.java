@@ -23,7 +23,7 @@ public class Main {
 
 			// 현재 경로 따기
 			String PATH = Paths.get("").toAbsolutePath().toString();
-			System.out.println("현재 경로: " + PATH);
+			$.pn("현재 경로: " + PATH);
 
 			// 파일 객체 부르기
 			FileInputStream file = new FileInputStream(new File(PATH, "★settings.xlsx"));
@@ -56,20 +56,43 @@ public class Main {
 					//     NUMERIC(0), STRING(1), FORMULA(2),
 					//     BLANK(3), BOOLEAN(4), ERROR(5)
 					// 그 외에 NONE(-1)도 있긴 한데 내부적으로 쓰이는 값이므로 신경쓰지 말자.
-					// .getNumericCellValue()는 기본적으로 double형을 리턴함을 참고.
+					// .getNumericCellValue()로 계산된 셀값을 구할 수 있되, 기본적으로 boolean형만 리턴하니 참고.
+					$.pf(cell.getAddress() + "셀 - ");
 					switch (cell.getCellType()) {
+						// 숫자셀인 경우, 기본적으로 숫자 형태로만 빼지므로, 문자형으로 쓰려면 String으로 변환해서 써야 한다.
+						// 예제 셀값: 135
 						case NUMERIC:
-							System.out.print((int) cell.getNumericCellValue() + "\t");
+							$.pn("[" + cell.getCellType() + "(" + cell.getClass() + ") ] " + cell.getNumericCellValue());
 							break;
+						// 문자셀인 경우.
+						// 예제 셀값: "문자열"
 						case STRING:
-							System.out.print(cell.getStringCellValue() + "\t");
+							$.pn("[" + cell.getCellType() + "(" + cell.getClass() + ") ] " + cell.getStringCellValue());
 							break;
-						default:
-							System.out.println("타입이 없습니다.");
+						// 에러 셀. 셀 타입 별로 서로 다른 SWITCH를 쓰려면, 에러 셀 case문은 반드시 FORMULA 전에 위치하여야 한다.
+						// ERROR도 기본적으로 FORMULA의 일종이기 때문.
+						// 예제 셀값: "=(A1:A3/B1:B3)" (에러 남)
+						case ERROR:
+							$.pn("[" + cell.getCellType() + "(" + cell.getClass() + ") ] " + cell.getCellFormula());
+							break;
+						// FORMULA(수식)셀인 경우, 결과값을 "문자열"로 빼오거나, 아예 "수식구문"을 빼올 수도 있다.
+						// 예제 셀값: "=ADDRESS(ROW(),COLUMN())"
+						case FORMULA:
+							$.pn("[" + cell.getCellType() + "(" + cell.getClass() + ") ] " + cell.getStringCellValue()
+								+ " / " + cell.getCellFormula());
+							break;
+						// 빈 값
+						case BLANK:
+							$.pn("[" + cell.getCellType() + "(" + cell.getClass() + ") ] " + cell.getNumericCellValue());
+							break;
+						// TRUE/FALSE 중 하나로 기록했을 경우.
+						// 예제 셀값: "TRUE"
+						case BOOLEAN:
+							$.pn("[" + cell.getCellType() + "(" + cell.getClass() + ") ] " + cell.getBooleanCellValue());
 							break;
 					}
+					$.pn("SWITCH문 끝. 줄 개행");
 				}
-				$.pn("줄 개행");
 			}
 
 			// 시트 이용이 끝났다면, 시트를 먼저 닫고 그 다음에 파일을 닫아야 한다.
