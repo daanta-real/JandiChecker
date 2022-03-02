@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -22,9 +23,9 @@ public class Main {
 		// 시트 데이터 불러오기
 		// 현재 경로 따기
 		String PATH = Paths.get("").toAbsolutePath().toString();
-		$.pn("현재 경로: " + PATH);
+		$.pn("현재 경로: " + PATH + "\n구성원 목록이 담겨 있는 엑셀 파일을 불러옵니다.");
 		// 파일 객체 부르기
-		FileInputStream file = new FileInputStream(new File(PATH, "_test.xlsx"));
+		FileInputStream file = new FileInputStream(new File(PATH, "list.xlsx"));
 		// 파일 객체로부터 시트 객체 뽑아내기
 		XSSFWorkbook workbook = new XSSFWorkbook(file);
 		XSSFSheet sheet = workbook.getSheetAt(0);
@@ -32,13 +33,7 @@ public class Main {
 		// 셋팅 내용 뽑기 준비
 		List<String[]> list = new ArrayList<>();
 		Iterator<Row> rowIterator = sheet.iterator();
-		while(rowIterator.hasNext()) {
-			Row row = rowIterator.next();
-			$.pn(row.getRowNum() + "행 진입. 이 줄의 마지막 열: " + row.getLastCellNum());
-		}
 		// 3행으로 이동
-		rowIterator.next();
-		rowIterator.next();
 		rowIterator.next();
 
 		// 각 이름/ID 뽑기
@@ -47,19 +42,21 @@ public class Main {
 			// 줄 준비
 			Row row = rowIterator.next();
 			Iterator<Cell> cellIterator = row.cellIterator();
-			$.pn(row.getRowNum() + "행 진입. 이 줄의 마지막 열: " + row.getLastCellNum());
-			// 2열로 이동
-			cellIterator.next();
-			// 이름 획득
-			Cell cell2 = cellIterator.next();
-			$.pn(cell2.getAddress() + "(" + cell2.getCellType() + ")");
-			String name = cell2.getStringCellValue();
-			$.pn(cell2.getStringCellValue());
-			// 주소 획득
-			Cell cell3 = cellIterator.next();
-			$.pn(cell3.getAddress() + "(" + cell3.getCellType() + ")");
-			String id = cell3.getStringCellValue();
-			String[] rowArray = new String[] {name, id};
+			// 이름 셀로 이동
+			Cell cell_name = cellIterator.next();
+			// 만약에 빈 셀이 나오면 읽기 종료
+			if(cell_name.getCellType() == CellType.BLANK) {
+				$.pn("읽기 종료");
+				break;
+			}
+			String nameString = cell_name.getStringCellValue();
+			// Github ID 획득
+			Cell cell_id = cellIterator.next();
+			String id = cell_id.getStringCellValue();
+			// 획득된 구성원 정보를 목록에 추가
+			$.pn("구성원 목록 추가: " + cell_name.getStringCellValue() + "(" + cell_id.getStringCellValue() + ")");
+			String[] rowArray = new String[] {nameString, id};
+			list.add(rowArray);
 		}
 
 		// 완성된 List 출력
