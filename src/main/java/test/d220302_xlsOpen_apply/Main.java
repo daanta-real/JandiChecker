@@ -23,7 +23,8 @@ public class Main {
 		// 시트 데이터 불러오기
 		// 현재 경로 따기
 		String PATH = Paths.get("").toAbsolutePath().toString();
-		$.pn("현재 경로: " + PATH + "\n구성원 목록이 담겨 있는 엑셀 파일을 불러옵니다.");
+		$.pn("구성원 목록이 담겨 있는 엑셀 파일을 불러옵니다.");
+		$.pn("현재 경로: " + PATH);
 		// 파일 객체 부르기
 		FileInputStream file = new FileInputStream(new File(PATH, "list.xlsx"));
 		// 파일 객체로부터 시트 객체 뽑아내기
