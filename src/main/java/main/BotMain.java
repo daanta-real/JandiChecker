@@ -5,6 +5,7 @@ import javax.security.auth.login.LoginException;
 import $.$;
 import main.data.DataSystem;
 import main.libraries.Cmd;
+import main.libraries.ListLoad;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -12,15 +13,18 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 class BotMain extends ListenerAdapter {
 
-	// 어디서든 호출 있는 JDA 생성
+	// 어디서든 호출할 수 있는 JDA 생성
     public static JDA jda_obj = null;
 
-	// 명령어에 따른 응답 부분
+	// 명령어에 따른 동작 실행
     @Override
     public void onMessageReceived(MessageReceivedEvent event) { Cmd.command(event); }
 
 	// 서버의 실행
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
+
+		// 잔디 확인할 대상목록 불러오기
+		ListLoad.ready();
 
 		// 인스턴스 잡기
 		JDA jda = JdaObj.instance;
