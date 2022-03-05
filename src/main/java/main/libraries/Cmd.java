@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import $.$;
-import main.data.DataSystem;
+import main.data.MainSystem;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
@@ -29,7 +29,7 @@ public class Cmd {
 
 	// 1명의 깃헙 ID를 획득
 	public static String getGithubID(String name) {
-		for(String[] s: DataSystem.LIST)
+		for(String[] s: MainSystem.list)
 			if(s[0].equals(name) || s[0].substring(1).equals(name)) return s[1];
 		return null;
 	}

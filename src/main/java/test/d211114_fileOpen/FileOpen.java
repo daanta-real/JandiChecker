@@ -10,7 +10,7 @@ import java.io.ObjectInputStream;
 import java.util.Set;
 
 import $.$;
-import main.data.DataSystem;
+import main.data.MainSystem;
 
 public class FileOpen {
 
@@ -51,7 +51,7 @@ public class FileOpen {
     		= new ObjectInputStream(
     		  new BufferedInputStream(
     		  new FileInputStream(
-    		  new File(DataSystem.PATH, "int.txt"))));
+    		  new File(MainSystem.PATH, "int.txt"))));
 		Set<Integer> sRead = (Set<Integer>) i.readObject();
     	i.close();
     	$.pn("읽기완료: " + sRead.toString());

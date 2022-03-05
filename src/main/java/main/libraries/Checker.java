@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import $.$;
-import main.data.DataSystem;
+import main.data.MainSystem;
 import test.d211003_crawling.Crawler;
 
 // 깃헙 제출한 사람과 안 한 사람들의 정보를 정리
@@ -43,7 +43,7 @@ public class Checker {
 		$.pn("커밋을 확인합니다. 확인할 날짜: " + day);
 		StringBuilder sb = new StringBuilder();
 		int count = 0;
-		for(String[] s: DataSystem.LIST) {
+		for(String[] s: MainSystem.list) {
 			String name = s[0];
 			String id = s[1];
 			boolean isCommited = getIsGithubCommitedByDay(id, day);
