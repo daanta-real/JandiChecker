@@ -29,7 +29,7 @@ public class Cmd {
 
 	// 1명의 깃헙 ID를 획득
 	public static String getGithubID(String name) {
-		for(String[] s: MainSystem.list)
+		for(String[] s: MainSystem.LIST)
 			if(s[0].equals(name) || s[0].substring(1).equals(name)) return s[1];
 		return null;
 	}
