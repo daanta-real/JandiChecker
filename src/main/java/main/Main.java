@@ -16,7 +16,7 @@ class Main extends ListenerAdapter {
 	public static JDA jda_obj = null;
 
 	// 싱글톤 인스턴스 획득
-	public static MainSystem mainSystem = MainSystem.getInstance();
+	public static MainSystem mainSystem;
 
 
 	// 명령어에 따른 동작 실행
@@ -27,18 +27,28 @@ class Main extends ListenerAdapter {
 	public static void main(String[] args) throws Exception {
 
 		// 환경설정 확인
+		$.pn("[[[잔디체커 시작]]]\n");
+
+		// mainSystem 변수의 인스턴스 설정
+		mainSystem = MainSystem.getInstance();
+
+		// 상세 환경변수 확인 시작
 		$.pn("[[[잔디체커 환경설정 확인]]]");
+		$.pr(" - 메인 설정 확인: ");
+		$.pn(mainSystem);
+
 		$.pf(" - 실행 경로 확인: %s\n", mainSystem.getPath());
 		$.pf(" - 토큰: %s\n", mainSystem.getToken());
 		$.pn(" - 명단 확인: ");
 		String[][] members = mainSystem.getMembers();
 		for(int i = 0; i < members.length; i++) {
 			String[] s = members[i];
-			$.pf("	ㄴ %d번째 인원: '%s' (Github ID: %s)", s[0], s[1]);
+			char line = i == members.length - 1 ? '└' : '├';
+			$.pf("    %c─ %d번째 인원: '%s' (Github ID: %s)\n", line, i, s[0], s[1]);
 		}
 
 		// 인스턴스 잡기
-		$.pn("[[[잔디체커 JDA 인스턴스 생성]]]");
+		$.pn("\n[[[잔디체커 JDA 인스턴스 생성]]]");
 		JDA jda = JdaObj.instance;
 		// 기본 jda를 만든다
 		try {
@@ -47,13 +57,13 @@ class Main extends ListenerAdapter {
 		} catch (LoginException e) { e.printStackTrace(); }
 
 		// jda에 이벤트를 감지하는 리스너 봇을 넣는다.
-		$.pn("[[[잔디체커 JDA 리스너 로드]]]");
+		$.pn("\n[[[잔디체커 JDA 리스너 로드]]]");
 		ListenerAdapter bot = new Main(); // 리스너 봇
 		jda.addEventListener(bot); // 만들어진 리스너 봇을 JdaObj의 인스턴스 내부에 할당
 		$.pn(" - 이벤트 리스너 생성: " + bot.toString());
 
 		// 모든 실행 준비가 끝났다.
-		$.pn("[[[잔디체커 실행 완료]]]");
+		$.pn("\n[[[잔디체커 실행 완료]]]");
 
 	}
 
