@@ -47,11 +47,12 @@ public class FileOpen {
 	public static Object getFileContents() throws Exception {
 
     	// 파일불러오기
+		MainSystem mainSystem = MainSystem.getInstance();
     	ObjectInputStream i
     		= new ObjectInputStream(
     		  new BufferedInputStream(
     		  new FileInputStream(
-    		  new File(MainSystem.PATH, "int.txt"))));
+    		  new File(mainSystem.getPath(), "int.txt"))));
 		Set<Integer> sRead = (Set<Integer>) i.readObject();
     	i.close();
     	$.pn("읽기완료: " + sRead.toString());
