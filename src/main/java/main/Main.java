@@ -38,9 +38,11 @@ class Main extends ListenerAdapter {
 
 	}
 	public static void readyJda() {
+
 		// JDA 인스턴스 잡기
 		$.pn("\n[[[잔디체커 JDA 인스턴스 생성]]]");
 		jda = JdaObj.instance;
+
 		// 기본 jda를 만든다
 		try {
 			jda = JDABuilder.createDefault(mainSystem.token).build(); // 봇을 만들어 로그인시킨 뒤, JdaObj의 인스턴스 값으로 할당
@@ -52,6 +54,7 @@ class Main extends ListenerAdapter {
 		ListenerAdapter bot = new Main(); // 리스너 봇
 		jda.addEventListener(bot); // 만들어진 리스너 봇을 JdaObj의 인스턴스 내부에 할당
 		$.pn(" - 이벤트 리스너 생성: " + bot.toString());
+
 	}
 
 	// 로딩모듈

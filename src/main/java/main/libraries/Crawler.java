@@ -5,11 +5,8 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
-
-import $.$;
 
 // 깃헙 긁어오기 관련 모든 소스코드. 크롤링 및 데이터 획득
 public class Crawler {
@@ -67,7 +64,8 @@ public class Crawler {
 		Map<String, Boolean> map = new TreeMap<>();
 		for(int i = 0; i < list.length; i++) {
 			String[] keyValStr = list[i].split(",");
-			$.pn(Arrays.toString(keyValStr));
+			// 날짜 별 커밋 농도를 콘솔에 표시
+			// $.pf(Arrays.toString(keyValStr));
 			// 날짜 찾기
 			String dateStr = keyValStr[0];
 			// 잔디여부 찾기
