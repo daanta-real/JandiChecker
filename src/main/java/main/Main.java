@@ -19,7 +19,7 @@ class Main extends ListenerAdapter {
 	public static MainSystem mainSystem;
 
 	// 환경설정 로드
-	public void readySystem() {
+	public static void readySystem() {
 
 		// mainSystem 변수의 인스턴스 설정
 		mainSystem = MainSystem.getInstance();
@@ -37,7 +37,7 @@ class Main extends ListenerAdapter {
 		}
 
 	}
-	public void readyJda() {
+	public static void readyJda() {
 		// JDA 인스턴스 잡기
 		$.pn("\n[[[잔디체커 JDA 인스턴스 생성]]]");
 		jda = JdaObj.instance;
@@ -53,7 +53,9 @@ class Main extends ListenerAdapter {
 		jda.addEventListener(bot); // 만들어진 리스너 봇을 JdaObj의 인스턴스 내부에 할당
 		$.pn(" - 이벤트 리스너 생성: " + bot.toString());
 	}
-	public void ready() {
+
+	// 로딩모듈
+	public static void ready() {
 
 		// 환경설정 확인
 		$.pn("[[[잔디체커 시작]]]");
@@ -84,6 +86,7 @@ class Main extends ListenerAdapter {
 	// 서버의 실행
 	public static void main(String[] args) throws Exception {
 
+		ready();
 		/*TextChannel textChannel = YourBotInstance.getJda().getTextChannelById("386242731875368960");
 		if(textChannel.canTalk()) {
 		    textChannel.sendMessage("Your message here.").queue();
