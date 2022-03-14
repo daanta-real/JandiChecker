@@ -20,7 +20,7 @@ import main.data.MainSystem;
 public class XlsReader {
 
 	// 엑셀 경로
-	private static final String PATH = Paths.get("").toAbsolutePath().toString(); // 잔디체커가 실행되는 경로
+	public static final String PATH = Paths.get("").toAbsolutePath().toString(); // 잔디체커가 실행되는 경로
 	private static final String XLS_FILE_NAME = "list.xlsx"; // 스터디 목록을 읽어올 엑셀 파일명
 
 	// 명단이 적혀 있는 멤버 목록을 배열로 리턴해줌

@@ -33,8 +33,7 @@ public class Checker {
 		$.pn("커밋을 확인합니다. 확인할 날짜: " + day);
 		StringBuilder sb = new StringBuilder();
 		int count = 0;
-		MainSystem mainSystem = MainSystem.getInstance();
-		for(String[] s: mainSystem.getMembers()) {
+		for(String[] s: MainSystem.MEMBERS) {
 			String name = s[0];
 			String id = s[1];
 			boolean isCommited = getIsGithubCommitedByDay(id, day);

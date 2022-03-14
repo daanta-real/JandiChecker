@@ -1,7 +1,6 @@
 package main;
 
 import $.$;
-import main.data.MainSystem;
 import main.libraries.Jda;
 
 class Main {
@@ -13,7 +12,6 @@ class Main {
 
 		// 환경설정 로드
 		$.pn("\n[[[잔디체커 환경설정 로드]]]\n");
-		MainSystem.load();
 
 		// JDA 로드
 		$.pn("\n[[[잔디체커 JDA 로드]]]\n");

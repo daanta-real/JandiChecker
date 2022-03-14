@@ -10,7 +10,7 @@ import java.io.ObjectInputStream;
 import java.util.Set;
 
 import $.$;
-import main.data.MainSystem;
+import main.libraries.XlsReader;
 
 public class FileOpen {
 
@@ -47,12 +47,11 @@ public class FileOpen {
 	public static Object getFileContents() throws Exception {
 
     	// 파일불러오기
-		MainSystem mainSystem = MainSystem.getInstance();
     	ObjectInputStream i
     		= new ObjectInputStream(
     		  new BufferedInputStream(
     		  new FileInputStream(
-    		  new File(mainSystem.getPath(), "int.txt"))));
+    		  new File(XlsReader.PATH, "int.txt"))));
 		Set<Integer> sRead = (Set<Integer>) i.readObject();
     	i.close();
     	$.pn("읽기완료: " + sRead.toString());
