@@ -3,7 +3,7 @@ package main.libraries;
 import javax.security.auth.login.LoginException;
 
 import $.$;
-import main.data.MainSystem;
+import main.Settings.MainSettings;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -24,7 +24,7 @@ public class Jda extends ListenerAdapter {
 
 		// 기본 jda를 만든다
 		try {
-			instance = JDABuilder.createDefault(MainSystem.TOKEN).build(); // 봇을 만들어 로그인시킨 뒤, JdaObj의 인스턴스 값으로 할당
+			instance = JDABuilder.createDefault(MainSettings.getToken()).build(); // 봇을 만들어 로그인시킨 뒤, JdaObj의 인스턴스 값으로 할당
 			$.pn("JDA 인스턴스 생성 완료:" + instance.toString() );
 		} catch (LoginException e) { e.printStackTrace(); }
 

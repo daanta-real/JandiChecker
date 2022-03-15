@@ -1,4 +1,4 @@
-package main.libraries.Scheduler;
+package main.Scheduler;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package main.libraries.Scheduler;
+package main.Scheduler;
 
 import static org.quartz.CronScheduleBuilder.cronSchedule;
 import static org.quartz.JobBuilder.newJob;

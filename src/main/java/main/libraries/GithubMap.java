@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import $.$;
-import main.data.MainSystem;
+import main.Settings.MainSettings;
 
 // 크롤러에서 읽어온 데이터에서 특정 정보를 빼내오거나, 특정 인원들의 깃헙 정보를 출력해줌
 public class GithubMap {
@@ -27,7 +27,7 @@ public class GithubMap {
 	public static Map<String, Object> getGithubMapInfo(String id) throws Exception {
 
 		// 변수정의
-		boolean debug = MainSystem.DEBUG;
+		boolean debug = MainSettings.isDebug();
 		SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd (EEEE)");
 		StringBuilder[] sb = new StringBuilder[7];
 		for(int i = 0; i < 7; i++) sb[i] = new StringBuilder();

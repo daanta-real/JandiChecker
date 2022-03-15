@@ -10,12 +10,11 @@ import java.io.ObjectInputStream;
 import java.util.Set;
 
 import $.$;
-import main.libraries.XlsReader;
+import main.Settings.MainSettings;
 
 public class FileOpen {
 
 	// DollarCode과 기실습 자료에서 소스를 갖고 왔다. 사용할 수 있는 코드로 추릴 필요가 있다.
-
 
     // 파일이름을 넣으면 파일내용을 String으로 돌려주는 메소드
     @SuppressWarnings("unused")
@@ -51,7 +50,7 @@ public class FileOpen {
     		= new ObjectInputStream(
     		  new BufferedInputStream(
     		  new FileInputStream(
-    		  new File(XlsReader.PATH, "int.txt"))));
+    		  new File(MainSettings.getPath(), "int.txt"))));
 		Set<Integer> sRead = (Set<Integer>) i.readObject();
     	i.close();
     	$.pn("읽기완료: " + sRead.toString());

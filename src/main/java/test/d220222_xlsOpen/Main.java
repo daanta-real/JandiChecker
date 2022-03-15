@@ -1,21 +1,9 @@
 package test.d220222_xlsOpen;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.file.Paths;
-import java.util.Iterator;
-
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import $.$;
-
 public class Main {
 	public static void main(String[] args) {
 
+/*
 		try {
 
 			// 잔디체커의 시작
@@ -27,7 +15,6 @@ public class Main {
 
 			// 파일 객체 부르기
 			FileInputStream file = new FileInputStream(new File(PATH, "_test.xlsx"));
-
 			// 파일 객체로부터 시트 객체 생성하기
 			// Workbook instance 생성 후
 			// 1. .getSheetAt(시트 순번 혹은 시트명) 을 통해 시트를 객체로 가져올 수 있다.
@@ -102,6 +89,6 @@ public class Main {
 			file.close();
 
 		} catch (IOException e) { e.printStackTrace(); }
-
+*/
 	}
 }

@@ -25,20 +25,6 @@
 		<artifactId>quartz</artifactId>
 		<version>2.3.2</version>
 	</dependency>
-	
-	<!-- 엑셀 라이브러리 POI -->
-	<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
-	<dependency>
-		<groupId>org.apache.poi</groupId>
-		<artifactId>poi</artifactId>
-		<version>5.2.0</version>
-	</dependency>
-	<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
-	<dependency>
-		<groupId>org.apache.poi</groupId>
-		<artifactId>poi-ooxml</artifactId>
-		<version>5.2.0</version>
-	</dependency>
 
 	<!-- YAML 설정파일을 읽어오기 위한 JACKSON-YAML 라이브러리 -->
   <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml -->

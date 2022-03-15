@@ -1,25 +1,9 @@
 package test.d220302_xlsOpen_apply;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-import $.$;
-
 public class Main {
 
 	public static void main(String[] args) throws Exception {
-
+/*
 		// 시트 데이터 불러오기
 		// 현재 경로 따기
 		String PATH = Paths.get("").toAbsolutePath().toString();
@@ -66,6 +50,6 @@ public class Main {
 		// 시트 밑 파일 객체 닫기
 		workbook.close();
 		file.close();
-
+*/
 	}
 }

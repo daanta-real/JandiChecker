@@ -1,0 +1,16 @@
+--- #잔디체커 설정 파일
+
+# 디버그 모드
+debug: yes
+
+# 토큰
+token: 토큰번호 기입
+
+# 스케쥴러 실행 주기 설정을 위한 CRON 문자열
+cron: 0 1 0 1/1 * ? * # ← ㅁ매일 0시 1분
+
+# 추적 명단
+members: [
+  [daanta, daanta-real],
+  [test, test]
+]
