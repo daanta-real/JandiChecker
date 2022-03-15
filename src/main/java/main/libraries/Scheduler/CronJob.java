@@ -1,5 +1,7 @@
 package main.libraries.Scheduler;
 
+import java.util.Date;
+
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
@@ -13,8 +15,7 @@ public class CronJob implements Job {
 	// CRON 스케쥴러 설정주기에 맞게 이 메소드가 실행된다.
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
-		$.pn("자바");
+		$.pn("예약 작업 실행됨. 현재 시각: " + new Date());
 	}
-
 
 }

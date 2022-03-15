@@ -12,7 +12,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 public class Jda extends ListenerAdapter {
 
 	// 어디서든 호출할 수 있는 JDA 인스턴스
-	private static JDA instance;
+	public static JDA instance;
 
 	// Jda 봇 객체
 	private static ListenerAdapter bot;
