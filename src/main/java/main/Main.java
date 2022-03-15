@@ -1,12 +1,15 @@
 package main;
 
 import $.$;
+import main.data.MainSystem;
 import main.libraries.Jda;
+import main.libraries.Scheduler.CronJob;
+import main.libraries.Scheduler.CronScheduler;
 
 class Main {
 
 	// 로딩모듈
-	public static void ready() {
+	public static void ready() throws Exception {
 
 		$.pn("[[[잔디체커 시작]]]");
 
@@ -16,6 +19,10 @@ class Main {
 		// JDA 로드
 		$.pn("\n[[[잔디체커 JDA 로드]]]\n");
 		Jda.load();
+
+		// 스케쥴러 로드
+		$.pn("\n[[[스케쥴러 로드]]]\n");
+		CronScheduler.run(CronJob.class, MainSystem.CRON);
 
 		$.pn("\n[[[잔디체커 실행 완료]]]\n");
 
