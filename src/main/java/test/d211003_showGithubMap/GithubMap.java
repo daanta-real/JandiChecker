@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import $.$;
-import main.libraries.Crawler;
+import main.Crawler.Crawler;
 
 public class GithubMap {
 

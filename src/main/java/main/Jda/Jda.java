@@ -1,8 +1,9 @@
-package main.libraries;
+package main.Jda;
 
 import javax.security.auth.login.LoginException;
 
 import $.$;
+import main.Crawler.Cmd;
 import main.Settings.MainSettings;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
