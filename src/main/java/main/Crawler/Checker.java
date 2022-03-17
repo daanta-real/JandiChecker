@@ -39,7 +39,7 @@ public class Checker {
 	}
 
 	// 스터디원 전원의 특정 날의 커밋 현황을 체크하여 커밋하지 않은 사람의 명부를 회신
-	public static String[] getNotCommitedByDay(String day) throws Exception {
+	public static String[] isCommitedByDay(String day, boolean findNegative) throws Exception {
 		$.pn("커밋을 확인합니다. 확인할 날짜: " + day);
 		StringBuilder sb = new StringBuilder();
 		int count = 0;
@@ -47,7 +47,8 @@ public class Checker {
 			String name = s[0];
 			String id = s[1];
 			boolean isCommited = getIsGithubCommitedByDay(id, day);
-			if(!isCommited) {
+
+			if() {
 				count++;
 				sb.append(name + "\n");
 			}

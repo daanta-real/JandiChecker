@@ -25,14 +25,15 @@ public class MainSettings {
 	// YAML로 된 환경변수 파일을 로드
 	public static void ready() throws Exception {
 
-		$.pf(" - 설정파일 읽기 시작..");
+		$.pf(" - 환경설정 로드 시작..");
+
 		// 파일 객체 부르기
 		FileInputStream file = new FileInputStream(new File(MainSettings.path, "settings.yaml"));
 
 		// ObjectMapper 생성자가, YAML파일을 오브젝트로 읽어들인다.
 		// 그 다음 그 오브젝트를 MainSettings 클래스 각 변수에 맵핑시키는 식으로 그 내용을 읽어들인다. 자동이다!
 		ObjectMapper om = new ObjectMapper(new YAMLFactory());
-		MainSettingsDto dto = om.readValue(file, MainSettingsDto.class);
+		MainSettingsVO dto = om.readValue(file, MainSettingsVO.class);
 		file.close();
 		$.pn(" MainSettings DTO 읽기 완료.");
 
