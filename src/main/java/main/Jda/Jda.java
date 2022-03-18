@@ -44,7 +44,7 @@ public class Jda extends ListenerAdapter {
 		$.pn("[[명령어 입력정보 시작]]");
 		$.pn(" - 채널 ID: " + id);
 		$.pn("[[명령어 입력정보 끝]]");
-		Cmd.command(event);
+		try { Cmd.command(event); } catch (Exception e) { e.printStackTrace(); }
 	}
 
 }

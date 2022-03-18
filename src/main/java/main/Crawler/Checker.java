@@ -39,18 +39,21 @@ public class Checker {
 	}
 
 	// 스터디원 전원의 특정 날의 커밋 현황을 체크하여 커밋하지 않은 사람의 명부를 회신
-	public static String[] isCommitedByDay(String day, boolean findNegative) throws Exception {
+	public static String[] getCommitListByDay(String day) throws Exception { return getCommitListByDay(day, false); }
+	public static String[] getCommitListByDay(String day, boolean findNegative) throws Exception {
 		$.pn("커밋을 확인합니다. 확인할 날짜: " + day);
 		StringBuilder sb = new StringBuilder();
 		int count = 0;
 		for(String[] s: MainSettings.getMembers()) {
 			String name = s[0];
 			String id = s[1];
-			boolean isCommited = getIsGithubCommitedByDay(id, day);
-
-			if() {
-				count++;
-				sb.append(name + "\n");
+			boolean isCommitted = getIsGithubCommitedByDay(id, day);
+			if(
+				(!findNegative && isCommitted)    // 커밋한 사람을 찾는 모드일 때, 커밋했을 경우
+				|| (findNegative && !isCommitted) // 커밋 빼먹은 사람을 찾는 모드일 때, 커밋 빼멋은 경우
+				) {
+					count++;
+					sb.append(name + "\n");
 			}
 		}
 		String[] result = { String.valueOf(count), sb.toString() };
@@ -63,7 +66,7 @@ public class Checker {
 		c.add(Calendar.DATE, -1);
 		String day = sdf.format(c.getTime());
 
-		String[] list = Checker.getNotCommitedByDay(day);
+		String[] list = getCommitListByDay(day, false);
 		SimpleDateFormat sdf_debug = new SimpleDateFormat("yyyy-MM-dd (EEEE)");
 		String day_notice = sdf_debug.format(c.getTime());
 		String result = "```md\n[어제 커밋 안 한 사람 " + list[0] + "명 명단]: " + day_notice + "\n" + list[1] + "```";
@@ -75,7 +78,7 @@ public class Checker {
 		Calendar c = Calendar.getInstance();
 		String day = sdf.format(c.getTime());
 
-		String[] list = Checker.getNotCommitedByDay(day);
+		String[] list = getCommitListByDay(day, false);
 		SimpleDateFormat sdf_debug = new SimpleDateFormat("yyyy-MM-dd (EEEE)");
 		String day_notice = sdf_debug.format(c.getTime());
 		String result = "```md\n[오늘 아직 커밋 안 한 사람 " + list[0] + "명 명단]: " + day_notice + "\n" + list[1] + "```";
@@ -93,7 +96,7 @@ public class Checker {
 		String day = sdf.format(c.getTime());
 
 		// 본실행
-		String[] list = Checker.getNotCommitedByDay(day);
+		String[] list = getCommitListByDay(day, false);
 		SimpleDateFormat sdf_debug = new SimpleDateFormat("yyyy-MM-dd (EEEE)");
 		String day_notice = sdf_debug.format(c.getTime());
 		String result = "```md\n[특정 날짜에 커밋 안 한 사람 " + list[0] + "명 명단]: " + day_notice + "\n" + list[1] + "```";
