@@ -41,7 +41,8 @@ public class Checker {
 	// 스터디원 전원의 특정 날의 커밋 현황을 체크하여 커밋하지 않은 사람의 명부를 회신
 	public static String[] getCommitListByDay(String day) throws Exception { return getCommitListByDay(day, false); }
 	public static String[] getCommitListByDay(String day, boolean findNegative) throws Exception {
-		$.pn("커밋을 확인합니다. 확인할 날짜: " + day);
+		$.pr("커밋을 " + (findNegative ? "'안 했는지'" : "'했는지'"));
+		$.pn(" 확인합니다. 확인할 날짜: " + day);
 		StringBuilder sb = new StringBuilder();
 		int count = 0;
 		for(String[] s: MainSettings.getMembers()) {
@@ -60,23 +61,9 @@ public class Checker {
 		return result;
 	}
 
-	// 어제 커밋 안 한 스터디원 목록을 회신
+	// 어제 커밋 안 한 사람의 목록을 회신
 	public static String getNotCommittedYesterday() throws Exception {
-		$.pn("getNotCommittedYesterday");
-		Calendar c = Calendar.getInstance();
-		c.add(Calendar.DATE, -1);
-		String day = sdf.format(c.getTime());
-
-		String[] list = getCommitListByDay(day, false);
-		SimpleDateFormat sdf_debug = new SimpleDateFormat("yyyy-MM-dd (EEEE)");
-		String day_notice = sdf_debug.format(c.getTime());
-		String result = "```md\n[어제 커밋 안 한 사람 " + list[0] + "명 명단]: " + day_notice + "\n" + list[1] + "```";
-		return result;
-	}
-
-	// 어제 커밋 한 스터디원 목록을 회신
-	public static String getDidCommitYesterday() throws Exception {
-		$.pn("getDidCommitYesterday");
+		$.pn("어제 커밋 안 한 사람의 목록을 회신 요청받았습니다.");
 		Calendar c = Calendar.getInstance();
 		c.add(Calendar.DATE, -1);
 		String day = sdf.format(c.getTime());
@@ -84,7 +71,21 @@ public class Checker {
 		String[] list = getCommitListByDay(day, true);
 		SimpleDateFormat sdf_debug = new SimpleDateFormat("yyyy-MM-dd (EEEE)");
 		String day_notice = sdf_debug.format(c.getTime());
-		String result = "```md\n[어제 커밋 한 사람 " + list[0] + "명 명단]: " + day_notice + "\n" + list[1] + "```";
+		String result = "```md\n[어제 커밋 안 한 사람 " + list[0] + "명]: " + day_notice + "\n" + list[1] + "```";
+		return result;
+	}
+
+	// 어제 커밋 한 스터디원 목록을 회신
+	public static String getDidCommitYesterday() throws Exception {
+		$.pn("어제 커밋한 사람의 목록을 회신 요청받았습니다.");
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.DATE, -1);
+		String day = sdf.format(c.getTime());
+
+		String[] list = getCommitListByDay(day, false);
+		SimpleDateFormat sdf_debug = new SimpleDateFormat("yyyy-MM-dd (EEEE)");
+		String day_notice = sdf_debug.format(c.getTime());
+		String result = "```md\n[어제 커밋을 완료한 사람 " + list[0] + "명]: " + day_notice + "\n" + list[1] + "```";
 		return result;
 	}
 

@@ -22,6 +22,18 @@ public class MainSettings {
 	private static String cron; // 스케쥴러 실행 주기
 	private static String[][] members; // 참여인 목록
 
+	// 소개말
+	public static String INFO_STRING = "```md\n_**저는 매일 저녁과 자정, 잔디를 심지 않은 사람들을 찾아내 그 명단을 발표할 것입니다.**_\n"
+		+ "&목표: 이 봇이 제작된 목표를 설명합니다.\n"
+		+ "&정보 [사람이름]: 특정인의 최근 1년 간 및 근 30일 간의 Github 잔디 정보를 가져옵니다. 이때 관리목록에 이름이 서로 겹치는 인원이 없을 경우, 성은 생략해도 무관합니다.\n"
+		+ "&id [id]: 특정 id의 최근 1년 간 및 근 30일 간의 Github 잔디 정보를 가져옵니다.\n"
+		+ "&어제: 어제 잔디를 심은 사람들의 명단을 공개합니다.\n"
+		+ "&어제안함: 어제 잔디를 심지 않은 사람들의 명단을 공개합니다.\n"
+		+ "&오늘안함: 오늘 잔디를 심지 않은 사람들의 명단을 공개합니다.\n"
+		+ "&확인 [날짜(yyyy-MM-dd 형식)]: 특정 날짜에 잔디를 제출하지 않은 사람들의 명단을 출력합니다.\n"
+		+ "\n"
+		+ "잔디체커(JandiChecker) v1.0\n제작 by 단타(박준성)\ne-mail: daanta@naver.com\nGithub: http://github.com/daanta-real```";
+
 	// YAML로 된 환경변수 파일을 로드
 	public static void ready() throws Exception {
 

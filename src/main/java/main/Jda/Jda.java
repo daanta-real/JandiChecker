@@ -3,7 +3,7 @@ package main.Jda;
 import javax.security.auth.login.LoginException;
 
 import $.$;
-import main.Crawler.Cmd;
+import main.Cmd.Switcher;
 import main.Settings.MainSettings;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -44,7 +44,7 @@ public class Jda extends ListenerAdapter {
 		$.pn("[[명령어 입력정보 시작]]");
 		$.pn(" - 채널 ID: " + id);
 		$.pn("[[명령어 입력정보 끝]]");
-		try { Cmd.command(event); } catch (Exception e) { e.printStackTrace(); }
+		try { Switcher.command(event); } catch (Exception e) { e.printStackTrace(); }
 	}
 
 }
