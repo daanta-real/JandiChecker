@@ -22,7 +22,7 @@ public class Checker {
     }
 
 	// id와 특정 일자 문자열(yyyy-MM-dd)을 넣으면 그 사람이 그날 커밋했는지 점검하여 t/f 리턴해줌
-	public static boolean getIsGithubCommitedByDay(String id, String day) throws Exception {
+	public static boolean getGithubCommittedByDay(String id, String day) throws Exception {
 		$.pn(id + "의 " + day + " 날의 커밋을 확인합니다.");
 		String html = Crawler.makeDataCSV(
 				      Crawler.trim(
@@ -47,7 +47,7 @@ public class Checker {
 		for(String[] s: MainSettings.getMembers()) {
 			String name = s[0];
 			String id = s[1];
-			boolean isCommitted = getIsGithubCommitedByDay(id, day);
+			boolean isCommitted = getGithubCommittedByDay(id, day);
 			if(
 				(!findNegative && isCommitted)    // 커밋한 사람을 찾는 모드일 때, 커밋했을 경우
 				|| (findNegative && !isCommitted) // 커밋 빼먹은 사람을 찾는 모드일 때, 커밋 빼멋은 경우
@@ -61,7 +61,8 @@ public class Checker {
 	}
 
 	// 어제 커밋 안 한 스터디원 목록을 회신
-	public static String getNotCommitedYesterday() throws Exception {
+	public static String getNotCommittedYesterday() throws Exception {
+		$.pn("getNotCommittedYesterday");
 		Calendar c = Calendar.getInstance();
 		c.add(Calendar.DATE, -1);
 		String day = sdf.format(c.getTime());
@@ -73,8 +74,22 @@ public class Checker {
 		return result;
 	}
 
+	// 어제 커밋 한 스터디원 목록을 회신
+	public static String getDidCommitYesterday() throws Exception {
+		$.pn("getDidCommitYesterday");
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.DATE, -1);
+		String day = sdf.format(c.getTime());
+
+		String[] list = getCommitListByDay(day, true);
+		SimpleDateFormat sdf_debug = new SimpleDateFormat("yyyy-MM-dd (EEEE)");
+		String day_notice = sdf_debug.format(c.getTime());
+		String result = "```md\n[어제 커밋 한 사람 " + list[0] + "명 명단]: " + day_notice + "\n" + list[1] + "```";
+		return result;
+	}
+
 	// 오늘 커밋 안 한 스터디원 목록을 회신
-	public static String getNotCommitedToday() throws Exception {
+	public static String getNotCommittedToday() throws Exception {
 		Calendar c = Calendar.getInstance();
 		String day = sdf.format(c.getTime());
 
@@ -86,7 +101,7 @@ public class Checker {
 	}
 
 	// 특정 날짜에 커밋 안 한 스터디원 목록을 회신
-	public static String getNotCommitedSomeday(String date) throws Exception {
+	public static String getNotCommittedSomeday(String date) throws Exception {
 		// 날짜 양식 불만족 시 리턴
 		if(!isValidDate(date)) return "날짜를 잘못 입력하셨습니다.";
 		String[] dates = date.split("-");

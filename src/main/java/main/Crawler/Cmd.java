@@ -15,8 +15,9 @@ public class Cmd {
 		+ "&목표: 이 봇이 제작된 목표를 설명합니다.\n"
 		+ "&정보 [사람이름]: 특정인의 최근 1년 간 및 근 30일 간의 Github 잔디 정보를 가져옵니다. 이때 관리목록에 이름이 서로 겹치는 인원이 없을 경우, 성은 생략해도 무관합니다.\n"
 		+ "&id [id]: 특정 id의 최근 1년 간 및 근 30일 간의 Github 잔디 정보를 가져옵니다.\n"
-		+ "&어제: 어제 잔디를 제출하지 않은 사람들의 명단을 공개합니다.\n"
-		+ "&오늘: 오늘 잔디를 제출하지 않은 사람들의 명단을 공개합니다.\n"
+		+ "&어제: 어제 잔디를 심은 사람들의 명단을 공개합니다.\n"
+		+ "&어제안함: 어제 잔디를 심지 않은 사람들의 명단을 공개합니다.\n"
+		+ "&오늘안함: 오늘 잔디를 심지 않은 사람들의 명단을 공개합니다.\n"
 		+ "&확인 [날짜(yyyy-MM-dd 형식)]: 특정 날짜에 잔디를 제출하지 않은 사람들의 명단을 출력합니다.\n"
 		+ "\n"
 		+ "잔디체커(JandiChecker) v1.0\n제작 by 단타(박준성)\ne-mail: daanta@naver.com\nGithub: http://github.com/daanta-real```";
@@ -62,17 +63,22 @@ public class Cmd {
 
 	// 어제 커밋 안 한 스터디원 목록을 출력
 	public static String showNotCommitedYesterday() throws Exception {
-		return Checker.getNotCommitedYesterday();
+		return Checker.getNotCommittedYesterday();
+	}
+
+	// 어제 커밋 한 스터디원 목록을 출력
+	public static String showDidCommitYesterday() throws Exception {
+		return Checker.getDidCommitYesterday();
 	}
 
 	// 현시각 기준 오늘 아직 커밋 안 한 스터디원 목록을 출력
 	public static String showNotCommitedToday() throws Exception {
-		return Checker.getNotCommitedToday();
+		return Checker.getNotCommittedToday();
 	}
 
 	// 특정일에 커밋 안 한 스터디원 목록을 출력
 	public static String showNotCommitedSomeday(String date) throws Exception {
-		return Checker.getNotCommitedSomeday(date);
+		return Checker.getNotCommittedSomeday(date);
 	}
 
 	// 입수된 이벤트의 명령을 해석하여, 각 명령을 실행
@@ -115,12 +121,17 @@ public class Cmd {
 				break;
 
 			// 어제 커밋 안 한 사람 목록 출력
-			case "&어제":
+			case "&어제안함":
 				send(event, Cmd.showNotCommitedYesterday());
 				break;
 
+			// 어제 커밋 한 사람 목록 출력
+			case "&어제":
+				send(event, Cmd.showDidCommitYesterday());
+				break;
+
 			// 현 시점 오늘 커밋 안 한 사람 목록 출력
-			case "&오늘":
+			case "&오늘안함":
 				send(event, Cmd.showNotCommitedToday());
 				break;
 
