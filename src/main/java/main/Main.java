@@ -24,7 +24,6 @@ class Main {
 		CronScheduler.run(CronJob.class, MainSettings.getCron());
 
 		$.pn("\n[[[잔디체커 실행 완료]]]\n");
-		// 메세지가 들어올 때마다 디버그 콘솔이 출력되는 문제가 있음.
 
 	}
 

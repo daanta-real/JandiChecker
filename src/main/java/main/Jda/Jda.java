@@ -40,11 +40,10 @@ public class Jda extends ListenerAdapter {
 	// 초기화 이후, 명령어에 따른 동작 실행
 	@Override
 	public void onMessageReceived(MessageReceivedEvent event) {
-		String id = event.getChannel().getId();
-		$.pn("[[명령어 입력정보 시작]]");
-		$.pn(" - 채널 ID: " + id);
-		$.pn("[[명령어 입력정보 끝]]");
+
+		// 명령 실행
 		try { Switcher.command(event); } catch (Exception e) { e.printStackTrace(); }
+
 	}
 
 }

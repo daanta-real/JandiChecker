@@ -85,7 +85,7 @@ public class Checker {
 		String[] list = getCommitListByDay(day, false);
 		SimpleDateFormat sdf_debug = new SimpleDateFormat("yyyy-MM-dd (EEEE)");
 		String day_notice = sdf_debug.format(c.getTime());
-		String result = "```md\n[어제 커밋을 완료한 사람 " + list[0] + "명]: " + day_notice + "\n" + list[1] + "```";
+		String result = "```md\n[어제 커밋에 성공한 사람은 " + list[0] + "명...!]: " + day_notice + "\n" + list[1] + "```";
 		return result;
 	}
 

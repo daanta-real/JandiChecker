@@ -14,13 +14,15 @@ import $.$;
 public class MainSettings {
 
 	// 환경상수
-	private static final String path = Paths.get("").toAbsolutePath().toString(); // 잔디체커가 실행되는 경로
+	private static final String PATH = Paths.get("").toAbsolutePath().toString(); // 잔디체커가 실행되는 경로
+	private static final String CMD_CHAR = "&"; // 잔디체커 명령임을 판독하는 기준이 되는 구분자
 
 	// 환경변수
 	private static boolean debug; // 디버그 여부
 	private static String token; // 토큰
 	private static String cron; // 스케쥴러 실행 주기
 	private static String[][] members; // 참여인 목록
+	private static String targetChannelId; // CRON 스케쥴러 실행 결과 메세지가 전송될 타겟 채널 ID
 
 	// 소개말
 	public static String INFO_STRING = "```md\n_**저는 매일 저녁과 자정, 잔디를 심지 않은 사람들을 찾아내 그 명단을 발표할 것입니다.**_\n"
@@ -40,7 +42,7 @@ public class MainSettings {
 		$.pf(" - 환경설정 로드 시작..");
 
 		// 파일 객체 부르기
-		FileInputStream file = new FileInputStream(new File(MainSettings.path, "settings.yaml"));
+		FileInputStream file = new FileInputStream(new File(MainSettings.PATH, "settings.yaml"));
 
 		// ObjectMapper 생성자가, YAML파일을 오브젝트로 읽어들인다.
 		// 그 다음 그 오브젝트를 MainSettings 클래스 각 변수에 맵핑시키는 식으로 그 내용을 읽어들인다. 자동이다!
@@ -54,12 +56,14 @@ public class MainSettings {
 		token = dto.getToken();
 		cron  = dto.getCron();
 		members = dto.getMembers();
+		targetChannelId = dto.getTargetChannelId();
 
 		// 로드된 환경변수들 일괄 출력
 		$.pf(" - 디버그 모드: %s\n", debug);
-		$.pf(" - 경로: %s\n", path);
+		$.pf(" - 경로: %s\n", PATH);
 		$.pf(" - 토큰: %s\n", token);
 		$.pf(" - 크론: %s\n", cron);
+		$.pf(" - 채널: %s\n", targetChannelId);
 		$.pn(" - 명단 확인: ");
 		for(int i = 0; i < members.length; i++)
 			$.pf("    %c─ %d번째 인원: '%s' (Github ID: %s)\n",
@@ -70,14 +74,12 @@ public class MainSettings {
 	}
 
 	// Getters/Setters
-	public static boolean    isDebug   () { return debug  ; }
-	public static String     getToken  () { return token  ; }
-	public static String     getCron   () { return cron   ; }
-	public static String     getPath   () { return path   ; }
-	public static String[][] getMembers() { return members; }
-	public static void setDebug  (boolean    debug  ) { MainSettings.debug   = debug  ; }
-	public static void setToken  (String     token  ) { MainSettings.token   = token  ; }
-	public static void setCron   (String     cron   ) { MainSettings.cron    = cron   ; }
-	public static void setMembers(String[][] members) { MainSettings.members = members; }
+	public static boolean    isDebug   () { return debug   ; }
+	public static String     getToken  () { return token   ; }
+	public static String     getCron   () { return cron    ; }
+	public static String     getChId   () { return targetChannelId; }
+	public static String     getPath   () { return PATH    ; }
+	public static String[][] getMembers() { return members ; }
+	public static String     getCmdChar() { return CMD_CHAR; }
 
 }
