@@ -54,7 +54,7 @@ public class Crawler {
 		.replaceAll("\"[1-9]\"\n", "1\n")  // true의 경우
 		.replaceAll("\"0\"\n", "0\n")      // false의 경우
 
-		.replaceAll("\n\s.*", "")
+		.replaceAll("\\n\\s.*", "")
 		;
 
 	}
