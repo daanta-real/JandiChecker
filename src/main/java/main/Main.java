@@ -1,5 +1,8 @@
 package main;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import $.$;
 import main.Jda.Jda;
 import main.Scheduler.CronJob;
@@ -7,6 +10,10 @@ import main.Scheduler.CronScheduler;
 import main.Settings.MainSettings;
 
 class Main {
+
+	// 출력 도구 생성
+	@SuppressWarnings("unused")
+	private Logger logger = LoggerFactory.getLogger(Main.class);
 
 	// 서버의 실행
 	public static void main(String[] args) throws Exception {
