@@ -1,8 +1,8 @@
-package main.Cmd;
+package cmd;
 
-import main.Crawler.Checker;
-import main.Crawler.GithubMap;
-import main.Settings.MainSettings;
+import crawler.Checker;
+import crawler.GithubMap;
+import vo.MainSettings;
 
 // 정보 출력 메소드 모음
 public class Commands {

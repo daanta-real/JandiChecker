@@ -1,12 +1,12 @@
-package main.Scheduler;
+package scheduler;
 
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-import main.Cmd.Commands;
-import main.Cmd.Sender;
-import main.Settings.MainSettings;
+import cmd.Commands;
+import cmd.Sender;
+import vo.MainSettings;
 
 // 실제 실행될 JOB 내용만을 담고 있는 실행내용 객체
 public class CronJob implements Job {

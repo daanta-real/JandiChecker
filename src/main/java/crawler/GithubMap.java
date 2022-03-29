@@ -1,4 +1,4 @@
-package main.Crawler;
+package crawler;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import $.$;
-import main.Settings.MainSettings;
+import vo.MainSettings;
 
 // 크롤러에서 읽어온 데이터에서 특정 정보를 빼내오거나, 특정 인원들의 깃헙 정보를 출력해줌
 public class GithubMap {

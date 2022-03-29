@@ -1,4 +1,4 @@
-package main.Settings;
+package vo;
 
 import java.io.File;
 import java.io.FileInputStream;

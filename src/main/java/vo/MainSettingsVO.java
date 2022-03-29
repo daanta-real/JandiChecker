@@ -1,4 +1,4 @@
-package main.Settings;
+package vo;
 
 // YAML 파일로부터 읽어오는 환경설정 내용들을 담을 YAML DTO
 public class MainSettingsVO {

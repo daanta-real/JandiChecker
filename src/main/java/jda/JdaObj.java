@@ -1,4 +1,4 @@
-package main.Jda;
+package jda;
 
 import net.dv8tion.jda.api.JDA;
 

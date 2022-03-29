@@ -1,7 +1,7 @@
-package main.Cmd;
+package cmd;
 
 import $.$;
-import main.Jda.Jda;
+import jda.Jda;
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 

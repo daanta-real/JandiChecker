@@ -11,58 +11,58 @@
 
 	<dependencies>
 
-	<!-- 자바 디스코드 봇 JDA 라이브러리 --> 
-	<dependency>
-		<groupId>net.dv8tion</groupId>
-		<artifactId>JDA</artifactId>
-		<version>4.2.0_228</version>
-	</dependency>
-	
-	<!-- 스케쥴러 라이브러리 -->
-	<!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
-	<dependency>
-		<groupId>org.quartz-scheduler</groupId>
-		<artifactId>quartz</artifactId>
-		<version>2.3.2</version>
-	</dependency>
+		<!-- 자바 디스코드 봇 JDA 라이브러리 --> 
+		<dependency>
+			<groupId>net.dv8tion</groupId>
+			<artifactId>JDA</artifactId>
+			<version>4.2.0_228</version>
+		</dependency>
 
-	<!-- YAML 설정파일을 읽어오기 위한 JACKSON-YAML 라이브러리 -->
-	<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml -->
-	<dependency>
-		<groupId>com.fasterxml.jackson.dataformat</groupId>
-		<artifactId>jackson-dataformat-yaml</artifactId>
-		<version>2.13.2</version>
-	</dependency>
-	<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-	<dependency>
-		<groupId>com.fasterxml.jackson.core</groupId>
-		<artifactId>jackson-databind</artifactId>
-		<version>2.13.2</version>
-	</dependency>
+		<!-- 스케쥴러 라이브러리 -->
+		<!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>2.3.2</version>
+		</dependency>
 
-	<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
-	<dependency>
-	<groupId>org.apache.logging.log4j</groupId>
-		<artifactId>log4j-core</artifactId>
-		<version>2.17.2</version>
-	</dependency>
-	<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-reload4j -->
-	<dependency>
-		<groupId>org.slf4j</groupId>
-		<artifactId>slf4j-reload4j</artifactId>
-		<version>1.7.36</version>
-	</dependency>
+		<!-- YAML 설정파일을 읽어오기 위한 JACKSON-YAML 라이브러리 -->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-yaml</artifactId>
+			<version>2.13.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.13.2</version>
+		</dependency>
 
-</dependencies>
+		<!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+		<dependency>
+		<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.17.2</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-reload4j -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-reload4j</artifactId>
+			<version>1.7.36</version>
+		</dependency>
 
-<repositories>
+	</dependencies>
 
-	<repository>
-		<id>jcenter</id>
-		<name>jcenter-bintray</name>
-		<url>https://jcenter.bintray.com</url>
-	</repository>
+	<repositories>
 
-</repositories>
+		<repository>
+			<id>jcenter</id>
+			<name>jcenter-bintray</name>
+			<url>https://jcenter.bintray.com</url>
+		</repository>
+
+	</repositories>
 
 </project>
