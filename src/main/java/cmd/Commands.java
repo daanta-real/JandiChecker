@@ -2,7 +2,7 @@ package cmd;
 
 import crawler.Checker;
 import crawler.GithubMap;
-import vo.MainSettings;
+import settings.MainSettings;
 
 // 정보 출력 메소드 모음
 public class Commands {

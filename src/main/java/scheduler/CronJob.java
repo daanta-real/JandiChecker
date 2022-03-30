@@ -6,7 +6,7 @@ import org.quartz.JobExecutionException;
 
 import cmd.Commands;
 import cmd.Sender;
-import vo.MainSettings;
+import settings.MainSettings;
 
 // 실제 실행될 JOB 내용만을 담고 있는 실행내용 객체
 public class CronJob implements Job {

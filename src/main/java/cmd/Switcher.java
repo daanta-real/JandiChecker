@@ -5,7 +5,7 @@ import java.util.List;
 
 import $.$;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import vo.MainSettings;
+import settings.MainSettings;
 
 // 입수된 이벤트 객체로부터 명령을 뽑아내어 분석 후, 알맞은 명령을 실행하는 단일 메소드만 있는 클래스
 public class Switcher {

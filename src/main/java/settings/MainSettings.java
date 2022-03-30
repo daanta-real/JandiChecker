@@ -1,4 +1,4 @@
-package vo;
+package settings;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,13 +8,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import $.$;
+import vo.MainSettingsVO;
 
 // 잔디체커가 실행되는 내내 환경설정을 담고 있게 되는 클래스.
 // 잔디체커가 시작되면 Jackson을 이용해 YAML 파일을 읽어오게 되고, 그 내용이 이 클래스의 각 변수에 채워진다.
 public class MainSettings {
 
 	// 환경상수
-	private static final String PATH = Paths.get("").toAbsolutePath().toString(); // 잔디체커가 실행되는 경로
+	public static final String PATH = Paths.get("").toAbsolutePath().toString(); // 잔디체커가 실행되는 경로
 	private static final String CMD_CHAR = "&"; // 잔디체커 명령임을 판독하는 기준이 되는 구분자
 
 	// 환경변수
