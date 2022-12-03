@@ -1,7 +1,7 @@
 
 plugins {
-   // id 'java-library'
-    //id 'maven-publish'
+//    id 'java-library'
+//    id 'maven-publish'
     id 'java'
 }
 
@@ -13,14 +13,16 @@ sourceCompatibility = '17'
 repositories {
     mavenLocal()
     mavenCentral()
-    maven { url = uri('https://repo.maven.apache.org/maven2/') }
+//    maven { url = uri('https://repo.maven.apache.org/maven2/') }
 }
 
 dependencies {
 
     // 자바 디스코드 봇 JDA 라이브러리
     // https://mvnrepository.com/artifact/net.dv8tion/JDA
-    implementation 'net.dv8tion:JDA:latest.integration'
+    implementation 'net.dv8tion:JDA:latest.integration' {
+        exclude module: 'opus-java' // 음성모듈 제외
+    }
 
     // 스케쥴러 라이브러리
     // https://mvnrepository.com/artifact/org.quartz-scheduler/quartz
@@ -35,8 +37,8 @@ dependencies {
     // 로깅 라이브러리
 //    api 'org.apache.logging.log4j:log4j-core' <<< 안쓸려고..
     // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
-    testImplementation 'ch.qos.logback:logback-classic:latest.integration'
+    implementation 'ch.qos.logback:logback-classic:latest.integration'
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-reload4j
-    testImplementation 'org.slf4j:slf4j-reload4j:latest.integration'
+//    implementation 'org.slf4j:slf4j-reload4j:latest.integration'
 
 }

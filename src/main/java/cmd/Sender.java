@@ -2,7 +2,8 @@ package cmd;
 
 import $.$;
 import jda.Jda;
-import net.dv8tion.jda.api.entities.TextChannel;
+//import net.dv8tion.jda.api.entities.TextChannel; << 이건 구버전에서 썼었던 모양..
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 // 메세지를 보내는 메소드를 모은 곳
@@ -19,7 +20,11 @@ public class Sender {
 	public static void send(String channelId, String msg) {
 		TextChannel channel = Jda.instance.getTextChannelById(channelId);
 		$.pn(channelId + " 채널에 메세지를 보냅니다. (채널 존재 여부: " + (channel != null) + ")");
-		send(channel, msg);
+		if (channel != null) {
+			send(channel, msg);
+		} else {
+			$.pn("채널이 존재하지 않아 메세지를 보낼 수 없습니다.");
+		}
 	}
 
 	// 이벤트가 접수된 텍스트 채널에 메세지 전송. 모든 타입의 채널에 가능
