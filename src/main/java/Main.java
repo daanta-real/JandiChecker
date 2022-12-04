@@ -67,7 +67,7 @@ public class Main {
 		System.exit(0);*/
 
 		// 환경설정 로드
-		log.info("""
+		System.out.println("""
 			**********************************************************************
 			                JandiChecker v1.1  (Build 221204_1038)
 			                        Github 잔디 점검 프로그램
