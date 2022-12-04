@@ -14,6 +14,7 @@ public class Main {
 	// 서버의 실행
 	public static void main(String[] args) throws Exception {
 /*
+		// MacOS only
 		// 콘솔을 강제로 열어주는 코드. 윈도에서는 무조건 콘솔이 열리나 맥에서는 그렇지 않다.
 		// 맥을 위해 필요한 코드이다.
 		Console console = System.console();
@@ -66,6 +67,12 @@ public class Main {
 		System.exit(0);*/
 
 		// 환경설정 로드
+		log.info("""
+			**********************************************************************
+			                JandiChecker v1.1  (Build 221204_1038)
+			                        Github 잔디 점검 프로그램
+			**********************************************************************
+			""");
 		log.info("\n[[[잔디체커 환경설정 로드]]]\n");
 		MainSettings.ready();
 
