@@ -4,12 +4,12 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-import $.$;
 
+@Slf4j
 public class RunJob implements Job {
 
 	public void execute(JobExecutionContext context) throws JobExecutionException {
-		$.pn("자바");
+		log.info("자바");
 	}
 
 

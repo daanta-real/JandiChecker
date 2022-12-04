@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.Set;
 
-import $.$;
 import main.Settings.MainSettings;
 
 public class FileOpen {
@@ -53,7 +52,7 @@ public class FileOpen {
     		  new File(MainSettings.getPath(), "int.txt"))));
 		Set<Integer> sRead = (Set<Integer>) i.readObject();
     	i.close();
-    	$.pn("읽기완료: " + sRead.toString());
+    	log.info("읽기완료: " + sRead.toString());
 		return sRead;
     }
 

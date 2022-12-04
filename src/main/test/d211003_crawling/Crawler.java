@@ -9,8 +9,8 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 
-import $.$;
 
+@Slf4j
 public class Crawler {
 
 	// ID 주면 전체 HTML 리턴해줌
@@ -66,7 +66,7 @@ public class Crawler {
 		Map<String, Boolean> map = new TreeMap<>();
 		for(int i = 0; i < list.length; i++) {
 			String[] keyValStr = list[i].split(",");
-			$.pn(Arrays.toString(keyValStr));
+			log.info(Arrays.toString(keyValStr));
 			// 날짜 찾기
 			String dateStr = keyValStr[0];
 			// 잔디여부 찾기

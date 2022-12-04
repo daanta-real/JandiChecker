@@ -7,12 +7,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import $.$;
 import main.Crawler.Crawler;
 
+@Slf4j
 public class GithubMap {
-
-	private static final boolean DEBUG = true;
 
 	// 특정 날짜의 객체 획득
 	private static Calendar getDate(String dateStr) {
@@ -40,12 +38,12 @@ public class GithubMap {
 		// 첫 날과 마지막 날을 구함
 		Calendar firstDay = getDate(Collections.min(map.keySet()));
 		Calendar lastDay  = getDate(Collections.max(map.keySet()));
-		if(DEBUG) $.pn("기간: " + sdf.format(firstDay.getTime()) + " ~ " + sdf.format(lastDay.getTime()));
+		log.info("기간: " + sdf.format(firstDay.getTime()) + " ~ " + sdf.format(lastDay.getTime()));
 
 		// 첫 원소의 일요일 날짜까지 필요한 칸수를 확인하여 점을 다 찍어줌
 		int move = -firstDay.get(Calendar.DAY_OF_WEEK) + 1;
 		for(int i = 0; i < move; i++) sb[move].append('.');
-		if(DEBUG) $.pn("일요일 날짜: " + move + "일 전, sb[0] = " + sb[0].toString());
+		log.info("일요일 날짜: " + move + "일 전, sb[0] = " + sb[0].toString());
 
 		// 데이터 만들기
 		Iterator<String> it = map.keySet().iterator();
@@ -57,7 +55,7 @@ public class GithubMap {
 			// 변수준비
 			String k = it.next();
 			cal = getDate(k);
-			if(DEBUG) $.pn("count: " + count + " (" + count%7 + ")");
+			log.info("count: " + count + " (" + count%7 + ")");
 
 			// 기록
 			boolean isCommited = map.get(k);
@@ -66,7 +64,7 @@ public class GithubMap {
 
 			// 정리
 			count++;
-			if(DEBUG) $.pn("찾아낸 날짜(" + count + "번째): " + sdf.format(cal.getTime()) + " > " + map.get(k));
+			log.info("찾아낸 날짜(" + count + "번째): " + sdf.format(cal.getTime()) + " > " + map.get(k));
 		}
 
 
@@ -80,13 +78,13 @@ public class GithubMap {
 		StringBuilder sbResult = new StringBuilder();
 		for(StringBuilder s: sb) sbResult.append(s.toString() + "\n");
 		result.put("totalMap", sbResult.toString());
-		if(DEBUG) $.pn("[디버그] 맵현황:\n" + sbResult.toString() + "입니다.");
+		log.info("[디버그] 맵현황:\n" + sbResult.toString() + "입니다.");
 
 		// 최근 2주 간의 TF
 		int recentCount = 0, recentTotal = 0;
 		for(int i = count - 30; i < count; i++) {
 			recentTotal++;
-			$.pn(i + "번째 날의 커밋: " + commitTFs[i]);
+			log.info(i + "번째 날의 커밋: " + commitTFs[i]);
 			recentCount += commitTFs[i] ? 1 : 0;
 		}
 		result.put("recentTotal", recentTotal);
@@ -106,10 +104,10 @@ public class GithubMap {
 		float perc = count / total;
 		perc = (int)(perc * 1000) / 10;
 		sb.append("# 최근 30일 간 잔디 심은 날: " + count + "일 (1일 1커밋률 " + perc + "%)\n");
-		$.pn("30일 간의 커밋 수: " + count);
-		$.pn("30일 간의 총 날짜 수: " + total);
-		$.pn("30일 간의 커밋률(계산 전): " + perc);
-		$.pn("30일 간의 커밋률(계산 후): " + perc);
+		log.info("30일 간의 커밋 수: " + count);
+		log.info("30일 간의 총 날짜 수: " + total);
+		log.info("30일 간의 커밋률(계산 전): " + perc);
+		log.info("30일 간의 커밋률(계산 후): " + perc);
 		sb.append("# 상세 커밋 현황\n");
 		sb.append(map.get("totalMap"));
 		sb.append("```");

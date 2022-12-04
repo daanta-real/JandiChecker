@@ -1,14 +1,17 @@
 package crawler;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Map;
-import java.util.TreeMap;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
 
 // 깃헙 긁어오기 관련 모든 소스코드. 크롤링 및 데이터 획득
+@Slf4j
 public class Crawler {
 
 	// ID 주면 전체 HTML 리턴해줌
@@ -18,7 +21,7 @@ public class Crawler {
 	    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 
 	    // 회신값 수신하여 문자열로 저장
-	    Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), "UTF-8"));
+	    Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
 	    StringBuilder sb = new StringBuilder();
 	    for (int c; (c = in.read()) >= 0;) sb.append((char)c);
 
@@ -38,7 +41,7 @@ public class Crawler {
 	// 수신된 웹 데이터 2차 trim (내부 태그 정돈)
 	static String makeDataCSV(String str) {
 
-		return str.toString()
+		return str
 
 		// 1차 내부 트림
 		.replaceAll("^.*(<g.*>).*\n|.*</?g.*\n|(.*data-count=\"\\d\"\\s)|(></).*(rect>)|(\\s.*<rect).*count=\"\\d\\d\"\\s", "") // 무관문자열 all삭제
@@ -60,12 +63,13 @@ public class Crawler {
 	// 완성된 CSV를 배열로 변환 후 리턴
 	static Map<String, Boolean> CSVtoHashMap(String csv) {
 
-		String list[] = csv.split("\n");
+		String[] csvArr = csv.split("\n");
+		List<String> list = new ArrayList<>(Arrays.asList(csvArr));
 		Map<String, Boolean> map = new TreeMap<>();
-		for(int i = 0; i < list.length; i++) {
-			String[] keyValStr = list[i].split(",");
+		for(String lis: list) {
+			String[] keyValStr = lis.split(",");
 			// 날짜 별 커밋 농도를 콘솔에 표시
-			// $.pf(Arrays.toString(keyValStr));
+			// log.info(Arrays.toString(keyValStr));
 			// 날짜 찾기
 			String dateStr = keyValStr[0];
 			// 잔디여부 찾기
@@ -80,7 +84,6 @@ public class Crawler {
 		String str               = getHTML     (githubId);
 		String trimmed           = trim        (str)     ;
 		String csv               = makeDataCSV (trimmed) ;
-		Map<String, Boolean> map = CSVtoHashMap(csv);
-		return map;
+		return CSVtoHashMap(csv);
 	}
 }

@@ -1,8 +1,5 @@
 --- #잔디체커 설정 파일. 이건 양식파일입니다. 쓰기 전에, 파일 이름을 settings_form.yaml 이 아닌 settings.yaml 으로 바꿔야 합니다.
 
-# 디버그 모드
-debug: yes
-
 # 토큰
 token: 토큰번호 기입
 

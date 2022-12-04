@@ -1,20 +1,20 @@
 package test.d211003_checker;
 
-import $.$;
 
+@Slf4j
 public class Main { public static void main(String[] args) throws Exception {
 	/*String id = "daanta-real";
 	String day = "2021-10-03";
 	boolean isCommited = Checker.getIsGithubCommitedByDay(id, day);
-	$.pn("\n\n" + isCommited);*/
+	log.info("\n\n" + isCommited);*/
 
 
 	// 오늘 날짜 포맷 준비
 	boolean s = Checker.getIsGithubCommitedByDay("daanta-real", "2021-10-03");
-	$.pn("\n"+s);
+	log.info("\n"+s);
 
 	// 전체 확인
-	$.pn("어제의 커밋을 전부 점검하겠습니다.");
+	log.info("어제의 커밋을 전부 점검하겠습니다.");
 	Checker.getNotCommitedYesterday();
 
 } }

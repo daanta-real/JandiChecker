@@ -10,8 +10,8 @@ import org.quartz.SchedulerFactory;
 import org.quartz.Trigger;
 import org.quartz.impl.StdSchedulerFactory;
 
-import $.$;
 
+@Slf4j
 public class Scheduler {
 
 	public static void run(Class<? extends Job> jobClass, String cron) {
@@ -38,7 +38,7 @@ public class Scheduler {
 	        scheduler.start();
 	    }
 	    catch(Exception e) {
-	    	$.pn("에러");
+	    	log.info("에러");
 	    	e.printStackTrace();
     	}
 

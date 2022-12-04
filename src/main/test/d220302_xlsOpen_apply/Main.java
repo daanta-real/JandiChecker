@@ -1,5 +1,6 @@
 package test.d220302_xlsOpen_apply;
 
+@Slf4j
 public class Main {
 
 	public static void main(String[] args) throws Exception {
@@ -7,8 +8,8 @@ public class Main {
 		// 시트 데이터 불러오기
 		// 현재 경로 따기
 		String PATH = Paths.get("").toAbsolutePath().toString();
-		$.pn("구성원 목록이 담겨 있는 엑셀 파일을 불러옵니다.");
-		$.pn("현재 경로: " + PATH);
+		log.info("구성원 목록이 담겨 있는 엑셀 파일을 불러옵니다.");
+		log.info("현재 경로: " + PATH);
 		// 파일 객체 부르기
 		FileInputStream file = new FileInputStream(new File(PATH, "list.xlsx"));
 		// 파일 객체로부터 시트 객체 뽑아내기
@@ -31,7 +32,7 @@ public class Main {
 			Cell cell_name = cellIterator.next();
 			// 만약에 빈 셀이 나오면 읽기 종료
 			if(cell_name.getCellType() == CellType.BLANK) {
-				$.pn("읽기 종료");
+				log.info("읽기 종료");
 				break;
 			}
 			String nameString = cell_name.getStringCellValue();
@@ -39,13 +40,13 @@ public class Main {
 			Cell cell_id = cellIterator.next();
 			String id = cell_id.getStringCellValue();
 			// 획득된 구성원 정보를 목록에 추가
-			$.pn("구성원 목록 추가: " + cell_name.getStringCellValue() + "(" + cell_id.getStringCellValue() + ")");
+			log.info("구성원 목록 추가: " + cell_name.getStringCellValue() + "(" + cell_id.getStringCellValue() + ")");
 			String[] rowArray = new String[] {nameString, id};
 			list.add(rowArray);
 		}
 
 		// 완성된 List 출력
-		for(String[] s: list) $.pn(Arrays.toString(s));
+		for(String[] s: list) log.info(Arrays.toString(s));
 
 		// 시트 밑 파일 객체 닫기
 		workbook.close();

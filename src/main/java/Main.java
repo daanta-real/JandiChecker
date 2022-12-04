@@ -1,18 +1,15 @@
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import $.$;
 import jda.Jda;
+
+import lombok.extern.slf4j.Slf4j;
+
 import scheduler.CronJob;
 import scheduler.CronScheduler;
+
 import settings.MainSettings;
 
+@Slf4j
 public class Main {
-
-	// 출력 도구 생성
-	@SuppressWarnings("unused")
-	private Logger logger = LoggerFactory.getLogger(Main.class);
 
 	// 서버의 실행
 	public static void main(String[] args) throws Exception {
@@ -64,23 +61,23 @@ public class Main {
 	            e.printStackTrace();
 	        }
 	    }
-		$.pn(MainSettings.PATH);
+		log.info(MainSettings.PATH);
 		Runtime.getRuntime().exec("/usr/bin/open -a Terminal " + MainSettings.PATH);
 		System.exit(0);*/
 
 		// 환경설정 로드
-		$.pn("\n[[[잔디체커 환경설정 로드]]]\n");
+		log.info("\n[[[잔디체커 환경설정 로드]]]\n");
 		MainSettings.ready();
 
 		// JDA 로드
-		$.pn("\n[[[잔디체커 JDA 로드]]]\n");
+		log.info("\n[[[잔디체커 JDA 로드]]]\n");
 		Jda.load();
 
 		// 스케쥴러 실행
-		$.pn("\n[[[스케쥴러 시작]]]\n");
+		log.info("\n[[[스케쥴러 시작]]]\n");
 		CronScheduler.run(CronJob.class, MainSettings.getCron());
 
-		$.pn("\n[[[잔디체커 실행 완료]]]\n");
+		log.info("\n[[[잔디체커 실행 완료]]]\n");
 
 	}
 
