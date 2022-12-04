@@ -10,6 +10,8 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import lombok.extern.slf4j.Slf4j;
 import vo.MainSettingsVO;
 
+import static utils.Utils.waitForEnter;
+
 // 잔디체커가 실행되는 내내 환경설정을 담고 있게 되는 클래스.
 // 잔디체커가 시작되면 Jackson을 이용해 YAML 파일을 읽어오게 되고, 그 내용이 이 클래스의 각 변수에 채워진다.
 @Slf4j
@@ -55,6 +57,7 @@ Github: http://github.com/daanta-real
 		if(!settingsFile.exists()) {
 			log.error("환경설정 파일을 찾지 못했습니다. 실행파일과 같은 폴더에 settings.yaml 파일을 넣어주세요.");
 			log.error("settings.yaml 파일의 작성법은 리포의 settings_form.yaml을 참고해 주시기 바랍니다.");
+			waitForEnter("엔터 키를 누르시면 종료됩니다..");
 			throw new Exception();
 		}
 		FileInputStream file = new FileInputStream(settingsFile);

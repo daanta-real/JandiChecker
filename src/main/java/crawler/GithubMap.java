@@ -8,8 +8,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import $.$;
 import lombok.extern.slf4j.Slf4j;
+
+import static utils.Utils.getCalendar;
 
 // 크롤러에서 읽어온 데이터에서 특정 정보를 빼내오거나, 특정 인원들의 깃헙 정보를 출력해줌
 @Slf4j
@@ -21,7 +22,7 @@ public class GithubMap {
 		String y = String.valueOf(dayStrArr[0]);
 		String m = String.valueOf(Integer.parseInt(dayStrArr[1]) - 1);
 		String d = String.valueOf(dayStrArr[2]);
-		return $.getCalendar(y, m, d);
+		return getCalendar(y, m, d);
 	}
 
 	// 깃헙 커밋 정보 획득

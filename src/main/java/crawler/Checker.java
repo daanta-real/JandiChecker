@@ -1,12 +1,11 @@
 package crawler;
 
-import $.$;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import lombok.extern.slf4j.Slf4j;
 import settings.MainSettings;
+import utils.Utils;
 
 // 깃헙 제출한 사람과 안 한 사람들의 정보를 정리
 @Slf4j
@@ -107,7 +106,7 @@ public class Checker {
 		String[] dates = date.split("-");
 
 		// 날짜 String들 만들기
-		Calendar c = $.getCalendar(dates[0], (Integer.parseInt(dates[1]) - 1) + "", dates[2]);
+		Calendar c = Utils.getCalendar(dates[0], (Integer.parseInt(dates[1]) - 1) + "", dates[2]);
 		String day = sdf.format(c.getTime());
 
 		// 본실행

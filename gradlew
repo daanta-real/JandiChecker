@@ -32,8 +32,8 @@
 #       Busybox and similar reduced shells will NOT work, because this script
 #       requires all of these POSIX shell features:
 #         * functions;
-#         * expansions «$var», «${var}», «${var:-default}», «${var+SET}»,
-#           «${var#prefix}», «${var%suffix}», and «$( cmd )»;
+#         * expansions «$var», «utils.${var}», «utils.${var:-default}», «utils.${var+SET}»,
+#           «utils.${var#prefix}», «utils.${var%suffix}», and «utils.$( cmd )»;
 #         * compound commands having a testable exit status, especially «case»;
 #         * various built-in commands including «command», «set», and «ulimit».
 #
@@ -45,7 +45,7 @@
 #       The "traditional" practice of packing multiple parameters into a
 #       space-separated string is a well documented source of bugs and security
 #       problems, so this is (mostly) avoided, by progressively accumulating
-#       options in "$@", and eventually passing that to Java.
+#       options in "utils.$@", and eventually passing that to Java.
 #
 #       Where the inherited environment variables (DEFAULT_JVM_OPTS, JAVA_OPTS,
 #       and GRADLE_OPTS) rely on word-splitting, this is performed explicitly;
@@ -212,7 +212,7 @@ set -- \
 # In Bash we could simply go:
 #
 #   readarray ARGS < <( xargs -n1 <<<"$var" ) &&
-#   set -- "${ARGS[@]}" "$@"
+#   set -- "utils.${ARGS[@]}" "utils.$@"
 #
 # but POSIX shell has neither arrays nor command substitution, so instead we
 # post-process each arg (as a line of input to sed) to backslash-escape any
@@ -229,6 +229,6 @@ eval "set -- $(
         xargs -n1 |
         sed ' s~[^-[:alnum:]+,./:=@_]~\\&~g; ' |
         tr '\n' ' '
-    )" '"$@"'
+    )" '"utils.$@"'
 
 exec "$JAVACMD" "$@"

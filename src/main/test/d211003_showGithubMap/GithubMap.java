@@ -15,7 +15,7 @@ public class GithubMap {
 	// 특정 날짜의 객체 획득
 	private static Calendar getDate(String dateStr) {
 		String[] dayStrArr = dateStr.split("-");
-		return $.getCalendar(
+		return utils.$.getCalendar(
 				Integer.valueOf(dayStrArr[0]),
 				Integer.valueOf(dayStrArr[1]) - 1,
 				Integer.valueOf(dayStrArr[2])
