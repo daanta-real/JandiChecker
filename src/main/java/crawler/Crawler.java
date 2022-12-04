@@ -73,7 +73,7 @@ public class Crawler {
 			// 날짜 찾기
 			String dateStr = keyValStr[0];
 			// 잔디여부 찾기
-			Boolean val = !keyValStr[1].equals("0");
+			Boolean val = !"0".equals(keyValStr[1]);
 			map.put(dateStr, val);
 		}
 		return map;

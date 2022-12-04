@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import jda.JdaMsgSender;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
-import settings.MainSettings;
+import configurations.Configurations;
 
 // 입수된 이벤트 객체로부터
 // 명령을 뽑아내어 분석 후, 알맞은 명령을 실행하는 단일 메소드만 있는 클래스
 @Slf4j
-public class Switcher {
+public class CommandController {
 
 	public static void command(MessageReceivedEvent event) throws Exception {
 
@@ -19,7 +20,7 @@ public class Switcher {
 		// 리스닝 중인 채널에 메세지가 발생하였으나, 메세지가 없거나, 그 첫 글자가 &가 아니어서 명령이 아닌 경우, 무지성 리턴
 		String totalString = event.getMessage().getContentRaw();
 		if(totalString.isBlank()) return;
-		String firstString = totalString.substring(0, 1);
+		String firstString = totalString.substring(0, 1); // Trim the first char - Identifier &
 		if(!"&".equals(firstString)) return;
 		log.info("[[명령이 접수되었습니다.]]");
 		String id = event.getChannel().getId();
@@ -34,7 +35,7 @@ public class Switcher {
 
 		// 1. 명령을 cmd 문자열에 담는다.
 		String cmdRawStr = cmdStrAll[0];
-		String cmdStarter = MainSettings.getCmdChar();
+		String cmdStarter = Configurations.getCmdChar();
 		String cmd = cmdRawStr.substring(cmdStarter.length());
 		log.info(" - 접수된 명령문: " + cmd);
 
@@ -54,51 +55,51 @@ public class Switcher {
 		switch(cmd) {
 
 			// 소개말 출력
-			case "도움말", "help", "도와줘", "도우미", "도움", "도움!", "소개" -> Sender.send(event, MainSettings.INFO_STRING);
+			case "도움말", "help", "도와줘", "도우미", "도움", "도움!", "소개", "?" -> JdaMsgSender.send(event, Configurations.INFO_STRING);
 
 			// 목표 출력
-			case "목표" -> Sender.send(event, "저는 매일 저녁과 자정, 잔디를 심지 않은 사람들을 찾아내 그 명단을 발표할 것입니다.");
+			case "목표" -> JdaMsgSender.send(event, "매일 자정, 목록에 등재된 인원 중 잔디를 심는데 성공한 사람들을 알려주는 봇입니다.");
 
 			// 특정 별칭에 해당하는 종합 커밋정보 출력
 			case "정보" -> {
 				if (opt.size() == 0) {
-					Sender.send(event, "정확히 입력해 주세요.");
+					JdaMsgSender.send(event, "정확히 입력해 주세요.");
 					break;
 				} // 미입력 걸러내기
 				option = opt.get(0);
-				log.info(option + "님 (ID: " + Commands.getGithubID(option) + ")의 정보 호출을 명령받았습니다.");
-				Sender.send(event, Commands.showJandiMap(option));
+				log.info(option + "님 (ID: " + CommandExecute.getGithubID(option) + ")의 정보 호출을 명령받았습니다.");
+				JdaMsgSender.send(event, CommandExecute.showJandiMap(option));
 			}
 
 			// 특정 Github ID에 해당하는 종합 커밋정보 출력
 			case "id" -> {
 				if (opt.size() == 0) {
-					Sender.send(event, "정확히 입력해 주세요.");
+					JdaMsgSender.send(event, "정확히 입력해 주세요.");
 					break;
 				} // 미입력 걸러내기
 				option = opt.get(0);
 				log.info("ID " + option + " 의 정보 호출을 명령받았습니다.");
-				Sender.send(event, Commands.showJandiMapById(option));
+				JdaMsgSender.send(event, CommandExecute.showJandiMapById(option));
 			}
 
 			// 어제 커밋 안 한 사람 목록 출력
-			case "어제안함" -> Sender.send(event, Commands.showNotCommitedYesterday());
+			case "어제안함" -> JdaMsgSender.send(event, CommandExecute.showNotCommitedYesterday());
 
 			// 어제 커밋 한 사람 목록 출력
-			case "어제" -> Sender.send(event, Commands.showDidCommitYesterday());
+			case "어제" -> JdaMsgSender.send(event, CommandExecute.showDidCommitYesterday());
 
 			// 현 시점 오늘 커밋 안 한 사람 목록 출력
-			case "&오늘안함" -> Sender.send(event, Commands.showNotCommitedToday());
+			case "&오늘안함" -> JdaMsgSender.send(event, CommandExecute.showNotCommitedToday());
 
 			// 특정 날짜에 잔디를 심지 않은 사람의 목록을 출력
 			case "확인" -> {
 				// 미입력 걸러내기
 				if (opt.size() == 0) {
-					Sender.send(event, "정확히 입력해 주세요.");
+					JdaMsgSender.send(event, "정확히 입력해 주세요.");
 					break;
 				}
 				option = opt.get(0);
-				Sender.send(event, Commands.showNotCommitedSomeday(option));
+				JdaMsgSender.send(event, CommandExecute.showNotCommitedSomeday(option));
 			}
 
 		}

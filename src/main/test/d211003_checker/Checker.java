@@ -22,7 +22,7 @@ public class Checker {
 		for(String s: text) if(s.substring(0, 10).equals(day)) {
 			String[] dayInfo = s.split(",");
 			String resultDay = dayInfo[0];
-			resultCommited = dayInfo[1].equals("0") ? false : true;
+			resultCommited = "0".equals(dayInfo[1]) ? false : true;
 			log.info("날짜: " + resultDay + " / 커밋 결과: " + resultCommited);
 		}
 		return resultCommited;

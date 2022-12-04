@@ -1,12 +1,12 @@
 
-import jda.Jda;
+import jda.JdaController;
 
 import lombok.extern.slf4j.Slf4j;
 
 import scheduler.CronJob;
 import scheduler.CronScheduler;
 
-import settings.MainSettings;
+import configurations.Configurations;
 
 @Slf4j
 public class Main {
@@ -69,22 +69,22 @@ public class Main {
 			// 환경설정 로드
 			System.out.println("""
 					**********************************************************************
-									JandiChecker v1.1  (Build 221204_1038)
-											Github 잔디 점검 프로그램
+					                JandiChecker v1.1  (Build 221204_1038)
+					                        Github 잔디 점검 프로그램
 					**********************************************************************""");
 			System.out.println();
 			log.info("[[[잔디체커 환경설정 로드]]]");
-			MainSettings.ready();
+			Configurations.ready();
 
 			// JDA 로드
 			System.out.println();
 			log.info("[[[잔디체커 JDA 로드]]]");
-			Jda.load();
+			JdaController.load();
 
 			// 스케쥴러 실행
 			System.out.println();
 			log.info("[[[스케쥴러 시작]]]");
-			CronScheduler.run(CronJob.class, MainSettings.getCron());
+			CronScheduler.run(CronJob.class, Configurations.getCron());
 
 			System.out.println();
 			log.info("[[[잔디체커 실행 완료]]]");

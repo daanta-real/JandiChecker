@@ -1,6 +1,5 @@
-package cmd;
+package jda;
 
-import jda.Jda;
 //import net.dv8tion.jda.api.entities.TextChannel; << 이건 구버전에서 썼었던 모양..
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
@@ -8,7 +7,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 // 메세지를 보내는 메소드를 모은 곳
 @Slf4j
-public class Sender {
+public class JdaMsgSender {
 
 	// 메세지 보내는 원본 메소드
 	public static void send(TextChannel channel, String msg) {
@@ -19,7 +18,7 @@ public class Sender {
 
 	// 특정 ID의 채널에 텍스트 채널에 메세지 전송
 	public static void send(String channelId, String msg) {
-		TextChannel channel = Jda.instance.getTextChannelById(channelId);
+		TextChannel channel = JdaController.instance.getTextChannelById(channelId);
 		log.info(channelId + " 채널에 메세지를 보냅니다. (채널 존재 여부: " + (channel != null) + ")");
 		if (channel != null) {
 			send(channel, msg);

@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 import lombok.extern.slf4j.Slf4j;
-import settings.MainSettings;
+import configurations.Configurations;
 import utils.Utils;
 
 // 깃헙 제출한 사람과 안 한 사람들의 정보를 정리
@@ -45,7 +45,7 @@ public class Checker {
 		log.info(" 확인합니다. 확인할 날짜: " + day);
 		StringBuilder sb = new StringBuilder();
 		int count = 0;
-		for(String[] s: MainSettings.getMembers()) {
+		for(String[] s: Configurations.getMembers()) {
 			String name = s[0];
 			String id = s[1];
 			boolean isCommitted = getGithubCommittedByDay(id, day);

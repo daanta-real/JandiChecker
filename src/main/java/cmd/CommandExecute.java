@@ -2,14 +2,14 @@ package cmd;
 
 import crawler.Checker;
 import crawler.GithubMap;
-import settings.MainSettings;
+import configurations.Configurations;
 
 // 정보 출력 메소드 모음
-public class Commands {
+public class CommandExecute {
 
 	// 이름을 입력하면 깃헙 ID를 리턴
 	public static String getGithubID(String name) {
-		for(String[] s: MainSettings.getMembers())
+		for(String[] s: Configurations.getMembers())
 			if(s[0].equals(name) || s[0].substring(1).equals(name)) return s[1];
 		return null;
 	}

@@ -1,4 +1,4 @@
-package settings;
+package configurations;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -8,14 +8,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import lombok.extern.slf4j.Slf4j;
-import vo.MainSettingsVO;
 
 import static utils.Utils.waitForEnter;
 
 // 잔디체커가 실행되는 내내 환경설정을 담고 있게 되는 클래스.
 // 잔디체커가 시작되면 Jackson을 이용해 YAML 파일을 읽어오게 되고, 그 내용이 이 클래스의 각 변수에 채워진다.
 @Slf4j
-public class MainSettings {
+public class Configurations {
 
 	// 환경상수
 	public static final String PATH = Paths.get("").toAbsolutePath().toString(); // 잔디체커가 실행되는 경로
@@ -65,7 +64,7 @@ Github: http://github.com/daanta-real
 		// ObjectMapper 생성자가, YAML파일을 오브젝트로 읽어들인다.
 		// 그 다음 그 오브젝트를 MainSettings 클래스 각 변수에 맵핑시키는 식으로 그 내용을 읽어들인다. 자동이다!
 		ObjectMapper om = new ObjectMapper(new YAMLFactory());
-		MainSettingsVO dto = om.readValue(file, MainSettingsVO.class);
+		ConfigurationsVO dto = om.readValue(file, ConfigurationsVO.class);
 		file.close();
 		log.info(" MainSettings DTO 읽기 완료.");
 
