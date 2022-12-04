@@ -38,6 +38,15 @@ This is a Discord Bot for digging and showing a list of who has succeeded to com
 
 
 
+# Development Environments
+
+Main: Java 17, Gradle 7.4, JDA 5.0.0 Beta1
+
+Sub: Quartz 2.3.2, Logback 1.4.5
+
+
+
+
 # Developer's Info
 
 잔디체커(JandiChecker) v1.1
@@ -47,12 +56,3 @@ This is a Discord Bot for digging and showing a list of who has succeeded to com
 e-mail: daanta@naver.com
 
 Github: http://github.com/daanta-real
-
-
-
-
-# Development Environments
-
-Main: Java 17, Gradle 7.4, JDA 5.0.0 Beta1
-
-Sub: Quartz 2.3.2, Logback 1.4.5
