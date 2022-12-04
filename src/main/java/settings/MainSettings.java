@@ -51,7 +51,13 @@ Github: http://github.com/daanta-real
 		log.info("셋팅된 경로: {}", PATH);
 
 		// 파일 객체 부르기
-		FileInputStream file = new FileInputStream(new File(PATH, "settings.yaml"));
+		File settingsFile = new File(PATH, "settings.yaml");
+		if(!settingsFile.exists()) {
+			log.error("환경설정 파일을 찾지 못했습니다. 실행파일과 같은 폴더에 settings.yaml 파일을 넣어주세요.");
+			log.error("settings.yaml 파일의 작성법은 리포의 settings_form.yaml을 참고해 주시기 바랍니다.");
+			throw new Exception();
+		}
+		FileInputStream file = new FileInputStream(settingsFile);
 
 		// ObjectMapper 생성자가, YAML파일을 오브젝트로 읽어들인다.
 		// 그 다음 그 오브젝트를 MainSettings 클래스 각 변수에 맵핑시키는 식으로 그 내용을 읽어들인다. 자동이다!
