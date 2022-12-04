@@ -72,20 +72,24 @@ public class Main {
 			                JandiChecker v1.1  (Build 221204_1038)
 			                        Github 잔디 점검 프로그램
 			**********************************************************************""");
-		log.info("\n[[[잔디체커 환경설정 로드]]]\n");
+		System.out.println();
+		log.info("[[[잔디체커 환경설정 로드]]]");
 		MainSettings.ready();
 
 		// JDA 로드
-		log.info("\n[[[잔디체커 JDA 로드]]]\n");
+		System.out.println();
+		log.info("[[[잔디체커 JDA 로드]]]");
 		Jda.load();
 
 		// 스케쥴러 실행
-		log.info("\n[[[스케쥴러 시작]]]\n");
+		System.out.println();
+		log.info("[[[스케쥴러 시작]]]");
 		CronScheduler.run(CronJob.class, MainSettings.getCron());
 
-		log.info("\n[[[잔디체커 실행 완료]]]\n");
+		System.out.println();
+		log.info("[[[잔디체커 실행 완료]]]");
+		System.out.println();
 
 	}
 
 }
-

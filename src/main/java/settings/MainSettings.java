@@ -48,7 +48,7 @@ Github: http://github.com/daanta-real
 	public static void ready() throws Exception {
 
 		log.info(" - 환경설정 로드 시작..");
-		log.info("셋팅된 경로: {}", PATH);
+		log.info(" - 셋팅된 경로: {}", PATH);
 
 		// 파일 객체 부르기
 		File settingsFile = new File(PATH, "settings.yaml");
@@ -73,10 +73,10 @@ Github: http://github.com/daanta-real
 		targetChannelId = dto.getTargetChannelId();
 
 		// 로드된 환경변수들 일괄 출력
-		log.info(" - 경로: {}\n", PATH);
-		log.info(" - 토큰: {}\n", token);
-		log.info(" - 크론: {}\n", cron);
-		log.info(" - 채널: {}\n", targetChannelId);
+		log.info(" - 경로: {}", PATH);
+		log.info(" - 토큰: {}", token);
+		log.info(" - 크론: {}", cron);
+		log.info(" - 채널: {}", targetChannelId);
 		log.info(" - 명단 확인: ");
 		for(int i = 0; i < members.length; i++)
 			log.info("    {}─ {}번째 인원: '{}' (Github ID: {})",
