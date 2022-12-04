@@ -73,7 +73,7 @@ Github: http://github.com/daanta-real
 		log.info(" - 채널: {}\n", targetChannelId);
 		log.info(" - 명단 확인: ");
 		for(int i = 0; i < members.length; i++)
-			log.info("    {}─ {}번째 인원: '{}' (Github ID: {})\n",
+			log.info("    {}─ {}번째 인원: '{}' (Github ID: {})",
 				(i == members.length - 1 ? '└' : '├'), i, members[i][0], members[i][1]);
 
 		log.info(" - 환경설정 로드 끝.");
