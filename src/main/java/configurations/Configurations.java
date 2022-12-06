@@ -48,8 +48,8 @@ Github: http://github.com/daanta-real
 	// YAML로 된 환경변수 파일을 로드
 	public static void ready() throws Exception {
 
-		log.info(" - 환경설정 로드 시작..");
-		log.info(" - 셋팅된 경로: {}", PATH);
+		log.info("환경설정 로드 시작..");
+		log.info("셋팅된 경로: {}", PATH);
 
 		// 파일 객체 부르기
 		File settingsFile = new File(PATH, "settings.yaml");
@@ -66,7 +66,7 @@ Github: http://github.com/daanta-real
 		ObjectMapper om = new ObjectMapper(new YAMLFactory());
 		ConfigurationsVO dto = om.readValue(file, ConfigurationsVO.class);
 		file.close();
-		log.info(" MainSettings DTO 읽기 완료.");
+		log.info("MainSettings DTO 읽기 완료.");
 
 		// 읽어온 내용을 MainSettings 클래스의 static 값들에 집어넣는다.
 		token = dto.getToken();
@@ -75,16 +75,16 @@ Github: http://github.com/daanta-real
 		targetChannelId = dto.getTargetChannelId();
 
 		// 로드된 환경변수들 일괄 출력
-		log.info(" - 경로: {}", PATH);
-		log.info(" - 토큰: {}", token);
-		log.info(" - 크론: {}", cron);
-		log.info(" - 채널: {}", targetChannelId);
-		log.info(" - 명단 확인: ");
+		log.info("경로: {}", PATH);
+		log.info("토큰: {}", token);
+		log.info("크론: {}", cron);
+		log.info("채널: {}", targetChannelId);
+		log.info("명단 확인: ");
 		for(int i = 0; i < members.length; i++)
 			log.info("    {}─ {}번째 인원: '{}' (Github ID: {})",
 				(i == members.length - 1 ? '└' : '├'), i, members[i][0], members[i][1]);
 
-		log.info(" - 환경설정 로드 끝.");
+		log.info("환경설정 로드 끝.");
 
 	}
 

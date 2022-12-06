@@ -44,6 +44,5 @@ dependencies {
     // 로깅 어노테이션을 쓰기 위한 롬복
     // https://mvnrepository.com/artifact/org.projectlombok/lombok
     implementation 'org.projectlombok:lombok'
-    implementation 'org.projectlombok:lombok:1.18.22'
 
 }

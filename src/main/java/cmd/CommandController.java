@@ -24,7 +24,7 @@ public class CommandController {
 		if(!"&".equals(firstString)) return;
 		log.info("[[명령이 접수되었습니다.]]");
 		String id = event.getChannel().getId();
-		log.info(" - 채널 ID: " + id);
+		log.info("채널 ID: " + id);
 
 		// 커맨드 정보 접수부.
 		// 명령은 명령과 옵션, 이렇게 두 개의 String을 스페이스로 구분한 형태로 받게 되어 있다.
@@ -37,7 +37,7 @@ public class CommandController {
 		String cmdRawStr = cmdStrAll[0];
 		String cmdStarter = Configurations.getCmdChar();
 		String cmd = cmdRawStr.substring(cmdStarter.length());
-		log.info(" - 접수된 명령문: " + cmd);
+		log.info("접수된 명령문: " + cmd);
 
 		// 2. 옵션을 opt 콜렉션에 담는다.
 		// 주의: "리스트에 add/remove 등 수정이 필요한 경우에는 Arrays.asList()을 사용해선 안됨을 명심하자."
@@ -49,7 +49,7 @@ public class CommandController {
 		String option;
 		List<String> opt = new ArrayList<>(Arrays.asList(cmdStrAll));
 		opt.remove(0); // 첫 단어는 명령어이므로 빼준다.
-		log.info(" - 접수된 옵션 목록: " + opt);
+		log.info("접수된 옵션 목록: " + opt);
 
 		// 본격적인 명령의 분석 및 실행부
 		switch(cmd) {
