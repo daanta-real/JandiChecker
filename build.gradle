@@ -42,7 +42,14 @@ dependencies {
 //    implementation 'org.slf4j:slf4j-reload4j:latest.integration'
 
     // 로깅 어노테이션을 쓰기 위한 롬복
+    // LOMBOK은 사용 전제조건이 까다로우므로 사용 시 주의.
+    // 1. 어떤 롬복을 어떤 타겟에 implement(release/dev 모두) 최신판의 버전 숫자를 필히 명기해줘야 한다.
+    // 2. 반드시 Annotation Processor를 활성해줘야 한다.
+    //  1) 밑에처럼 annotationProcessor 형식의 dependency도 추가로 선언해 줘야 함
+    //  2) Settings > Build, Execution, Depolyment > Compiler > Annotation Processors
+    //     > Enable annotation processing 에 체크해야 함
     // https://mvnrepository.com/artifact/org.projectlombok/lombok
-    implementation 'org.projectlombok:lombok'
+    implementation 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
 }
