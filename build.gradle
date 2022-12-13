@@ -3,6 +3,7 @@ plugins {
 //    id 'java-library'
 //    id 'maven-publish'
     id 'java'
+//    id 'org.kordamp.gradle.jdeps' version '0.19.0'
 }
 
 group = 'Group'
@@ -13,15 +14,16 @@ description = 'Discord_bot_JandiChecker'
 repositories {
     mavenLocal()
     mavenCentral()
-//    maven { url = uri('https://repo.maven.apache.org/maven2/') }
-    // 아래는 방화벽 환경용. 필요 시 주석 해제
-//    maven { url 'https://maven.aliyun.com/repository/google/' }
-//    maven { url 'https://maven.aliyun.com/repository/public/' }
-//    maven { url 'https://maven.aliyun.com/repository/spring/' }
-//    maven { url 'https://maven.aliyun.com/repository/gradle-plugin/' }
-//    maven { url 'https://maven.aliyun.com/repository/spring-plugin/' }
-//    maven { url 'https://plugins.gradle.org/m2/' }
-//    maven { url 'https://maven.xillio.com/artifactory/libs-release/'
+    gradlePluginPortal()
+    maven { url 'https://repo.maven.apache.org/maven2/' }
+    // 아래는 온갖 미러사이트들. 필요 시 주석 해제
+    maven { url 'https://maven.aliyun.com/repository/google/' }
+    maven { url 'https://maven.aliyun.com/repository/public/' }
+    maven { url 'https://maven.aliyun.com/repository/spring/' }
+    maven { url 'https://maven.aliyun.com/repository/gradle-plugin/' }
+    maven { url 'https://maven.aliyun.com/repository/spring-plugin/' }
+    maven { url 'https://plugins.gradle.org/m2/' }
+    maven { url 'https://maven.xillio.com/artifactory/libs-release/' }
 }
 
 dependencies {
@@ -60,8 +62,21 @@ dependencies {
     implementation 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
+    // JDEPS로 의존성 풀 리스트 보기
+    // 얘도 버전 명기를 해야 돌아간다.
+    // https://mvnrepository.com/artifact/org.kordamp.gradle/jdeps-gradle-plugin
+//    implementation 'org.kordamp.gradle:jdeps-gradle-plugin:0.19.0'
+
 }
 
+//apply plugin: 'org.kordamp.gradle.jdeps'
+
+// jar를 따로 생성하지 못하게 한다. 왜 추가했는지 기억이 안 난다..
 jar {
     enabled = false
+}
+
+// CLI 터미널에서 한글 깨짐 오류가 발생하는 것을 방지한다.
+tasks.withType(JavaCompile){
+    options.encoding = "UTF-8"
 }
