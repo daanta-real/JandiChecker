@@ -17,8 +17,8 @@ import static utils.Utils.waitForEnter;
 public class Configurations {
 
 	// 환경상수
-	public static final String version = "v1.1";
-	public static final String build = "221215_1336";
+	public static final String version = "v1.2";
+	public static final String build = "221215_1353";
 	public static final String PATH = Paths.get("").toAbsolutePath().toString(); // 잔디체커가 실행되는 경로
 	private static final String CMD_CHAR = "&"; // 잔디체커 명령임을 판독하는 기준이 되는 구분자
 
