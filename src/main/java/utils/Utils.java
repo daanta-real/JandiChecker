@@ -17,6 +17,7 @@ public class Utils {
 
     // pause in console
     // https://stackoverflow.com/questions/6032118/make-the-console-wait-for-a-user-input-to-close
+    public static void waitForEnter() { waitForEnter(""); }
     public static void waitForEnter(String message, Object... args) {
         Console c = System.console();
         if (c != null) {

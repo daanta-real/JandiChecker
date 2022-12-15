@@ -8,6 +8,8 @@ import scheduler.CronScheduler;
 
 import configurations.Configurations;
 
+import static utils.Utils.waitForEnter;
+
 @Slf4j
 public class Main {
 
@@ -91,6 +93,8 @@ public class Main {
 			System.out.println();
 
 		} catch(Exception e) {
+			waitForEnter();
+			System.exit(-1);
 			// 자동으로 return됨 = 강제종료
 		}
 
