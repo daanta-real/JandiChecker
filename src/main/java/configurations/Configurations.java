@@ -17,6 +17,8 @@ import static utils.Utils.waitForEnter;
 public class Configurations {
 
 	// 환경상수
+	public static final String version = "v1.1";
+	public static final String build = "221215_1336";
 	public static final String PATH = Paths.get("").toAbsolutePath().toString(); // 잔디체커가 실행되는 경로
 	private static final String CMD_CHAR = "&"; // 잔디체커 명령임을 판독하는 기준이 되는 구분자
 
@@ -38,12 +40,12 @@ _**저는 매일 자정, 잔디를 심는 데 성공한 사람들을 찾아낼 �
 &오늘안함: 오늘 잔디를 심지 않은 사람들의 명단을 공개합니다.
 &확인 [날짜(yyyy-MM-dd 형식)]: 특정 날짜에 잔디를 제출하지 않은 사람들의 명단을 출력합니다.
 
-잔디체커(JandiChecker) v1.0
+잔디체커(JandiChecker) %s Build %s
 제작 by 단타(박준성)
 e-mail: daanta@naver.com
 Github: http://github.com/daanta-real
 ```
-""";
+""".formatted(version, build);
 
 	// YAML로 된 환경변수 파일을 로드
 	public static void ready() throws Exception {

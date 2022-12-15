@@ -67,11 +67,11 @@ public class Main {
 			System.exit(0);*/
 
 			// 환경설정 로드
-			System.out.println("""
-					**********************************************************************
-					                JandiChecker v1.1  (Build 221204_1038)
-					                        Github 잔디 점검 프로그램
-					**********************************************************************""");
+			System.out.printf("""
+					**********************************************
+					- JandiChecker %s Build %s
+					- Github 잔디 점검 프로그램
+					**********************************************%n%n""", Configurations.version, Configurations.build);
 			System.out.println();
 			log.info("[[[잔디체커 환경설정 로드]]]");
 			Configurations.ready();
