@@ -1,10 +1,23 @@
 package utils;
 
-import tray.TrayMenues;
-
-import java.awt.*;
-import java.io.Console;
 import java.util.Calendar;
+import tray.TrayMenues;
+import java.awt.*;
+import java.awt.event.*;
+
+import javax.swing.AbstractAction;
+
+import javax.swing.JComponent;
+
+import javax.swing.JFrame;
+
+import javax.swing.JRootPane;
+
+import javax.swing.KeyStroke;
+
+import javax.swing.UIManager;
+
+import java.io.Console;
 
 public class Utils {
 
@@ -57,6 +70,9 @@ public class Utils {
             trayIcon.addActionListener(TrayMenues.getExitListener());
             // Try to add the tray image. If failed this throws AWTException
             tray.add(trayIcon);
+
+            // Hide
+            setVisible(false);
 
         } catch (UnsupportedOperationException e) { // Current OS does not support tray mode
             // disable tray option in your application or perform other actions
