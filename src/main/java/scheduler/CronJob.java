@@ -3,7 +3,7 @@ package scheduler;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 
-import cmd.CommandExecute;
+import cmd.CommandService;
 import jda.JdaMsgSender;
 import configurations.Configurations;
 
@@ -16,7 +16,7 @@ public class CronJob implements Job {
 	@Override
 	public void execute(JobExecutionContext context) {
 		try {
-			String yesterdayCommitedString = CommandExecute.showDidCommitYesterday();
+			String yesterdayCommitedString = CommandService.showDidCommitYesterday();
 			JdaMsgSender.send(Configurations.getChId(), yesterdayCommitedString);
 		} catch (Exception e) { e.printStackTrace(); }
 	}

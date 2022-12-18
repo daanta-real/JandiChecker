@@ -73,7 +73,7 @@ public class Main {
 					**********************************************
 					- JandiChecker %s Build %s
 					- Github 잔디 점검 프로그램
-					**********************************************%n%n""", Configurations.version, Configurations.build);
+					**********************************************%n%n""", Configurations.VERSION, Configurations.BUILD);
 			System.out.println();
 			log.info("[[[잔디체커 환경설정 로드]]]");
 			Configurations.ready();

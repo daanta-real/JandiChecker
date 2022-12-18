@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import window.WindowService;
 import jda.JdaMsgSender;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -67,8 +68,8 @@ public class CommandController {
 					break;
 				} // 미입력 걸러내기
 				option = opt.get(0);
-				log.info(option + "님 (ID: " + CommandExecute.getGithubID(option) + ")의 정보 호출을 명령받았습니다.");
-				JdaMsgSender.send(event, CommandExecute.showJandiMap(option));
+				log.info(option + "님 (ID: " + CommandService.getGithubID(option) + ")의 정보 호출을 명령받았습니다.");
+				JdaMsgSender.send(event, CommandService.showJandiMap(option));
 			}
 
 			// 특정 Github ID에 해당하는 종합 커밋정보 출력
@@ -79,17 +80,17 @@ public class CommandController {
 				} // 미입력 걸러내기
 				option = opt.get(0);
 				log.info("ID " + option + " 의 정보 호출을 명령받았습니다.");
-				JdaMsgSender.send(event, CommandExecute.showJandiMapById(option));
+				JdaMsgSender.send(event, CommandService.showJandiMapById(option));
 			}
 
 			// 어제 커밋 안 한 사람 목록 출력
-			case "어제안함" -> JdaMsgSender.send(event, CommandExecute.showNotCommitedYesterday());
+			case "어제안함" -> JdaMsgSender.send(event, CommandService.showNotCommitedYesterday());
 
 			// 어제 커밋 한 사람 목록 출력
-			case "어제" -> JdaMsgSender.send(event, CommandExecute.showDidCommitYesterday());
+			case "어제" -> JdaMsgSender.send(event, CommandService.showDidCommitYesterday());
 
 			// 현 시점 오늘 커밋 안 한 사람 목록 출력
-			case "&오늘안함" -> JdaMsgSender.send(event, CommandExecute.showNotCommitedToday());
+			case "&오늘안함" -> JdaMsgSender.send(event, CommandService.showNotCommitedToday());
 
 			// 특정 날짜에 잔디를 심지 않은 사람의 목록을 출력
 			case "확인" -> {
@@ -99,7 +100,11 @@ public class CommandController {
 					break;
 				}
 				option = opt.get(0);
-				JdaMsgSender.send(event, CommandExecute.showNotCommitedSomeday(option));
+				JdaMsgSender.send(event, CommandService.showNotCommitedSomeday(option));
+			}
+
+			case "숨김" -> {
+				WindowService.goTray();
 			}
 
 		}
