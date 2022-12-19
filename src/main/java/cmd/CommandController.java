@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.sun.tools.javac.Main;
 import window.WindowService;
 import jda.JdaMsgSender;
 import lombok.extern.slf4j.Slf4j;
@@ -103,7 +104,7 @@ public class CommandController {
 				JdaMsgSender.send(event, CommandService.showNotCommitedSomeday(option));
 			}
 
-			case "숨김" -> WindowService.goTray();
+			case "숨김" -> Main.goTray();
 
 		}
 	}

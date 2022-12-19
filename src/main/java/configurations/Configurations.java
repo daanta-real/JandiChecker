@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import lombok.extern.slf4j.Slf4j;
+import window.WindowService;
 
 import static utils.Utils.waitForEnter;
 
@@ -52,6 +53,10 @@ Github: http://github.com/daanta-real
 
 		log.info("환경설정 로드 시작..");
 		log.info("셋팅된 경로: {}", PATH);
+
+		// 윈도 컨트롤 등 트레이 준비
+		WindowService.init();
+		log.info("윈도 컨트롤 준비 완료.");
 
 		// 파일 객체 부르기
 		File settingsFile = new File(PATH, "settings.yaml");

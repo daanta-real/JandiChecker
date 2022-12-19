@@ -1,5 +1,6 @@
 package window;
 
+import com.sun.tools.javac.Main;
 import configurations.Configurations;
 import lombok.extern.slf4j.Slf4j;
 
@@ -7,26 +8,20 @@ import javax.swing.*;
 import java.awt.*;
 
 @Slf4j
-public class WindowService extends JFrame {
-
-    // Fields
-    private static WindowService instance = null;
-    private static boolean windowVisible = true;
+public final class WindowService {
 
     // Constructor
     private WindowService() {
-        super("잔디체커 " + Configurations.VERSION + " Build " + Configurations.BUILD);
-        instance = new WindowService();
-        windowVisible = true;
     }
 
-    // Get app to go tray
-    public static void goTray() {
+    // prepare tray props
+    public static void init() {
+
         try {
 
             // 1. Prepare
             // get the SystemTray instance
-            // If the system tray isn't supported by the current platform, it throws UnsupportedOperationException
+            // if the system tray isn't supported by the current platform, it throws UnsupportedOperationException
             SystemTray tray = SystemTray.getSystemTray();
             // load an image
             Image image = Toolkit.getDefaultToolkit().getImage("resources/main/img/windows_16x16.ico");
@@ -47,10 +42,6 @@ public class WindowService extends JFrame {
             // Try to add the tray image. If failed this throws AWTException
             tray.add(trayIcon);
 
-            // Hide
-            instance.setVisible(false);
-            windowVisible = false;
-
         } catch (UnsupportedOperationException e) { // Current OS does not support tray mode
             // disable tray option in your application or perform other actions
             log.error("트레이 기능을 지원하지 않는 기종에서 실행되었습니다.");
@@ -66,7 +57,6 @@ public class WindowService extends JFrame {
         // if (trayIcon != null) {
         //     trayIcon.setImage(updatedImage);
         // }
-
     }
 
 }

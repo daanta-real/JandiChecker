@@ -8,13 +8,30 @@ import scheduler.CronScheduler;
 
 import configurations.Configurations;
 
+import javax.swing.*;
+
 import static utils.Utils.waitForEnter;
 
 @Slf4j
-public class Main {
+public class Main extends JFrame {
 
-	// 서버의 실행
+	// Fields
+	private static boolean windowVisible = true;
+
+	// Minimalization
+	public static void goTray() {
+		System.out.println();
+	}
+
+	// Constructor
+	private Main() {
+		super("잔디체커 " + Configurations.VERSION + " Build " + Configurations.BUILD);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	}
+
+	// 실제 실행
 	public static void main(String[] args) {
+
 		try {
 /*
 			// MacOS only
