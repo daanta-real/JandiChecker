@@ -103,9 +103,7 @@ public class CommandController {
 				JdaMsgSender.send(event, CommandService.showNotCommitedSomeday(option));
 			}
 
-			case "숨김" -> {
-				WindowService.goTray();
-			}
+			case "숨김" -> WindowService.goTray();
 
 		}
 	}

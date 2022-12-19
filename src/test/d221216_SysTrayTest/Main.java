@@ -129,4 +129,4 @@ public class d221216_SysTrayTest extends JFrame {
         new SystemTrayIn();
     }
 
-}ㅋ
+}

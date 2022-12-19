@@ -9,17 +9,15 @@ import java.awt.*;
 @Slf4j
 public class WindowService extends JFrame {
 
-    private static boolean windowVisible;
+    // Fields
+    private static WindowService instance = null;
+    private static boolean windowVisible = true;
 
-    // Singleton
+    // Constructor
     private WindowService() {
         super("잔디체커 " + Configurations.VERSION + " Build " + Configurations.BUILD);
-        setVisible(true);
+        instance = new WindowService();
         windowVisible = true;
-    }
-
-    private static void setVisibility(boolean toVisible) {
-        setVisible(false);
     }
 
     // Get app to go tray
@@ -50,7 +48,8 @@ public class WindowService extends JFrame {
             tray.add(trayIcon);
 
             // Hide
-            if(windowVisible) setVisibility(false);
+            instance.setVisible(false);
+            windowVisible = false;
 
         } catch (UnsupportedOperationException e) { // Current OS does not support tray mode
             // disable tray option in your application or perform other actions
