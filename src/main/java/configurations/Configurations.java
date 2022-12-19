@@ -9,8 +9,6 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import lombok.extern.slf4j.Slf4j;
 
-import javax.swing.*;
-
 import static utils.Utils.waitForEnter;
 
 // 잔디체커가 실행되는 내내 환경설정을 담고 있게 되는 클래스.
@@ -47,7 +45,7 @@ _**저는 매일 자정, 잔디를 심는 데 성공한 사람들을 찾아낼 �
 e-mail: daanta@naver.com
 Github: http://github.com/daanta-real
 ```
-""".formatted(version, build);
+""".formatted(VERSION, BUILD);
 
 	// YAML로 된 환경변수 파일을 로드
 	public static void ready() throws Exception {
