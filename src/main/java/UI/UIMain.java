@@ -5,6 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Objects;
@@ -49,9 +52,9 @@ public final class UIMain extends JFrame {
                 .createFont(Font.TRUETYPE_FONT, fontStream)
                 .deriveFont(15f); // Make sure to derive the size;
         log.debug("폰트 로딩 완료");
-
         UIManager.getLookAndFeelDefaults()
                 .put("defaultFont", FONT);
+        log.debug("폰트를 디폴트 폰트에 적용 완료");
 
     }
 
@@ -94,11 +97,20 @@ public final class UIMain extends JFrame {
             UIMenu ui = UIMenu.getInstance();
             ui.initTray();
 
-            // Reserve making tray icon for clicking minimize button
+            // Reserve making tray action for clicking minimize button
             addWindowStateListener(e -> {
                 if ((e.getNewState() & Frame.ICONIFIED) == Frame.ICONIFIED){
-                    log.debug("최소화 버튼을 눌러 최소화합니다.");
-                    ui.runGoTray();
+                    runGoTray();
+                }
+            });
+            // Reserve activating windows action for double-clicking tray icon
+            addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e){
+                    if(e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
+                        log.info("더블 클릭되었습니다.");
+                        runGoActivate();
+                    }
                 }
             });
 
@@ -125,6 +137,28 @@ public final class UIMain extends JFrame {
     public void activateWindow() {
         System.out.println("윈도 재활성화");
         setVisible(true);
+    }
+
+    // 4. Actions
+
+    // Minimization
+    public void runGoTray() {
+        System.out.println("요청에 의해 윈도우를 트레이로 보냅니다.");
+        setVisible(false);
+        UIMenu.trayIconOn();
+    }
+
+    public void runGoActivate() {
+        System.out.println("요청에 의해 윈도우를 활성화합니다.");
+        UIMenu.trayIconOff();
+        setVisible(true);
+        toFront();
+        setState(Frame.NORMAL);
+    }
+
+    public void runExit() {
+        System.out.println("요청에 의해 종료합니다.");
+        System.exit(0);
     }
 
 }

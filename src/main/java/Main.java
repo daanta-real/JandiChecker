@@ -19,17 +19,17 @@ public class Main extends JFrame {
 
 		try {
 
-			// 타이틀 표시
-			System.out.printf("""
-					**********************************************
-					- JandiChecker %s Build %s
-					- Github 잔디 점검 프로그램
-					**********************************************%n%n""", Initializer.VERSION, Initializer.BUILD);
-			System.out.println();
-
 			// 환경설정 로드
-			log.info("[[[잔디체커 환경설정 로드]]]");
+			log.info("[[[잔디체커 환경설정 로드 시작]]]");
 			Initializer.ready();
+			log.info("[[[잔디체커 환경설정 로드 완료]]]");
+
+			// 타이틀 표시
+			log.info("""
+     				\n\n**********************************************
+					- JandiChecker {} Build {}
+					- Github 잔디 점검 프로그램
+					**********************************************""", Initializer.VERSION, Initializer.BUILD);
 
 			// JDA 로드
 			System.out.println();

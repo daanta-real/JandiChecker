@@ -11,9 +11,10 @@ public class UIMenu {
     // 1. Fields
     private static final UIMenu INSTANCE = new UIMenu();
     private final SystemTray TRAY = SystemTray.getSystemTray();
+    private TrayIcon ICON;
     private final PopupMenu POPUP = new PopupMenu();
 
-    // 2. Constructors
+    // 2. Constructor
     private UIMenu() {
 
         try {
@@ -30,12 +31,12 @@ public class UIMenu {
             MENU_EXIT.setShortcut(new MenuShortcut(KeyEvent.VK_E));
     
             // labels
-            MENU_SHOW_WINDOW.setLabel("&Open");
-            MENU_EXIT.setLabel("&Exit");
+            MENU_SHOW_WINDOW.setLabel("Open");
+            MENU_EXIT.setLabel("Exit");
     
             // listeners
-            MENU_SHOW_WINDOW.addActionListener(e -> runOpen());
-            MENU_EXIT.addActionListener(e -> runExit());
+            MENU_SHOW_WINDOW.addActionListener(e -> UIMain.getInstance().runGoActivate());
+            MENU_EXIT.addActionListener(e -> UIMain.getInstance().runExit());
     
             // add all menues to popup
             POPUP.add(MENU_SHOW_WINDOW);
@@ -60,10 +61,7 @@ public class UIMenu {
             // 2. Icon
             // construct a TrayIcon
             Image iconImage = UIMain.getInstance().getImage();
-            TrayIcon trayIcon = new TrayIcon(iconImage, "JandiChecker", POPUP);
-            // set the TrayIcon double click linstener
-            // Try to add the tray image. If failed this throws AWTException
-            TRAY.add(trayIcon);
+            ICON = new TrayIcon(iconImage, "JandiChecker", POPUP);
 
             // ...
             // some time later
@@ -72,39 +70,38 @@ public class UIMenu {
             //     trayIcon.setImage(updatedImage);
             // }
 
-        } catch (AWTException e) { // Failed to add the tray image
-            log.error("트레이 아이콘을 추가하는 데 실패했습니다.");
-            throw e;
         } catch (Exception e) { // etc.
-            log.error("트레이 반영 중 기타 에러가 발생하셨습니다.", e);
+            log.error("트레이 초기화 중 기타 에러가 발생하셨습니다.", e);
             throw e;
         }
 
-        log.info("트레이 반영 완료.");
+        log.info("트레이 초기화 완료.");
 
     }
+
+    // 4. Getter
 
     // Return the singleton instance
     public static UIMenu getInstance() {
         return INSTANCE;
     }
 
-    // 4. Actions
+    // 5. Actions
 
-    // Minimization
-    public void runGoTray() {
-        System.out.println("요청에 의해 윈도우를 트레이로 보냅니다.");
-        UIMain.getInstance().setVisible(false);
+    // Show tray icon
+    public static void trayIconOn() {
+        try {
+            UIMenu ui = UIMenu.getInstance();
+            ui.TRAY.add(ui.ICON);
+        } catch(AWTException e) {
+            log.error("트레이 아이콘 생성에 실패하였습니다.");
+        }
     }
 
-    public void runOpen() {
-        System.out.println("요청에 의해 윈도우를 활성화합니다.");
-        UIMain.getInstance().activateWindow();
-    }
-
-    public void runExit() {
-        System.out.println("요청에 의해 종료합니다.");
-        System.exit(0);
+    // Hide tray icon
+    public static void trayIconOff() {
+        UIMenu ui = UIMenu.getInstance();
+        ui.TRAY.remove(ui.ICON);
     }
 
 }
