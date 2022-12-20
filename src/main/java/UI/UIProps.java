@@ -1,10 +1,10 @@
-package window;
+package UI;
 
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
-public final class WindowProps {
+public final class UIProps {
 
     // 1. Fields
     // menues
@@ -15,7 +15,7 @@ public final class WindowProps {
     public static final ActionListener LISTENER_EXIT = e -> runExit();
 
     // 2. Constructor must set private (and class must be final; Because it's a utility class)
-    private WindowProps() {
+    private UIProps() {
         MENU_SHOW_WINDOW.setShortcut(new MenuShortcut(KeyEvent.VK_O));
         MENU_EXIT.setShortcut(new MenuShortcut(KeyEvent.VK_E));
         MENU_SHOW_WINDOW.setLabel("&Open");
@@ -27,7 +27,7 @@ public final class WindowProps {
     // 3. Methods
     public static void runOpen() {
         System.out.println("요청에 의해 윈도우를 활성화합니다.");
-        WindowService.getInstance().activateWindow();
+        UIService.getInstance().activateWindow();
     }
 
     public static void runExit() {

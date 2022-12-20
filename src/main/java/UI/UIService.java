@@ -1,4 +1,4 @@
-package window;
+package UI;
 
 import configurations.Configurations;
 import lombok.extern.slf4j.Slf4j;
@@ -10,14 +10,14 @@ import java.net.URL;
 import java.util.Objects;
 
 @Slf4j
-public final class WindowService extends JFrame {
+public final class UIService extends JFrame {
 
     // 1. Fields
-    private static final WindowService INSTANCE;
+    private static final UIService INSTANCE;
 
     static {
         try {
-            INSTANCE = new WindowService();
+            INSTANCE = new UIService();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -32,7 +32,7 @@ public final class WindowService extends JFrame {
 
 
     // 2. Constructor
-    private WindowService() throws Exception {
+    private UIService() throws Exception {
 
         log.debug("WindowService 초기화 시작");
 
@@ -67,7 +67,7 @@ public final class WindowService extends JFrame {
     }
 
     // 3. Getter
-    public static WindowService getInstance() {
+    public static UIService getInstance() {
         return INSTANCE;
     }
 
@@ -145,8 +145,8 @@ public final class WindowService extends JFrame {
 
             // 1. popup
             // add all menues to popup
-            POPUP_MENU.add(WindowProps.MENU_SHOW_WINDOW);
-            POPUP_MENU.add(WindowProps.MENU_EXIT);
+            POPUP_MENU.add(UIProps.MENU_SHOW_WINDOW);
+            POPUP_MENU.add(UIProps.MENU_EXIT);
 
             // 2. Icon
             // construct a TrayIcon
