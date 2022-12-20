@@ -7,13 +7,10 @@ import utils.scheduler.CronScheduler;
 
 import init.Initializer;
 
-import javax.swing.*;
-
 import static utils.CommonUtils.waitForEnter;
 
 @Slf4j
-public class Main extends JFrame {
-
+public class Main {
 	// 실제 실행
 	public static void main(String[] args) {
 

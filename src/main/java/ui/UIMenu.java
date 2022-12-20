@@ -4,6 +4,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 @Slf4j
 public class UIMenu {
@@ -56,12 +58,25 @@ public class UIMenu {
     // Initialize tray
     public void initTray() {
 
+        UIMain uiMain = UIMain.getInstance();
+
         try {
 
             // 2. Icon
             // construct a TrayIcon
-            Image iconImage = UIMain.getInstance().getImage();
+            Image iconImage = uiMain.getImage();
             ICON = new TrayIcon(iconImage, "JandiChecker", POPUP);
+
+            // Reserve activating windows action for double-clicking tray icon
+            ICON.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    if(e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
+                        log.info("트레이 아이콘이 더블 클릭되었습니다.");
+                        uiMain.runGoActivate();
+                    }
+                }
+            });
 
             // ...
             // some time later

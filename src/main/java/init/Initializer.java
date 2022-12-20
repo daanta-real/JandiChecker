@@ -56,17 +56,17 @@ public class Initializer {
 
 		log.info("환경설정 로드 시작..");
 
-		// 1. 윈도 컨트롤, 트레이 등 ui 준비
-		UIMain.getInstance().init();
-		log.info("윈도 컨트롤 준비 완료.");
-
-		// 2. YAML로 된 내부 환경변수 파일을 로드
+		// 1. YAML로 된 내부 환경변수 파일을 로드
 		loadProperties_inner();
 		log.info("내부 환경변수 로드 완료.");
 
-		// 3. YAML로 된 외부 환경변수 파일을 로드 (settings.yaml)
+		// 2. YAML로 된 외부 환경변수 파일을 로드 (settings.yaml)
 		loadProperties_outer();
 		log.info("외부 환경변수 로드 완료.");
+
+		// 3. 윈도 컨트롤, 트레이 등 ui 준비
+		UIMain.getInstance().init();
+		log.info("윈도 컨트롤 준비 완료.");
 
 		log.info("환경설정 로드 끝.");
 
@@ -87,9 +87,8 @@ public class Initializer {
 		URL resource = Initializer.class.getClassLoader().getResource("properties.yaml");
 		assert resource != null;
 		URI location = resource.toURI();
-		log.info("내부 환경변수 파일의 위치: {}", location);
-
 		File configFile = new File(location);
+		log.info("내부 환경변수 파일의 절대위치: {}", location);
 		if(!configFile.exists()) {
 			log.error("properties.yaml 파일이 없는 것 같습니다.");
 			throw new Exception();
@@ -118,7 +117,7 @@ public class Initializer {
 	private static void loadProperties_outer() throws Exception {
 
 		// 경로 확인
-		log.info("외부 셋팅파일을 찾는 기준 위치: {}", PATH);
+		log.info("외부 셋팅파일의 절대위치: {}", PATH);
 
 		// 파일 객체 부르기
 		File settingsFile = new File(PATH, "settings.yaml");

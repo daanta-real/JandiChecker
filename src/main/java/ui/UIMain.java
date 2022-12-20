@@ -5,8 +5,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Objects;
@@ -100,16 +98,6 @@ public final class UIMain extends JFrame {
             addWindowStateListener(e -> {
                 if ((e.getNewState() & Frame.ICONIFIED) == Frame.ICONIFIED){
                     runGoTray();
-                }
-            });
-            // Reserve activating windows action for double-clicking tray icon
-            addMouseListener(new MouseAdapter() {
-                @Override
-                public void mouseClicked(MouseEvent e){
-                    if(e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
-                        log.info("더블 클릭되었습니다.");
-                        runGoActivate();
-                    }
                 }
             });
 
