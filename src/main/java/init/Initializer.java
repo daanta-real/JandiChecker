@@ -12,7 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import lombok.extern.slf4j.Slf4j;
-import UI.UIMain;
+import ui.UIMain;
 
 import static utils.CommonUtils.waitForEnter;
 
@@ -34,7 +34,7 @@ public class Initializer {
 	private static String targetChannelId; // CRON 스케쥴러 실행 결과 메세지가 전송될 타겟 채널 ID
 
 	// 소개말
-	public static String INFO_STRING = """
+	public static final String INFO_STRING = """
 			```md
 			_**저는 매일 자정, 잔디를 심는 데 성공한 사람들을 찾아낼 것입니다.**_
 			&목표: 이 봇이 제작된 목표를 설명합니다.
@@ -56,7 +56,7 @@ public class Initializer {
 
 		log.info("환경설정 로드 시작..");
 
-		// 1. 윈도 컨트롤, 트레이 등 UI 준비
+		// 1. 윈도 컨트롤, 트레이 등 ui 준비
 		UIMain.getInstance().init();
 		log.info("윈도 컨트롤 준비 완료.");
 
@@ -85,6 +85,7 @@ public class Initializer {
 
 		// find file
 		URL resource = Initializer.class.getClassLoader().getResource("properties.yaml");
+		assert resource != null;
 		URI location = resource.toURI();
 		log.info("내부 환경변수 파일의 위치: {}", location);
 

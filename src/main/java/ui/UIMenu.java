@@ -1,4 +1,4 @@
-package UI;
+package ui;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -54,7 +54,7 @@ public class UIMenu {
     // 3. Initializer
 
     // Initialize tray
-    public void initTray() throws Exception {
+    public void initTray() {
 
         try {
 

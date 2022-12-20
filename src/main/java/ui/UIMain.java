@@ -1,4 +1,4 @@
-package UI;
+package ui;
 
 import init.Initializer;
 import lombok.extern.slf4j.Slf4j;
@@ -7,7 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.Objects;
@@ -59,7 +58,7 @@ public final class UIMain extends JFrame {
     }
 
     // 3. Initializer
-    public void init() throws Exception {
+    public void init() {
 
         try {
 
@@ -93,7 +92,7 @@ public final class UIMain extends JFrame {
             // Reserve exit button in main window
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-            // Initialize UI Menues
+            // Initialize ui Menues
             UIMenu ui = UIMenu.getInstance();
             ui.initTray();
 
@@ -125,18 +124,8 @@ public final class UIMain extends JFrame {
     public static UIMain getInstance() {
         return INSTANCE;
     }
-
-    // 5. Methods
-
-    // Returns image
     public Image getImage() {
         return IMAGE;
-    }
-
-    // Minimalization
-    public void activateWindow() {
-        System.out.println("윈도 재활성화");
-        setVisible(true);
     }
 
     // 4. Actions

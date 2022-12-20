@@ -26,7 +26,9 @@ public class Main extends JFrame {
 
 			// 타이틀 표시
 			log.info("""
-     				\n\n**********************************************
+
+
+					**********************************************
 					- JandiChecker {} Build {}
 					- Github 잔디 점검 프로그램
 					**********************************************""", Initializer.VERSION, Initializer.BUILD);

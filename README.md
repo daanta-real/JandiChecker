@@ -3,7 +3,7 @@
 # JandiChecker
 _**"저는 매일 저녁과 자정, 잔디를 심지 않은 사람들을 찾아내 그 명단을 발표할 것입니다."**_
 
-This is a Discord Bot for digging and showing a list of who has succeeded to commit to Github yesterday in my study group.
+This is a Discord Bot for digging and showing a list of who has succeeded to commit to GitHub yesterday in my study group.
 
 이 디스코드 봇은 제 스터디그룹에서 전날 커밋에 성공한 사람들을 찾아내 그 명단을 디코 채팅방에 출력해 줍니다.
 
