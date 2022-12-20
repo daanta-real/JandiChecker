@@ -1,11 +1,11 @@
-package scheduler;
+package utils.scheduler;
 
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 
-import cmd.CommandService;
-import jda.JdaMsgSender;
-import configurations.Configurations;
+import cmd.CmdService;
+import utils.jda.JdaMsgSender;
+import init.Initializer;
 
 // 실제 실행될 JOB 내용만을 담고 있는 실행내용 객체
 public class CronJob implements Job {
@@ -16,8 +16,8 @@ public class CronJob implements Job {
 	@Override
 	public void execute(JobExecutionContext context) {
 		try {
-			String yesterdayCommitedString = CommandService.showDidCommitYesterday();
-			JdaMsgSender.send(Configurations.getChId(), yesterdayCommitedString);
+			String yesterdayCommitedString = CmdService.showDidCommitYesterday();
+			JdaMsgSender.send(Initializer.getChId(), yesterdayCommitedString);
 		} catch (Exception e) { e.printStackTrace(); }
 	}
 

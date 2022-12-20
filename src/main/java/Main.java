@@ -1,15 +1,15 @@
 
-import jda.JdaController;
+import utils.jda.JdaController;
 
 import lombok.extern.slf4j.Slf4j;
 
-import scheduler.CronScheduler;
+import utils.scheduler.CronScheduler;
 
-import configurations.Configurations;
+import init.Initializer;
 
 import javax.swing.*;
 
-import static utils.Utils.waitForEnter;
+import static utils.CommonUtils.waitForEnter;
 
 @Slf4j
 public class Main extends JFrame {
@@ -24,12 +24,12 @@ public class Main extends JFrame {
 					**********************************************
 					- JandiChecker %s Build %s
 					- Github 잔디 점검 프로그램
-					**********************************************%n%n""", Configurations.VERSION, Configurations.BUILD);
+					**********************************************%n%n""", Initializer.VERSION, Initializer.BUILD);
 			System.out.println();
 
 			// 환경설정 로드
 			log.info("[[[잔디체커 환경설정 로드]]]");
-			Configurations.ready();
+			Initializer.ready();
 
 			// JDA 로드
 			System.out.println();

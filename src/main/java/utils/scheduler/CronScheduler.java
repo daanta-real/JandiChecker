@@ -1,10 +1,10 @@
-package scheduler;
+package utils.scheduler;
 
 import static org.quartz.CronScheduleBuilder.cronSchedule;
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.TriggerBuilder.newTrigger;
 
-import configurations.Configurations;
+import init.Initializer;
 import org.quartz.Job;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
@@ -40,7 +40,7 @@ public class CronScheduler {
 
 	// 스케쥴러 실행
 	public static void run() throws Exception {
-		scheduleExecute(CronJob.class, Configurations.getCron());
+		scheduleExecute(CronJob.class, Initializer.getCron());
 	}
 
 }

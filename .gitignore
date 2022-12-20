@@ -126,7 +126,7 @@ fabric.properties
 **/build/
 !src/**/build/
 
-# Ignore Gradle GUI configurations
+# Ignore Gradle GUI init
 gradle-app.setting
 
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)

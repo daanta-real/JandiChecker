@@ -1,15 +1,15 @@
 package cmd;
 
-import crawler.Checker;
-import crawler.GithubMap;
-import configurations.Configurations;
+import utils.crawler.Checker;
+import utils.crawler.GithubMap;
+import init.Initializer;
 
 // 정보 출력 메소드 모음
-public class CommandService {
+public class CmdService {
 
 	// 이름을 입력하면 깃헙 ID를 리턴
 	public static String getGithubID(String name) {
-		for(String[] s: Configurations.getMembers())
+		for(String[] s: Initializer.getMembers())
 			if(s[0].equals(name) || s[0].substring(1).equals(name)) return s[1];
 		return null;
 	}

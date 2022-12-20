@@ -1,6 +1,6 @@
-package jda;
+package utils.jda;
 
-import cmd.CommandController;
+import cmd.CmdController;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -8,7 +8,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.jetbrains.annotations.NotNull;
-import configurations.Configurations;
+import init.Initializer;
 
 @Slf4j
 public class JdaController extends ListenerAdapter {
@@ -23,7 +23,7 @@ public class JdaController extends ListenerAdapter {
 
 		// 기본 jda를 만든다
 		// 원래 옛날 버전에서 try catch를 써서 예외처리를 해야 했으나 패치로 없어진 모양
-		instance = JDABuilder.createDefault(Configurations.getToken())
+		instance = JDABuilder.createDefault(Initializer.getToken())
 				.enableIntents(GatewayIntent.MESSAGE_CONTENT) // JDA 4.2.0부터 정책이 바뀌어 권한을 직접 활성화해줘야 함
 				.build(); // 봇을 만들어 로그인시킨 뒤, JdaObj의 인스턴스 값으로 할당
 		log.info("JDA 인스턴스 생성 완료:" + instance);
@@ -44,7 +44,7 @@ public class JdaController extends ListenerAdapter {
 	public void onMessageReceived(@NotNull MessageReceivedEvent event) {
 
 		// 명령 실행
-		try { CommandController.command(event); } catch (Exception e) { e.printStackTrace(); }
+		try { CmdController.command(event); } catch (Exception e) { e.printStackTrace(); }
 
 	}
 

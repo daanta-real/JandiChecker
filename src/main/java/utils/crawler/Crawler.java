@@ -1,4 +1,4 @@
-package crawler;
+package utils.crawler;
 
 import lombok.extern.slf4j.Slf4j;
 

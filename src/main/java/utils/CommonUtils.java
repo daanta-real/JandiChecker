@@ -4,7 +4,7 @@ import java.util.Calendar;
 
 import java.io.Console;
 
-public class Utils {
+public class CommonUtils {
 
     // Returns a Calendar Instance (Which is set by inputted date info)
     public static Calendar getCalendar(String y, String m, String d) {
