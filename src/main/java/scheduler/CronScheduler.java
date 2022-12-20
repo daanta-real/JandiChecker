@@ -4,6 +4,7 @@ import static org.quartz.CronScheduleBuilder.cronSchedule;
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.TriggerBuilder.newTrigger;
 
+import configurations.Configurations;
 import org.quartz.Job;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
@@ -14,7 +15,7 @@ import org.quartz.impl.StdSchedulerFactory;
 public class CronScheduler {
 
 	// 스케쥴러 생성과 실행을 담당하는 메소드
-	public static void run(Class<? extends Job> jobClass, String cron) throws Exception {
+	public static void scheduleExecute(Class<? extends Job> jobClass, String cron) throws Exception {
 
 		// 스케쥴러 객체 생성: 팩토리와 인스턴스
 		SchedulerFactory schedulerFactory = new StdSchedulerFactory();
@@ -35,6 +36,11 @@ public class CronScheduler {
 		// 발사명령. 이제 외부에서 CronScheduler.run() 외치면 여기까지 실행되고 스케쥴러가 실행된다.
 		scheduler.start();
 
+	}
+
+	// 스케쥴러 실행
+	public static void run() throws Exception {
+		scheduleExecute(CronJob.class, Configurations.getCron());
 	}
 
 }

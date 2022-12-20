@@ -18,6 +18,7 @@ import static utils.Utils.waitForEnter;
 public class Configurations {
 
 	// 환경상수
+	public static WindowService WINDOW;
 	public static final String VERSION = "v1.2";
 	public static final String BUILD = "221215_1353";
 	public static final String PATH = Paths.get("").toAbsolutePath().toString(); // 잔디체커가 실행되는 경로
@@ -55,7 +56,8 @@ Github: http://github.com/daanta-real
 		log.info("셋팅된 경로: {}", PATH);
 
 		// 윈도 컨트롤 등 트레이 준비
-		WindowService.init();
+		WINDOW = WindowService.getInstance();
+		WINDOW.initAll();
 		log.info("윈도 컨트롤 준비 완료.");
 
 		// 파일 객체 부르기
