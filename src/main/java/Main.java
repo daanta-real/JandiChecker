@@ -16,11 +16,11 @@ import static utils.Utils.waitForEnter;
 public class Main extends JFrame {
 
 	// Fields
-	private static boolean windowVisible = true;
+	public static boolean windowVisible = true;
 
 	// Minimalization
-	public static void goTray() {
-		System.out.println();
+	public void goTray() {
+		System.out.println("트레이로");
 	}
 
 	// Constructor

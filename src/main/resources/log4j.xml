@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE log4j:configuration SYSTEM "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
-<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+<log4j:configuration>
 
 	<!-- ▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶ Appenders
 		내가 준비하고 싶은 각 로거들을 여기서 설정해 둔다.
@@ -14,7 +14,7 @@
 			-%n: 개행
 			-%d: 시간 출력 포맷. %d{형식} 이렇게 하면 임의 형태로 포맷 출력 가능. (SimpleDateFormat과 사용법 동일)
 	-->
-	
+
 	<!--
 		1. [Console Appender] 콘솔 로깅
 		   실행 콘솔에 로그메세지를 출력해주는 것이다.
@@ -22,12 +22,12 @@
 		   2) layout: 출력 형식을 지정한다. 위의 ConversionPattern을 사용.
 	-->
 	<appender name="console" class="org.apache.log4j.ConsoleAppender">
-		<param name="Target" value="System.out" />
+		<param name="Target" value="System.out"/>
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%-5p: %m - %c (%d{yyyy-MM-dd HH:mm:ss})%n" />
+			<param name="ConversionPattern" value="%-5p: %m - %c (%d{yyyy-MM-dd HH:mm:ss})%n"/>
 		</layout>
 	</appender>
-	
+
 	<!--
 		2. [File Appender] 파일 로깅
 		   로그 내용을 파일로 동시 저장할 수 있다.
@@ -44,15 +44,15 @@
 		   3) layout: 출력 형식을 지정한다. 위의 ConversionPattern을 사용.
 	-->
 	<appender name="file" class="org.apache.log4j.FileAppender">
-		<param name="file" value="log/out.log" />
-		<param name="append" value="true" />
+		<param name="file" value="log/out.log"/>
+		<param name="append" value="true"/>
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%-5p: %m - %c (%d{yyyy-MM-dd HH:mm:ss})%n" />
+			<param name="ConversionPattern" value="%-5p: %m - %c (%d{yyyy-MM-dd HH:mm:ss})%n"/>
 		</layout>
 	</appender>
-	
+
 	<!--
-		3. [Daily Rolling File Appender] 날짜 별 파일 로깅 
+		3. [Daily Rolling File Appender] 날짜 별 파일 로깅
 		   "Daily" Appender를 설정하면 일 단위로 파일 로그를 동시 저장할 수도 있다.
 		   1) file: 출력 대상 파일.     상동
 		   2) append: 이어쓰기 여부.    상동
@@ -60,14 +60,14 @@
 		   4) DatePattern: 파일 "이름"의 규격. 이것도 SimpleDatePattern 포맷 쓰면 됨.
 	-->
 	<appender name="daily" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="file" value="log/daily"></param>
-		<param name="append" value="true"></param>
-		<param name="DatePattern" value="'-'yyyy-MM-dd'.log'"></param>
+		<param name="file" value="log/daily" />
+		<param name="append" value="true" />
+		<param name="DatePattern" value="'-'yyyy-MM-dd'.log'" />
 		<layout class="org.apache.log4j.PatternLayout">
-			<param name="ConversionPattern" value="%-5p: %m - %c (%d{yyyy-MM-dd HH:mm:ss})%n" />
+			<param name="ConversionPattern" value="%-5p: %m - %c (%d{yyyy-MM-dd HH:mm:ss})%n"/>
 		</layout>
 	</appender>
-	
+
 	<!-- ▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶ Root Logger
 		 Log4j의 공통 설정을 여기서 할 수 있다.
 		 하지만, 각 Appender에서 값을 바꿔 설정한 것이 있다면, Appender가 우선되니 주의.
@@ -80,10 +80,10 @@
 		    즉, 내가 실행하고 싶지 않은 로거가 있을 경우, 아래와 같이 주석처리하면 된다.
 	-->
 	<root>
-		<priority value="trace" />
-		<appender-ref ref="console" />
+		<priority value="trace"/>
+		<appender-ref ref="console"/>
 		<!-- <appender-ref ref="file" /> -->
 		<!-- <appender-ref ref="daily" /> -->
 	</root>
-	
+
 </log4j:configuration>
