@@ -36,7 +36,8 @@ dependencies {
 
     // 스케쥴러 라이브러리
     // https://mvnrepository.com/artifact/org.quartz-scheduler/quartz
-    implementation 'org.quartz-utils.scheduler:quartz:latest.integration'
+    implementation 'org.quartz-scheduler:quartz:latest.integration'
+
 
     // YAML 설정파일을 읽어오기 위한 JACKSON-YAML 라이브러리
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml
