@@ -1,4 +1,4 @@
-package test.d211003_checker;
+package d211003_checker;
 
 
 @Slf4j

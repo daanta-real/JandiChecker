@@ -1,4 +1,4 @@
-package test.d211003_checker;
+package d211003_checker;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

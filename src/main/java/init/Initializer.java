@@ -83,34 +83,22 @@ public class Initializer {
 
 	private static void loadProperties_inner() throws Exception {
 
-		// find file
-		File configFile;
-		try {
-			URL resource = Initializer.class.getClassLoader().getResource("properties.yaml");
-			assert resource != null;
-			URI location = resource.toURI();
-			configFile = new File(location);
-			log.info("내부 환경변수 파일의 절대위치: {}", location);
-			if(!configFile.exists()) throw new Exception();
-		} catch(Exception e) {
-			log.error("properties.yaml 파일을 찾아내는 데 실패했습니다.");
-			throw new Exception();
-		}
-
 		// load file contents to props
 		Properties props;
-		try(InputStream is = new FileInputStream(configFile)) {
+		try(InputStream is = Initializer.class.getClassLoader().getResourceAsStream( "settings.yaml")) {
 			props = new Properties();
 			props.load(is);
 		} catch(Exception e) {
-			log.error("properties.yaml 파일 내부를 읽는 중 에러가 발생했습니다.");
+			log.error("properties.yaml 파일을 읽을 수 없습니다. {}", e);
 			throw new Exception(e);
 		}
 
+		// load props
 		VERSION = props.getProperty("VERSION", "??????");
 		BUILD = props.getProperty("BUILD", "?????");
 		CMD_CHAR = props.getProperty("CMD_CHAR", "???");
 
+		// show loaded props
 		log.info("버전: {}", VERSION);
 		log.info("빌드: {}", BUILD);
 		log.info("명령어: {}", CMD_CHAR);
