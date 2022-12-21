@@ -62,7 +62,7 @@ public class d221216_SysTrayTest extends JFrame {
                     setVisible(true);
                     setExtendedState(JFrame.NORMAL);
                 }
-            }
+            };
 
             // set popup
             PopupMenu popup = new PopupMenu();

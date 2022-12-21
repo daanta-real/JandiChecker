@@ -84,13 +84,16 @@ public class Initializer {
 	private static void loadProperties_inner() throws Exception {
 
 		// find file
-		URL resource = Initializer.class.getClassLoader().getResource("properties.yaml");
-		assert resource != null;
-		URI location = resource.toURI();
-		File configFile = new File(location);
-		log.info("내부 환경변수 파일의 절대위치: {}", location);
-		if(!configFile.exists()) {
-			log.error("properties.yaml 파일이 없는 것 같습니다.");
+		File configFile;
+		try {
+			URL resource = Initializer.class.getClassLoader().getResource("properties.yaml");
+			assert resource != null;
+			URI location = resource.toURI();
+			configFile = new File(location);
+			log.info("내부 환경변수 파일의 절대위치: {}", location);
+			if(!configFile.exists()) throw new Exception();
+		} catch(Exception e) {
+			log.error("properties.yaml 파일을 찾아내는 데 실패했습니다.");
 			throw new Exception();
 		}
 
