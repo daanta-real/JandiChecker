@@ -1,9 +1,11 @@
-package test.d220302_xlsOpen_apply;
+package d220302_xlsOpen_apply;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 public class Main {
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) /*throws Exception*/ {
 /*
 		// 시트 데이터 불러오기
 		// 현재 경로 따기

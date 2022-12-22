@@ -102,8 +102,6 @@ public class CmdController {
 				JdaMsgSender.send(event, CmdService.showNotCommitedSomeday(option));
 			}
 
-			case "숨김" -> System.out.println("숨김");
-
 		}
 	}
 }

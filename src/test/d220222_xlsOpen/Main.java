@@ -1,10 +1,11 @@
-package test.d220222_xlsOpen;
+package d220222_xlsOpen;
+
+import groovy.util.logging.Slf4j;
 
 @Slf4j
 public class Main {
 	public static void main(String[] args) {
 
-/*
 		try {
 
 			// 잔디체커의 시작
@@ -90,6 +91,6 @@ public class Main {
 			file.close();
 
 		} catch (IOException e) { e.printStackTrace(); }
-*/
 	}
+
 }

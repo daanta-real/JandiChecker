@@ -14,6 +14,7 @@ public final class UIMain extends JFrame {
 
     // 1. Fields
     private static final UIMain INSTANCE;
+    private static final JTextPane LOGBOX = new JTextPane();
 
     static {
         try {
@@ -76,13 +77,12 @@ public final class UIMain extends JFrame {
             setSize(1200, 500);
 
             // Top box (= text box)
-            JTextPane topTextBox = new JTextPane();
-            topTextBox.setContentType("text/plain");
-            topTextBox.setEditable(false);
-            topTextBox.setBackground(new Color(160, 160, 160));
-            topTextBox.setText("오우예");
-            topTextBox.setFont(FONT);
-            add(topTextBox, BorderLayout.CENTER);
+            LOGBOX.setContentType("text/plain");
+            LOGBOX.setEditable(false);
+            LOGBOX.setBackground(new Color(160, 160, 160));
+            LOGBOX.setText("오우예");
+            LOGBOX.setFont(FONT);
+            add(LOGBOX, BorderLayout.CENTER);
 
             // Show
             setVisible(true);
@@ -112,6 +112,9 @@ public final class UIMain extends JFrame {
     public static UIMain getInstance() {
         return INSTANCE;
     }
+    public static JTextPane getLogbox() {
+        return LOGBOX;
+    }
     public Image getImage() {
         return IMAGE;
     }
@@ -120,13 +123,13 @@ public final class UIMain extends JFrame {
 
     // Minimization
     public void runGoTray() {
-        System.out.println("요청에 의해 윈도우를 트레이로 보냅니다.");
+        log.trace("요청에 의해 윈도우를 트레이로 보냅니다.");
         setVisible(false);
         UIMenu.trayIconOn();
     }
 
     public void runGoActivate() {
-        System.out.println("요청에 의해 윈도우를 활성화합니다.");
+        log.trace("요청에 의해 윈도우를 활성화합니다.");
         UIMenu.trayIconOff();
         setVisible(true);
         toFront();
@@ -134,7 +137,7 @@ public final class UIMain extends JFrame {
     }
 
     public void runExit() {
-        System.out.println("요청에 의해 종료합니다.");
+        log.trace("요청에 의해 종료합니다.");
         System.exit(0);
     }
 
