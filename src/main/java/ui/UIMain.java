@@ -1,6 +1,5 @@
 package ui;
 
-import init.Initializer;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.swing.*;
@@ -14,7 +13,7 @@ public final class UIMain extends JFrame {
 
     // 1. Fields
     private static final UIMain INSTANCE;
-    private static final JTextPane LOGBOX = new JTextPane();
+    private static final JTextArea LOGBOX = new JTextArea();
 
     static {
         try {
@@ -61,8 +60,7 @@ public final class UIMain extends JFrame {
 
         try {
 
-            // Title
-            setTitle("잔디체커 " + Initializer.VERSION + " Build " + Initializer.BUILD);
+            // Font
             setFont(FONT);
             add(WINDOW);
 
@@ -77,7 +75,6 @@ public final class UIMain extends JFrame {
             setSize(1200, 500);
 
             // Top box (= text box)
-            LOGBOX.setContentType("text/plain");
             LOGBOX.setEditable(false);
             LOGBOX.setBackground(new Color(160, 160, 160));
             LOGBOX.setText("오우예");
@@ -112,9 +109,6 @@ public final class UIMain extends JFrame {
     public static UIMain getInstance() {
         return INSTANCE;
     }
-    public static JTextPane getLogbox() {
-        return LOGBOX;
-    }
     public Image getImage() {
         return IMAGE;
     }
@@ -123,13 +117,13 @@ public final class UIMain extends JFrame {
 
     // Minimization
     public void runGoTray() {
-        log.trace("요청에 의해 윈도우를 트레이로 보냅니다.");
+        log.info("요청에 의해 윈도우를 트레이로 보냅니다.");
         setVisible(false);
         UIMenu.trayIconOn();
     }
 
     public void runGoActivate() {
-        log.trace("요청에 의해 윈도우를 활성화합니다.");
+        log.info("요청에 의해 윈도우를 활성화합니다.");
         UIMenu.trayIconOff();
         setVisible(true);
         toFront();
@@ -137,7 +131,7 @@ public final class UIMain extends JFrame {
     }
 
     public void runExit() {
-        log.trace("요청에 의해 종료합니다.");
+        log.info("요청에 의해 종료합니다.");
         System.exit(0);
     }
 

@@ -54,27 +54,28 @@ public class Initializer {
 
 	public static void ready() throws Exception {
 
-		log.info("환경설정 로드 시작..");
+		log.info("0. 환경설정 로드 시작..");
 
-		// 1. YAML로 된 내부 환경변수 파일을 로드
-		loadProperties_inner();
-		log.info("내부 환경변수 로드 완료.");
-
-		// 2. YAML로 된 외부 환경변수 파일을 로드 (settings.yaml)
-		loadProperties_outer();
-		log.info("외부 환경변수 로드 완료.");
-
-		// 3. 윈도 컨트롤, 트레이 등 ui 준비
+		// 1. 윈도 컨트롤, 트레이 등 ui 준비
 		UIMain.getInstance().init();
-		log.info("윈도 컨트롤 준비 완료.");
+		log.info("1. 윈도 컨트롤 준비 완료.");
 
-		log.info("환경설정 로드 끝.");
+		// 2. YAML로 된 내부 환경변수 파일을 로드
+		loadProperties_inner();
+		UIMain.getInstance().setTitle("잔디체커 " + Initializer.VERSION + " Build " + Initializer.BUILD);
+		log.info("2. 내부 환경변수 로드 완료.");
+
+		// 3. YAML로 된 외부 환경변수 파일을 로드 (settings.yaml)
+		loadProperties_outer();
+		log.info("3. 외부 환경변수 로드 완료.");
+
+		log.info("4. 환경설정 로드 끝.");
 
 	}
 
 	// Getters/Setters
-	public static String     getToken  () { return token   ; }
-	public static String     getCron   () { return cron    ; }
+	public static String     getToken  () { return token; }
+	public static String     getCron   () { return cron; }
 	public static String     getChId   () { return targetChannelId; }
 	public static String[][] getMembers() { return members ; }
 	public static String     getCmdChar() { return CMD_CHAR; }
@@ -85,12 +86,15 @@ public class Initializer {
 
 		// find file
 		URL resource = Initializer.class.getClassLoader().getResource("properties.yaml");
-		assert resource != null;
+		if(resource == null) {
+			log.error("properties.yaml 파일을 찾지 못했습니다.");
+			throw new Exception();
+		}
 		URI location = resource.toURI();
 		File configFile = new File(location);
 		log.info("내부 환경변수 파일의 절대위치: {}", location);
 		if(!configFile.exists()) {
-			log.error("properties.yaml 파일이 없는 것 같습니다.");
+			log.error("properties.yaml 파일을 불러오는 중 오류가 발생했습니다.");
 			throw new Exception();
 		}
 

@@ -29,13 +29,11 @@ public class JdaController extends ListenerAdapter {
 		log.info("JDA 인스턴스 생성 완료:" + instance);
 
 		// jda에 이벤트를 감지하는 리스너 봇을 넣는다.
-		log.trace("\n");
+		log.info("\n");
 		log.info("[[[잔디체커 JDA 리스너 로드]]]");
 		ListenerAdapter bot = new JdaController(); // JDA 봇 객체. 리스너이기도 하다
 		instance.addEventListener(bot); // 만들어진 리스너 봇을 JdaObj의 인스턴스 내부에 할당
 		log.info("이벤트 리스너 생성: " + bot);
-
-
 
 	}
 
