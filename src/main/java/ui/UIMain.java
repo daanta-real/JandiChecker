@@ -13,7 +13,7 @@ public final class UIMain extends JFrame {
 
     // 1. Fields
     private static final UIMain INSTANCE;
-    private static final JTextArea LOGBOX = new JTextArea();
+    private static final JTextArea TEXTAREA = new JTextArea();
 
     static {
         try {
@@ -47,10 +47,13 @@ public final class UIMain extends JFrame {
         InputStream fontStream = Objects.requireNonNull(getClass().getResourceAsStream("/font.ttf"));
         FONT = Font
                 .createFont(Font.TRUETYPE_FONT, fontStream)
-                .deriveFont(15f); // Make sure to derive the size;
+                .deriveFont(17f); // Make sure to derive the size;
         log.debug("폰트 로딩 완료");
         UIManager.getLookAndFeelDefaults()
                 .put("defaultFont", FONT);
+        GraphicsEnvironment ge
+                = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        ge.registerFont(FONT);
         log.debug("폰트를 디폴트 폰트에 적용 완료");
 
     }
@@ -75,11 +78,19 @@ public final class UIMain extends JFrame {
             setSize(1200, 500);
 
             // Top box (= text box)
-            LOGBOX.setEditable(false);
-            LOGBOX.setBackground(new Color(160, 160, 160));
-            LOGBOX.setText("오우예");
-            LOGBOX.setFont(FONT);
-            add(LOGBOX, BorderLayout.CENTER);
+            TEXTAREA.setEditable(false);
+            TEXTAREA.setBackground(new Color(160, 160, 160));
+            TEXTAREA.setText("오우예");
+            TEXTAREA.setFont(FONT);
+            add(TEXTAREA, BorderLayout.CENTER);
+
+            // Scrollbar
+            JScrollPane scroll = new JScrollPane(
+                    TEXTAREA,
+                    JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+                    JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
+            );
+            add(scroll);
 
             // Show
             setVisible(true);
@@ -112,7 +123,7 @@ public final class UIMain extends JFrame {
     public Image getImage() {
         return IMAGE;
     }
-
+    public static JTextArea getTextarea() { return TEXTAREA; }
     // 4. Actions
 
     // Minimization

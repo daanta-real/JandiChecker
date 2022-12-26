@@ -3,6 +3,7 @@ import utils.jda.JdaController;
 
 import lombok.extern.slf4j.Slf4j;
 
+import utils.logging.JTextAppender;
 import utils.scheduler.CronScheduler;
 
 import init.Initializer;
@@ -12,9 +13,12 @@ import static utils.CommonUtils.waitForEnter;
 @Slf4j
 public class Main {
 
+	static JTextAppender appender = new JTextAppender();
 
 	// 실제 실행
 	public static void main(String[] args) {
+
+		appender.init();
 
 		try {
 

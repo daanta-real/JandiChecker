@@ -3,15 +3,17 @@
 
 	<!-- 1. Appenders -->
 	<!-- STDOUT -->
-	<appender name="STDOUT" class="utils.logging.JTextAppender">
+	<appender name="JTextAppender" class="utils.logging.JTextAppender">
 		<pattern>
 			[%d{yyyy-MM-dd HH:mm:ss}:%-3relative][%thread] %-5level %logger{36} -쫺- %msg%n
 		</pattern>
 	</appender>
 
+	<logger name="JTextLogger" level="INFO" />
+
 	<!-- 2. Output level -->
-	<root level="TRACE">
-		<appender-ref ref="STDOUT" />
+	<root level="INFO">
+		<appender-ref ref="JTextAppender" />
 	</root>
 
 </configuration>
