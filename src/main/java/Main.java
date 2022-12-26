@@ -23,9 +23,9 @@ public class Main {
 		try {
 
 			// 환경설정 로드
-			log.info("[[[잔디체커 환경설정 로드 시작]]]");
+			System.out.println();
+			log.info("\n\n\n[[[잔디체커 환경설정 로드]]]");
 			Initializer.ready();
-			log.info("[[[잔디체커 환경설정 로드 완료]]]");
 
 			// 타이틀 표시
 			log.info("""
@@ -34,21 +34,19 @@ public class Main {
 					**********************************************
 					- JandiChecker {} Build {}
 					- Github 잔디 점검 프로그램
-					**********************************************""", Initializer.VERSION, Initializer.BUILD);
+					**********************************************
+					""", Initializer.VERSION, Initializer.BUILD);
 
 			// JDA 로드
-			System.out.println();
-			log.info("[[[잔디체커 JDA 로드]]]");
-			JdaController.load();
+			log.info("\n[[[잔디체커 JDA 로드]]]");
+			JdaController.ready();
 
 			// 스케쥴러 실행
-			System.out.println();
-			log.info("[[[스케쥴러 시작]]]");
+			log.info("\n[[[스케쥴러 시작]]]");
 			CronScheduler.run();
 
 			// 실행 완료
-			System.out.println();
-			log.info("[[[잔디체커 실행 완료]]]");
+			log.info("\n[[[잔디체커 실행 완료]]]");
 			System.out.println();
 
 		} catch(Exception e) {

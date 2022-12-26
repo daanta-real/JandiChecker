@@ -71,13 +71,14 @@ public final class UIMain extends JFrame {
 
             // Layout
             setLayout(new BorderLayout());
-            setSize(1200, 500);
+            setSize(1000, 1000);
 
             // Top box (= text box)
             TEXTAREA.setEditable(false);
             TEXTAREA.setForeground(new Color(169, 183, 198));
             TEXTAREA.setBackground(new Color(43, 43, 43));
             TEXTAREA.setFont(FONT);
+            TEXTAREA.setLineWrap(true);
             add(TEXTAREA, BorderLayout.CENTER);
 
             // Scrollbar

@@ -54,22 +54,25 @@ public class Initializer {
 
 	public static void ready() throws Exception {
 
-		log.info("0. 환경설정 로드 시작..");
+		log.info("\n[환경설정 로드] 시작...\n");
 
 		// 1. 윈도 컨트롤, 트레이 등 ui 준비
+		log.info("[환경설정 로드 1] 윈도 컨트롤 준비");
 		UIMain.getInstance().init();
-		log.info("1. 윈도 컨트롤 준비 완료.");
+		log.info("완료.\n");
 
 		// 2. YAML로 된 내부 환경변수 파일을 로드
+		log.info("[환경설정 로드 2] 내부 환경변수 로드");
 		loadProperties_inner();
 		UIMain.getInstance().setTitle("잔디체커 " + Initializer.VERSION + " Build " + Initializer.BUILD);
-		log.info("2. 내부 환경변수 로드 완료.");
+		log.info("완료.\n");
 
 		// 3. YAML로 된 외부 환경변수 파일을 로드 (settings.yaml)
+		log.info("[환경설정 로드 3] 외부 환경변수 로드");
 		loadProperties_outer();
-		log.info("3. 외부 환경변수 로드 완료.");
+		log.info("완료.\n");
 
-		log.info("4. 환경설정 로드 끝.");
+		log.info("[환경설정 로드] 완료!\n");
 
 	}
 
