@@ -34,21 +34,24 @@ public class JTextAppender extends AppenderBase<ILoggingEvent> {
 
         // 1. Prepare variables
         String msgOrg = event.getMessage();
-        JTextArea textarea = UIMain.getTextarea();
+        JTextArea textArea = UIMain.getTextarea();
 
         // 2. Make msg string
         String msg = Optional.ofNullable(msgOrg).orElse("") + "\n";
         System.out.printf("  - nullable 검사 후 메세지: %s\n", msg);
-        textarea.append(msg);
-        System.out.printf("  - textarea 에 메세지를 추가했습니다: %s\n", textarea);
-        
+        textArea.append(msg);
+
+        // 3. Focus the caret to the last line
+        int len = textArea.getDocument().getLength();
+        textArea.setCaretPosition(len);
+        System.out.printf("  - textArea 에 메세지를 추가했습니다: %s\n", textArea);
+
     }
 
     // 4. Trim old messages
     private void trimOldMsgOverflow() {
 
         try {
-
 
             // 1. Variables
             JTextArea textarea = UIMain.getTextarea();
