@@ -44,16 +44,12 @@ public final class UIMain extends JFrame {
         log.debug("잔디체커 이미지 로드 완료");
 
         // Set font
-        InputStream fontStream = Objects.requireNonNull(getClass().getResourceAsStream("/font.ttf"));
+        InputStream fontStream = Objects.requireNonNull(getClass().getResourceAsStream("/font.otf"));
         FONT = Font
                 .createFont(Font.TRUETYPE_FONT, fontStream)
-                .deriveFont(17f); // Make sure to derive the size;
+                .deriveFont(16f); // Make sure to derive the size;
         log.debug("폰트 로딩 완료");
-        UIManager.getLookAndFeelDefaults()
-                .put("defaultFont", FONT);
-        GraphicsEnvironment ge
-                = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        ge.registerFont(FONT);
+        UIManager.getLookAndFeelDefaults().put("defaultFont", FONT);
         log.debug("폰트를 디폴트 폰트에 적용 완료");
 
     }
@@ -79,8 +75,8 @@ public final class UIMain extends JFrame {
 
             // Top box (= text box)
             TEXTAREA.setEditable(false);
-            TEXTAREA.setBackground(new Color(160, 160, 160));
-            TEXTAREA.setText("오우예");
+            TEXTAREA.setForeground(new Color(169, 183, 198));
+            TEXTAREA.setBackground(new Color(43, 43, 43));
             TEXTAREA.setFont(FONT);
             add(TEXTAREA, BorderLayout.CENTER);
 
