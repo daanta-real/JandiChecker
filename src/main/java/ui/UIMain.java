@@ -71,7 +71,7 @@ public final class UIMain extends JFrame {
 
             // Layout
             setLayout(new BorderLayout());
-            setSize(1000, 1000);
+            setSize(1200, 600);
 
             // Top box (= text box)
             TEXTAREA.setEditable(false);

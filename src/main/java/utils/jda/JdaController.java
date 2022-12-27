@@ -19,7 +19,8 @@ public class JdaController extends ListenerAdapter {
 	public static void ready() {
 
 		// JDA 인스턴스 잡기
-		log.info("\n[잔디체커 JDA 인스턴스 생성]");
+		log.info("");
+		log.info("[잔디체커 JDA 인스턴스 생성]");
 
 		// 기본 jda를 만든다
 		// 원래 옛날 버전에서 try catch를 써서 예외처리를 해야 했으나 패치로 없어진 모양
@@ -29,7 +30,8 @@ public class JdaController extends ListenerAdapter {
 		log.info("JDA 인스턴스 생성 완료:" + instance);
 
 		// jda에 이벤트를 감지하는 리스너 봇을 넣는다.
-		log.info("\n[잔디체커 JDA 리스너 로드]");
+		log.info("");
+		log.info("[잔디체커 JDA 리스너 로드]");
 		ListenerAdapter bot = new JdaController(); // JDA 봇 객체. 리스너이기도 하다
 		instance.addEventListener(bot); // 만들어진 리스너 봇을 JdaObj의 인스턴스 내부에 할당
 		log.info("이벤트 리스너 생성: " + bot);

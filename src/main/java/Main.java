@@ -23,8 +23,10 @@ public class Main {
 		try {
 
 			// 환경설정 로드
-			System.out.println();
-			log.info("\n\n\n[[[잔디체커 환경설정 로드]]]");
+			log.info("");
+			log.info("");
+			log.info("");
+			log.info("[[[잔디체커 환경설정 로드]]]");
 			Initializer.ready();
 
 			// 타이틀 표시
@@ -38,16 +40,19 @@ public class Main {
 					""", Initializer.VERSION, Initializer.BUILD);
 
 			// JDA 로드
-			log.info("\n[[[잔디체커 JDA 로드]]]");
+			log.info("");
+			log.info("[[[잔디체커 JDA 로드]]]");
 			JdaController.ready();
 
 			// 스케쥴러 실행
-			log.info("\n[[[스케쥴러 시작]]]");
+			log.info("");
+			log.info("[[[스케쥴러 시작]]]");
 			CronScheduler.run();
 
 			// 실행 완료
-			log.info("\n[[[잔디체커 실행 완료]]]");
-			System.out.println();
+			log.info("");
+			log.info("[[[잔디체커 실행 완료]]]");
+			log.info("");
 
 		} catch(Exception e) {
 			waitForEnter();

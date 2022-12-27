@@ -1,6 +1,8 @@
 package utils.logging;
 
+import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.AppenderBase;
 import org.slf4j.LoggerFactory;
@@ -8,17 +10,29 @@ import ui.UIMain;
 
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
-import java.util.Optional;
 
 public class JTextAppender extends AppenderBase<ILoggingEvent> {
+
+    Logger rootLogger = (Logger)LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+    LoggerContext ctx = rootLogger.getLoggerContext();
+    PatternLayoutEncoder encoder = new PatternLayoutEncoder();
 
     // 1. Initializer
     // Make an appender and apply to logger
     public void init() {
-        LoggerContext ctx = (LoggerContext) LoggerFactory.getILoggerFactory();
+
+        // Encoder
+        encoder.setContext(ctx);
+        encoder.setPattern("[%d{yyyy-MM-dd HH:mm:ss}:%-3relative][%thread] %-5level %logger{36} ☞ %msg%n");
+        encoder.start();
+
+        // Appender
         setContext(ctx);
         start();
-        ((ch.qos.logback.classic.Logger)LoggerFactory.getLogger("JTextAppender")).addAppender(this);
+
+        // Apply to log context
+        rootLogger.addAppender(this);
+
     }
 
     // 2. Append action
@@ -33,18 +47,15 @@ public class JTextAppender extends AppenderBase<ILoggingEvent> {
     private void appendNewMsg(ILoggingEvent event) {
 
         // 1. Prepare variables
-        String msgOrg = event.getMessage();
+        String msg = new String(encoder.encode(event));
         JTextArea textArea = UIMain.getTextarea();
 
         // 2. Make msg string
-        String msg = Optional.ofNullable(msgOrg).orElse("") + "\n";
-        System.out.printf("  - nullable 검사 후 메세지: %s\n", msg);
         textArea.append(msg);
 
         // 3. Focus the caret to the last line
         int len = textArea.getDocument().getLength();
         textArea.setCaretPosition(len);
-        System.out.printf("  - textArea 에 메세지를 추가했습니다: %s\n", textArea);
 
     }
 
@@ -66,7 +77,7 @@ public class JTextAppender extends AppenderBase<ILoggingEvent> {
             }
             int trimLineEnd = totalLines - maxLines;
             int endChar = textarea.getLineEndOffset(trimLineEnd);
-            System.out.printf("  - 자를 구간: 0 ~ %d (끝문자: %d번째)\n", trimLineEnd, endChar);
+            System.out.printf("  - 자를 구간: 0 ~ %d (끝문자: %d번째)", trimLineEnd, endChar);
             //textarea.replaceRange("", 0, endChar);
 
         } catch(BadLocationException e) {
