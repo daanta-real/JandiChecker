@@ -13,6 +13,7 @@ import javax.swing.text.BadLocationException;
 
 public class JTextAppender extends AppenderBase<ILoggingEvent> {
 
+    // 1. Fields
     private final Logger rootLogger;
     private final LoggerContext ctx;
     private final PatternLayoutEncoder encoder;
