@@ -22,11 +22,11 @@ public class UIMenu {
         try {
             
             // Set SystemTray instance
-            log.debug("UIMenu.SystemTray 인스턴스 생성 완료");
+            log.info("UIMenu.SystemTray 인스턴스 생성 완료");
             MenuItem MENU_SHOW_WINDOW = new MenuItem();
             MenuItem MENU_EXIT = new MenuItem();
-            log.debug("UIMenu.MenuItem 인스턴스 생성 완료");
-            log.debug("UIMenu.PopupMenu 인스턴스 생성 완료");
+            log.info("UIMenu.MenuItem 인스턴스 생성 완료");
+            log.info("UIMenu.PopupMenu 인스턴스 생성 완료");
     
             // shortcuts
             MENU_SHOW_WINDOW.setShortcut(new MenuShortcut(KeyEvent.VK_O));
@@ -45,7 +45,7 @@ public class UIMenu {
             POPUP.add(MENU_EXIT);
             
         } catch (Exception e) { // etc.
-            log.error("트레이 생성 중 기타 에러가 발생하셨습니다.", e);
+            log.info("트레이 생성 중 기타 에러가 발생하셨습니다.", e);
             throw e;
         }
 

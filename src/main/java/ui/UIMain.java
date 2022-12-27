@@ -19,7 +19,7 @@ public final class UIMain extends JFrame {
         try {
             INSTANCE = new UIMain();
         } catch (Exception e) {
-            log.debug("UIMain 객체 생성 중 오류가 발생했습니다.");
+            log.info("UIMain 객체 생성 중 오류가 발생했습니다.");
             throw new RuntimeException(e);
         }
     }
@@ -32,25 +32,25 @@ public final class UIMain extends JFrame {
     // 2. Constructor
     private UIMain() throws Exception {
 
-        log.debug("WindowService 초기화 시작");
+        log.info("WindowService 초기화 시작");
 
         // Set JPanel(main window) instance
         WINDOW = new JPanel();
-        log.debug("WindowService 인스턴스 생성 완료");
+        log.info("WindowService 인스턴스 생성 완료");
 
         // Set an image icon
         URL imgUrl = getClass().getClassLoader().getResource("img/windows_16x16.png");
         IMAGE = Toolkit.getDefaultToolkit().getImage(imgUrl);
-        log.debug("잔디체커 이미지 로드 완료");
+        log.info("잔디체커 이미지 로드 완료");
 
         // Set font
         InputStream fontStream = Objects.requireNonNull(getClass().getResourceAsStream("/font.otf"));
         FONT = Font
                 .createFont(Font.TRUETYPE_FONT, fontStream)
                 .deriveFont(16f); // Make sure to derive the size;
-        log.debug("폰트 로딩 완료");
+        log.info("폰트 로딩 완료");
         UIManager.getLookAndFeelDefaults().put("defaultFont", FONT);
-        log.debug("폰트를 디폴트 폰트에 적용 완료");
+        log.info("폰트를 디폴트 폰트에 적용 완료");
 
     }
 
@@ -71,7 +71,7 @@ public final class UIMain extends JFrame {
 
             // Layout
             setLayout(new BorderLayout());
-            setSize(1200, 600);
+            setSize(1400, 800);
 
             // Top box (= text box)
             TEXTAREA.setEditable(false);

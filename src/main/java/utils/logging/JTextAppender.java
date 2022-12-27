@@ -13,37 +13,47 @@ import javax.swing.text.BadLocationException;
 
 public class JTextAppender extends AppenderBase<ILoggingEvent> {
 
-    Logger rootLogger = (Logger)LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
-    LoggerContext ctx = rootLogger.getLoggerContext();
-    PatternLayoutEncoder encoder = new PatternLayoutEncoder();
+    private final Logger rootLogger;
+    private final LoggerContext ctx;
+    private final PatternLayoutEncoder encoder;
 
-    // 1. Initializer
+    // 2. Constructor
+    private JTextAppender() {
+        rootLogger = (Logger) LoggerFactory.getLogger(Logger.ROOT_LOGGER_NAME);
+        ctx = rootLogger.getLoggerContext();
+        encoder = new PatternLayoutEncoder();
+    }
+
+    // 3. Initializer
     // Make an appender and apply to logger
-    public void init() {
+    public static void init() {
+
+        // 1. Fields
+        JTextAppender instance = new JTextAppender();
 
         // Encoder
-        encoder.setContext(ctx);
-        encoder.setPattern("[%d{yyyy-MM-dd HH:mm:ss}:%-3relative][%thread] %-5level %logger{36} ☞ %msg%n");
-        encoder.start();
+        // Original Pattern: "[%d{yyyy-MM-dd HH:mm:ss}:%-3relative][%thread] %-5level %logger{36} ☞ %msg%n"
+        instance.encoder.setContext(instance.ctx);
+        instance.encoder.setPattern("[%d{yyyy-MM-dd HH:mm:ss}][%thread] ☞ %msg%n");
+        instance.encoder.start();
 
         // Appender
-        setContext(ctx);
-        start();
+        instance.setContext(instance.ctx);
+        instance.start();
 
         // Apply to log context
-        rootLogger.addAppender(this);
+        instance.rootLogger.addAppender(instance);
 
     }
 
-    // 2. Append action
+    // 4. Append - main
     @Override
     protected void append(ILoggingEvent event) {
         appendNewMsg(event);
         trimOldMsgOverflow();
     }
 
-
-    // 3. Append received msg to LOGBOX
+    // 5. Append 1 - add new msg to console
     private void appendNewMsg(ILoggingEvent event) {
 
         // 1. Prepare variables
@@ -59,35 +69,33 @@ public class JTextAppender extends AppenderBase<ILoggingEvent> {
 
     }
 
-    // 4. Trim old messages
+    // 6. Append 2 - Trim old messages
     private void trimOldMsgOverflow() {
 
         try {
 
             // 1. Variables
             JTextArea textarea = UIMain.getTextarea();
-            int maxLines = 40;
+            int maxLines = 2000;
             int totalLines = textarea.getLineCount();
-            System.out.printf("  - 라인 수: %d/%d\n", totalLines, maxLines);
+            // System.out.printf("  - 라인 수: %d/%d\n", totalLines, maxLines);
 
             // 2. Trim
             if (totalLines <= maxLines) {
-                System.out.println("  - 라인을 자를 필요가 없습니다.");
+                // System.out.println("  - 라인을 자를 필요가 없습니다.");
                 return;
             }
             int trimLineEnd = totalLines - maxLines;
             int endChar = textarea.getLineEndOffset(trimLineEnd);
-            System.out.printf("  - 자를 구간: 0 ~ %d (끝문자: %d번째)", trimLineEnd, endChar);
-            //textarea.replaceRange("", 0, endChar);
+            // System.out.printf("  - 자를 구간: 0 ~ %d (끝문자: %d번째)", trimLineEnd, endChar);
+            textarea.replaceRange("", 0, endChar);
 
         } catch(BadLocationException e) {
-            System.out.println("  - 자를 구간을 찾는데 실패했습니다.");
+            // System.out.println("  - 자를 구간을 찾는데 실패했습니다.");
         } catch(Exception e) {
-            System.out.println("  - 오래된 로그를 잘라내는 데 실패했습니다.");
+            // System.out.println("  - 오래된 로그를 잘라내는 데 실패했습니다.");
         }
 
-
     }
-
 
 }

@@ -125,7 +125,7 @@ public class Initializer {
 		// show loaded props
 		log.info("버전: {}", VERSION);
 		log.info("빌드: {}", BUILD);
-		log.info("명령어: {}", CMD_CHAR);
+		log.info("명령어 키워드: {}", CMD_CHAR);
 
 	}
 

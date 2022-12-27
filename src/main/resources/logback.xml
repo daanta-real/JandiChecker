@@ -1,15 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration>
-
-	<!-- 1. Appenders -->
-	<!-- STDOUT -->
-	<appender name="JTextAppender" class="utils.logging.JTextAppender" />
-
-	<logger name="JTextLogger" level="INFO" />
-
-	<!-- 2. Output level -->
-	<root level="INFO">
-		<appender-ref ref="JTextAppender" />
-	</root>
-
-</configuration>
+<!-- 이 파일을 유지해야 한다. 유지하지 않으면 시스템 콘솔 쪽에도 로그가 출력된다 -->
+<configuration />
