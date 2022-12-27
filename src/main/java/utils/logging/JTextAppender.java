@@ -29,20 +29,20 @@ public class JTextAppender extends AppenderBase<ILoggingEvent> {
     // Make an appender and apply to logger
     public static void init() {
 
-        // 1. Fields
+        // 1. Making instance
         JTextAppender instance = new JTextAppender();
 
-        // Encoder
+        // 2. Encoder
         // Original Pattern: "[%d{yyyy-MM-dd HH:mm:ss}:%-3relative][%thread] %-5level %logger{36} ☞ %msg%n"
         instance.encoder.setContext(instance.ctx);
         instance.encoder.setPattern("[%d{yyyy-MM-dd HH:mm:ss}][%thread] ☞ %msg%n");
         instance.encoder.start();
 
-        // Appender
+        // 3. Appender
         instance.setContext(instance.ctx);
         instance.start();
 
-        // Apply to log context
+        // 4. Apply to log context
         instance.rootLogger.addAppender(instance);
 
     }
