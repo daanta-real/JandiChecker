@@ -3,8 +3,6 @@ package init;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.net.URI;
-import java.net.URL;
 import java.nio.file.Paths;
 import java.util.Properties;
 
@@ -93,27 +91,13 @@ public class Initializer {
 
 	private static void loadProperties_inner() throws Exception {
 
-		// find file
-		URL resource = Initializer.class.getClassLoader().getResource("properties.yaml");
-		if(resource == null) {
-			log.error("properties.yaml 파일을 찾지 못했습니다.");
-			throw new Exception();
-		}
-		URI location = resource.toURI();
-		File configFile = new File(location);
-		log.info("내부 환경변수 파일의 절대위치: {}", location);
-		if(!configFile.exists()) {
-			log.error("properties.yaml 파일을 불러오는 중 오류가 발생했습니다.");
-			throw new Exception();
-		}
-
 		// load file contents to props
-		Properties props;
-		try(InputStream is = new FileInputStream(configFile)) {
+		Properties props = null;
+		try(InputStream is = Initializer.class.getClassLoader().getResourceAsStream("properties.yaml")) {
 			props = new Properties();
 			props.load(is);
 		} catch(Exception e) {
-			log.error("properties.yaml 파일 내부를 읽는 중 에러가 발생했습니다.");
+			log.error("properties.yaml 파일을 불러오는 중 오류가 발생했습니다.");
 			throw new Exception(e);
 		}
 
