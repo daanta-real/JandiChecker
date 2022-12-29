@@ -92,7 +92,7 @@ public class Initializer {
 	private static void loadProperties_inner() throws Exception {
 
 		// load file contents to props
-		Properties props = null;
+		Properties props;
 		try(InputStream is = Initializer.class.getClassLoader().getResourceAsStream("properties.yaml")) {
 			props = new Properties();
 			props.load(is);
