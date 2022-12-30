@@ -1,7 +1,7 @@
 package cmd;
 
-import utils.crawler.Checker;
-import utils.crawler.GithubMap;
+import crawler.Checker;
+import crawler.GithubMap;
 import init.Initializer;
 
 // 정보 출력 메소드 모음

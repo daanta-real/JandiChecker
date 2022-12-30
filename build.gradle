@@ -76,7 +76,13 @@ dependencies {
     // JDEPS로 의존성 풀 리스트 보기
     // 얘도 버전 명기를 해야 돌아간다.
     // https://mvnrepository.com/artifact/org.kordamp.gradle/jdeps-gradle-plugin
-    // implementation 'org.kordamp.gradle:jdeps-gradle-plugin:0.19.0'
+    // implementation 'org.kordamp.gradle:jdeps-gradle-plugin:0.19.
+
+    // 엑셀 읽기 라이브러리 POI
+    // https://mvnrepository.com/artifact/org.apache.poi/poi
+    testImplementation 'org.apache.poi:poi:latest.integration'
+    // https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
+    testImplementation 'org.apache.poi:poi-ooxml:latest.integration'
 
 }
 

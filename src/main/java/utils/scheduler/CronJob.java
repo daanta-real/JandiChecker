@@ -4,7 +4,7 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 
 import cmd.CmdService;
-import utils.jda.JdaMsgSender;
+import jda.JdaMsgSender;
 import init.Initializer;
 
 // 실제 실행될 JOB 내용만을 담고 있는 실행내용 객체

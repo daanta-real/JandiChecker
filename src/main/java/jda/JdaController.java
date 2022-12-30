@@ -1,4 +1,4 @@
-package utils.jda;
+package jda;
 
 import cmd.CmdController;
 import lombok.extern.slf4j.Slf4j;

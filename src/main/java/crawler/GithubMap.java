@@ -1,4 +1,4 @@
-package utils.crawler;
+package crawler;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
