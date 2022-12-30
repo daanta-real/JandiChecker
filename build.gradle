@@ -64,9 +64,6 @@ dependencies {
     //     > Enable annotation processing 에 체크해야 함
     // https://mvnrepository.com/artifact/org.projectlombok/lombok
     implementation 'org.projectlombok:lombok:1.18.24'
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
-    testImplementation 'org.projectlombok:lombok:1.18.22'
-    testImplementation 'org.projectlombok:lombok:1.18.22'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
     // Logback에 Groovy를 쓰기 위한 Groovy
@@ -83,6 +80,14 @@ dependencies {
     testImplementation 'org.apache.poi:poi:latest.integration'
     // https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
     testImplementation 'org.apache.poi:poi-ooxml:latest.integration'
+
+    // 테스트를 위한 JUnit
+    // https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher
+    testImplementation 'org.junit.platform:junit-platform-launcher:latest.integration'
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:latest.integration'
+    // https://mvnrepository.com/artifact/org.junit.vintage/junit-vintage-engine
+    testImplementation 'org.junit.vintage:junit-vintage-engine:latest.integration'
 
 }
 
