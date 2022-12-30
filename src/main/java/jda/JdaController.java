@@ -24,7 +24,7 @@ public class JdaController extends ListenerAdapter {
 
 		// 기본 jda를 만든다
 		// 원래 옛날 버전에서 try catch를 써서 예외처리를 해야 했으나 패치로 없어진 모양
-		instance = JDABuilder.createDefault(Initializer.getToken())
+		instance = JDABuilder.createDefault(Initializer.getToken_discordBot())
 				.enableIntents(GatewayIntent.MESSAGE_CONTENT) // JDA 4.2.0부터 정책이 바뀌어 권한을 직접 활성화해줘야 함
 				.build(); // 봇을 만들어 로그인시킨 뒤, JdaObj의 인스턴스 값으로 할당
 		log.info("JDA 인스턴스 생성 완료:" + instance);

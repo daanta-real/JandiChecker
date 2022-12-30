@@ -26,10 +26,11 @@ public class Initializer {
 	private static String CMD_CHAR; // 잔디체커 명령임을 판독하는 기준이 되는 구분자
 
 	// 환경변수 (외부 settings.yaml)
-	private static String token; // 토큰
+	private static String token_discordBot; // 토큰 (디코봇)
 	private static String cron; // 스케쥴러 실행 주기
 	private static String[][] members; // 참여인 목록
 	private static String targetChannelId; // CRON 스케쥴러 실행 결과 메세지가 전송될 타겟 채널 ID
+	private static String token_googleTranslateAPI; // 토큰 (구글 번역 API)
 
 	// 소개말
 	public static final String INFO_STRING = """
@@ -81,12 +82,12 @@ public class Initializer {
 	}
 
 	// Getters/Setters
-	public static String     getToken  () { return token; }
-	public static String     getCron   () { return cron; }
-	public static String     getChId   () { return targetChannelId; }
+	public static String getToken_discordBot() { return token_discordBot; }
+	public static String getCron() { return cron; }
+	public static String getChId() { return targetChannelId; }
 	public static String[][] getMembers() { return members ; }
-	public static String     getCmdChar() { return CMD_CHAR; }
-
+	public static String  getCmdChar() { return CMD_CHAR; }
+	public static String getToken_googleTranslateAPI() { return token_googleTranslateAPI; }
 	// Methods
 
 	private static void loadProperties_inner() throws Exception {
@@ -131,25 +132,27 @@ public class Initializer {
 		// ObjectMapper 생성자가, YAML파일을 오브젝트로 읽어들인다.
 		// 그 다음 그 오브젝트를 MainSettings 클래스 각 변수에 맵핑시키는 식으로 그 내용을 읽어들인다. 자동이다!
 		ObjectMapper om = new ObjectMapper(new YAMLFactory());
-		InitializerSettingsFileVO dto = om.readValue(file, InitializerSettingsFileVO.class);
+		InitializerSettingsFileVO vo = om.readValue(file, InitializerSettingsFileVO.class);
 		file.close();
 		log.info("MainSettings DTO 읽기 완료.");
 
 		// 읽어온 내용을 MainSettings 클래스의 static 값들에 집어넣는다.
-		token = dto.getToken();
-		cron  = dto.getCron();
-		members = dto.getMembers();
-		targetChannelId = dto.getTargetChannelId();
+		token_discordBot = vo.getTokenJDA();
+		cron  = vo.getCron();
+		members = vo.getMembers();
+		targetChannelId = vo.getTargetChannelId();
+		token_googleTranslateAPI = vo.getTokenGoogleTranslateAPI();
 
 		// 로드된 환경변수들 일괄 출력
 		log.info("경로: {}", PATH);
-		log.info("토큰: {}", token);
+		log.info("토큰(디스코드 JDA): {}", token_discordBot);
 		log.info("크론: {}", cron);
 		log.info("채널: {}", targetChannelId);
 		log.info("명단 확인: ");
 		for(int i = 0; i < members.length; i++)
 			log.info("    {}─ {}번째 인원: '{}' (Github ID: {})",
 					(i == members.length - 1 ? '└' : '├'), i, members[i][0], members[i][1]);
+		log.info("토큰(구글번역 API): {}", token_googleTranslateAPI);
 
 	}
 
