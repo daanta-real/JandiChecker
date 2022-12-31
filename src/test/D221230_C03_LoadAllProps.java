@@ -14,6 +14,9 @@ public class D221230_C03_LoadAllProps {
     public void main() throws Exception {
         Initializer.ready(); // UI든 뭐든 다 불러오는 전체초기화를 수행. 프롭만 테스트하자고 구조를 뜯을 순 없어서..
         log.debug("토큰가져옴: {}", Initializer.getToken_googleTranslateAPI());
+
+        // 결론: Initializer.ready()만 하면 Initializer 필드들 잘 로딩됨.
+
     }
 
 }

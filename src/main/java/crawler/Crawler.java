@@ -1,32 +1,17 @@
 package crawler;
 
 import lombok.extern.slf4j.Slf4j;
+import utils.CommonUtils;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 // 깃헙 긁어오기 관련 모든 소스코드. 크롤링 및 데이터 획득
 @Slf4j
 public class Crawler {
 
-	// ID 주면 전체 HTML 리턴해줌
-	static String getHTML(String id) throws Exception {
-		// 필요변수 정의
-		URL url = new URL("https://github.com/" + id);
-	    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-
-	    // 회신값 수신하여 문자열로 저장
-	    Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
-	    StringBuilder sb = new StringBuilder();
-	    for (int c; (c = in.read()) >= 0;) sb.append((char)c);
-
-	    // 결과리턴
-	    return sb.toString();
+	// Return the GitHub profile page of someone
+	public static String getHTML(String id) throws Exception {
+		return CommonUtils.httpRequestUrl_GET("https://github.com/" + id);
 	}
 
 	// 수신된 웹 데이터 1차 trim (불필요 태그들 제거)
