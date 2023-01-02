@@ -31,6 +31,7 @@ public class Initializer {
 	private static String[][] members; // 참여인 목록
 	private static String targetChannelId; // CRON 스케쥴러 실행 결과 메세지가 전송될 타겟 채널 ID
 	private static String token_googleTranslateAPI; // 토큰 (구글 번역 API)
+	private static String token_chatGPTAPI; // 토큰 (ChatGPT API)
 
 	// 소개말
 	public static final String INFO_STRING = """
@@ -88,6 +89,10 @@ public class Initializer {
 	public static String[][] getMembers() { return members ; }
 	public static String  getCmdChar() { return CMD_CHAR; }
 	public static String getToken_googleTranslateAPI() { return token_googleTranslateAPI; }
+	public static String getToken_chatGPTAPI() { return token_chatGPTAPI; }
+
+
+
 	// Methods
 
 	private static void loadProperties_inner() throws Exception {
@@ -142,6 +147,7 @@ public class Initializer {
 		members = vo.getMembers();
 		targetChannelId = vo.getTargetChannelId();
 		token_googleTranslateAPI = vo.getTokenGoogleTranslateAPI();
+		token_chatGPTAPI = vo.getTokenChatGPTAPI();
 
 		// 로드된 환경변수들 일괄 출력
 		log.info("경로: {}", PATH);
@@ -153,6 +159,7 @@ public class Initializer {
 			log.info("    {}─ {}번째 인원: '{}' (Github ID: {})",
 					(i == members.length - 1 ? '└' : '├'), i, members[i][0], members[i][1]);
 		log.info("토큰(구글번역 API): {}", token_googleTranslateAPI);
+		log.info("토큰(ChatGPT API): {}", token_chatGPTAPI);
 
 	}
 

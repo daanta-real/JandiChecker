@@ -89,9 +89,12 @@ dependencies {
     // https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
     testImplementation 'org.apache.poi:poi-ooxml:latest.integration'
 
+    // ChatGPT를 쓰기 위한 의존성
+    implementation 'com.theokanning.openai-gpt3-java:client:<version>'
+
     // 구글 번역 API를 쓰기 위한 구글 클라우드 의존성
-    // https://mvnrepository.com/artifact/com.google.cloud/google-cloud-translate
-    implementation 'com.google.cloud:google-cloud-translate:latest.integration'
+    // https://mvnrepository.com/artifact/com.theokanning.openai-gpt3-java/client
+    implementation 'com.theokanning.openai-gpt3-java:client:0.8.1'
 
 }
 

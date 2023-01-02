@@ -1,10 +1,5 @@
 
 // Imports the Google Cloud Translation library.
-import com.google.cloud.translate.v3.LocationName;
-import com.google.cloud.translate.v3.TranslateTextRequest;
-import com.google.cloud.translate.v3.TranslateTextResponse;
-import com.google.cloud.translate.v3.Translation;
-import com.google.cloud.translate.v3.TranslationServiceClient;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
@@ -59,7 +54,7 @@ class GoogleTranslation {
     public static void translate(String projectId, String targetLanguage, String text) throws IOException {
 
         log.debug("translation(A, B, C) 시작..");
-
+/*
         // Initialize client that will be used to send requests. This client only needs to be created
         // once, and can be reused for multiple requests. After completing all of your requests, call
         // the "close" method on the client to safely clean up any remaining background resources.
@@ -81,7 +76,7 @@ class GoogleTranslation {
                             .setTargetLanguageCode(targetLanguage)
                             .addContents(text)
                             .build();
-            log.debug("request = ", request);
+            log.debug("request = ", request.toString());
 
             log.debug("진짜 번역 실시합니다");
             TranslateTextResponse response = client.translateText(request);
@@ -95,7 +90,7 @@ class GoogleTranslation {
 
             log.debug("최종 번역 완료");
 
-        }
+        }*/
 
     }
 

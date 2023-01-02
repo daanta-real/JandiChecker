@@ -102,6 +102,18 @@ public class CmdController {
 				JdaMsgSender.send(event, CmdService.showNotCommitedSomeday(option));
 			}
 
+			// 일반적인 질문에 답하는 AI
+			case "영어질문" -> {
+				// 미입력 걸러내기
+				if (opt.size() == 0) {
+					JdaMsgSender.send(event, "정확히 입력해 주세요.");
+					break;
+				}
+				String question = String.join(" ", opt);
+				JdaMsgSender.send(event, CmdService.getEngQuestionAnswer(question));
+
+			}
+
 		}
 	}
 }
