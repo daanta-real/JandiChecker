@@ -66,6 +66,14 @@ dependencies {
     implementation 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
+    // 테스트를 위한 JUnit
+    // https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher
+    testImplementation 'org.junit.platform:junit-platform-launcher:latest.integration'
+    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:latest.integration'
+    // https://mvnrepository.com/artifact/org.junit.vintage/junit-vintage-engine
+    testImplementation 'org.junit.vintage:junit-vintage-engine:latest.integration'
+
     // Logback에 Groovy를 쓰기 위한 Groovy
     // https://mvnrepository.com/artifact/org.apache.groovy/groovy-all
     implementation 'org.apache.groovy:groovy-all:latest.integration'
@@ -75,19 +83,15 @@ dependencies {
     // https://mvnrepository.com/artifact/org.kordamp.gradle/jdeps-gradle-plugin
     // implementation 'org.kordamp.gradle:jdeps-gradle-plugin:0.19.
 
-    // 엑셀 읽기 라이브러리 POI
+    // 엑셀 읽기 라이브러리 POI (테스트용)
     // https://mvnrepository.com/artifact/org.apache.poi/poi
     testImplementation 'org.apache.poi:poi:latest.integration'
     // https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml
     testImplementation 'org.apache.poi:poi-ooxml:latest.integration'
 
-    // 테스트를 위한 JUnit
-    // https://mvnrepository.com/artifact/org.junit.platform/junit-platform-launcher
-    testImplementation 'org.junit.platform:junit-platform-launcher:latest.integration'
-    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:latest.integration'
-    // https://mvnrepository.com/artifact/org.junit.vintage/junit-vintage-engine
-    testImplementation 'org.junit.vintage:junit-vintage-engine:latest.integration'
+    // 구글 번역 API를 쓰기 위한 구글 클라우드 의존성
+    // https://mvnrepository.com/artifact/com.google.cloud/google-cloud-translate
+    implementation 'com.google.cloud:google-cloud-translate:latest.integration'
 
 }
 
