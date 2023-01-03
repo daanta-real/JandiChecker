@@ -1,6 +1,7 @@
 /target/
 /settings_backup.yaml
 /settings.yaml
+/*.json
 /settings/
 *.iml
 *.idea
