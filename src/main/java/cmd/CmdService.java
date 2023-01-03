@@ -1,6 +1,5 @@
 package cmd;
 
-import chatGPT.ChatService;
 import crawler.Checker;
 import crawler.GithubMap;
 import init.Initializer;
@@ -46,10 +45,5 @@ public class CmdService {
 	public static String showNotCommitedSomeday(String date) throws Exception {
 		return Checker.getNotCommittedSomeday(date);
 	}
-
-	// Return the answer to the question using ChatGPT
-    public static String getEngQuestionAnswer(String question) {
-		return ChatService.getChatResponse(question);
-    }
 
 }
