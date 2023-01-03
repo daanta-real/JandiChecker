@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import lombok.extern.slf4j.Slf4j;
+import translate.TranslationService;
 import ui.UIMain;
 
 import static utils.CommonUtils.waitForEnter;
@@ -74,6 +75,12 @@ public class Initializer {
 		// 3. YAML로 된 외부 환경변수 파일을 로드 (settings.yaml)
 		log.info("[환경설정 로드 3] 외부 환경변수 로드");
 		loadProperties_outer();
+		log.info("완료.");
+		log.info("");
+
+		// 4. Load Google Translate API (googleAPIKey.json)
+		log.info("[환경설정 로드 4] 구글 번역 API 로드");
+		loadProperties_googleTranslationAPI();
 		log.info("완료.");
 		log.info("");
 
@@ -161,6 +168,10 @@ public class Initializer {
 		log.info("토큰(구글번역 API): {}", token_googleTranslateAPI);
 		log.info("토큰(ChatGPT API): {}", token_chatGPTAPI);
 
+	}
+
+	private static void loadProperties_googleTranslationAPI() throws Exception {
+		TranslationService.init();
 	}
 
 }

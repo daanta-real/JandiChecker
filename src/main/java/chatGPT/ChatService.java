@@ -36,8 +36,7 @@ public class ChatService {
         });
 
         // 4. Clean and retrun it
-        String result = sb.toString().replaceAll("", "\n");
-        return "\n\n\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93님 가라사대...```" + result + "```";
+        return sb.toString().replaceAll("", "\n");
 
     }
 
