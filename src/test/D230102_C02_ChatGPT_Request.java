@@ -21,7 +21,7 @@ class D230102_C02_ChatGPT_Request {
 //            if(!StringUtils.isEmpty(scanned)) input = scanned;
 //        }
 //        inputTxt = "대한민국의 올해 경제정책에 대해서 설명하시오";
-        inputTxt = "Please explain Korea's economic policy this year.";
+        inputTxt = "Please explain Korean economic policy this year.";
 
         OpenAiService service = new OpenAiService(Initializer.getToken_chatGPTAPI());
         CompletionRequest completionRequest = CompletionRequest.builder()
@@ -39,7 +39,7 @@ class D230102_C02_ChatGPT_Request {
     }
 
     public void pr(String text) {
-        text.replaceAll("\n\n", " ");
+        text = text.replaceAll("\n\n", " ");
         log.debug("로그: <<<{}>>>", text);
     }
 
