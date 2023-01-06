@@ -52,6 +52,8 @@ dependencies {
     // api 'org.apache.utils.logging.log4j:log4j-core' <<< 안쓸려고..
     // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
     implementation 'ch.qos.logback:logback-classic:latest.integration'
+    // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
+    implementation 'org.slf4j:slf4j-api:latest.integration'
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-reload4j
     // implementation 'org.slf4j:slf4j-reload4j:latest.integration'
 
@@ -100,11 +102,6 @@ dependencies {
 }
 
 //apply plugin: 'org.kordamp.gradle.jdeps'
-
-// jar를 따로 생성하지 못하게 한다. 왜 추가했는지 기억이 안 난다..
-jar {
-    enabled = false
-}
 
 // CLI 터미널에서 한글 깨짐 오류가 발생하는 것을 방지한다.
 tasks.withType(JavaCompile){

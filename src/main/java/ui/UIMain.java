@@ -39,12 +39,24 @@ public final class UIMain extends JFrame {
         log.info("WindowService 인스턴스 생성 완료");
 
         // Set an image icon
-        URL imgUrl = getClass().getClassLoader().getResource("img/windows_16x16.png");
+        URL imgUrl;
+        try {
+            imgUrl = getClass().getClassLoader().getResource("windows_16x16.png");
+        } catch(Exception e) {
+            log.debug("잔디체커 아이콘 로드에 실패했습니다.");
+            throw new Exception();
+        }
         IMAGE = Toolkit.getDefaultToolkit().getImage(imgUrl);
         log.info("잔디체커 이미지 로드 완료");
 
         // Set font
-        InputStream fontStream = Objects.requireNonNull(getClass().getResourceAsStream("/font.otf"));
+        InputStream fontStream;
+        try {
+            fontStream = Objects.requireNonNull(getClass().getResourceAsStream("/font.otf"));
+        } catch(Exception e) {
+            log.debug("폰트 파일 로드에 실패했습니다.");
+            throw new Exception();
+        }
         FONT = Font
                 .createFont(Font.TRUETYPE_FONT, fontStream)
                 .deriveFont(16f); // Make sure to derive the size;
