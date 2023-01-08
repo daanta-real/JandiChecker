@@ -4,7 +4,7 @@ import com.theokanning.openai.OpenAiService;
 import com.theokanning.openai.completion.CompletionRequest;
 import init.Initializer;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tools.ant.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import translate.TranslationService;
 
 import java.util.List;
