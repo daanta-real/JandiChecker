@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.jetbrains.annotations.NotNull;
 import init.Initializer;
 
@@ -43,7 +44,7 @@ public class JdaController extends ListenerAdapter {
 	public void onMessageReceived(@NotNull MessageReceivedEvent event) {
 
 		// 명령 실행
-		try { CmdController.command(event); } catch (Exception e) { e.printStackTrace(); }
+		try { CmdController.command(event); } catch (Exception e) { log.error(ExceptionUtils.getStackTrace(e)); }
 
 	}
 

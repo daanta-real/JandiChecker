@@ -1,5 +1,7 @@
 package utils.scheduler;
 
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 
@@ -8,6 +10,7 @@ import jda.JdaMsgSender;
 import init.Initializer;
 
 // 실제 실행될 JOB 내용만을 담고 있는 실행내용 객체
+@Slf4j
 public class CronJob implements Job {
 
 	// JOB 객체에서는 execute를 오버라이드하여 그 작업내용을 쓰도록 되어 있다.
@@ -18,7 +21,7 @@ public class CronJob implements Job {
 		try {
 			String yesterdayCommitedString = CmdService.showDidCommitYesterday();
 			JdaMsgSender.send(Initializer.getChId(), yesterdayCommitedString);
-		} catch (Exception e) { e.printStackTrace(); }
+		} catch (Exception e) { log.error(ExceptionUtils.getStackTrace(e)); }
 	}
 
 }

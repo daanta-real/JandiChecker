@@ -2,6 +2,7 @@ package XLS_Reader_POI;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
@@ -41,7 +42,7 @@ public class D220302_xlsOpen_apply {
 			iteratorOLD(sheet);
 			iteratorNEW(sheet);
 		} catch(Exception e) {
-			e.printStackTrace();
+			log.error(ExceptionUtils.getStackTrace(e));
 		}
 
 	}
@@ -98,7 +99,7 @@ public class D220302_xlsOpen_apply {
 
 			// 열 루프
 			for(Cell cell: row) {
-				log.debug("Cell: ", cell);
+				log.debug("Cell: {}", cell);
 
 				// 만약에 빈 셀이 나오면 읽기 종료
 				if(cell.getCellType() == CellType.BLANK) {
@@ -122,7 +123,7 @@ public class D220302_xlsOpen_apply {
 		}
 
 		// 결과 출력
-		log.debug("결과를 발표함\n", m);
+		log.debug("결과를 발표함\n{}", m);
 
 	}
 

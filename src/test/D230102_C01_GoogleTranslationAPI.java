@@ -1,6 +1,7 @@
 
 // Imports the Google Cloud Translation library.
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -16,7 +17,7 @@ public class D230102_C01_GoogleTranslationAPI {
             GoogleTranslation.translate();
         } catch(Exception e) {
             log.debug("에러났엉:\n");
-            e.printStackTrace();
+            log.error(ExceptionUtils.getStackTrace(e));
         }
 
         log.debug("실험 종료..");
@@ -37,14 +38,14 @@ class GoogleTranslation {
 
         // TODO(developer): Replace these variables before running the sample.
         String projectId = "YOUR-PROJECT-ID";
-        log.debug("projectId = ", projectId);
+        log.debug("projectId = {}", projectId);
 
         // Supported Languages: https://cloud.google.com/translate/docs/languages
         String targetLanguage = "your-target-language";
-        log.debug("targetLanguage = ", targetLanguage);
+        log.debug("targetLanguage = {}", targetLanguage);
 
         String text = "your-text";
-        log.debug("text = ", text);
+        log.debug("text = {}", text);
 
         translate(projectId, targetLanguage, text);
 
