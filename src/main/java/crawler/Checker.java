@@ -2,6 +2,7 @@ package crawler;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Map;
 
 import lombok.extern.slf4j.Slf4j;
 import init.Initializer;
@@ -31,24 +32,19 @@ public class Checker {
 //		log.debug("▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶ HTML (LENGTH: {})\n", html_org.length());
 		String trimmed = Crawler.trim(html_org);
 //		log.debug("▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶ TRIMMED (LENGTH: {})\n{}", trimmed.length(), trimmed);
-		String csv = Crawler.makeDataCSV(trimmed);
-		log.debug("▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶ CSV (LENGTH: {})\n{}", csv.length(), csv);
-		String[] text = csv.split("\n");
-		boolean hasCommit = false;
+		Map<String, Boolean> map = Crawler.makeMapFromTrimmed(trimmed);
 
-		for(String s: text) {
-			log.debug("▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶ 줄: {}", s);
-			if(!StringUtils.isEmpty(s) && s.length() >= 10 && s.substring(0, 10).equals(day)) {
-				String[] dayInfo = s.split(",");
-				String resultDay = dayInfo[0];
-				hasCommit = !"0".equals(dayInfo[1]);
-				log.info("날짜: " + resultDay + " / 커밋 결과: " + hasCommit);
-			}
+		boolean hasCommit = false;
+		for(Map.Entry<String, Boolean> entry: map.entrySet()) {
+			String key = entry.getKey();
+			if(StringUtils.isEmpty(key) || key.length() < 10 || !day.equals(key.substring(0, 10))) continue;
+			hasCommit = entry.getValue();
+			log.info("날짜: " + key + " / 커밋 결과: " + hasCommit);
 		}
 		return hasCommit;
 	}
 
-	// 스터디원 전원의 특정 날의 커밋 현황을 체크하여 커밋하지 않은 사람의 명부를 회신
+	// 스터디원 전원의 특정 날의 커밋 현황을 체크하여 커밋한(findNegative true일 시, 안 한) 사람의 명부를 회신
 	public static String[] getCommitListByDay(String day, boolean findNegative) throws Exception {
 		log.info("커밋을 {} 확인합니다. 확인할 날짜: {}", (findNegative ? "'안 했는지'" : "'했는지'"), day);
 
@@ -100,7 +96,7 @@ public class Checker {
 	}
 
 	// 오늘 커밋 안 한 스터디원 목록을 회신
-	public static String getNotCommittedToday() throws Exception {
+	public static String getDidCommittedToday() throws Exception {
 
 		// 날짜 String 만들기
 		Calendar c = Calendar.getInstance();
@@ -108,11 +104,11 @@ public class Checker {
 
 		String[] list = getCommitListByDay(day, false);
 		String day_notice = sdf_dayweek.format(c.getTime());
-		return "```md\n[오늘 아직 커밋 안 한 사람 " + list[0] + "명 명단]: " + day_notice + "\n" + list[1] + "```";
+		return "```md\n[오늘 커밋에 성공한 사람 " + list[0] + "명 명단]: " + day_notice + "\n" + list[1] + "```";
 	}
 
 	// 특정 날짜에 커밋 안 한 스터디원 목록을 회신
-	public static String getNotCommittedSomeday(String date) throws Exception {
+	public static String getDidCommittedSomeday(String date) throws Exception {
 
 		// 날짜 양식 불만족 시 리턴
 		if(!isValidDate(date)) return "날짜를 잘못 입력하셨습니다.";
@@ -125,7 +121,7 @@ public class Checker {
 		// 본실행
 		String[] list = getCommitListByDay(day, false);
 		String day_notice = sdf_dayweek.format(c.getTime());
-		return "```md\n[특정 날짜에 커밋 안 한 사람 " + list[0] + "명 명단]: " + day_notice + "\n" + list[1] + "```";
+		return "```md\n[" + date+ "에 커밋에 성공한 사람 " + list[0] + "명 명단]: " + day_notice + "\n" + list[1] + "```";
 
 	}
 

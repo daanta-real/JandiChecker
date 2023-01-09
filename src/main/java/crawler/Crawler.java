@@ -23,52 +23,39 @@ public class Crawler {
 		;
 	}
 
-	// 수신된 웹 데이터 2차 trim (내부 태그 정돈)
-	static String makeDataCSV(String str) {
+	// Trimmed HTML to commit score by date
+	static Map<String, Boolean> makeMapFromTrimmed(String trimmedHTML) {
 
-		return str
+		String[] htmlArr = trimmedHTML.split("\n");
 
-		// 1차 내부 트림
-		.replaceAll("^.*(<g.*>).*\n|.*</?g.*\n|(.*data-count=\"\\d\"\\s)|(></).*(rect>)|(\\s.*<rect).*count=\"\\d\\d\"\\s", "") // 무관문자열 all삭제
-		.replaceAll("\"d", "\"\nd")             // 엔터키 안쳐진거 엔터치기
+		Map<String, Boolean> m = new HashMap<>();
+		for(String oneline: htmlArr) {
 
-		// 데이터 좌우 트림
-		.replaceAll("data-date=\"", "")    // 왼쪽부분
-		.replaceAll("\" data-level=", ",") // 오른쪽부분
+			// Target only the lines including the rect tag
+			if(!oneline.contains("<rect")) continue;
 
-		// 잔디심은 결과에 따른 트림
-		.replaceAll("\"[1-9]\"\n", "1\n")  // true의 경우
-		.replaceAll("\"0\"\n", "0\n")      // false의 경우
+			// Date extraction
+			int idx_date = oneline.indexOf("data-date");
+			String date = oneline.substring(idx_date + 11, idx_date + 21);
 
-		.replaceAll("\\n\\s.*", "")
-		;
+			// Data extraction
+			int idx_data = oneline.indexOf("data-level");
+			String data = oneline.substring(idx_data + 12, idx_data + 13);
+			boolean hasCommitted = Integer.parseInt(data) > 0;
 
-	}
+//			log.debug("{}: {}점", date, data_num);
+			m.put(date, hasCommitted);
 
-	// 완성된 CSV를 배열로 변환 후 리턴
-	static Map<String, Boolean> CSVtoHashMap(String csv) {
-
-		String[] csvArr = csv.split("\n");
-		List<String> list = new ArrayList<>(Arrays.asList(csvArr));
-		Map<String, Boolean> map = new TreeMap<>();
-		for(String lis: list) {
-			String[] keyValStr = lis.split(",");
-			// 날짜 별 커밋 농도를 콘솔에 표시
-			// log.info(Arrays.toString(keyValStr));
-			// 날짜 찾기
-			String dateStr = keyValStr[0];
-			// 잔디여부 찾기
-			Boolean val = !"0".equals(keyValStr[1]);
-			map.put(dateStr, val);
 		}
-		return map;
+
+		return m;
+
 	}
 
 	// ID를 넘기면 일일 잔디현황을 Map으로 리턴
 	public static Map<String, Boolean> getGithubMap(String githubId) throws Exception {
-		String str               = getHTMLByID(githubId);
-		String trimmed           = trim        (str)     ;
-		String csv               = makeDataCSV (trimmed) ;
-		return CSVtoHashMap(csv);
+		String str               = getHTMLByID(githubId)      ;
+		String trimmed           = trim        (str)          ;
+		return makeMapFromTrimmed(trimmed);
 	}
 }
