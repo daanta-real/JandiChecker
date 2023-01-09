@@ -83,14 +83,14 @@ public class CmdController {
 				JdaMsgSender.send(event, CmdService.showJandiMapById(option));
 			}
 
-			// 어제 커밋 안 한 사람 목록 출력
-			case "어제안함" -> JdaMsgSender.send(event, CmdService.showNotCommitedYesterday());
+			// 현 시점 오늘 커밋 안 한 사람 목록 출력
+			case "오늘함" -> JdaMsgSender.send(event, CmdService.showDidCommitToday());
 
 			// 어제 커밋 한 사람 목록 출력
 			case "어제" -> JdaMsgSender.send(event, CmdService.showDidCommitYesterday());
 
-			// 현 시점 오늘 커밋 안 한 사람 목록 출력
-			case "&오늘안함" -> JdaMsgSender.send(event, CmdService.showNotCommitedToday());
+			// 어제 커밋 안 한 사람 목록 출력
+			case "어제안함" -> JdaMsgSender.send(event, CmdService.showNotCommitedYesterday());
 
 			// 특정 날짜에 잔디를 심지 않은 사람의 목록을 출력
 			case "확인" -> {
@@ -100,7 +100,7 @@ public class CmdController {
 					break;
 				}
 				option = opt.get(0);
-				JdaMsgSender.send(event, CmdService.showNotCommitedSomeday(option));
+				JdaMsgSender.send(event, CmdService.showDidCommitSomeday(option));
 			}
 
 			// 일반적인 질문에 답하는 AI
@@ -116,4 +116,5 @@ public class CmdController {
 
 		}
 	}
+
 }

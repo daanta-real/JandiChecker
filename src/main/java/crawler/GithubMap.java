@@ -2,11 +2,7 @@ package crawler;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -18,10 +14,9 @@ public class GithubMap {
 
 	// 특정 날짜의 객체 획득
 	private static Calendar getDate(String dateStr) {
-		String[] dayStrArr = dateStr.split("-");
-		String y = String.valueOf(dayStrArr[0]);
-		String m = String.valueOf(Integer.parseInt(dayStrArr[1]) - 1);
-		String d = String.valueOf(dayStrArr[2]);
+		String y = dateStr.substring(0, 4);
+		String m = dateStr.substring(4, 6);
+		String d = dateStr.substring(6, 8);
 		return getCalendar(y, m, d);
 	}
 
@@ -43,31 +38,31 @@ public class GithubMap {
 		Calendar lastDay  = getDate(Collections.max(map.keySet()));
 		log.info("기간: " + sdf.format(firstDay.getTime()) + " ~ " + sdf.format(lastDay.getTime()));
 
-		// 첫 원소의 일요일 날짜까지 필요한 칸수를 확인하여 점을 다 찍어줌
-		int move = -firstDay.get(Calendar.DAY_OF_WEEK) + 1;
+		// 첫 원소의 일요일 날짜부터 시작일 직전일까지 필요한 칸수를 확인하여 점을 다 찍어줌
+		int move = -firstDay.get(Calendar.DAY_OF_WEEK) + 1; // amount needed to go back to sunday
 		for(int i = 0; i < move; i++) sb[move].append('.');
 		log.info("일요일 날짜: " + move + "일 전, sb[0] = " + sb[0].toString());
 
 		// 데이터 만들기
-		Iterator<String> it = map.keySet().iterator();
 		Calendar cal;
 		int count = 0;
-		boolean[] commitTFs = new boolean[500];
-		while(it.hasNext()) {
+		boolean[] commitTFs = new boolean[500]; // Stores success status of commits (from the first day to the end)
+		for(Map.Entry<String, Boolean> entry: map.entrySet()) {
 
 			// 변수준비
-			String k = it.next();
+			String k = entry.getKey();
 			cal = getDate(k);
-			log.info("count: " + count + " (" + count%7 + ")");
+			int weekday = count % 7;
 
 			// 기록
-			boolean isCommited = map.get(k);
-			sb[count % 7].append(isCommited ? '●' : '○'); // 상세현황 문자열
-			commitTFs[count] = isCommited; // 상세현황 tf
+			boolean commitSuccess = entry.getValue();
+			char text = commitSuccess ? '●' : '○';
+			sb[weekday].append(text); // 상세현황 문자열
+			commitTFs[count] = commitSuccess; // 상세현황 tf
 
 			// 정리
+			log.info("찾아낸 날짜({}번째, %7 = {}): {} > {}", count, weekday, sdf.format(cal.getTime()), map.get(k));
 			count++;
-			log.info("찾아낸 날짜(" + count + "번째): " + sdf.format(cal.getTime()) + " > " + map.get(k));
 
 		}
 

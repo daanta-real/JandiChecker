@@ -28,7 +28,7 @@ public class Crawler {
 
 		String[] htmlArr = trimmedHTML.split("\n");
 
-		Map<String, Boolean> m = new HashMap<>();
+		TreeMap<String, Boolean> m = new TreeMap<>();
 		for(String oneline: htmlArr) {
 
 			// Target only the lines including the rect tag
@@ -36,7 +36,11 @@ public class Crawler {
 
 			// Date extraction
 			int idx_date = oneline.indexOf("data-date");
-			String date = oneline.substring(idx_date + 11, idx_date + 21);
+			int idx_date_start = idx_date + 11;
+			String date
+					= oneline.substring(idx_date_start, idx_date_start + 4)
+					+ oneline.substring(idx_date_start + 5, idx_date_start + 7)
+					+ oneline.substring(idx_date_start + 8, idx_date_start + 10);
 
 			// Data extraction
 			int idx_data = oneline.indexOf("data-level");

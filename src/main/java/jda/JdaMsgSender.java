@@ -50,11 +50,11 @@ public class JdaMsgSender {
 		String last3Chars = msg.substring(msg.length() - 3);
 		boolean finishedWithCode = last3Chars.equals("```");
 		int cutLength = finishedWithCode ? 1997 : 2000;
-		cutLength -= 7; // "...(생략)" ← 이거 붙일려고..
+		cutLength -= 7; // "...(후략)" ← 이거 붙일려고..
 
 		String trimmedStr = msg.substring(0, cutLength);
 		if(finishedWithCode) trimmedStr += "```";
-		trimmedStr += "...(생략)";
+		trimmedStr += "...(후략)";
 
 		return trimmedStr;
 

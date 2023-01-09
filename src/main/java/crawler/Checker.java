@@ -29,15 +29,13 @@ public class Checker {
 	public static boolean getGithubCommittedByDay(String id, String day) throws Exception {
 		log.info("{}의 {} 날의 커밋을 확인합니다.", id, day);
 		String html_org = Crawler.getHTMLByID(id);
-//		log.debug("▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶ HTML (LENGTH: {})\n", html_org.length());
 		String trimmed = Crawler.trim(html_org);
-//		log.debug("▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶ TRIMMED (LENGTH: {})\n{}", trimmed.length(), trimmed);
 		Map<String, Boolean> map = Crawler.makeMapFromTrimmed(trimmed);
 
 		boolean hasCommit = false;
 		for(Map.Entry<String, Boolean> entry: map.entrySet()) {
 			String key = entry.getKey();
-			if(StringUtils.isEmpty(key) || key.length() < 10 || !day.equals(key.substring(0, 10))) continue;
+			if(key == null) continue;
 			hasCommit = entry.getValue();
 			log.info("날짜: " + key + " / 커밋 결과: " + hasCommit);
 		}
