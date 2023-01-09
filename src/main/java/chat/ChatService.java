@@ -1,4 +1,4 @@
-package chatGPT;
+package chat;
 
 import com.theokanning.openai.OpenAiService;
 import com.theokanning.openai.completion.CompletionRequest;
@@ -53,7 +53,7 @@ public class ChatService {
         log.debug("한국어로 번역된 답변: <<<{}>>>", answerKor);
 
         // 6. Return result
-        return "\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93ChatGPT AI님 가라사대...\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93```" + answerKor + "```";
+        return "\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 ChatGPT AI님 가라사대... \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93```" + answerKor + "```";
 
     }
 

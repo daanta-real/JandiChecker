@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import chatGPT.ChatService;
+import chat.ChatService;
 import jda.JdaMsgSender;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -21,6 +21,13 @@ public class CmdController {
 		// 리스닝 중인 채널에 메세지가 발생하였으나, 메세지가 없거나, 그 첫 글자가 &가 아니어서 명령이 아닌 경우, 무지성 리턴
 		String totalString = event.getMessage().getContentRaw();
 		if(totalString.isBlank()) return;
+
+		// 버튼형 메뉴를 불러올 경우 커맨드를 따지지 않고 바로 메뉴판 호출 후 리턴
+		if(totalString.equals("잔디야")) {
+			ButtonMenues.showButtonMenues(event);
+			return;
+		}
+
 		String firstString = totalString.substring(0, 1); // Trim the first char - Identifier &
 		if(!"&".equals(firstString)) return;
 		log.info("[[명령이 접수되었습니다.]]");

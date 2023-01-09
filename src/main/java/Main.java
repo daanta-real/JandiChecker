@@ -36,7 +36,7 @@ public class Main {
 			// Load JDA
 			log.info("");
 			log.info("[[[잔디체커 JDA 로드]]]");
-			JdaController.ready();
+			JdaController.init();
 
 			// Run scheduler
 			log.info("");
