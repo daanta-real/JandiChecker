@@ -1,10 +1,8 @@
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
-import java.util.Arrays;
-
 @Slf4j
-public class D230109_ParseDateStrToNumber {
+public class D230109_C03_ParseDateStrToNumber {
 
     @Test
     public void test1() {

@@ -19,8 +19,7 @@ public class Crawler {
 		int st = str.indexOf("js-calendar-graph-svg") + 26;
 		int ed = str.indexOf("<text ");
 		str = str.substring(st, ed);
-		return str.replaceAll("^(<rect).*(data-)$", "")
-		;
+		return str.replaceAll("^(<rect).*(data-)$", "");
 	}
 
 	// Trimmed HTML to commit score by date
@@ -62,4 +61,5 @@ public class Crawler {
 		String trimmed           = trim        (str)          ;
 		return makeMapFromTrimmed(trimmed);
 	}
+
 }

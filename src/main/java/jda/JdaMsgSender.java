@@ -1,9 +1,11 @@
 package jda;
 
 //import net.dv8tion.jda.api.entities.TextChannel; << 이건 구버전에서 썼었던 모양..
+
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import org.apache.commons.text.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 
 // 메세지를 보내는 메소드를 모은 곳
@@ -15,6 +17,7 @@ public class JdaMsgSender {
 		log.info("메세지를 보내 보겠습니다. 현재 채널 메세지 발송 가능 여부: " + channel.canTalk());
 		if(channel.canTalk()) {
 			msg = msgTrim(msg);
+			msg = decodeHTMLEntity(msg);
 			channel.sendMessage(msg).queue();
 		} else {
 			log.info("메세지를 보낼 수가 없어요");
@@ -27,6 +30,7 @@ public class JdaMsgSender {
 		log.info(channelId + " 채널에 메세지를 보냅니다. (채널 존재 여부: " + (channel != null) + ")");
 		if (channel != null) {
 			msg = msgTrim(msg);
+			msg = decodeHTMLEntity(msg);
 			send(channel, msg);
 		} else {
 			log.info("채널이 존재하지 않아 메세지를 보낼 수 없습니다.");
@@ -37,6 +41,7 @@ public class JdaMsgSender {
 	public static void send(MessageReceivedEvent event, String msg) {
 		log.info("이벤트가 접수된 채널에 메세지를 보냅니다. (모든 타입의 채널 대응용 메소드 실행)");
 		msg = msgTrim(msg);
+		msg = decodeHTMLEntity(msg);
 		event.getChannel().sendMessage(msg).queue();
 	}
 
@@ -58,6 +63,11 @@ public class JdaMsgSender {
 
 		return trimmedStr;
 
+	}
+
+	// Unescape all of HTML Entity characters
+	private static String decodeHTMLEntity(String msg) {
+		return StringEscapeUtils.unescapeHtml4(msg);
 	}
 
 }

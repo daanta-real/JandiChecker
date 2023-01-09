@@ -10,7 +10,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
 @Slf4j
-public class D230109_HTTPTest {
+public class D230109_C01_HTTPTest {
 
     private static final String id = "daanta-real";
 

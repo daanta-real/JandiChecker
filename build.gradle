@@ -43,9 +43,13 @@ dependencies {
     implementation 'org.projectlombok:lombok:1.18.24'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
-    // String 취급을 쉽게 해주는 Apache Commons-lang
+    // String 취급을 쉽게 해주는 Apache Commons Lang
     // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
     implementation 'org.apache.commons:commons-lang3:latest.integration'
+
+    // 파싱 등을 처리하기 위해 영입한 Apache Commons Text
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-text
+    implementation 'org.apache.commons:commons-text:1.10.0'
 
     // YAML 설정파일을 읽어오기 위한 JACKSON-YAML 라이브러리
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml

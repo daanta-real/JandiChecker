@@ -1,16 +1,11 @@
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.FileUtils;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
-public class D230109_MakeCSVTest {
+public class D230109_C02_MakeCSVTest {
 
 //    private static String trimmed;
 //    private static String PATH = Paths.get("").toAbsolutePath().toString();

@@ -35,23 +35,7 @@ public class Initializer {
 	private static String token_chatGPTAPI; // 토큰 (ChatGPT API)
 
 	// 소개말
-	public static final String INFO_STRING = """
-			```md
-			_**저는 매일 자정, 잔디를 심는 데 성공한 사람들을 찾아낼 것입니다.**_
-			&목표: 이 봇이 제작된 목표를 설명합니다.
-			&정보 [사람이름]: 특정인의 최근 1년 간 및 근 30일 간의 Github 잔디 정보를 가져옵니다. 이때 관리목록에 이름이 서로 겹치는 인원이 없다면 성은 생략해도 됩니다.
-			&id [id]: 특정 id의 최근 1년 간 및 근 30일 간의 Github 잔디 정보를 가져옵니다. 관리목록에 없는 사람도 조회 가능합니다.
-			&오늘함: 오늘 잔디를 심은 사람들의 명단을 공개합니다.
-			&어제: 어제 잔디를 심은 사람들의 명단을 공개합니다.
-			&어제안함: 어제 잔디를 심은 사람들의 명단을 공개합니다.
-			&확인 [날짜(yyyy-MM-dd 형식)]: 특정 날짜에 잔디를 제출하지 않은 사람들의 명단을 출력합니다.
-					
-			잔디체커(JandiChecker) %s Build %s
-			제작 by 단타(박준성)
-			e-mail: daanta@naver.com
-			Github: http://github.com/daanta-real
-			```
-			""".formatted(VERSION, BUILD);
+	public static String INFO_STRING;
 
 	public static void ready() throws Exception {
 
@@ -123,6 +107,31 @@ public class Initializer {
 		log.info("버전: {}", VERSION);
 		log.info("빌드: {}", BUILD);
 		log.info("명령어 키워드: {}", CMD_CHAR);
+
+		// Set info String
+		INFO_STRING = """
+			```md
+			
+			_**저는 매일 자정, 잔디를 심는 데 성공한 사람들을 찾아낼 것입니다.**_
+			
+			[[[ 커맨드 설명 ]]]
+			&목표: 이 봇이 제작된 목표를 설명합니다.
+			&정보 [사람이름]: 특정인의 최근 1년 간 및 근 30일 간의 Github 잔디 정보를 가져옵니다. 이때 관리목록에 이름이 서로 겹치는 인원이 없다면 성은 생략해도 됩니다.
+			&id [id]: 특정 id의 최근 1년 간 및 근 30일 간의 Github 잔디 정보를 가져옵니다. 관리목록에 없는 사람도 조회 가능합니다.
+			&오늘함: 오늘 잔디를 심은 사람들의 명단을 공개합니다.
+			&어제: 어제 잔디를 심은 사람들의 명단을 공개합니다.
+			&어제안함: 어제 잔디를 심은 사람들의 명단을 공개합니다.
+			&확인 [날짜(yyyy-MM-dd 형식)]: 특정 날짜에 잔디를 제출하지 않은 사람들의 명단을 출력합니다.
+
+			[[[ 앱 정보 ]]]
+			잔디체커(JandiChecker) %s Build %s
+			제작 by 단타(박준성)
+			e-mail: daanta@naver.com
+			GitHub: http://github.com/daanta-real
+			Blog  : http://blog.naver.com/daanta
+			
+			```
+			""".formatted(VERSION, BUILD);
 
 	}
 

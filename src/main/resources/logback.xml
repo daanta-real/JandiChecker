@@ -1,15 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration>
-
-    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <charset>UTF-8</charset>
-            <pattern>테스트맞다니까[%d] [%highlight(%-5level)] %logger[%cyan(%method:%line)] - %msg %n</pattern>
-        </encoder>
-    </appender>
-
-    <root level="TRACE">
-        <appender-ref ref="CONSOLE" />
-    </root>
-
-</configuration>
+<!-- 이 파일을 유지해야 한다. 유지하지 않으면 시스템 콘솔 쪽에도 로그가 출력된다 -->
+<configuration />
