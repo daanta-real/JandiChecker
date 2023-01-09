@@ -5,6 +5,7 @@ import java.util.Calendar;
 
 import lombok.extern.slf4j.Slf4j;
 import init.Initializer;
+import org.apache.commons.lang3.StringUtils;
 import utils.CommonUtils;
 
 // 깃헙 제출한 사람과 안 한 사람들의 정보를 정리
@@ -25,17 +26,24 @@ public class Checker {
 
 	// id와 특정 일자 문자열(yyyy-MM-dd)을 넣으면 그 사람이 그날 커밋했는지 점검하여 t/f 리턴해줌
 	public static boolean getGithubCommittedByDay(String id, String day) throws Exception {
-		log.info(id + "의 " + day + " 날의 커밋을 확인합니다.");
-		String html = Crawler.makeDataCSV(
-				      Crawler.trim(
-				      Crawler.getHTML(id)));
-		String[] text = html.split("\n");
+		log.info("{}의 {} 날의 커밋을 확인합니다.", id, day);
+		String html_org = Crawler.getHTMLByID(id);
+//		log.debug("▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶ HTML (LENGTH: {})\n", html_org.length());
+		String trimmed = Crawler.trim(html_org);
+//		log.debug("▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶ TRIMMED (LENGTH: {})\n{}", trimmed.length(), trimmed);
+		String csv = Crawler.makeDataCSV(trimmed);
+		log.debug("▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶ CSV (LENGTH: {})\n{}", csv.length(), csv);
+		String[] text = csv.split("\n");
 		boolean hasCommit = false;
-		for(String s: text) if(s.substring(0, 10).equals(day)) {
-			String[] dayInfo = s.split(",");
-			String resultDay = dayInfo[0];
-			hasCommit = !"0".equals(dayInfo[1]);
-			log.info("날짜: " + resultDay + " / 커밋 결과: " + hasCommit);
+
+		for(String s: text) {
+			log.debug("▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶▶ 줄: {}", s);
+			if(!StringUtils.isEmpty(s) && s.length() >= 10 && s.substring(0, 10).equals(day)) {
+				String[] dayInfo = s.split(",");
+				String resultDay = dayInfo[0];
+				hasCommit = !"0".equals(dayInfo[1]);
+				log.info("날짜: " + resultDay + " / 커밋 결과: " + hasCommit);
+			}
 		}
 		return hasCommit;
 	}

@@ -10,7 +10,7 @@ import java.util.*;
 public class Crawler {
 
 	// Return the GitHub profile page of someone
-	public static String getHTML(String id) throws Exception {
+	public static String getHTMLByID(String id) throws Exception {
 		return CommonUtils.httpRequestUrl_GET("https://github.com/" + id);
 	}
 
@@ -66,7 +66,7 @@ public class Crawler {
 
 	// ID를 넘기면 일일 잔디현황을 Map으로 리턴
 	public static Map<String, Boolean> getGithubMap(String githubId) throws Exception {
-		String str               = getHTML     (githubId);
+		String str               = getHTMLByID(githubId);
 		String trimmed           = trim        (str)     ;
 		String csv               = makeDataCSV (trimmed) ;
 		return CSVtoHashMap(csv);
