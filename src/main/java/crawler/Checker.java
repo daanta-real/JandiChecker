@@ -1,29 +1,16 @@
 package crawler;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Map;
 
 import lombok.extern.slf4j.Slf4j;
 import init.Initializer;
-import org.apache.commons.lang3.StringUtils;
 import utils.CommonUtils;
 
 // 깃헙 제출한 사람과 안 한 사람들의 정보를 정리
 @Slf4j
 public class Checker {
-
-	private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	private static final SimpleDateFormat sdf_dayweek = new SimpleDateFormat("yyyy-MM-dd (EEEE)");
-
-	// 날짜 유효성 검사
-	private static boolean isValidDate(String input) {
-        try {
-            sdf.setLenient(false);
-            sdf.parse(input);
-        } catch (Exception e) { return false; }
-        return true;
-    }
 
 	// id와 특정 일자 문자열(yyyy-MM-dd)을 넣으면 그 사람이 그날 커밋했는지 점검하여 t/f 리턴해줌
 	public static boolean getGithubCommittedByDay(String id, String day) throws Exception {
@@ -72,10 +59,10 @@ public class Checker {
 		// 날짜 String 만들기
 		Calendar c = Calendar.getInstance();
 		c.add(Calendar.DATE, -1);
-		String day = sdf.format(c.getTime());
+		String day = CommonUtils.sdf.format(c.getTime());
 
 		String[] list = getCommitListByDay(day, true);
-		String day_notice = sdf_dayweek.format(c.getTime());
+		String day_notice = CommonUtils.sdf_dayweek.format(c.getTime());
 		return "```md\n[어제 커밋 안 한 사람 " + list[0] + "명]: " + day_notice + "\n" + list[1] + "```";
 	}
 
@@ -86,10 +73,10 @@ public class Checker {
 		// 날짜 String 만들기
 		Calendar c = Calendar.getInstance();
 		c.add(Calendar.DATE, -1);
-		String day = sdf.format(c.getTime());
+		String day = CommonUtils.sdf.format(c.getTime());
 
 		String[] list = getCommitListByDay(day, false);
-		String day_notice = sdf_dayweek.format(c.getTime());
+		String day_notice = CommonUtils.sdf_dayweek.format(c.getTime());
 		return "```md\n[어제 커밋에 성공한 사람은 " + list[0] + "명...!]: " + day_notice + "\n" + list[1] + "```";
 	}
 
@@ -98,27 +85,31 @@ public class Checker {
 
 		// 날짜 String 만들기
 		Calendar c = Calendar.getInstance();
-		String day = sdf.format(c.getTime());
+		String day = CommonUtils.sdf.format(c.getTime());
 
 		String[] list = getCommitListByDay(day, false);
-		String day_notice = sdf_dayweek.format(c.getTime());
+		String day_notice = CommonUtils.sdf_dayweek.format(c.getTime());
 		return "```md\n[오늘 커밋에 성공한 사람 " + list[0] + "명 명단]: " + day_notice + "\n" + list[1] + "```";
 	}
 
 	// 특정 날짜에 커밋 안 한 스터디원 목록을 회신
-	public static String getDidCommittedSomeday(String date) throws Exception {
+	public static String getDidCommittedSomeday(List<String> option) throws Exception {
+
+		// 미입력 걸러내기
+		if (option.size() == 0) return "정확히 입력해 주세요.";
+		String date = option.get(0);
 
 		// 날짜 양식 불만족 시 리턴
-		if(!isValidDate(date)) return "날짜를 잘못 입력하셨습니다.";
+		if(!CommonUtils.isValidDate(date)) return "날짜를 잘못 입력하셨습니다.";
 		String[] dates = date.split("-");
 
 		// 날짜 String들 만들기
 		Calendar c = CommonUtils.getCalendar(dates[0], (Integer.parseInt(dates[1]) - 1) + "", dates[2]);
-		String day = sdf.format(c.getTime());
+		String day = CommonUtils.sdf.format(c.getTime());
 
 		// 본실행
 		String[] list = getCommitListByDay(day, false);
-		String day_notice = sdf_dayweek.format(c.getTime());
+		String day_notice = CommonUtils.sdf_dayweek.format(c.getTime());
 		return "```md\n[" + date+ "에 커밋에 성공한 사람 " + list[0] + "명 명단]: " + day_notice + "\n" + list[1] + "```";
 
 	}

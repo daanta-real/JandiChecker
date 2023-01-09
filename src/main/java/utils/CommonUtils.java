@@ -5,9 +5,23 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class CommonUtils {
+
+    // Date String formatters
+    public static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    public static final SimpleDateFormat sdf_dayweek = new SimpleDateFormat("yyyy-MM-dd (EEEE)");
+
+    // Date String validation
+    public static boolean isValidDate(String input) {
+        try {
+            sdf.setLenient(false);
+            sdf.parse(input);
+        } catch (Exception e) { return false; }
+        return true;
+    }
 
     // Returns a Calendar Instance which is set by inputted date info
     public static Calendar getCalendar(String y, String m, String d) {
