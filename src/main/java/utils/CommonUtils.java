@@ -11,14 +11,14 @@ import java.util.Calendar;
 public class CommonUtils {
 
     // Date String formatters
-    public static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    public static final SimpleDateFormat sdf_thin = new SimpleDateFormat("yyyyMMdd");
     public static final SimpleDateFormat sdf_dayweek = new SimpleDateFormat("yyyy-MM-dd (EEEE)");
 
     // Date String validation
     public static boolean isValidDate(String input) {
         try {
-            sdf.setLenient(false);
-            sdf.parse(input);
+            sdf_thin.setLenient(false);
+            sdf_thin.parse(input);
         } catch (Exception e) { return false; }
         return true;
     }

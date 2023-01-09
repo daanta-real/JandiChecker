@@ -47,17 +47,16 @@ public class CmdController {
 		String cmd = cmdRawStr.substring(cmdStarter.length());
 		log.info("접수된 명령문: " + cmd);
 
-		// 2. 옵션을 opt 콜렉션에 담는다.
+		// 2. 옵션을 option 콜렉션에 담는다.
 		// 주의: "리스트에 add/remove 등 수정이 필요한 경우에는 Arrays.asList()을 사용해선 안됨을 명심하자."
-		// List<String> opt = Arrays.asList(cmds) → X
-		// List<String> opt = new ArrayList(Arrays.asList(cmds)) → O
-		// opt.removeIf(el -> el.equals(cmds.get(0))); → O but 비추
-		// opt.stream().filter(el -> el.equals(cmds.get(0))).collect(Collectors.toList()); → O but 비추
+		// List<String> option = Arrays.asList(cmds) → X
+		// List<String> option = new ArrayList(Arrays.asList(cmds)) → O
+		// option.removeIf(el -> el.equals(cmds.get(0))); → O but 비추
+		// option.stream().filter(el -> el.equals(cmds.get(0))).collect(Collectors.toList()); → O but 비추
 		// 아니면 그냥 array 상태에서 remove하는 것도 불편하지만 괜찮다.
-		String option;
-		List<String> opt = new ArrayList<>(Arrays.asList(cmdStrAll));
-		opt.remove(0); // 첫 단어는 명령어이므로 빼준다.
-		log.info("접수된 옵션 목록: " + opt);
+		List<String> option = new ArrayList<>(Arrays.asList(cmdStrAll));
+		option.remove(0); // 첫 단어는 명령어이므로 빼준다.
+		log.info("접수된 옵션 목록: " + option);
 
 		// 본격적인 명령의 분석 및 실행부
 		switch(cmd) {
@@ -69,26 +68,10 @@ public class CmdController {
 			case "목표" -> JdaMsgSender.send(event, "매일 자정, 목록에 등재된 인원 중 잔디를 심는데 성공한 사람들을 알려주는 봇입니다.");
 
 			// 특정 별칭에 해당하는 종합 커밋정보 출력
-			case "정보" -> {
-				if (opt.size() == 0) {
-					JdaMsgSender.send(event, "정확히 입력해 주세요.");
-					break;
-				} // 미입력 걸러내기
-				option = opt.get(0);
-				log.info(option + "님 (ID: " + CmdService.getGithubID(option) + ")의 정보 호출을 명령받았습니다.");
-				JdaMsgSender.send(event, CmdService.showJandiMap(option));
-			}
+			case "정보" ->JdaMsgSender.send(event, CmdService.showJandiMap(option));
 
 			// 특정 Github ID에 해당하는 종합 커밋정보 출력
-			case "id" -> {
-				if (opt.size() == 0) {
-					JdaMsgSender.send(event, "정확히 입력해 주세요.");
-					break;
-				} // 미입력 걸러내기
-				option = opt.get(0);
-				log.info("ID " + option + " 의 정보 호출을 명령받았습니다.");
-				JdaMsgSender.send(event, CmdService.showJandiMapById(option));
-			}
+			case "id" -> JdaMsgSender.send(event, CmdService.showJandiMapById(option));
 
 			// 현 시점 오늘 커밋 안 한 사람 목록 출력
 			case "오늘함" -> JdaMsgSender.send(event, CmdService.showDidCommitToday());
@@ -99,27 +82,11 @@ public class CmdController {
 			// 어제 커밋 안 한 사람 목록 출력
 			case "어제안함" -> JdaMsgSender.send(event, CmdService.showNotCommitedYesterday());
 
-			// 특정 날짜에 잔디를 심지 않은 사람의 목록을 출력
-			case "확인" -> {
-				// 미입력 걸러내기
-				if (opt.size() == 0) {
-					JdaMsgSender.send(event, "정확히 입력해 주세요.");
-					break;
-				}
-				option = opt.get(0);
-				JdaMsgSender.send(event, CmdService.showDidCommitSomeday(option));
-			}
+			// 특정 날짜에 잔디를 심은 사람의 목록을 출력
+			case "확인" -> JdaMsgSender.send(event, CmdService.showDidCommitSomeday(option));
 
 			// 일반적인 질문에 답하는 AI
-			case "질문" -> {
-				// 미입력 걸러내기
-				if (opt.size() == 0) {
-					JdaMsgSender.send(event, "정확히 입력해 주세요.");
-					break;
-				}
-				JdaMsgSender.send(event, ChatService.getChatAnswerByQuestion(opt));
-
-			}
+			case "질문" -> JdaMsgSender.send(event, ChatService.getChatAnswerByQuestion(option));
 
 		}
 	}

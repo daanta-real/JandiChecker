@@ -14,27 +14,21 @@ public class Crawler {
 		return CommonUtils.httpRequestUrl_GET("https://github.com/" + id);
 	}
 
-	// 수신된 웹 데이터 1차 trim (불필요 태그들 제거)
-	static String trim(String str) {
-		int st = str.indexOf("js-calendar-graph-svg") + 26;
-		int ed = str.indexOf("<text ");
-		str = str.substring(st, ed);
-		return str.replaceAll("^(<rect).*(data-)$", "");
-	}
-
 	// Trimmed HTML to commit score by date
-	static Map<String, Boolean> makeMapFromTrimmed(String trimmedHTML) {
+	public static Map<String, Boolean> makeMapFromTrimmed(String trimmedHTML) {
 
 		String[] htmlArr = trimmedHTML.split("\n");
 
 		TreeMap<String, Boolean> m = new TreeMap<>();
+		log.debug("전체 HTML:\n{}", trimmedHTML);
 		for(String oneline: htmlArr) {
 
 			// Target only the lines including the rect tag
-			if(!oneline.contains("<rect")) continue;
+			if(!oneline.contains("<rect width")) continue; // 잔디 있는 줄은 모두 <rect로 시작
+			int idx_date = oneline.indexOf("data-date");
+			if(idx_date < 0) continue; // data-date가 없는데 <rect로 시작하는 애들이 있다.
 
 			// Date extraction
-			int idx_date = oneline.indexOf("data-date");
 			int idx_date_start = idx_date + 11;
 			String date
 					= oneline.substring(idx_date_start, idx_date_start + 4)
@@ -46,20 +40,20 @@ public class Crawler {
 			String data = oneline.substring(idx_data + 12, idx_data + 13);
 			boolean hasCommitted = Integer.parseInt(data) > 0;
 
-//			log.debug("{}: {}점", date, data_num);
+//			log.debug("makeMapFromTrimmed > {} 날의 커밋여부 {}", date, hasCommitted);
 			m.put(date, hasCommitted);
 
 		}
 
+		log.debug("트림 결과: {}", m);
 		return m;
 
 	}
 
 	// ID를 넘기면 일일 잔디현황을 Map으로 리턴
 	public static Map<String, Boolean> getGithubMap(String githubId) throws Exception {
-		String str               = getHTMLByID(githubId)      ;
-		String trimmed           = trim        (str)          ;
-		return makeMapFromTrimmed(trimmed);
+		String str = getHTMLByID(githubId)      ;
+		return makeMapFromTrimmed(str);
 	}
 
 }

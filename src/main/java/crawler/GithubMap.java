@@ -15,7 +15,7 @@ public class GithubMap {
 	// 특정 날짜의 객체 획득
 	private static Calendar getDate(String dateStr) {
 		String y = dateStr.substring(0, 4);
-		String m = dateStr.substring(4, 6);
+		String m = String.valueOf(Integer.parseInt(dateStr.substring(4, 6)) - 1);
 		String d = dateStr.substring(6, 8);
 		return getCalendar(y, m, d);
 	}
@@ -104,7 +104,7 @@ public class GithubMap {
 		sb.append(name);
 		sb.append("님 ( http://github.com/");
 		sb.append(id);
-		sb.append("/ )의 최근 커밋 현황\n");
+		sb.append(" )의 최근 커밋 현황\n");
 		int count = (int) map.get("recentCount");
 		float total = (int) map.get("recentTotal");
 		float percOrg = count / total * 100;

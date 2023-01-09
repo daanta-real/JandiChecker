@@ -20,6 +20,9 @@ public class ChatService {
     // send ChatGPT request with "inputTxt" String and return its response
     public static String getChatAnswerByQuestion(List<String> inputTxtList) {
 
+        // 0. Null check for options
+        if (inputTxtList.size() == 0) return "정확히 입력해 주세요.";
+
         // 1. Prepare
         String questionKor = StringUtils.join(inputTxtList, " ");
         log.debug("접수된 원본 질문: \"{}\" (길이 {})", questionKor, questionKor.length());

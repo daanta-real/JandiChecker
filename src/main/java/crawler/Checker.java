@@ -16,8 +16,7 @@ public class Checker {
 	public static boolean getGithubCommittedByDay(String id, String day) throws Exception {
 		log.info("{}의 {} 날의 커밋을 확인합니다.", id, day);
 		String html_org = Crawler.getHTMLByID(id);
-		String trimmed = Crawler.trim(html_org);
-		Map<String, Boolean> map = Crawler.makeMapFromTrimmed(trimmed);
+		Map<String, Boolean> map = Crawler.makeMapFromTrimmed(html_org);
 
 		boolean hasCommit = false;
 		for(Map.Entry<String, Boolean> entry: map.entrySet()) {
@@ -59,7 +58,7 @@ public class Checker {
 		// 날짜 String 만들기
 		Calendar c = Calendar.getInstance();
 		c.add(Calendar.DATE, -1);
-		String day = CommonUtils.sdf.format(c.getTime());
+		String day = CommonUtils.sdf_thin.format(c.getTime());
 
 		String[] list = getCommitListByDay(day, true);
 		String day_notice = CommonUtils.sdf_dayweek.format(c.getTime());
@@ -73,7 +72,7 @@ public class Checker {
 		// 날짜 String 만들기
 		Calendar c = Calendar.getInstance();
 		c.add(Calendar.DATE, -1);
-		String day = CommonUtils.sdf.format(c.getTime());
+		String day = CommonUtils.sdf_thin.format(c.getTime());
 
 		String[] list = getCommitListByDay(day, false);
 		String day_notice = CommonUtils.sdf_dayweek.format(c.getTime());
@@ -85,7 +84,7 @@ public class Checker {
 
 		// 날짜 String 만들기
 		Calendar c = Calendar.getInstance();
-		String day = CommonUtils.sdf.format(c.getTime());
+		String day = CommonUtils.sdf_thin.format(c.getTime());
 
 		String[] list = getCommitListByDay(day, false);
 		String day_notice = CommonUtils.sdf_dayweek.format(c.getTime());
@@ -105,7 +104,7 @@ public class Checker {
 
 		// 날짜 String들 만들기
 		Calendar c = CommonUtils.getCalendar(dates[0], (Integer.parseInt(dates[1]) - 1) + "", dates[2]);
-		String day = CommonUtils.sdf.format(c.getTime());
+		String day = CommonUtils.sdf_thin.format(c.getTime());
 
 		// 본실행
 		String[] list = getCommitListByDay(day, false);
