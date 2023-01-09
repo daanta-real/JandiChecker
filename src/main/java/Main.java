@@ -21,7 +21,7 @@ public class Main {
 
 			// Load all preferences
 			log.info("[[[잔디체커 환경설정 로드]]]");
-			Initializer.ready();
+			Initializer.ready(true);
 
 			// Show title
 			log.info("""

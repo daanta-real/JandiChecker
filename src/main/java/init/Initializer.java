@@ -37,15 +37,19 @@ public class Initializer {
 	// 소개말
 	public static String INFO_STRING;
 
-	public static void ready() throws Exception {
+	public static void ready(boolean needSwingWindow) throws Exception {
 
 		log.info("");
 		log.info("[환경설정 로드] 시작...");
 		log.info("");
 
 		// 1. 윈도 컨트롤, 트레이 등 ui 준비
-		log.info("[환경설정 로드 1] 윈도 컨트롤 준비");
-		UIMain.getInstance().init();
+		if(needSwingWindow) {
+			log.info("[환경설정 로드 1] Swing 윈도 컨트롤 준비");
+			UIMain.getInstance().init();
+		} else {
+			log.info("[환경설정 로드 1] Swing 윈도 컨트롤을 준비하지 않습니다.");
+		}
 		log.info("완료.");
 		log.info("");
 
@@ -72,6 +76,12 @@ public class Initializer {
 		log.info("");
 
 	}
+
+	// False option to not load Swing window logger
+	public static void ready() throws Exception {
+		ready(false);
+	}
+
 
 	// Getters/Setters
 	public static String getToken_discordBot() { return token_discordBot; }

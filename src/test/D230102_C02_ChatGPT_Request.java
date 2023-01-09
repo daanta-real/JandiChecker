@@ -11,7 +11,7 @@ class D230102_C02_ChatGPT_Request {
     public void chatTest() throws Exception {
 
         // 1. Declare
-        Initializer.ready();
+        Initializer.ready(false);
         String inputTxt = "";
 
         // 2. Input
