@@ -68,8 +68,8 @@ public class GithubMap {
 			// 정리
 			count++;
 			log.info("찾아낸 날짜(" + count + "번째): " + sdf.format(cal.getTime()) + " > " + map.get(k));
-		}
 
+		}
 
 
 
