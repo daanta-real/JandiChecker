@@ -105,11 +105,11 @@ public class GithubMap {
 		}
 
 		StringBuilder sb = new StringBuilder();
-		sb.append("\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93");
+		sb.append("\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 ");
 		sb.append(name);
 		sb.append("님 ( http://github.com/");
 		sb.append(id);
-		sb.append(" )의 최근 잔디 현황\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93\n");
+		sb.append(" )의 최근 잔디 현황 \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93\n");
 		sb.append("```md\n");
 		int count = (int) map.get("recentCount");
 		float total = (int) map.get("recentTotal");
