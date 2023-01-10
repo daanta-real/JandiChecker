@@ -25,6 +25,12 @@ public class ChatService {
 
         // 1. Prepare
         String questionKor = StringUtils.join(inputTxtList, " ");
+        return getChatAnswerByQuestion(questionKor);
+
+    }
+    public static String getChatAnswerByQuestion(String questionKor) {
+
+        // 1. Prepare
         log.debug("접수된 원본 질문: \"{}\" (길이 {})", questionKor, questionKor.length());
 
         // 2. KOR -> ENG

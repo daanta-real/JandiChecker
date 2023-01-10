@@ -48,7 +48,7 @@ public class CmdService {
 	}
 
 	// 어제 커밋 안 한 스터디원 목록을 리턴
-	public static String showNotCommitedYesterday() throws Exception {
+	public static String showNotCommittedYesterday() throws Exception {
 		return Checker.getNotCommittedYesterday();
 	}
 

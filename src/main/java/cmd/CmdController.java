@@ -17,19 +17,6 @@ public class CmdController {
 
 	public static void command(MessageReceivedEvent event) throws Exception {
 
-		// 접수된 메세지가 명령문이 아닐 경우 리턴.
-		// 리스닝 중인 채널에 메세지가 발생하였으나, 메세지가 없거나, 그 첫 글자가 &가 아니어서 명령이 아닌 경우, 무지성 리턴
-		String totalString = event.getMessage().getContentRaw();
-		if(totalString.isBlank()) return;
-
-		// 버튼형 메뉴를 불러올 경우 커맨드를 따지지 않고 바로 메뉴판 호출 후 리턴
-		if(totalString.equals("잔디야")) {
-			ButtonMenues.showButtonMenues(event);
-			return;
-		}
-
-		String firstString = totalString.substring(0, 1); // Trim the first char - Identifier &
-		if(!"&".equals(firstString)) return;
 		log.info("[[명령이 접수되었습니다.]]");
 		String id = event.getChannel().getId();
 		log.info("채널 ID: " + id);
@@ -68,7 +55,7 @@ public class CmdController {
 			case "목표" -> JdaMsgSender.send(event, "매일 자정, 목록에 등재된 인원 중 잔디를 심는데 성공한 사람들을 알려주는 봇입니다.");
 
 			// 특정 별칭에 해당하는 종합 커밋정보 출력
-			case "정보" ->JdaMsgSender.send(event, CmdService.showJandiMap(option));
+			case "정보" -> JdaMsgSender.send(event, CmdService.showJandiMap(option));
 
 			// 특정 Github ID에 해당하는 종합 커밋정보 출력
 			case "id" -> JdaMsgSender.send(event, CmdService.showJandiMapById(option));
@@ -80,7 +67,7 @@ public class CmdController {
 			case "어제" -> JdaMsgSender.send(event, CmdService.showDidCommitYesterday());
 
 			// 어제 커밋 안 한 사람 목록 출력
-			case "어제안함" -> JdaMsgSender.send(event, CmdService.showNotCommitedYesterday());
+			case "어제안함" -> JdaMsgSender.send(event, CmdService.showNotCommittedYesterday());
 
 			// 특정 날짜에 잔디를 심은 사람의 목록을 출력
 			case "확인" -> JdaMsgSender.send(event, CmdService.showDidCommitSomeday(option));
