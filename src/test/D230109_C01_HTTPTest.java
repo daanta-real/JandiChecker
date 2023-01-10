@@ -29,6 +29,8 @@ public class D230109_C01_HTTPTest {
     public static String httpRequestUrl_GET(String url) throws Exception {
         URL finalUrl = new URL(url);
         HttpURLConnection conn = (HttpURLConnection)finalUrl.openConnection();
+        // User-Agent 헤더를 꼭 넣어줘야 한다. 넣어주지 않으면 '오늘자'의 커밋이 입수되지 않는다.
+        conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36");
         return httpRequest(conn);
     }
 
