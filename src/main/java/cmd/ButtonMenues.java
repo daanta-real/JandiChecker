@@ -25,7 +25,7 @@ public class ButtonMenues extends ListenerAdapter {
     };
 
     public static void showButtonMenues(MessageReceivedEvent e) {
-        e.getChannel().sendMessage("\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 무엇을 도와드릴까요? \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93")
+        e.getChannel().sendMessage("\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 잔디 등장. 무엇을 도와드릴까요? \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93")
                 .addActionRow(makeRow(btn[0]))
                 .addActionRow(makeRow(btn[1], btn[2]))
                 .addActionRow(makeRow(btn[3], btn[4]))

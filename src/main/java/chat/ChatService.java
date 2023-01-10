@@ -4,10 +4,8 @@ import com.theokanning.openai.OpenAiService;
 import com.theokanning.openai.completion.CompletionRequest;
 import init.Initializer;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import net.dv8tion.jda.api.events.Event;
 import translate.TranslationService;
-
-import java.util.List;
 
 // ChatGPT API related services
 @Slf4j
@@ -18,17 +16,7 @@ public class ChatService {
     }
 
     // send ChatGPT request with "inputTxt" String and return its response
-    public static String getChatAnswerByQuestion(List<String> inputTxtList) {
-
-        // 0. Null check for options
-        if (inputTxtList.size() == 0) return "정확히 입력해 주세요.";
-
-        // 1. Prepare
-        String questionKor = StringUtils.join(inputTxtList, " ");
-        return getChatAnswerByQuestion(questionKor);
-
-    }
-    public static String getChatAnswerByQuestion(String questionKor) {
+    public static String getChatAnswerByQuestion(Event event, String questionKor) {
 
         // 1. Prepare
         log.debug("접수된 원본 질문: \"{}\" (길이 {})", questionKor, questionKor.length());
@@ -61,7 +49,12 @@ public class ChatService {
         String answerKor = TranslationService.translateEngToKor(answerEng);
         log.debug("한국어로 번역된 답변: <<<{}>>>", answerKor);
 
-        // 6. Return result
+        // 6. If the result have unintentional chars("? "), trim it
+        if(answerKor.startsWith("? ")) {
+            answerKor = answerKor.substring(2);
+        }
+
+        // 7. Return result
         return "\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 ChatGPT AI님 가라사대... \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93```" + answerKor + "```";
 
     }

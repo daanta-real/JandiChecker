@@ -10,17 +10,21 @@ import java.util.*;
 public class Crawler {
 
 	// Return the GitHub profile page of someone
-	public static String getHTMLByID(String id) throws Exception {
-		return CommonUtils.httpRequestUrl_GET("https://github.com/" + id);
+	public static String getHTMLByID(String id) {
+		try {
+			return CommonUtils.httpRequestUrl_GET("https://github.com/" + id);
+		} catch(Exception e) {
+			return null;
+		}
 	}
 
 	// Trimmed HTML to commit score by date
-	public static Map<String, Boolean> makeMapFromTrimmed(String trimmedHTML) {
+	public static TreeMap<String, Boolean> makeMapFromTrimmed(String trimmedHTML) {
 
 		String[] htmlArr = trimmedHTML.split("\n");
 
 		TreeMap<String, Boolean> m = new TreeMap<>();
-		log.debug("전체 HTML:\n{}", trimmedHTML);
+		// log.debug("전체 HTML:\n{}", trimmedHTML);
 		for(String oneline: htmlArr) {
 
 			// Target only the lines including the rect tag
@@ -45,15 +49,20 @@ public class Crawler {
 
 		}
 
-		log.debug("트림 결과: {}", m);
+		String first = Collections.min(m.keySet());
+		String last = Collections.max(m.keySet());
+		log.debug("트림 결과: 총 {}개 ({} ~ {})", m.size(), first, last);
 		return m;
 
 	}
 
-	// ID를 넘기면 일일 잔디현황을 Map으로 리턴
-	public static Map<String, Boolean> getGithubMap(String githubId) throws Exception {
-		String str = getHTMLByID(githubId)      ;
-		return makeMapFromTrimmed(str);
+	// ID를 넘기면 연간 잔디정보를 Map으로 리턴
+	public static TreeMap<String, Boolean> getGithubMap(String id) throws Exception {
+		TreeMap<String, Boolean> gitHubMap;
+		String html = getHTMLByID(id);
+		if(html == null) throw new Exception();
+		gitHubMap = makeMapFromTrimmed(html);
+		return gitHubMap;
 	}
 
 }

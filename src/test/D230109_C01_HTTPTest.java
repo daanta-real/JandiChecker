@@ -47,4 +47,10 @@ public class D230109_C01_HTTPTest {
 
     }
 
+    @Test
+    public void falseID() throws Exception {
+        String id = "Asdfasdawegwpwnpgwe";
+        log.debug("result: {}", Crawler.getGithubMap(id));
+    }
+
 }

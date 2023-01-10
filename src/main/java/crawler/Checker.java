@@ -3,11 +3,11 @@ package crawler;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Map;
 
 import lombok.extern.slf4j.Slf4j;
 import init.Initializer;
+import org.apache.commons.lang3.StringUtils;
 import utils.CommonUtils;
 
 // 깃헙 제출한 사람과 안 한 사람들의 정보를 정리
@@ -18,7 +18,9 @@ public class Checker {
 	public static boolean getGithubCommittedByDay(String id, String day) throws Exception {
 		log.info("{}의 {} 날의 커밋을 확인합니다.", id, day);
 		String html_org = Crawler.getHTMLByID(id);
+		if(html_org == null) throw new Exception();
 		Map<String, Boolean> map = Crawler.makeMapFromTrimmed(html_org);
+		if(map.size() == 0) throw new Exception();
 
 		boolean hasCommit = false;
 		for(Map.Entry<String, Boolean> entry: map.entrySet()) {
@@ -94,16 +96,16 @@ public class Checker {
 	}
 
 	// 특정 날짜에 커밋 한 스터디원 목록을 회신
-	public static String getDidCommittedSomeday(List<String> option) throws Exception {
+	public static String getDidCommittedSomeday(String date) throws Exception {
 
 		// 미입력 걸러내기
-		if (option.size() == 0) return "정확히 입력해 주세요.";
-		String date = option.get(0);
+		if (StringUtils.isEmpty(date)) return "정확히 입력해 주세요.";
 
 		// 날짜 양식 불만족 시 리턴
 		String date_today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-		if(!CommonUtils.isValidDate(date)
-				|| date_today.compareTo(date) < 0) { // date가 현재보다 미래 날짜일 경우 -1이 된다
+		if(
+				!CommonUtils.isValidDate(date) // 주어진 문자열로 날짜를 만들 수 없을 경우
+				|| date_today.compareTo(date) < 0) { // date가 현재보다 미래 날짜일 경우 -1이 되어 불만족
 			return "날짜를 잘못 입력하셨습니다.";
 		}
 		String[] dates = date.split("-");

@@ -24,14 +24,12 @@ public class Initializer {
 	public static String VERSION;
 	public static String BUILD;
 	public static final String PATH = Paths.get("").toAbsolutePath().toString(); // 잔디체커가 실행되는 경로
-	private static String CMD_CHAR; // 잔디체커 명령임을 판독하는 기준이 되는 구분자
 
 	// 환경변수 (외부 settings.yaml)
 	private static String token_discordBot; // 토큰 (디코봇)
 	private static String cron; // 스케쥴러 실행 주기
 	private static String[][] members; // 참여인 목록
 	private static String targetChannelId; // CRON 스케쥴러 실행 결과 메세지가 전송될 타겟 채널 ID
-	private static String token_googleTranslateAPI; // 토큰 (구글 번역 API)
 	private static String token_chatGPTAPI; // 토큰 (ChatGPT API)
 
 	// 소개말
@@ -88,8 +86,6 @@ public class Initializer {
 	public static String getCron() { return cron; }
 	public static String getChId() { return targetChannelId; }
 	public static String[][] getMembers() { return members ; }
-	public static String  getCmdChar() { return CMD_CHAR; }
-	public static String getToken_googleTranslateAPI() { return token_googleTranslateAPI; }
 	public static String getToken_chatGPTAPI() { return token_chatGPTAPI; }
 
 
@@ -111,12 +107,10 @@ public class Initializer {
 		// load props
 		VERSION = props.getProperty("VERSION", "??????");
 		BUILD = props.getProperty("BUILD", "?????");
-		CMD_CHAR = props.getProperty("CMD_CHAR", "???");
 
 		// show loaded props
 		log.info("버전: {}", VERSION);
 		log.info("빌드: {}", BUILD);
-		log.info("명령어 키워드: {}", CMD_CHAR);
 
 		// Set info String
 		INFO_STRING = """
@@ -124,21 +118,33 @@ public class Initializer {
 			
 			_**저는 매일 자정, 잔디를 심는 데 성공한 사람들을 찾아낼 것입니다.**_
 			
-			[[[ 커맨드 설명 ]]]
-			&목표: 이 봇이 제작된 목표를 설명합니다.
-			&정보 [사람이름]: 특정인의 최근 1년 간 및 근 30일 간의 Github 잔디 정보를 가져옵니다. 이때 관리목록에 이름이 서로 겹치는 인원이 없다면 성은 생략해도 됩니다.
-			&id [id]: 특정 id의 최근 1년 간 및 근 30일 간의 Github 잔디 정보를 가져옵니다. 관리목록에 없는 사람도 조회 가능합니다.
-			&오늘함: 오늘 잔디를 심은 사람들의 명단을 공개합니다.
-			&어제: 어제 잔디를 심은 사람들의 명단을 공개합니다.
-			&어제안함: 어제 잔디를 심은 사람들의 명단을 공개합니다.
-			&확인 [날짜(yyyy-MM-dd 형식)]: 특정 날짜에 잔디를 제출하지 않은 사람들의 명단을 출력합니다.
+			# 잔디체커의 사용법
+			잔디체커는 세 가지 방법으로 이용할 수 있습니다.
+			1. 채팅창에 '/'(슬래시)를 입력하면 사용 가능한 명령어들이 슬래시 메뉴로 표시됩니다. 원하는 것을 선택한 후, 추가적인 옵션 입력이 필요하면 옵션을 입력해 주세요.
+			2. 채팅창에 '잔디야'라고 입력하면 사용 가능한 명령들이 버튼 메뉴로 표시됩니다. 원하는 것을 누른 후, 추가적인 옵션 입력이 필요하면 옵션을 입력해 주세요.
+			3. '잔디야 [질문내용]'이라고 입력하면, 메뉴 호출 없이 AI에게 바로 질문할 수 있습니다.
+			
+			# 각 커맨드에 대한 상세 소개
+			/나: 나의 잔디정보를 출력합니다. 정보를 얻기 위해서는 그룹원에 소속되어 있어야 합니다.
+			/잔디야: 일반적인 질문에 답하는 ChatGPT AI에게 질문하여 답변을 얻습니다. 질문은 한국어로 입력하면 됩니다.
+			/정보 [이름]: 특정 그룹원의 종합 잔디정보를 출력합니다.
+			/id [ID]: 특정 Github ID의 종합 잔디정보를 출력합니다.
+			/오늘: 오늘 현재 잔디심기 성공한 그룹원의 목록을 출력합니다.
+			/어제: 어제 잔디심기에 성공한 그룹원의 목록을 출력합니다.
+			/어제안함: 어제 잔디심기를 패스한 사람의 목록을 출력합니다.
+			/날짜 [yyyyMMdd]: 특정 날짜에 잔디를 심은 사람의 목록을 출력합니다.
+			/대하여: 이 봇을 소개합니다.
+			
+			# 팁
+			AI에게 질문하실 때에는 최대한 구체적이고 자세하게 질문해 주세요.
+			질문을 정확하게 정의할수록 답변도 정확하게 돌아옵니다.
 
-			[[[ 앱 정보 ]]]
-			잔디체커(JandiChecker) %s Build %s
-			제작 by 단타(박준성)
-			e-mail: daanta@naver.com
-			GitHub: http://github.com/daanta-real
-			Blog  : http://blog.naver.com/daanta
+			# 앱 정보
+			[잔디체커(JandiChecker)] (%s Build %s)
+			* 제작 by 단타(박준성)
+			* e-mail: daanta@naver.com
+			* GitHub: http://github.com/daanta-real
+			* Blog  : http://blog.naver.com/daanta
 			
 			```
 			""".formatted(VERSION, BUILD);
@@ -172,7 +178,6 @@ public class Initializer {
 		cron  = vo.getCron();
 		members = vo.getMembers();
 		targetChannelId = vo.getTargetChannelId();
-		token_googleTranslateAPI = vo.getTokenGoogleTranslateAPI();
 		token_chatGPTAPI = vo.getTokenChatGPTAPI();
 
 		// 로드된 환경변수들 일괄 출력
@@ -184,7 +189,6 @@ public class Initializer {
 		for(int i = 0; i < members.length; i++)
 			log.info("    {}─ {}번째 인원: '{}' (Github ID: {})",
 					(i == members.length - 1 ? '└' : '├'), i, members[i][0], members[i][1]);
-		log.info("토큰(구글번역 API): {}", token_googleTranslateAPI);
 		log.info("토큰(ChatGPT API): {}", token_chatGPTAPI);
 
 	}

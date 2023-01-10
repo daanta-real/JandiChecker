@@ -20,18 +20,16 @@ public class GithubMap {
 		return getCalendar(y, m, d);
 	}
 
-	// 깃헙 커밋 정보 획득
-	public static Map<String, Object> getGithubMapInfo(String id) throws Exception {
+	// 깃헙 잔디 정보 획득
+	public static TreeMap<String, Object> getGithubMapInfo(String id) throws Exception {
 
 		// 변수정의
 		SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd (EEEE)");
 		StringBuilder[] sb = new StringBuilder[7];
 		for(int i = 0; i < 7; i++) sb[i] = new StringBuilder();
 
-
-
 		// 맵 갖고 오기
-		Map<String, Boolean> map = Crawler.getGithubMap(id);
+		TreeMap<String, Boolean> map = Crawler.getGithubMap(id);
 
 		// 첫 날과 마지막 날을 구함
 		Calendar firstDay = getDate(Collections.min(map.keySet()));
@@ -70,7 +68,7 @@ public class GithubMap {
 
 		// 결과부
 		// 결과 변수
-		Map<String, Object> result = new HashMap<>();
+		TreeMap<String, Object> result = new TreeMap<>();
 
 		// 전체맵
 		StringBuilder sbResult = new StringBuilder();
@@ -97,8 +95,15 @@ public class GithubMap {
 	}
 
 	// 특정 인원에 대한 잔디 정보를 최종 출력해줌
-	public static String getGithubInfoString(String name, String id) throws Exception {
-		Map<String, Object> map = getGithubMapInfo(id);
+	public static String getGithubInfoString(String name, String id) {
+
+		TreeMap<String, Object> map;
+		try {
+			map = getGithubMapInfo(id);
+		} catch (Exception e) {
+			return "정확히 입력해 주세요.";
+		}
+
 		StringBuilder sb = new StringBuilder();
 		sb.append("```md\n# ");
 		sb.append(name);
@@ -122,7 +127,9 @@ public class GithubMap {
 		sb.append("# 최근 1년 간 커밋 상세:\n");
 		sb.append(map.get("totalMap"));
 		sb.append("```");
+
 		return sb.toString();
+
 	}
 
 }
