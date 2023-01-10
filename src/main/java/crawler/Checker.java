@@ -83,18 +83,6 @@ public class Checker {
 		return "```md\n[어제 커밋에 성공한 사람은 " + list[0] + "명...!]: " + day_notice + "\n" + list[1] + "```";
 	}
 
-	// 오늘 커밋 안 한 스터디원 목록을 회신
-	public static String getDidCommittedToday() throws Exception {
-
-		// 날짜 String 만들기
-		Calendar c = Calendar.getInstance();
-		String day = CommonUtils.sdf_thin.format(c.getTime());
-
-		String[] list = getCommitListByDay(day, false);
-		String day_notice = CommonUtils.sdf_dayweek.format(c.getTime());
-		return "```md\n[오늘 커밋에 성공한 사람 " + list[0] + "명 명단]: " + day_notice + "\n" + list[1] + "```";
-	}
-
 	// 특정 날짜에 커밋 한 스터디원 목록을 회신
 	public static String getDidCommittedSomeday(String date) throws Exception {
 
@@ -105,13 +93,15 @@ public class Checker {
 		String date_today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 		if(
 				!CommonUtils.isValidDate(date) // 주어진 문자열로 날짜를 만들 수 없을 경우
-				|| date_today.compareTo(date) < 0) { // date가 현재보다 미래 날짜일 경우 -1이 되어 불만족
+				|| date_today.compareTo(date) <= 0) { // date가 현재 혹은 현재보다 미래 날짜일 경우 -1이 되어 불만족
 			return "날짜를 잘못 입력하셨습니다.";
 		}
-		String[] dates = date.split("-");
+		String y = date.substring(0, 4);
+		String m = String.valueOf(Integer.parseInt(date.substring(4, 6)) - 1);
+		String d = date.substring(6, 8);
 
 		// 날짜 String들 만들기
-		Calendar c = CommonUtils.getCalendar(dates[0], (Integer.parseInt(dates[1]) - 1) + "", dates[2]);
+		Calendar c = CommonUtils.getCalendar(y, m, d);
 		String day = CommonUtils.sdf_thin.format(c.getTime());
 
 		// 본실행

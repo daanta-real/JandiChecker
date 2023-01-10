@@ -82,11 +82,6 @@ public class CmdService {
 		return Checker.getDidCommitYesterday();
 	}
 
-	// 현시각 기준 오늘 아직 커밋 한 스터디원 목록을 리턴
-	public static String showDidCommitToday() throws Exception {
-		return Checker.getDidCommittedToday();
-	}
-
 	// 특정일에 커밋 한 스터디원 목록을 리턴
 	public static String showDidCommitSomeday(String date) throws Exception {
 		return Checker.getDidCommittedSomeday(date);

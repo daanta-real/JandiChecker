@@ -52,6 +52,7 @@ public class Crawler {
 		String first = Collections.min(m.keySet());
 		String last = Collections.max(m.keySet());
 		log.debug("트림 결과: 총 {}개 ({} ~ {})", m.size(), first, last);
+//		log.debug("모든 트림 결과: {}", m);
 		return m;
 
 	}
