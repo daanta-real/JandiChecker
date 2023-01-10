@@ -1,5 +1,7 @@
 package crawler;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -91,7 +93,7 @@ public class Checker {
 		return "```md\n[오늘 커밋에 성공한 사람 " + list[0] + "명 명단]: " + day_notice + "\n" + list[1] + "```";
 	}
 
-	// 특정 날짜에 커밋 안 한 스터디원 목록을 회신
+	// 특정 날짜에 커밋 한 스터디원 목록을 회신
 	public static String getDidCommittedSomeday(List<String> option) throws Exception {
 
 		// 미입력 걸러내기
@@ -99,7 +101,11 @@ public class Checker {
 		String date = option.get(0);
 
 		// 날짜 양식 불만족 시 리턴
-		if(!CommonUtils.isValidDate(date)) return "날짜를 잘못 입력하셨습니다.";
+		String date_today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+		if(!CommonUtils.isValidDate(date)
+				|| date_today.compareTo(date) < 0) { // date가 현재보다 미래 날짜일 경우 -1이 된다
+			return "날짜를 잘못 입력하셨습니다.";
+		}
 		String[] dates = date.split("-");
 
 		// 날짜 String들 만들기
