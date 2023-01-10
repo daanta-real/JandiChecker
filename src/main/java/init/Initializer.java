@@ -127,7 +127,7 @@ public class Initializer {
 			# 각 커맨드에 대한 상세 소개
 			/나: 나의 잔디정보를 출력합니다. 정보를 얻기 위해서는 그룹원에 소속되어 있어야 합니다.
 			/잔디야: 일반적인 질문에 답하는 ChatGPT AI에게 질문하여 답변을 얻습니다. 질문은 한국어로 입력하면 됩니다.
-			/정보 [이름]: 특정 그룹원의 종합 잔디정보를 출력합니다.
+			/정보 [이름]: 특정 그룹원의 종합 잔디정보를 출력합니다. 성이름 모두 입력해도 되고 이름만 입력해도 됩니다.
 			/id [ID]: 특정 Github ID의 종합 잔디정보를 출력합니다.
 			/어제: 어제 잔디심기에 성공한 그룹원의 목록을 출력합니다.
 			/어제안함: 어제 잔디심기를 패스한 사람의 목록을 출력합니다.
@@ -138,12 +138,16 @@ public class Initializer {
 			AI에게 질문하실 때에는 최대한 구체적이고 자세하게 질문해 주세요.
 			질문을 정확하게 정의할수록 답변도 정확하게 돌아옵니다.
 
-			# 앱 정보
+			# App information
 			[잔디체커(JandiChecker)] (%s Build %s)
-			* 제작 by 단타(박준성)
-			* e-mail: daanta@naver.com
+			* Stacks used: Java 17, Gradle, IntelliJ, JDA, Quartz, ChatGPT API, Google Cloud API(for translation), Swing, JUnit5, Logback
+			* Have taking an effort to comply with TDD.
+
+			# Developer's informaiton
+			* Developed by 단타(박준성) / Daanta(Junsung Park)
 			* GitHub: http://github.com/daanta-real
 			* Blog  : http://blog.naver.com/daanta
+			* e-mail: daanta@naver.com
 			
 			```
 			""".formatted(VERSION, BUILD);
