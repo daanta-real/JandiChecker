@@ -32,7 +32,6 @@ public class JdaController extends ListenerAdapter {
 	public static final String CMD_JANDIYA = "잔디야";
 	public static final String CMD_NAME = "정보";
 	public static final String CMD_ID = "id";
-	public static final String CMD_LIST_TODAY_SUCCESS = "오늘";
 	public static final String CMD_LIST_YESTERDAY_SUCCESS = "어제";
 	public static final String CMD_LIST_YESTERDAY_FAIL = "어제안함";
 	public static final String CMD_LIST_BY_DATE = "날짜";
@@ -72,7 +71,6 @@ public class JdaController extends ListenerAdapter {
 		cmdList.add(Commands.slash(CMD_ID, "특정 ID의 잔디 정보를 조회합니다. 그룹원이 아닌 사람도 조회 가능합니다.")
 				.addOption(OptionType.STRING, "option", "조회하고자 하는 사람의 id를 입력하세요.", true)
 		);
-		cmdList.add(Commands.slash(CMD_LIST_TODAY_SUCCESS, "오늘 잔디를 심는데 성공한 그룹원 목록을 확인합니다."));
 		cmdList.add(Commands.slash(CMD_LIST_YESTERDAY_SUCCESS, "어제 잔디를 심는데 성공한 그룹원 목록을 확인합니다."));
 		cmdList.add(Commands.slash(CMD_LIST_YESTERDAY_FAIL, "어제 잔디 심기를 깜박한 그룹원 목록을 확인합니다."));
 		cmdList.add(Commands.slash(CMD_LIST_BY_DATE, "특정 날짜에 잔디를 심는데 성공한 그룹원 목록을 확인합니다.")
@@ -125,7 +123,6 @@ public class JdaController extends ListenerAdapter {
 					case CMD_JANDIYA                -> ChatService.getChatAnswerByQuestion(event, option); // 일반적인 질문에 답하는 AI
 					case CMD_NAME                   -> CmdService.showJandiMapByName(option); // 특정 이름의 그룹원의 종합 잔디정보 출력
 					case CMD_ID                     -> CmdService.showJandiMapById(option); // 특정 Github ID의 종합 잔디정보 출력
-					case CMD_LIST_YESTERDAY_SUCCESS -> CmdService.showDidCommitYesterday(); // 어제 잔디심기 성공한 사람 목록 출력
 					case CMD_LIST_YESTERDAY_FAIL    -> CmdService.showNotCommittedYesterday(); // 어제 잔디심기 안 한 사람 목록 출력
 					case CMD_LIST_BY_DATE           -> CmdService.showDidCommitSomeday(option); // 특정 날짜에 잔디를 심은 사람의 목록을 출력
 					case CMD_ABOUT                  -> Initializer.INFO_STRING; // 소개말
