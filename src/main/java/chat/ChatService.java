@@ -3,9 +3,14 @@ package chat;
 import com.theokanning.openai.OpenAiService;
 import com.theokanning.openai.completion.CompletionRequest;
 import init.Initializer;
+import jda.JdaMsgSender;
 import lombok.extern.slf4j.Slf4j;
-import net.dv8tion.jda.api.events.Event;
+import net.dv8tion.jda.api.entities.User;
+import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import org.apache.commons.lang3.StringUtils;
 import translate.TranslationService;
+
+import java.util.Objects;
 
 // ChatGPT API related services
 @Slf4j
@@ -15,8 +20,36 @@ public class ChatService {
     private ChatService() {
     }
 
-    // send ChatGPT request with "inputTxt" String and return its response
-    public static String getChatAnswerByQuestion(Event event, String questionKor) {
+    // Received event from msg event
+    public static String getChatAnswerByMsgCmd(String questionKor) {
+        return JdaMsgSender.msgTrim(getChatAnswerByQuestion(questionKor));
+    }
+
+    // Received event from slash event
+    public static String getChatAnswerBySlashCmd(SlashCommandInteractionEvent event, String questionKor) {
+
+        // Make name and answer string
+        User user = Objects.requireNonNull(event.getMember()).getUser();
+        String name = user.getName();
+        if(StringUtils.isEmpty(name)) return "질문자의 ID가 명확하지 않습니다.";
+        String answerKor = getChatAnswerByQuestion(questionKor);
+
+        // Make chat message and return
+        return """
+                🤔 %s님의 질문... 🤔```md
+                %s
+                ```
+                \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 ChatGPT AI님 가라사대... \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
+                ```
+                %s
+                (📌 "잔디야 bla bla..." 이런 식으로 질문하시면 약간 더 긴 답변을 받을 수 있습니다!)
+                ```
+                """.formatted(name, questionKor, answerKor);
+
+    }
+
+    // Answering method core
+    public static String getChatAnswerByQuestion(String questionKor) {
 
         // 1. Prepare
         log.debug("접수된 원본 질문: \"{}\" (길이 {})", questionKor, questionKor.length());
@@ -55,7 +88,7 @@ public class ChatService {
         }
 
         // 7. Return result
-        return "\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 ChatGPT AI님 가라사대... \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93```" + answerKor + "```";
+        return answerKor;
 
     }
 

@@ -48,7 +48,7 @@ public class JdaMsgSender {
 	// Return trimmed msg.
 	// Check the msg length is over 2000.
 	// If then, trim it considering markdown backticks and add "...(생략)"
-	private static String msgTrim(String msg) {
+	public static String msgTrim(String msg) {
 
 		if(StringUtils.isEmpty(msg) || msg.length() < 2000) return msg;
 

@@ -41,12 +41,10 @@ public class JdaController extends ListenerAdapter {
 	// Initializer
 	public static void init() {
 
-		// JDA 인스턴스 잡기
+		// JDA의 기본 인스턴스를 만든다.
 		log.info("");
 		log.info("[잔디체커 JDA 인스턴스 생성]");
-
-		// 기본 jda를 만든다
-		// 원래 옛날 버전에서 try catch를 써서 예외처리를 해야 했으나 패치로 없어진 모양
+		// 원래 옛날 버전에서는 여기를 try catch를 감싸서 예외처리를 해야 했으나 패치로 없어진 모양
 		instance = JDABuilder.createDefault(Initializer.getToken_discordBot())
 				.enableIntents(GatewayIntent.MESSAGE_CONTENT) // JDA 4.2.0부터 정책이 바뀌어 권한을 직접 활성화해줘야 함
 				.build(); // 봇을 만들어 로그인시킨 뒤, JdaObj의 인스턴스 값으로 할당
@@ -60,6 +58,8 @@ public class JdaController extends ListenerAdapter {
 		log.info("이벤트 리스너 생성: " + bot);
 
 		// 슬래시 커맨드 추가
+		log.info("");
+		log.info("[잔디체커 슬래시 커맨드 로드]");
 		List<CommandData> cmdList = new ArrayList<>();
 		cmdList.add(Commands.slash(CMD_ME, "내 잔디 정보를 조회합니다."));
 		cmdList.add(Commands.slash(CMD_JANDIYA, "잔디의 친구 ChatGPT AI에게 질문을 해봅니다.")
@@ -78,6 +78,7 @@ public class JdaController extends ListenerAdapter {
 		);
 		cmdList.add(Commands.slash(CMD_ABOUT, "이 봇에 대한 소개와 도움말을 출력합니다."));
 		instance.updateCommands().addCommands(cmdList).queue();
+		log.info("슬래시 커맨드 추가 완료.");
 
 	}
 
@@ -92,12 +93,14 @@ public class JdaController extends ListenerAdapter {
 		if(totalString.isBlank()) return;
 
 		// 명령어에 따라 다르게 동작
+		// 1. "잔디야" 라고만 치면 메뉴판 호출 후 리턴
 		if(totalString.equals("잔디야")) {
-			// "잔디야" 라고만 치면 메뉴판 호출 후 리턴
 			ButtonMenues.showButtonMenues(event);
-		} else if(totalString.startsWith("잔디야 ")) {
+		}
+		// 2. "잔디야 뭐뭐머뭐..." 이런 식으로 치면 뭐뭐머뭐... ← 이 부분이 질문이므로 AI의 답변을 회신
+		else if(totalString.startsWith("잔디야 ")) {
 			String question = totalString.substring(4);
-			JdaMsgSender.send(event, ChatService.getChatAnswerByQuestion(event, question)); // 메세지를 바로 돌려준다
+			JdaMsgSender.send(event, ChatService.getChatAnswerByMsgCmd(question)); // 메세지를 바로 돌려준다
 		}
 
 	}
@@ -120,7 +123,7 @@ public class JdaController extends ListenerAdapter {
 		try {
 			result = switch (cmd) {
 					case CMD_ME                     -> CmdService.showJandiMapOfMe(event); // 내 잔디정보를 출력
-					case CMD_JANDIYA                -> ChatService.getChatAnswerByQuestion(event, option); // 일반적인 질문에 답하는 AI
+					case CMD_JANDIYA                -> ChatService.getChatAnswerBySlashCmd(event, option); // 일반적인 질문에 답하는 AI
 					case CMD_NAME                   -> CmdService.showJandiMapByName(option); // 특정 이름의 그룹원의 종합 잔디정보 출력
 					case CMD_ID                     -> CmdService.showJandiMapById(option); // 특정 Github ID의 종합 잔디정보 출력
 				    case CMD_LIST_YESTERDAY_SUCCESS -> CmdService.showDidCommitYesterday(); // 어제 잔디심기 한 그룹원 목록 출력
@@ -134,6 +137,7 @@ public class JdaController extends ListenerAdapter {
 		}
 
 		// Send
+		result = JdaMsgSender.msgTrim(result);
 		event.getHook().sendMessage(result).queue();
 
 	}
