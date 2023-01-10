@@ -22,7 +22,10 @@ public class ChatService {
 
     // Received event from msg event
     public static String getChatAnswerByMsgCmd(String questionKor) {
-        return JdaMsgSender.msgTrim(getChatAnswerByQuestion(questionKor));
+        String answerKor = getChatAnswerByQuestion(questionKor);
+        String addSays = "\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 ChatGPT AI님 가라사대... \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93```" + answerKor + "```";
+        String unescaped = JdaMsgSender.unescapeHTMLEntity(addSays);
+        return JdaMsgSender.msgTrim(unescaped);
     }
 
     // Received event from slash event
@@ -33,6 +36,7 @@ public class ChatService {
         String name = user.getName();
         if(StringUtils.isEmpty(name)) return "질문자의 ID가 명확하지 않습니다.";
         String answerKor = getChatAnswerByQuestion(questionKor);
+        String unescaped = JdaMsgSender.unescapeHTMLEntity(answerKor);
 
         // Make chat message and return
         return """
@@ -44,7 +48,7 @@ public class ChatService {
                 %s
                 (📌 "잔디야 bla bla..." 이런 식으로 질문하시면 약간 더 긴 답변을 받을 수 있습니다!)
                 ```
-                """.formatted(name, questionKor, answerKor);
+                """.formatted(name, questionKor, unescaped);
 
     }
 
@@ -52,7 +56,7 @@ public class ChatService {
     public static String getChatAnswerByQuestion(String questionKor) {
 
         // 1. Prepare
-        log.debug("접수된 원본 질문: \"{}\" (길이 {})", questionKor, questionKor.length());
+        log.debug("접수된 원본 질문: <<<{}>>> (길이 {})", questionKor, questionKor.length());
 
         // 2. KOR -> ENG
         String questionEng = TranslationService.translateKorToEng(questionKor);

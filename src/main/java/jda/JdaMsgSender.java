@@ -66,7 +66,7 @@ public class JdaMsgSender {
 	}
 
 	// Unescape all of HTML Entity characters
-	private static String unescapeHTMLEntity(String msg) {
+	public static String unescapeHTMLEntity(String msg) {
 
 		// Unescape the chars StringEscapeUtils supports
 		String unescaped = StringEscapeUtils.unescapeHtml4(msg);
