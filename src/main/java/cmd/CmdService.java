@@ -55,10 +55,11 @@ public class CmdService {
 	public static String showJandiMapByName(String name) { // id로만
 
 		// 미입력 걸러내기
-		if (StringUtils.isEmpty(name)) return "정확히 입력해 주세요.";
+		if(StringUtils.isEmpty(name)) return "찾고자 하는 그룹원 이름을 입력해 주세요.";
 
 		// ID 구하기
 		String id = getGithubID(name);
+		if(StringUtils.isEmpty(id)) return "해당 이름으로 그룹원을 찾지 못하였습니다.";
 		
 		// 종합잔디정보 리턴
 		log.info("그룹원 '{}' (ID '{}')의 종합 잔디정보 호출을 명령받았습니다.", name, id);
