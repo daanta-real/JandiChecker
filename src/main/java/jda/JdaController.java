@@ -123,8 +123,9 @@ public class JdaController extends ListenerAdapter {
 					case CMD_JANDIYA                -> ChatService.getChatAnswerByQuestion(event, option); // 일반적인 질문에 답하는 AI
 					case CMD_NAME                   -> CmdService.showJandiMapByName(option); // 특정 이름의 그룹원의 종합 잔디정보 출력
 					case CMD_ID                     -> CmdService.showJandiMapById(option); // 특정 Github ID의 종합 잔디정보 출력
-					case CMD_LIST_YESTERDAY_FAIL    -> CmdService.showNotCommittedYesterday(); // 어제 잔디심기 안 한 사람 목록 출력
-					case CMD_LIST_BY_DATE           -> CmdService.showDidCommitSomeday(option); // 특정 날짜에 잔디를 심은 사람의 목록을 출력
+				    case CMD_LIST_YESTERDAY_SUCCESS -> CmdService.showDidCommitYesterday(); // 어제 잔디심기 한 그룹원 목록 출력
+					case CMD_LIST_YESTERDAY_FAIL    -> CmdService.showNotCommittedYesterday(); // 어제 잔디심기 안 한 그룹원 목록 출력
+					case CMD_LIST_BY_DATE           -> CmdService.showDidCommitSomeday(option); // 특정 날짜에 잔디를 심은 그룹원 목록 출력
 					case CMD_ABOUT                  -> Initializer.INFO_STRING; // 소개말
 					default -> throw new Exception();
 				};

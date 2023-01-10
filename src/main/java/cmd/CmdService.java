@@ -72,17 +72,17 @@ public class CmdService {
 	 * 2. Jandi map list services
 	 */
 
-	// 어제 커밋 안 한 스터디원 목록을 리턴
+	// 어제 잔디심기를 패스한 그룹원 목록을 리턴
 	public static String showNotCommittedYesterday() throws Exception {
 		return Checker.getNotCommittedYesterday();
 	}
 
-	// 어제 커밋 한 스터디원 목록을 리턴
+	// 어제 잔디심기에 성공한 그룹원 목록을 리턴
 	public static String showDidCommitYesterday() throws Exception {
 		return Checker.getDidCommitYesterday();
 	}
 
-	// 특정일에 커밋 한 스터디원 목록을 리턴
+	// 특정일에 잔디심기에 성공한 그룹원 목록을 리턴
 	public static String showDidCommitSomeday(String date) throws Exception {
 		return Checker.getDidCommittedSomeday(date);
 	}

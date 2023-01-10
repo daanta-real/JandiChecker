@@ -83,7 +83,7 @@ public class GithubMap {
 		int recentCount = 0, recentTotal = 0;
 		for(int i = count - 30; i < count; i++) {
 			recentTotal++;
-			log.info(i + "번째 날의 커밋: " + commitTFs[i]);
+			log.info(i + "번째 날의 잔디: " + commitTFs[i]);
 			recentCount += commitTFs[i] ? 1 : 0;
 		}
 		result.put("recentTotal", recentTotal);
@@ -109,7 +109,7 @@ public class GithubMap {
 		sb.append(name);
 		sb.append("님 ( http://github.com/");
 		sb.append(id);
-		sb.append(" )의 최근 커밋 현황\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93\n");
+		sb.append(" )의 최근 잔디 현황\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93\n");
 		sb.append("```md\n");
 		int count = (int) map.get("recentCount");
 		float total = (int) map.get("recentTotal");
@@ -117,15 +117,15 @@ public class GithubMap {
 		String perc = new DecimalFormat("#.##").format(percOrg);
 		sb.append("# 최근 30일 간 잔디 심은 날: ");
 		sb.append(count);
-		sb.append("일 (1일 1커밋률 ");
+		sb.append("일 (1일 1잔디율 ");
 		sb.append(perc);
 		sb.append("%)");
 		sb.append("\n");
-		log.info("30일 간의 커밋 수: " + count);
+		log.info("30일 간의 잔디 수: " + count);
 		log.info("30일 간의 총 날짜 수: " + total);
-		log.info("30일 간의 커밋률(계산 전): " + perc);
-		log.info("30일 간의 커밋률(계산 후): " + perc);
-		sb.append("# 최근 1년 간 커밋 상세:\n");
+		log.info("30일 간의 잔디율(계산 전): " + perc);
+		log.info("30일 간의 잔디율(계산 후): " + perc);
+		sb.append("# 최근 1년 간 잔디 상세:\n");
 		sb.append(map.get("totalMap"));
 		sb.append("```");
 

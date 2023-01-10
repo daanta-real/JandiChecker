@@ -44,7 +44,7 @@ public class Crawler {
 			String data = oneline.substring(idx_data + 12, idx_data + 13);
 			boolean hasCommitted = Integer.parseInt(data) > 0;
 
-//			log.debug("makeMapFromTrimmed > {} 날의 커밋여부 {}", date, hasCommitted);
+//			log.debug("makeMapFromTrimmed > {} 날의 잔디 여부 {}", date, hasCommitted);
 			m.put(date, hasCommitted);
 
 		}
