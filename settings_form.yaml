@@ -9,7 +9,7 @@ cron: 0 1 0 1/1 * ? * # ← ㅁ매일 0시 1분
 # 스케쥴러가 실행될 대상 채널 ID
 targetChannelId: 1234567890...
 
-# 추적 명단
+# 그룹원 명단
 members: [
   [daanta, daanta-real],
   [test, test]

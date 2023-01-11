@@ -34,6 +34,7 @@ public class JdaController extends ListenerAdapter {
 	public static final String CMD_ID = "id";
 	public static final String CMD_LIST_YESTERDAY_SUCCESS = "어제";
 	public static final String CMD_LIST_YESTERDAY_FAIL = "어제안함";
+	public static final String CMD_LIST_TODAY_SUCCESS = "오늘";
 	public static final String CMD_LIST_BY_DATE = "날짜";
 	public static final String CMD_ABOUT = "대하여";
 	public static final String CMD_CLOSE = "닫기";
@@ -73,6 +74,7 @@ public class JdaController extends ListenerAdapter {
 		);
 		cmdList.add(Commands.slash(CMD_LIST_YESTERDAY_SUCCESS, "어제 잔디를 심는데 성공한 그룹원 목록을 확인합니다."));
 		cmdList.add(Commands.slash(CMD_LIST_YESTERDAY_FAIL, "어제 잔디 심기를 깜박한 그룹원 목록을 확인합니다."));
+		cmdList.add(Commands.slash(CMD_LIST_TODAY_SUCCESS, "오늘 잔디를 심는데 성공한 그룹원 목록을 확인합니다."));
 		cmdList.add(Commands.slash(CMD_LIST_BY_DATE, "특정 날짜에 잔디를 심는데 성공한 그룹원 목록을 확인합니다.")
 				.addOption(OptionType.STRING, "option", "날짜를 입력하세요. yyyyMMdd 형태로 입력하셔야 합니다.", true)
 		);
@@ -128,6 +130,7 @@ public class JdaController extends ListenerAdapter {
 					case CMD_ID                     -> CmdService.showJandiMapById(option); // 특정 Github ID의 종합 잔디정보 출력
 				    case CMD_LIST_YESTERDAY_SUCCESS -> CmdService.showDidCommitYesterday(); // 어제 잔디심기 한 그룹원 목록 출력
 					case CMD_LIST_YESTERDAY_FAIL    -> CmdService.showNotCommittedYesterday(); // 어제 잔디심기 안 한 그룹원 목록 출력
+					case CMD_LIST_TODAY_SUCCESS     -> CmdService.showDidCommitToday(); // 오늘 잔디심기 한 그룹원 목록 출력
 					case CMD_LIST_BY_DATE           -> CmdService.showDidCommitSomeday(option); // 특정 날짜에 잔디를 심은 그룹원 목록 출력
 					case CMD_ABOUT                  -> Initializer.INFO_STRING; // 소개말
 					default -> throw new Exception();

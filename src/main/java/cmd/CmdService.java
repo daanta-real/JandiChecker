@@ -16,10 +16,18 @@ public class CmdService {
 	 */
 
 	// 이름을 입력하면 깃헙 ID를 리턴
-	public static String getGithubID(String name) {
+	public static String getGitHubIDByGroupName(String name) {
 		for(String[] s: Initializer.getMembers())
 			if(s[0].equals(name) || s[0].substring(1).equals(name)) return s[1];
 		return null;
+	}
+
+	// Get GitHub ID by member's Discord ID
+	// If fails to find ID then throw an error
+	public static String getGitHubIDByDiscordID(String id) throws Exception {
+		for(String[] s: Initializer.getMembers())
+			if(s[2].equals(id)) return s[2];
+		throw new Exception();
 	}
 
 
@@ -58,7 +66,7 @@ public class CmdService {
 		if(StringUtils.isEmpty(name)) return "찾고자 하는 그룹원 이름을 입력해 주세요.";
 
 		// ID 구하기
-		String id = getGithubID(name);
+		String id = getGitHubIDByGroupName(name);
 		if(StringUtils.isEmpty(id)) return "해당 이름으로 그룹원을 찾지 못하였습니다.";
 		
 		// 종합잔디정보 리턴
@@ -81,6 +89,11 @@ public class CmdService {
 	// 어제 잔디심기에 성공한 그룹원 목록을 리턴
 	public static String showDidCommitYesterday() throws Exception {
 		return Checker.getDidCommitYesterday();
+	}
+
+	// 특정일에 잔디심기에 성공한 그룹원 목록을 리턴
+	public static String showDidCommitToday() throws Exception {
+		return Checker.getDidCommittedToday();
 	}
 
 	// 특정일에 잔디심기에 성공한 그룹원 목록을 리턴

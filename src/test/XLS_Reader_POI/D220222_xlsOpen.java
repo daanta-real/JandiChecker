@@ -18,12 +18,9 @@ public class D220222_xlsOpen {
 	@Test
 	public void main() throws Exception {
 
-		// 잔디체커의 시작
-		log.info("[잔디체커를 실행합니다.]");
-
 		// 현재 경로 따기
 		String PATH = Paths.get("").toAbsolutePath().toString();
-		log.info("현재 경로: " + PATH);
+		log.info("현재 경로: {}", PATH);
 
 		// 파일 객체 부르기
 		FileInputStream file = new FileInputStream(new File(PATH, "_test.xlsx"));
@@ -52,8 +49,7 @@ public class D220222_xlsOpen {
 
 				// cell의 타입이 문자형이냐 숫자형이냐에 따라서 서로 다른 처리 가능.
 				// POI에서 제공하는 셀 타입 상수는 총 여섯 가지이다.
-				//     NUMERIC(0), STRING(1), FORMULA(2),
-				//     BLANK(3), BOOLEAN(4), ERROR(5)
+				// NUMERIC(0), STRING(1), FORMULA(2), BLANK(3), BOOLEAN(4), ERROR(5)
 				// 그 외에 NONE(-1)도 있긴 한데 내부적으로 쓰이는 값이므로 신경쓰지 말자.
 				// .getNumericCellValue()로 계산된 셀값을 구할 수 있되, 기본적으로 boolean형만 리턴하니 참고.
 				log.info("[" + cell.getAddress() + "(" + cell.getCellType() + ")] => ");

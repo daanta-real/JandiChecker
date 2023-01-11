@@ -21,7 +21,10 @@ public class CronJob implements Job {
 		try {
 			String yesterdayCommitedString = CmdService.showDidCommitYesterday();
 			JdaMsgSender.send(Initializer.getChId(), yesterdayCommitedString);
-		} catch (Exception e) { log.error(ExceptionUtils.getStackTrace(e)); }
+		} catch (Exception e) {
+			JdaMsgSender.send(Initializer.getChId(), "정보 획득에 실패하였습니다.");
+			log.error(ExceptionUtils.getStackTrace(e));
+		}
 	}
 
 }
