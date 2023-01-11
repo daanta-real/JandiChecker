@@ -4,6 +4,7 @@ import crawler.Checker;
 import crawler.GithubMap;
 import init.Initializer;
 import lombok.extern.slf4j.Slf4j;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import org.apache.commons.lang3.StringUtils;
 
@@ -22,14 +23,6 @@ public class CmdService {
 		return null;
 	}
 
-	// Get GitHub ID by member's Discord ID
-	// If fails to find ID then throw an error
-	public static String getGitHubIDByDiscordID(String id) throws Exception {
-		for(String[] s: Initializer.getMembers())
-			if(s[2].equals(id)) return s[2];
-		throw new Exception();
-	}
-
 
 
 	/*
@@ -40,10 +33,22 @@ public class CmdService {
 	public static String showJandiMapOfMe(SlashCommandInteractionEvent event) {
 
 		// ID 구하기
-		String myId = "daanta-real";
+		User user = event.getUser();
+		String name = user.getName();
+		String eventDiscordID = user.getAsTag();
+		String gitHubID = null;
+		for(String[] member: Initializer.getMembers()) {
+			if(member.length < 3) continue;
+			String yamlDiscordID = member[2];
+			if(eventDiscordID.equals(yamlDiscordID)) {
+				String memberGitHubID = member[1];
+				if(memberGitHubID != null) gitHubID = memberGitHubID;
+			}
+		}
+		if(StringUtils.isEmpty(gitHubID)) return name + "님의 GitHub ID를 찾는 데 실패했습니다.";
 
 		// 종합잔디정보 리턴
-		return showJandiMapById(myId);
+		return showJandiMapById(gitHubID);
 
 	}
 
