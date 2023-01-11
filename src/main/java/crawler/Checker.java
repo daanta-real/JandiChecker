@@ -29,8 +29,8 @@ public class Checker {
 		if(map.size() == 0) throw new Exception();
 
 		// 4. Check jandi result.
-		// If couldn't find target, map.get(day) is null,
-		// and which throws an Exception
+		// If commit box is not found here throws an Exception
+		if(map.get(day) == null) throw new Exception();
 		boolean committed = map.get(day);
 		log.debug("{}일의 잔디심기 점수: {}", day, committed);
 
