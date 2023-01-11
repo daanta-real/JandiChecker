@@ -46,9 +46,11 @@ public class D230109_C01_HTTPTest {
     }
 
     @Test
-    public void falseID() throws Exception {
-        String id = "Asdfasdawegwpwnpgwe";
-        log.debug("result: {}", Crawler.getGithubMap(id));
+    public void wrongID() throws Exception {
+        String url = "https://github.com/Asdfasdawegwpwnpgwe";
+        URL finalUrl = new URL(url);
+        HttpURLConnection conn = (HttpURLConnection)finalUrl.openConnection();
+        log.debug("결과: {}", conn.getResponseCode());
     }
 
 }

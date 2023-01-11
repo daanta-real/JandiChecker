@@ -53,6 +53,8 @@ public class CommonUtils {
     public static String httpRequestUrl_GET(String url) throws Exception {
         URL finalUrl = new URL(url);
         HttpURLConnection conn = (HttpURLConnection)finalUrl.openConnection();
+        int responseCode = conn.getResponseCode();
+        if(responseCode == 404) throw new Exception();
         return httpRequest(conn);
     }
     // Send HTTP Request and return the result
