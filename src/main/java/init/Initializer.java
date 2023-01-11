@@ -194,8 +194,10 @@ public class Initializer {
 			String name = info[0], gitHubId = info[1];
 			String discordID = info.length >= 3 ? info[2] : null;
 			String stickTextLeft = (i == members.length - 1) ? "└" : "├";
-			log.info("    {}─ {}번째 인원: '{}' (Github ID: {}, Discord ID: {})", //디코 아이디가 안불러와짐..
-					stickTextLeft, i, name, gitHubId, discordID);
+			log.info(
+					"    {}─ {}번째 인원: '{}' (Github ID: {}, Discord ID: {})",
+					stickTextLeft, i, name, gitHubId, discordID
+			);
 		}
 		log.info("토큰(ChatGPT API): {}", token_chatGPTAPI);
 
