@@ -29,26 +29,28 @@ public class CmdService {
 	 * 1. Single jandi map services
 	 */
 
-	// 커맨드를 요청한 사람의 잔디정보를 리턴
+	// 커맨드를 요청한 사람 스스로의 잔디정보를 리턴
 	public static String showJandiMapOfMe(SlashCommandInteractionEvent event) {
 
 		// ID 구하기
 		User user = event.getUser();
-		String name = user.getName();
+		String name = null;
 		String eventDiscordID = user.getAsTag();
 		String gitHubID = null;
 		for(String[] member: Initializer.getMembers()) {
 			if(member.length < 3) continue;
 			String yamlDiscordID = member[2];
 			if(eventDiscordID.equals(yamlDiscordID)) {
+				String memberName = member[0];
 				String memberGitHubID = member[1];
-				if(memberGitHubID != null) gitHubID = memberGitHubID;
+				if(!StringUtils.isEmpty(memberName)) name = memberName;
+				if(!StringUtils.isEmpty(memberGitHubID)) gitHubID = memberGitHubID;
 			}
 		}
 		if(StringUtils.isEmpty(gitHubID)) return name + "님의 GitHub ID를 찾는 데 실패했습니다.";
 
 		// 종합잔디정보 리턴
-		return showJandiMapById(gitHubID);
+		return showJandiMapByIdAndName(name, gitHubID);
 
 	}
 
@@ -61,6 +63,18 @@ public class CmdService {
 		// 종합잔디정보 리턴
 		log.info("ID '{}'의 종합 잔디정보 호출을 명령받았습니다.", id);
 		return GithubMap.getGithubInfoString(id, id);
+
+	}
+
+	// 특정 이름과 ID의 종합 잔디정보를 리턴
+	public static String showJandiMapByIdAndName(String name, String id) { // id로만
+
+		// 미입력 걸러내기
+		if(StringUtils.isEmpty(name) || StringUtils.isEmpty(id)) return "정확히 입력해 주세요.";
+
+		// 종합잔디정보 리턴
+		log.info("'{}'님 (ID '{}')의 종합 잔디정보 호출을 명령받았습니다.", name, id);
+		return GithubMap.getGithubInfoString(name, id);
 
 	}
 
