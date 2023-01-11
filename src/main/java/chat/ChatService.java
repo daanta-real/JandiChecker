@@ -7,6 +7,7 @@ import jda.JdaMsgSender;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
+import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import org.apache.commons.lang3.StringUtils;
 import translate.TranslationService;
 
@@ -26,6 +27,11 @@ public class ChatService {
         String addSays = "\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 ChatGPT AI님 가라사대... \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93```" + answerKor + "```";
         String unescaped = JdaMsgSender.unescapeHTMLEntity(addSays);
         return JdaMsgSender.msgTrim(unescaped);
+    }
+
+    // Received event from button event
+    public static String getChatAnswerByButton(ButtonInteractionEvent event) {
+        return null; // TODO
     }
 
     // Received event from slash event

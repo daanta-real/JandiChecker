@@ -124,7 +124,7 @@ public class JdaController extends ListenerAdapter {
 		String result;
 		try {
 			result = switch (cmd) {
-					case CMD_ME                     -> CmdService.showJandiMapOfMe(event); // 내 잔디정보를 출력
+					case CMD_ME                     -> CmdService.showJandiMapOfMeFromSlash(event); // 내 잔디정보를 출력
 					case CMD_JANDIYA                -> ChatService.getChatAnswerBySlashCmd(event, option); // 일반적인 질문에 답하는 AI
 					case CMD_NAME                   -> CmdService.showJandiMapByName(option); // 특정 이름의 그룹원의 종합 잔디정보 출력
 					case CMD_ID                     -> CmdService.showJandiMapById(option); // 특정 Github ID의 종합 잔디정보 출력
@@ -147,9 +147,40 @@ public class JdaController extends ListenerAdapter {
 
 	@Override
 	public void onButtonInteraction(@NotNull ButtonInteractionEvent event) {
-		String cmd = event.getComponentId();
+
+		// Get command and options
+		String cmd = event.getComponentId(); // Command
 		log.debug("[[[ 버튼 누르기로 명령을 접수하였습니다. ]]] [{}]", cmd);
-		if (event.getComponentId().equals("hello")) {
+
+		String result;
+		if(JdaController.CMD_CLOSE.equals(cmd)) {
+			System.out.println("치운다");
+			event.getHook().editOriginal("").queue();
+			return;
+		} else try {
+
+			// Print the loading spinner
+			event.deferReply().queue();
+
+			// Get result
+			result = switch(cmd) {
+				case JdaController.CMD_ME -> CmdService.showJandiMapOfMeFromButton(event); // 내 잔디정보를 출력
+				case JdaController.CMD_JANDIYA -> ChatService.getChatAnswerByButton(event); // 일반적인 질문에 답하는 AI
+				case JdaController.CMD_NAME -> CmdService.showJandiMapByNameFromButton(event); // 특정 이름의 그룹원의 종합 잔디정보 출력
+				case JdaController.CMD_ID -> CmdService.showJandiMapByIdFromButton(event); // 특정 Github ID의 종합 잔디정보 출력
+				case JdaController.CMD_LIST_YESTERDAY_SUCCESS -> CmdService.showDidCommitYesterday(); // 어제 잔디심기 한 그룹원 목록 출력
+				case JdaController.CMD_LIST_YESTERDAY_FAIL -> CmdService.showNotCommittedYesterday(); // 어제 잔디심기 안 한 그룹원 목록 출력
+				case JdaController.CMD_LIST_TODAY_SUCCESS -> CmdService.showDidCommitToday(); // 오늘 잔디심기 한 그룹원 목록 출력
+				case JdaController.CMD_LIST_BY_DATE -> CmdService.showDidCommitSomedayFromButton(event); // 특정 날짜에 잔디를 심은 그룹원 목록 출력
+				case JdaController.CMD_ABOUT -> Initializer.INFO_STRING; // 소개말
+				default -> throw new Exception();
+			};
+
+		} catch (Exception e) {
+			result = "정보 획득에 실패하였습니다.";
+		}
+
+		if (event.getComponentId().equals(JdaController.CMD_ME)) {
 			event.reply("Hello :)").queue(); // send a message in the channel
 		} else if (event.getComponentId().equals("emoji")) {
 			event.editMessage("That button didn't say click me").queue(); // update the message
