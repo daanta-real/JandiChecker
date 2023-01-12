@@ -1,6 +1,6 @@
 
 import lombok.extern.slf4j.Slf4j;
-import jda.JdaController;
+import jda.JDAController;
 
 import utils.logging.JTextAppender;
 import utils.scheduler.CronScheduler;
@@ -36,7 +36,7 @@ public class Main {
 			// Load JDA
 			log.info("");
 			log.info("[[[잔디체커 JDA 로드]]]");
-			JdaController.init();
+			JDAController.init();
 
 			// Run scheduler
 			log.info("");

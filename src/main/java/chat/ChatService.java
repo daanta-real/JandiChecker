@@ -3,7 +3,7 @@ package chat;
 import com.theokanning.openai.OpenAiService;
 import com.theokanning.openai.completion.CompletionRequest;
 import init.Initializer;
-import jda.JdaMsgSender;
+import jda.JDAMsgSender;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
@@ -27,7 +27,7 @@ public class ChatService {
         String answerKor = getChatAnswerByQuestion(questionKor);
         String addSays = "\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 ChatGPT AI님 가라사대... \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93```" + answerKor + "```";
         String unescaped = CommonUtils.unescapeHTMLEntity(addSays);
-        return JdaMsgSender.msgTrim(unescaped);
+        return JDAMsgSender.msgTrim(unescaped);
     }
 
     // Received event from button event

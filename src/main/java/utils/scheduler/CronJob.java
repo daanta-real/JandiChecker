@@ -6,7 +6,7 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 
 import cmd.CmdService;
-import jda.JdaMsgSender;
+import jda.JDAMsgSender;
 import init.Initializer;
 
 // 실제 실행될 JOB 내용만을 담고 있는 실행내용 객체
@@ -20,9 +20,9 @@ public class CronJob implements Job {
 	public void execute(JobExecutionContext context) {
 		try {
 			String yesterdayCommitedString = CmdService.showDidCommitYesterday();
-			JdaMsgSender.send(Initializer.getChId(), yesterdayCommitedString);
+			JDAMsgSender.send(Initializer.getChId(), yesterdayCommitedString);
 		} catch (Exception e) {
-			JdaMsgSender.send(Initializer.getChId(), "정보 획득에 실패하였습니다.");
+			JDAMsgSender.send(Initializer.getChId(), "정보 획득에 실패하였습니다.");
 			log.error(ExceptionUtils.getStackTrace(e));
 		}
 	}

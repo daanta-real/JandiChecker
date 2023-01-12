@@ -7,10 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
-import net.dv8tion.jda.api.interactions.components.ActionRow;
-import net.dv8tion.jda.api.interactions.components.text.TextInput;
-import net.dv8tion.jda.api.interactions.components.text.TextInputStyle;
-import net.dv8tion.jda.api.interactions.modals.Modal;
 import org.apache.commons.lang3.StringUtils;
 
 // 정보 출력 메소드 모음
@@ -64,27 +60,6 @@ public class CmdService {
 
 	}
 
-	// 특정 ID의 종합 잔디정보를 리턴
-	public static String showJandiMapByIdWithButton(ButtonInteractionEvent event) {
-
-		// TODO
-		TextInput id = TextInput.create("showJandiMapByIdText", "인자라벨", TextInputStyle.SHORT)
-				.setMinLength(1)
-				.setMaxLength(20)
-				.setLabel("안쪽라벨")
-				.setPlaceholder("조회하고자 하는 아이디를 입력하세요. (최대 20글자)")
-				.setRequired(true)
-				.build();
-
-		Modal modal = Modal.create("showJandiMapById", "아이디아이디")
-				.addActionRows(ActionRow.of(id))
-				.build();
-
-		event.replyModal(modal).queue();
-
-		return null;
-
-	}
 	public static String showJandiMapById(String id) { // id로만
 
 		// 미입력 걸러내기
@@ -149,7 +124,7 @@ public class CmdService {
 	}
 
 	// 특정일에 잔디심기에 성공한 그룹원 목록을 리턴
-	public static String showDidCommitSomedayWithButton(ButtonInteractionEvent event) throws Exception {
+	public static String showDidCommitSomedayWithButton(ButtonInteractionEvent event) {
 		return null; // TODO
 	}
 	public static String showDidCommitSomeday(String date) throws Exception {

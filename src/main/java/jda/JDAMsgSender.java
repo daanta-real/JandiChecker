@@ -10,7 +10,7 @@ import utils.CommonUtils;
 
 // 메세지를 보내는 메소드를 모은 곳
 @Slf4j
-public class JdaMsgSender {
+public class JDAMsgSender {
 
 	// 메세지 보내는 원본 메소드
 	public static void send(TextChannel channel, String msg) {
@@ -26,7 +26,7 @@ public class JdaMsgSender {
 
 	// 특정 ID의 채널에 텍스트 채널에 메세지 전송
 	public static void send(String channelId, String msg) {
-		TextChannel channel = JdaController.instance.getTextChannelById(channelId);
+		TextChannel channel = JDAController.instance.getTextChannelById(channelId);
 		log.info(channelId + " 채널에 메세지를 보냅니다. (채널 존재 여부: " + (channel != null) + ")");
 		if (channel != null) {
 			msg = msgTrim(msg);
