@@ -6,6 +6,7 @@ import cmd.CmdService;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -15,6 +16,7 @@ import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.GatewayIntent;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import init.Initializer;
 
@@ -124,8 +126,8 @@ public class JdaController extends ListenerAdapter {
 		String result;
 		try {
 			result = switch (cmd) {
-					case CMD_ME                     -> CmdService.showJandiMapOfMeFromSlash(event); // 내 잔디정보를 출력
-					case CMD_JANDIYA                -> ChatService.getChatAnswerBySlashCmd(event, option); // 일반적인 질문에 답하는 AI
+					case CMD_ME                     -> CmdService.showJandiMapOfMeWithSlash(event); // 내 잔디정보를 출력
+					case CMD_JANDIYA                -> ChatService.getChatAnswerWithSlash(event, option); // 일반적인 질문에 답하는 AI
 					case CMD_NAME                   -> CmdService.showJandiMapByName(option); // 특정 이름의 그룹원의 종합 잔디정보 출력
 					case CMD_ID                     -> CmdService.showJandiMapById(option); // 특정 Github ID의 종합 잔디정보 출력
 				    case CMD_LIST_YESTERDAY_SUCCESS -> CmdService.showDidCommitYesterday(); // 어제 잔디심기 한 그룹원 목록 출력
@@ -152,55 +154,83 @@ public class JdaController extends ListenerAdapter {
 		String cmd = event.getComponentId(); // Command
 		log.debug("[[[ 버튼 누르기로 명령을 접수하였습니다. ]]] [{}]", cmd);
 
-		String result;
-		if(JdaController.CMD_CLOSE.equals(cmd)) {
-			System.out.println("치운다");
-			event.getHook().editOriginal("").queue();
-			return;
-		} else try {
+		String result = null;
+		try {
 
 			// Print the loading spinner
-			event.deferReply().queue();
+			event.deferEdit().queue();
 
-			// Get result
-			result = switch(cmd) {
-				case JdaController.CMD_ME -> CmdService.showJandiMapOfMeFromButton(event); // 내 잔디정보를 출력
-				case JdaController.CMD_JANDIYA -> ChatService.getChatAnswerByButton(event); // 일반적인 질문에 답하는 AI
-				case JdaController.CMD_NAME -> CmdService.showJandiMapByNameFromButton(event); // 특정 이름의 그룹원의 종합 잔디정보 출력
-				case JdaController.CMD_ID -> CmdService.showJandiMapByIdFromButton(event); // 특정 Github ID의 종합 잔디정보 출력
-				case JdaController.CMD_LIST_YESTERDAY_SUCCESS -> CmdService.showDidCommitYesterday(); // 어제 잔디심기 한 그룹원 목록 출력
-				case JdaController.CMD_LIST_YESTERDAY_FAIL -> CmdService.showNotCommittedYesterday(); // 어제 잔디심기 안 한 그룹원 목록 출력
-				case JdaController.CMD_LIST_TODAY_SUCCESS -> CmdService.showDidCommitToday(); // 오늘 잔디심기 한 그룹원 목록 출력
-				case JdaController.CMD_LIST_BY_DATE -> CmdService.showDidCommitSomedayFromButton(event); // 특정 날짜에 잔디를 심은 그룹원 목록 출력
-				case JdaController.CMD_ABOUT -> Initializer.INFO_STRING; // 소개말
+			// Run each command
+			switch(cmd) {
+				case JdaController.CMD_ME -> {
+					CmdService.showJandiMapOfMeWithButton(event); // 내 잔디정보를 출력
+				}
+				case JdaController.CMD_JANDIYA -> {
+					ChatService.getChatAnswerWithButton(event); // 일반적인 질문에 답하는 AI
+				}
+				case JdaController.CMD_NAME -> {
+					CmdService.showJandiMapByNameWithButton(event); // 특정 이름의 그룹원의 종합 잔디정보 출력
+				}
+				case JdaController.CMD_ID -> {
+					CmdService.showJandiMapByIdWithButton(event); // 특정 Github ID의 종합 잔디정보 출력
+				}
+				case JdaController.CMD_LIST_YESTERDAY_SUCCESS -> {
+					result = CmdService.showDidCommitYesterday(); // 어제 잔디심기 한 그룹원 목록 출력
+				}
+				case JdaController.CMD_LIST_YESTERDAY_FAIL -> {
+					result = CmdService.showNotCommittedYesterday(); // 어제 잔디심기 안 한 그룹원 목록 출력
+				}
+				case JdaController.CMD_LIST_TODAY_SUCCESS -> {
+					result = CmdService.showDidCommitToday(); // 오늘 잔디심기 한 그룹원 목록 출력
+				}
+				case JdaController.CMD_LIST_BY_DATE -> {
+					CmdService.showDidCommitSomedayWithButton(event); // 특정 날짜에 잔디를 심은 그룹원 목록 출력
+				}
+				case JdaController.CMD_ABOUT -> {
+					result = Initializer.INFO_STRING; // 소개말
+				}
+				case JdaController.CMD_CLOSE -> {
+					event.getMessage().delete().queue();
+					return;
+				}
 				default -> throw new Exception();
-			};
+			}
 
-		} catch (Exception e) {
+		} catch(Exception e) {
 			result = "정보 획득에 실패하였습니다.";
 		}
 
-		if (event.getComponentId().equals(JdaController.CMD_ME)) {
-			event.reply("Hello :)").queue(); // send a message in the channel
-		} else if (event.getComponentId().equals("emoji")) {
-			event.editMessage("That button didn't say click me").queue(); // update the message
-		} else {
-			event.editMessage("버튼눌렀찌?").queue(); // update the message
+		// TODO
+		// Switch문의 리턴값 중에 텍스트 모달 입력 등이 있는 경우 result가 null이다.
+		event.getMessage().delete().queue();
+		if(!StringUtils.isEmpty(result)) {
+			event.getChannel().sendMessage(result).queue();
 		}
-//		if (event.getName().equals("hello")) {
-//			event.reply("Click the button to say hello")
-//					.addActionRow(
-//							Button.primary("hello", "Click Me"), // Button with only a label
-//							Button.success("emoji", Emoji.fromFormatted("<:minn:245267426227388416>"))) // Button with only an emoji
-//					.queue();
-//		} else if (event.getName().equals("info")) {
-//			event.reply("Click the buttons for more info")
-//					.addActionRow( // link buttons don't send events, they just open a link in the browser when clicked
-//							Button.link("https://github.com/DV8FromTheWorld/JDA", "GitHub")
-//									.withEmoji(Emoji.fromFormatted("<:github:849286315580719104>")), // Link Button with label and emoji
-//							Button.link("https://ci.dv8tion.net/job/JDA/javadoc/", "Javadocs")) // Link Button with only a label
-//					.queue();
-//		}
+
+	}
+
+	@Override
+	public void onModalInteraction(@NotNull ModalInteractionEvent event) {
+
+		String result = null;
+		try {
+			String modalId = event.getModalId();
+			switch (modalId) {
+				case "showJandiMapById" -> {
+					String id = event.getValue("showJandiMapByIdText").getAsString();
+					result = CmdService.showJandiMapById(id);
+				}
+			}
+
+			// If the result is null or blank String then throw an AssertException
+			assert !StringUtils.isEmpty(result);
+
+		} catch(Exception e) {
+			result = "정확히 입력해 주세요.";
+		}
+
+		event.getChannel().sendMessage(result).queue();
+
 	}
 
 }

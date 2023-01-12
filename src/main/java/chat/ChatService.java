@@ -10,6 +10,7 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import org.apache.commons.lang3.StringUtils;
 import translate.TranslationService;
+import utils.CommonUtils;
 
 import java.util.Objects;
 
@@ -25,24 +26,24 @@ public class ChatService {
     public static String getChatAnswerByMsgCmd(String questionKor) {
         String answerKor = getChatAnswerByQuestion(questionKor);
         String addSays = "\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 ChatGPT AI님 가라사대... \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93```" + answerKor + "```";
-        String unescaped = JdaMsgSender.unescapeHTMLEntity(addSays);
+        String unescaped = CommonUtils.unescapeHTMLEntity(addSays);
         return JdaMsgSender.msgTrim(unescaped);
     }
 
     // Received event from button event
-    public static String getChatAnswerByButton(ButtonInteractionEvent event) {
+    public static String getChatAnswerWithButton(ButtonInteractionEvent event) {
         return null; // TODO
     }
 
     // Received event from slash event
-    public static String getChatAnswerBySlashCmd(SlashCommandInteractionEvent event, String questionKor) {
+    public static String getChatAnswerWithSlash(SlashCommandInteractionEvent event, String questionKor) {
 
         // Make name and answer string
         User user = Objects.requireNonNull(event.getMember()).getUser();
         String name = user.getName();
         if(StringUtils.isEmpty(name)) return "질문자의 ID가 명확하지 않습니다.";
         String answerKor = getChatAnswerByQuestion(questionKor);
-        String unescaped = JdaMsgSender.unescapeHTMLEntity(answerKor);
+        String unescaped = CommonUtils.unescapeHTMLEntity(answerKor);
 
         // Make chat message and return
         return """

@@ -2,6 +2,7 @@ package utils;
 
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.text.StringEscapeUtils;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -67,6 +68,18 @@ public class CommonUtils {
 
         // return result
         return sb.toString();
+
+    }
+
+    // Unescape all of HTML Entity characters
+    public static String unescapeHTMLEntity(String msg) {
+
+        // Unescape the chars StringEscapeUtils supports
+        String unescaped = StringEscapeUtils.unescapeHtml4(msg);
+
+        // Forced unescape the chars StringEscapeUtils doesn't support
+        return unescaped.replaceAll("&#39;", "'")
+                .replaceAll("&quot;", "\"");
 
     }
 
