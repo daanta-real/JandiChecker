@@ -36,7 +36,7 @@ class GoogleTranslation {
 
         log.debug("translate() 시작");
 
-        // TODO(developer): Replace these variables before running the sample.
+        // Developers, Replace these variables before running the sample.
         String projectId = "YOUR-PROJECT-ID";
         log.debug("projectId = {}", projectId);
 

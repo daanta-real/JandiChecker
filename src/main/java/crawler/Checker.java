@@ -22,8 +22,12 @@ public class Checker {
 		log.info("{}의 {} 날의 잔디를 확인합니다.", id, day);
 
 		// 2. Get full HTML
-		String html_org = Crawler.getHTMLByID(id);
-		if(html_org == null) throw new Exception();
+		String html_org;
+		try {
+			html_org = Crawler.getHTMLByID(id);
+		} catch(Exception e) {
+			throw new Exception(e.getMessage());
+		}
 
 		// 3. HTML to Map
 		Map<String, Boolean> map = Crawler.makeMapFromTrimmed(html_org);

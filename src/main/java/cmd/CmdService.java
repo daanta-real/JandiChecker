@@ -18,7 +18,7 @@ public class CmdService {
 	 */
 
 	// 커맨드를 요청한 사람 스스로의 잔디정보를 리턴
-	public static String showJandiMapOfMe(User user) {
+	public static String getJandiMapStringOfMe(User user) throws Exception {
 
 		// 이름과 ID 구하기
 		String name = null;
@@ -27,15 +27,19 @@ public class CmdService {
 		try {
 			memberInfo = Initializer.getMemberInfoesByDiscordID(discordID);
 		} catch(Exception e) {
-			return name + "님의 GitHub ID를 찾는 데 실패했습니다.";
+			throw new Exception(name + "님의 GitHub ID를 찾는 데 실패했습니다.");
 		}
 
 		// 종합잔디정보 리턴
-		return showJandiMapByIdAndName(memberInfo.get("name"), memberInfo.get("gitHubID"));
+		try {
+			return getJandiMapStringByIdAndName(memberInfo.get("name"), memberInfo.get("gitHubID"));
+		} catch(Exception e) {
+			throw new Exception();
+		}
 
 	}
 
-	public static String showJandiMapById(String id) { // id로만
+	public static String getJandiMapStringByById(String id) { // id로만
 
 		// 미입력 걸러내기
 		if (StringUtils.isEmpty(id)) return "정확히 입력해 주세요.";
@@ -47,7 +51,7 @@ public class CmdService {
 	}
 
 	// 특정 이름과 ID의 종합 잔디정보를 리턴
-	public static String showJandiMapByIdAndName(String name, String id) { // id로만
+	public static String getJandiMapStringByIdAndName(String name, String id) { // id로만
 
 		// 미입력 걸러내기
 		if(StringUtils.isEmpty(name) || StringUtils.isEmpty(id)) return "정확히 입력해 주세요.";
@@ -58,7 +62,7 @@ public class CmdService {
 
 	}
 
-	public static String showJandiMapByName(String name) { // 이름으로만
+	public static String getJandiMapStringByName(String name) { // 이름으로만
 
 		// 미입력 걸러내기
 		if(StringUtils.isEmpty(name)) return "찾고자 하는 그룹원 이름을 입력해 주세요.";
@@ -69,7 +73,7 @@ public class CmdService {
 			id = Initializer.getGitHubIDByMemberName(name);
 			if (StringUtils.isEmpty(id)) throw new Exception();
 		} catch (Exception e) {
-			return "해당 이름으로 그룹원을 찾지 못하였습니다.";
+			return name + "님의 ID를 찾지 못하였습니다.";
 		}
 
 		// 이름과 ID로 종합잔디정보 리턴
@@ -85,22 +89,22 @@ public class CmdService {
 	 */
 
 	// 어제 잔디심기를 패스한 그룹원 목록을 리턴
-	public static String showNotCommittedYesterday() throws Exception {
+	public static String getNotCommittedStringYesterday() throws Exception {
 		return Checker.getNotCommittedYesterday();
 	}
 
 	// 어제 잔디심기에 성공한 그룹원 목록을 리턴
-	public static String showDidCommitYesterday() throws Exception {
+	public static String getDidCommitStringYesterday() throws Exception {
 		return Checker.getDidCommitYesterday();
 	}
 
 	// 오늘 잔디심기에 성공한 그룹원 목록을 리턴
-	public static String showDidCommitToday() {
+	public static String getDidCommitStringToday() {
 		return Checker.getDidCommittedToday();
 	}
 
 	// 특정일에 잔디심기에 성공한 그룹원 목록을 리턴
-	public static String showDidCommitSomeday(String date) throws Exception {
+	public static String getDidCommitStringSomeday(String date) throws Exception {
 		return Checker.getDidCommittedSomeday(date);
 	}
 

@@ -37,7 +37,7 @@ public class ModalInteraction {
                     String gitHubID = Initializer.getGitHubIDByMemberName(targetMemberName);
 
                     // Compute
-                    result = CmdService.showJandiMapByIdAndName(targetMemberName, gitHubID);
+                    result = CmdService.getJandiMapStringByIdAndName(targetMemberName, gitHubID);
 
                     // Show the result
                     event.getHook().sendMessage(result).queue();
@@ -51,7 +51,7 @@ public class ModalInteraction {
                     String id = m.getAsString();
 
                     // Compute
-                    result = CmdService.showJandiMapById(id);
+                    result = CmdService.getJandiMapStringByById(id);
 
                     // Show the result
                     event.getHook().sendMessage(result).queue();
@@ -95,7 +95,7 @@ public class ModalInteraction {
                     String date = m.getAsString();
 
                     // Compute
-                    result = CmdService.showDidCommitSomeday(date);
+                    result = CmdService.getDidCommitStringSomeday(date);
 
                     // Show the result
                     event.getHook().sendMessage(result).queue();

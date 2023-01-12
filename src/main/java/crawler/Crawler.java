@@ -10,21 +10,24 @@ import java.util.*;
 public class Crawler {
 
 	// Return the GitHub profile page of someone
-	public static String getHTMLByID(String id) {
+	public static String getHTMLByID(String id) throws Exception {
 		try {
 			return CommonUtils.httpRequestUrl_GET("https://github.com/" + id);
 		} catch(Exception e) {
-			return null;
+			String msg = e.getMessage().equals("404")
+					? "없는 GitHub ID입니다."
+					: e.getMessage();
+			throw new Exception(msg);
 		}
 	}
 
 	// Trimmed HTML to commit score by date
-	public static TreeMap<String, Boolean> makeMapFromTrimmed(String trimmedHTML) {
+	public static TreeMap<String, Boolean> makeMapFromTrimmed(String html) throws Exception {
 
-		String[] htmlArr = trimmedHTML.split("\n");
+		String[] htmlArr = html.split("\n");
 
 		TreeMap<String, Boolean> m = new TreeMap<>();
-		// log.debug("전체 HTML:\n{}", trimmedHTML);
+		// log.debug("전체 HTML:\n{}", html);
 		for(String oneline: htmlArr) {
 
 			// Target only the lines including the rect tag
@@ -48,22 +51,32 @@ public class Crawler {
 			m.put(date, hasCommitted);
 
 		}
+		if(m.size() == 0) throw new Exception("프로필 페이지에 잔디밭이 없어 조회하지 못했습니다.");
 
 		String first = Collections.min(m.keySet());
 		String last = Collections.max(m.keySet());
 		log.debug("트림 결과: 총 {}개 ({} ~ {})", m.size(), first, last);
-//		log.debug("모든 트림 결과: {}", m);
+		log.debug("모든 트림 결과: {}", m);
 		return m;
 
 	}
 
 	// ID를 넘기면 연간 잔디정보를 Map으로 리턴
 	public static TreeMap<String, Boolean> getGithubMap(String id) throws Exception {
-		TreeMap<String, Boolean> gitHubMap;
-		String html = getHTMLByID(id);
-		if(html == null) throw new Exception();
-		gitHubMap = makeMapFromTrimmed(html);
-		return gitHubMap;
+
+		String html;
+		try {
+			html = getHTMLByID(id);
+		} catch(Exception e) {
+			throw new Exception(e.getMessage());
+		}
+
+		try {
+			return makeMapFromTrimmed(html);
+		} catch(Exception e) {
+			throw new Exception(e.getMessage());
+		}
+
 	}
 
 }

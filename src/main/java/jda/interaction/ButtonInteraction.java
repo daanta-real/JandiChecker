@@ -27,22 +27,22 @@ public class ButtonInteraction {
                     // "원본 메시지가 삭제되었어요"라는 꼬리표가 붙고 또 spinner도 없어지지 않는다.
                     // deferEdit()를 사용해야 되는 것 같다.
                     event.deferEdit().queue();
-                    result = CmdService.showJandiMapOfMe(event.getUser()); // 내 잔디정보를 획득
+                    result = CmdService.getJandiMapStringOfMe(event.getUser()); // 내 잔디정보를 획득
                 }
                 case JDAController.CMD_JANDIYA -> ModalInteraction.getChatAnswer(event); // 일반적인 질문에 답하는 AI
                 case JDAController.CMD_NAME -> ModalInteraction.showJandiMapByName(event); // 특정 이름의 그룹원의 종합 잔디정보 출력
                 case JDAController.CMD_ID -> ModalInteraction.showJandiMapById(event); // 특정 Github ID의 종합 잔디정보 출력
                 case JDAController.CMD_LIST_YESTERDAY_SUCCESS -> {
                     event.deferEdit().queue(); // Set defer
-                    result = CmdService.showDidCommitYesterday(); // 어제 잔디심기 한 그룹원 목록 출력
+                    result = CmdService.getDidCommitStringYesterday(); // 어제 잔디심기 한 그룹원 목록 출력
                 }
                 case JDAController.CMD_LIST_YESTERDAY_FAIL -> {
                     event.deferEdit().queue(); // Set defer
-                    result = CmdService.showNotCommittedYesterday(); // 어제 잔디심기 안 한 그룹원 목록 출력
+                    result = CmdService.getNotCommittedStringYesterday(); // 어제 잔디심기 안 한 그룹원 목록 출력
                 }
                 case JDAController.CMD_LIST_TODAY_SUCCESS -> {
                     event.deferEdit().queue(); // Set defer
-                    result = CmdService.showDidCommitToday(); // 오늘 잔디심기 한 그룹원 목록 출력
+                    result = CmdService.getDidCommitStringToday(); // 오늘 잔디심기 한 그룹원 목록 출력
                 }
                 case JDAController.CMD_LIST_BY_DATE -> ModalInteraction.showDidCommitSomeday(event); // 특정 날짜에 잔디를 심은 그룹원 목록 출력
                 case JDAController.CMD_ABOUT -> {

@@ -29,7 +29,12 @@ public class GithubMap {
 		for(int i = 0; i < 7; i++) sb[i] = new StringBuilder();
 
 		// 맵 갖고 오기
-		TreeMap<String, Boolean> map = Crawler.getGithubMap(id);
+		TreeMap<String, Boolean> map;
+		try {
+			map = Crawler.getGithubMap(id);
+		} catch(Exception e) {
+			throw new Exception(e.getMessage());
+		}
 
 		// 첫 날과 마지막 날을 구함
 		Calendar firstDay = getDate(Collections.min(map.keySet()));
@@ -94,14 +99,15 @@ public class GithubMap {
 
 	}
 
-	// 특정 인원에 대한 잔디 정보를 최종 출력해줌
+	// 특정 인원에 대한 잔디 정보를 최종 구성해서 회신
 	public static String getGithubInfoString(String name, String id) {
 
 		TreeMap<String, Object> map;
 		try {
 			map = getGithubMapInfo(id);
-		} catch (Exception e) {
-			return "정확히 입력해 주세요.";
+		} catch(Exception e) {
+			log.error(e.getMessage());
+			return e.getMessage();
 		}
 
 		StringBuilder sb = new StringBuilder();

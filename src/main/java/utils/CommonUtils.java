@@ -55,7 +55,7 @@ public class CommonUtils {
         URL finalUrl = new URL(url);
         HttpURLConnection conn = (HttpURLConnection)finalUrl.openConnection();
         int responseCode = conn.getResponseCode();
-        if(responseCode == 404) throw new Exception();
+        if(responseCode == 404) throw new Exception("404");
         return httpRequest(conn);
     }
     // Send HTTP Request and return the result

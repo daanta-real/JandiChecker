@@ -16,7 +16,7 @@ public class D230110_C01_HTMLTrimTest {
             """;
 
     @Test
-    public void run() {
+    public void run() throws Exception {
         Map<String, Boolean> result = Crawler.makeMapFromTrimmed(html);
         log.debug("{}", result);
     }

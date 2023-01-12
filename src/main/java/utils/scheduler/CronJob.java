@@ -19,7 +19,7 @@ public class CronJob implements Job {
 	@Override
 	public void execute(JobExecutionContext context) {
 		try {
-			String yesterdayCommitedString = CmdService.showDidCommitYesterday();
+			String yesterdayCommitedString = CmdService.getDidCommitStringYesterday();
 			JDAMsgSender.send(Initializer.getChId(), yesterdayCommitedString);
 		} catch (Exception e) {
 			JDAMsgSender.send(Initializer.getChId(), "정보 획득에 실패하였습니다.");
