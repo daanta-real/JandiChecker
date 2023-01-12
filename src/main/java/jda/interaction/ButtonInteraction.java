@@ -22,8 +22,10 @@ public class ButtonInteraction {
             // Run each command
             switch(cmd) {
                 case JDAController.CMD_ME -> {
-                    // Interaction을 보내준 객체를 Spinner로 바꾼다.
-                    // 여기에서 deferReply()로 하면 답변 시 기본 메뉴판이 치워지지 않으므로, deferEdit()를 사용해야 한다.
+                    // Interaction을 보내준 객체를 spinner로 바꾼다.
+                    // 여기에서 deferReply()로 하면, 답신이 메세지가 아닌 답글 형태로만 달리게 되고
+                    // "원본 메시지가 삭제되었어요"라는 꼬리표가 붙고 또 spinner도 없어지지 않는다.
+                    // deferEdit()를 사용해야 되는 것 같다.
                     event.deferEdit().queue();
                     result = CmdService.showJandiMapOfMe(event.getUser()); // 내 잔디정보를 획득
                 }

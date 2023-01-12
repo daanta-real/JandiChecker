@@ -12,7 +12,7 @@ import java.util.Map;
 // 정보 출력 메소드 모음
 @Slf4j
 public class CmdService {
-	
+
 	/*
 	 * 1. Single jandi map services
 	 */
@@ -95,7 +95,7 @@ public class CmdService {
 	}
 
 	// 오늘 잔디심기에 성공한 그룹원 목록을 리턴
-	public static String showDidCommitToday() throws Exception {
+	public static String showDidCommitToday() {
 		return Checker.getDidCommittedToday();
 	}
 

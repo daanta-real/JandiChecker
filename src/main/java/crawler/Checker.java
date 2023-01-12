@@ -96,17 +96,25 @@ public class Checker {
 	}
 
 	// 오늘 잔디를 심은 그룹원 목록을 회신
-	public static String getDidCommittedToday() throws Exception {
+	public static String getDidCommittedToday() {
 
 		log.info("오늘 잔디를 심은 사람의 목록을 회신 요청받았습니다.");
 
-		// 날짜 String 만들기
-		Calendar c = Calendar.getInstance();
-		String day = CommonUtils.sdf_thin.format(c.getTime());
+		try {
+			// 날짜 String 만들기
+			Calendar c = Calendar.getInstance();
+			String day = CommonUtils.sdf_thin.format(c.getTime());
 
-		String date_notice = CommonUtils.sdf_dayweek.format(new Date());
-		String[] list = getCommitListByDay(day, false);
-		return "```md\n[오늘 잔디 심기에 성공한 사람은 " + list[0] + "명...!]: " + date_notice + "\n" + list[1] + "```";
+			String date_notice = CommonUtils.sdf_dayweek.format(new Date());
+			String[] list = getCommitListByDay(day, false);
+			return "```md\n[오늘 잔디 심기에 성공한 사람은 " + list[0] + "명...!]: " + date_notice + "\n" + list[1] + "```";
+		} catch(Exception e) {
+			return """
+					정보 획득에 실패하였습니다.
+					```md
+					아직 오늘자의 커밋이 비회원 유저에게 공개되기 전이라면, 오늘자 잔디가 조회되지 않을 수도 있습니다.```
+					""";
+		}
 
 	}
 
@@ -116,25 +124,35 @@ public class Checker {
 		// 미입력 걸러내기
 		if (StringUtils.isEmpty(date)) return "정확히 입력해 주세요.";
 
-		// 날짜 양식 불만족 시 리턴
+		// 값 검사: 날짜 양식 불만족 시 리턴
 		String date_today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-		if(
-				!CommonUtils.isValidDate(date) // 주어진 문자열로 날짜를 만들 수 없을 경우
-				|| date_today.compareTo(date) < 0) { // date가 현재보다 미래 날짜일 경우 -1이 되어 불만족
-			return "날짜를 잘못 입력하셨습니다.";
-		}
+		if(!CommonUtils.isValidDate(date)) return "형식에 맞지 않는 날짜 문자열을 입력하셨습니다.";
+		if(date_today.compareTo(date) < 0) return "날짜를 잘못 입력하셨습니다."; // date가 현재보다 미래 날짜일 경우 -1이 되어 불만족
+
+		// 연, 월, 일 문자열 만들어 날짜 객체 구하기
 		String y = date.substring(0, 4);
 		String m = String.valueOf(Integer.parseInt(date.substring(4, 6)) - 1);
 		String d = date.substring(6, 8);
-
-		// 날짜 String들 만들기
 		Calendar c = CommonUtils.getCalendar(y, m, d);
+
+		// 조회하고자 하는 날짜 문자열 만들기
 		String day = CommonUtils.sdf_thin.format(c.getTime());
 
 		// 본실행
-		String[] list = getCommitListByDay(day, false);
-		String day_notice = CommonUtils.sdf_dayweek.format(c.getTime());
-		return "```md\n[" + day_notice + " 에 잔디심기에 성공한 사람 " + list[0] + "명]: " + day_notice + "\n" + list[1] + "```";
+		try {
+			String[] list = getCommitListByDay(day, false);
+			String day_notice = CommonUtils.sdf_dayweek.format(c.getTime());
+			return "```md\n[" + day_notice + " 에 잔디심기에 성공한 사람 " + list[0] + "명]: " + day_notice + "\n" + list[1] + "```";
+		} catch(Exception e) {
+			Calendar todayCalendar = Calendar.getInstance();
+			String todayStr = CommonUtils.sdf_thin.format(todayCalendar.getTime());
+			if(todayStr.equals(date)) return """
+					정보 획득에 실패하였습니다.
+					```md
+					아직 오늘자의 커밋이 비회원 유저에게 공개되기 전이라면, 오늘자 잔디가 조회되지 않을 수도 있습니다.```
+					""";
+			else throw new Exception();
+		}
 
 	}
 
