@@ -3,6 +3,7 @@ package crawler;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 
 import lombok.extern.slf4j.Slf4j;
@@ -96,8 +97,17 @@ public class Checker {
 
 	// 오늘 잔디를 심은 그룹원 목록을 회신
 	public static String getDidCommittedToday() throws Exception {
-		String date_today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-		return getDidCommittedSomeday(date_today);
+
+		log.info("오늘 잔디를 심은 사람의 목록을 회신 요청받았습니다.");
+
+		// 날짜 String 만들기
+		Calendar c = Calendar.getInstance();
+		String day = CommonUtils.sdf_thin.format(c.getTime());
+
+		String date_notice = CommonUtils.sdf_dayweek.format(new Date());
+		String[] list = getCommitListByDay(day, false);
+		return "```md\n[오늘 잔디 심기에 성공한 사람은 " + list[0] + "명...!]: " + date_notice + "\n" + list[1] + "```";
+
 	}
 
 	// 특정 날짜에 잔디를 심은 그룹원 목록을 회신
@@ -124,7 +134,7 @@ public class Checker {
 		// 본실행
 		String[] list = getCommitListByDay(day, false);
 		String day_notice = CommonUtils.sdf_dayweek.format(c.getTime());
-		return "```md\n[" + day_notice + " 에 잔디심기에 성공한 사람 " + list[0] + "명]:\n" + list[1] + "```";
+		return "```md\n[" + day_notice + " 에 잔디심기에 성공한 사람 " + list[0] + "명]: " + day_notice + "\n" + list[1] + "```";
 
 	}
 

@@ -4,12 +4,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import translate.TranslationService;
 import ui.UIMain;
 
@@ -205,6 +208,56 @@ public class Initializer {
 
 	private static void loadProperties_googleTranslationAPI() throws Exception {
 		TranslationService.init();
+	}
+
+
+	// 그룹원명을 입력하면 깃헙 ID를 리턴
+	public static String getGitHubIDByMemberName(String memberName) throws Exception {
+		for(String[] s: Initializer.getMembers()) {
+			String yamlMemberName = s[0];
+			if(
+					yamlMemberName.equals(memberName)
+					|| yamlMemberName.substring(1).equals(memberName)
+			) {
+				return s[1]; // Member's GitHub ID from yaml
+			}
+		}
+		throw new Exception();
+	}
+
+	// 디스코드 ID를 입력하면 멤버명을 리턴
+	public static String getMemberNameByDiscordID(String discordID) throws Exception {
+		for(String[] member: getMembers()) {
+			if(member.length < 3) continue;
+			String yamlDiscordID = member[2];
+			if(discordID.equals(yamlDiscordID)) {
+				String memberName = member[0];
+				if(!StringUtils.isEmpty(memberName)) return memberName;
+			}
+		}
+		throw new Exception();
+	}
+
+	// 디스코드 ID로 그룹원의 이름과 GitHub ID를 Map으로 리턴
+	public static Map<String, String> getMemberInfoesByDiscordID(String discordID) throws Exception {
+
+		for(String[] member: Initializer.getMembers()) {
+			if(member.length < 3) continue;
+			String yamlDiscordID = member[2];
+			if(discordID.equals(yamlDiscordID)) {
+				String memberName = member[0];
+				String memberGitHubID = member[1];
+				if(!StringUtils.isEmpty(memberName) && !StringUtils.isEmpty(memberGitHubID)) {
+					Map<String, String> map = new HashMap<>();
+					map.put("name", memberName);
+					map.put("gitHubID", memberGitHubID);
+					return map;
+				}
+			}
+		}
+
+		throw new Exception();
+
 	}
 
 }

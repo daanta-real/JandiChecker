@@ -7,23 +7,12 @@ import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.entities.User;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Map;
+
 // 정보 출력 메소드 모음
 @Slf4j
 public class CmdService {
-
-	/*
-	 * 0. Libraries
-	 */
-
-	// 이름을 입력하면 깃헙 ID를 리턴
-	public static String getGitHubIDByGroupName(String name) {
-		for(String[] s: Initializer.getMembers())
-			if(s[0].equals(name) || s[0].substring(1).equals(name)) return s[1];
-		return null;
-	}
-
-
-
+	
 	/*
 	 * 1. Single jandi map services
 	 */
@@ -31,24 +20,18 @@ public class CmdService {
 	// 커맨드를 요청한 사람 스스로의 잔디정보를 리턴
 	public static String showJandiMapOfMe(User user) {
 
-		// ID 구하기
+		// 이름과 ID 구하기
 		String name = null;
-		String eventDiscordID = user.getAsTag();
-		String gitHubID = null;
-		for(String[] member: Initializer.getMembers()) {
-			if(member.length < 3) continue;
-			String yamlDiscordID = member[2];
-			if(eventDiscordID.equals(yamlDiscordID)) {
-				String memberName = member[0];
-				String memberGitHubID = member[1];
-				if(!StringUtils.isEmpty(memberName)) name = memberName;
-				if(!StringUtils.isEmpty(memberGitHubID)) gitHubID = memberGitHubID;
-			}
+		String discordID = user.getAsTag();
+		Map<String, String> memberInfo;
+		try {
+			memberInfo = Initializer.getMemberInfoesByDiscordID(discordID);
+		} catch(Exception e) {
+			return name + "님의 GitHub ID를 찾는 데 실패했습니다.";
 		}
-		if(StringUtils.isEmpty(gitHubID)) return name + "님의 GitHub ID를 찾는 데 실패했습니다.";
 
 		// 종합잔디정보 리턴
-		return showJandiMapByIdAndName(name, gitHubID);
+		return showJandiMapByIdAndName(memberInfo.get("name"), memberInfo.get("gitHubID"));
 
 	}
 
@@ -75,16 +58,21 @@ public class CmdService {
 
 	}
 
-	public static String showJandiMapByName(String name) { // id로만
+	public static String showJandiMapByName(String name) { // 이름으로만
 
 		// 미입력 걸러내기
 		if(StringUtils.isEmpty(name)) return "찾고자 하는 그룹원 이름을 입력해 주세요.";
 
-		// ID 구하기
-		String id = getGitHubIDByGroupName(name);
-		if(StringUtils.isEmpty(id)) return "해당 이름으로 그룹원을 찾지 못하였습니다.";
-		
-		// 종합잔디정보 리턴
+		// 이름이 있으니 ID를 구함
+		String id;
+		try {
+			id = Initializer.getGitHubIDByMemberName(name);
+			if (StringUtils.isEmpty(id)) throw new Exception();
+		} catch (Exception e) {
+			return "해당 이름으로 그룹원을 찾지 못하였습니다.";
+		}
+
+		// 이름과 ID로 종합잔디정보 리턴
 		log.info("그룹원 '{}' (ID '{}')의 종합 잔디정보 호출을 명령받았습니다.", name, id);
 		return GithubMap.getGithubInfoString(name, id);
 
@@ -106,7 +94,7 @@ public class CmdService {
 		return Checker.getDidCommitYesterday();
 	}
 
-	// 특정일에 잔디심기에 성공한 그룹원 목록을 리턴
+	// 오늘 잔디심기에 성공한 그룹원 목록을 리턴
 	public static String showDidCommitToday() throws Exception {
 		return Checker.getDidCommittedToday();
 	}
