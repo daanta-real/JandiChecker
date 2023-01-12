@@ -6,8 +6,12 @@ import init.Initializer;
 import jda.JDAController;
 import jda.JDAMsgSender;
 import lombok.extern.slf4j.Slf4j;
+import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Objects;
 
 // 슬래시 메뉴판을 사용한 커맨드 입력에 따른 동작 실행
 @Slf4j
@@ -28,8 +32,8 @@ public class SlashInteraction {
         String result;
         try {
             result = switch (cmd) {
-                case JDAController.CMD_ME                     -> CmdService.showJandiMapOfMeWithSlash(event); // 내 잔디정보를 출력
-                case JDAController.CMD_JANDIYA                -> ChatService.getChatAnswerWithSlash(event, option); // 일반적인 질문에 답하는 AI
+                case JDAController.CMD_ME                     -> CmdService.showJandiMapOfMe(event.getUser()); // 내 잔디정보를 출력
+                case JDAController.CMD_JANDIYA                -> makeChatAnswer(event, option); // 일반적인 질문에 답하는 AI
                 case JDAController.CMD_NAME                   -> CmdService.showJandiMapByName(option); // 특정 이름의 그룹원의 종합 잔디정보 출력
                 case JDAController.CMD_ID                     -> CmdService.showJandiMapById(option); // 특정 Github ID의 종합 잔디정보 출력
                 case JDAController.CMD_LIST_YESTERDAY_SUCCESS -> CmdService.showDidCommitYesterday(); // 어제 잔디심기 한 그룹원 목록 출력
@@ -46,6 +50,28 @@ public class SlashInteraction {
         // Send
         result = JDAMsgSender.msgTrim(result);
         event.getHook().sendMessage(result).queue();
+
+    }
+
+    private static String makeChatAnswer(SlashCommandInteractionEvent event, String questionKor) {
+
+        User user = Objects.requireNonNull(event.getMember()).getUser();
+        String name = user.getName();
+        if(StringUtils.isEmpty(name)) return "질문자의 ID가 명확하지 않습니다.";
+
+        String answerKor = ChatService.getChatAnswer(questionKor);
+
+        return """
+                        🤔 %s님의 질문... 🤔```md
+                        %s
+                        ```
+                        \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 ChatGPT AI님 가라사대... \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
+                        ```
+                        %s
+                                            
+                        📌 "잔디야 bla bla..." 이런 식으로 질문하시면 약간 더 긴 답변을 받을 수 있습니다.
+                        ```
+                        """.formatted(name, questionKor, answerKor);
 
     }
 

@@ -3,15 +3,9 @@ package chat;
 import com.theokanning.openai.OpenAiService;
 import com.theokanning.openai.completion.CompletionRequest;
 import init.Initializer;
-import jda.JDAMsgSender;
 import lombok.extern.slf4j.Slf4j;
-import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import org.apache.commons.lang3.StringUtils;
 import translate.TranslationService;
 import utils.CommonUtils;
-
-import java.util.Objects;
 
 // ChatGPT API related services
 @Slf4j
@@ -21,54 +15,23 @@ public class ChatService {
     private ChatService() {
     }
 
-    // Received event from msg event
-    public static String getChatAnswerByMsgCmd(String questionKor) {
-        String answerKor = getChatAnswerByQuestion(questionKor);
-        String addSays = "\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 ChatGPT AI님 가라사대... \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93```" + answerKor + "```";
-        String unescaped = CommonUtils.unescapeHTMLEntity(addSays);
-        return JDAMsgSender.msgTrim(unescaped);
-    }
-
-    // Received event from slash event
-    public static String getChatAnswerWithSlash(SlashCommandInteractionEvent event, String questionKor) {
-
-        // Make name and answer string
-        User user = Objects.requireNonNull(event.getMember()).getUser();
-        String name = user.getName();
-        if(StringUtils.isEmpty(name)) return "질문자의 ID가 명확하지 않습니다.";
-        String answerKor = getChatAnswerByQuestion(questionKor);
-        String unescaped = CommonUtils.unescapeHTMLEntity(answerKor);
-
-        // Make chat message and return
-        return """
-                🤔 %s님의 질문... 🤔```md
-                %s
-                ```
-                \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 ChatGPT AI님 가라사대... \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
-                ```
-                %s
-                
-                📌 "잔디야 bla bla..." 이런 식으로 질문하시면 약간 더 긴 답변을 받을 수 있습니다.
-                ```
-                """.formatted(name, questionKor, unescaped);
-
-    }
-
     // Answering method core
-    public static String getChatAnswerByQuestion(String questionKor) {
+    public static String getChatAnswer(String questionKor) {
 
         // 1. Prepare
         log.debug("접수된 원본 질문: <<<{}>>> (길이 {})", questionKor, questionKor.length());
 
         // 2. KOR -> ENG
         String questionEng = TranslationService.translateKorToEng(questionKor);
-        log.debug("영어로 번역된 질문: <<<{}>>> (길이 {})", questionEng, questionEng.length());
+        String unescapedEng = CommonUtils.unescapeHTMLEntity(questionEng);
+
+        log.debug("영어로 번역된 질문: <<<{}>>> (길이 {})", unescapedEng, unescapedEng.length());
 
         // 3. Make inquire
         StringBuilder sb = new StringBuilder();
         OpenAiService service = new OpenAiService(Initializer.getToken_chatGPTAPI());
         CompletionRequest completionRequest = CompletionRequest.builder()
-                .prompt(questionEng) // The question
+                .prompt(unescapedEng) // The question
                 .model("text-davinci-001")   // Strongest AI (has very high risk of timeout)
                 .maxTokens(500)              // Max length of answer string
                 .temperature(0d)             // Most strict answer
@@ -86,15 +49,16 @@ public class ChatService {
 
         // 5. ENG -> KOR
         String answerKor = TranslationService.translateEngToKor(answerEng);
-        log.debug("한국어로 번역된 답변: <<<{}>>>", answerKor);
+        String unescapedKor = CommonUtils.unescapeHTMLEntity(answerKor);
+        log.debug("한국어로 번역된 답변: <<<{}>>>", unescapedKor);
 
         // 6. If the result have unintentional chars("? "), trim it
-        if(answerKor.startsWith("? ")) {
-            answerKor = answerKor.substring(2);
+        if(unescapedKor.startsWith("? ")) {
+            unescapedKor = unescapedKor.substring(2);
         }
 
         // 7. Return result
-        return answerKor;
+        return unescapedKor;
 
     }
 

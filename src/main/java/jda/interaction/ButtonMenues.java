@@ -1,4 +1,4 @@
-package cmd;
+package jda.interaction;
 
 import jda.JDAController;
 import net.dv8tion.jda.api.entities.emoji.Emoji;
@@ -18,11 +18,11 @@ public class ButtonMenues extends ListenerAdapter {
             Button.secondary(JDAController.CMD_NAME, "이름으로 잔디 조회").withEmoji(Emoji.fromUnicode("\uD83D\uDD0D")),
             Button.secondary(JDAController.CMD_ID, "ID로 잔디 조회").withEmoji(Emoji.fromUnicode("\uD83D\uDD0D")),
             Button.primary(JDAController.CMD_LIST_YESTERDAY_SUCCESS, "어제 잔디 심은 사람").withEmoji(Emoji.fromUnicode("\uD83D\uDCAF")),
-            Button.secondary(JDAController.CMD_LIST_YESTERDAY_FAIL, "어제 잔디 건너뛴 사람").withEmoji(Emoji.fromUnicode("❕")),
             Button.primary(JDAController.CMD_LIST_TODAY_SUCCESS, "오늘 잔디 심은 사람").withEmoji(Emoji.fromUnicode("\uD83D\uDCAF")),
+            Button.secondary(JDAController.CMD_LIST_YESTERDAY_FAIL, "어제 잔디 건너뛴 사람").withEmoji(Emoji.fromUnicode("❕")),
             Button.secondary(JDAController.CMD_LIST_BY_DATE, "특정일 잔디 심은 사람").withEmoji(Emoji.fromUnicode("\uD83D\uDDD3")),
             Button.primary(JDAController.CMD_ABOUT, "대하여..").withEmoji(Emoji.fromUnicode("❔")),
-            Button.danger(JDAController.CMD_CLOSE, "닫기..").withEmoji(Emoji.fromUnicode("✖"))
+            Button.danger(JDAController.CMD_CLOSE, "닫기").withEmoji(Emoji.fromUnicode("✖"))
     };
 
     public static void showButtonMenues(MessageReceivedEvent e) {

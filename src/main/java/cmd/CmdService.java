@@ -5,8 +5,6 @@ import crawler.GithubMap;
 import init.Initializer;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import org.apache.commons.lang3.StringUtils;
 
 // 정보 출력 메소드 모음
@@ -31,9 +29,6 @@ public class CmdService {
 	 */
 
 	// 커맨드를 요청한 사람 스스로의 잔디정보를 리턴
-	public static String showJandiMapOfMeWithSlash(SlashCommandInteractionEvent event) {
-		return showJandiMapOfMe(event.getUser());
-	}
 	public static String showJandiMapOfMe(User user) {
 
 		// ID 구하기
@@ -80,10 +75,6 @@ public class CmdService {
 
 	}
 
-	// 특정 그룹원 이름으로 종합 잔디정보를 리턴
-	public static String showJandiMapByNameWithButton(ButtonInteractionEvent event) { // id로만
-		return null; // TODO
-	}
 	public static String showJandiMapByName(String name) { // id로만
 
 		// 미입력 걸러내기
@@ -121,9 +112,6 @@ public class CmdService {
 	}
 
 	// 특정일에 잔디심기에 성공한 그룹원 목록을 리턴
-	public static String showDidCommitSomedayWithButton(ButtonInteractionEvent event) {
-		return null; // TODO
-	}
 	public static String showDidCommitSomeday(String date) throws Exception {
 		return Checker.getDidCommittedSomeday(date);
 	}
