@@ -124,7 +124,7 @@ public class Checker {
 		// 본실행
 		String[] list = getCommitListByDay(day, false);
 		String day_notice = CommonUtils.sdf_dayweek.format(c.getTime());
-		return "```md\n[" + date+ "에 잔디심기에 성공한 사람 " + list[0] + "명 명단]: " + day_notice + "\n" + list[1] + "```";
+		return "```md\n[" + day_notice + " 에 잔디심기에 성공한 사람 " + list[0] + "명]:\n" + list[1] + "```";
 
 	}
 

@@ -31,13 +31,10 @@ public class CmdService {
 	 */
 
 	// 커맨드를 요청한 사람 스스로의 잔디정보를 리턴
-	public static String showJandiMapOfMeWithButton(ButtonInteractionEvent event) {
-		return showJandiMapOfMe(event.getUser());
-	}
 	public static String showJandiMapOfMeWithSlash(SlashCommandInteractionEvent event) {
 		return showJandiMapOfMe(event.getUser());
 	}
-	private static String showJandiMapOfMe(User user) {
+	public static String showJandiMapOfMe(User user) {
 
 		// ID 구하기
 		String name = null;

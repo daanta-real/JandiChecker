@@ -1,6 +1,5 @@
 package jda.interaction;
 
-import chat.ChatService;
 import cmd.CmdService;
 import init.Initializer;
 import jda.JDAController;
@@ -20,38 +19,31 @@ public class ButtonInteraction {
         String result = null;
         try {
 
-            // Print the loading spinner
-            event.deferEdit().queue();
-
             // Run each command
             switch(cmd) {
                 case JDAController.CMD_ME -> {
-                    CmdService.showJandiMapOfMeWithButton(event); // 내 잔디정보를 출력
+                    event.deferEdit().queue(); // Print the loading spinner
+                    result = CmdService.showJandiMapOfMe(event.getUser()); // 내 잔디정보를 출력
+                    event.getMessage().delete().queue();
                 }
                 case JDAController.CMD_JANDIYA -> {
-                    ChatService.getChatAnswerWithButton(event); // 일반적인 질문에 답하는 AI
+                    event.deferEdit().queue(); // Print the loading spinner
+                    // TODO: 텍스트 입력 모달
+                    //ChatService.getChatAnswerWithButton(event); // 일반적인 질문에 답하는 AI
                 }
                 case JDAController.CMD_NAME -> {
                     CmdService.showJandiMapByNameWithButton(event); // 특정 이름의 그룹원의 종합 잔디정보 출력
+                    // TODO: 텍스트 입력 모달
                 }
-                case JDAController.CMD_ID -> {
-                    ModalInteraction.showJandiMapById(event); // 특정 Github ID의 종합 잔디정보 출력
-                }
-                case JDAController.CMD_LIST_YESTERDAY_SUCCESS -> {
-                    result = CmdService.showDidCommitYesterday(); // 어제 잔디심기 한 그룹원 목록 출력
-                }
-                case JDAController.CMD_LIST_YESTERDAY_FAIL -> {
-                    result = CmdService.showNotCommittedYesterday(); // 어제 잔디심기 안 한 그룹원 목록 출력
-                }
-                case JDAController.CMD_LIST_TODAY_SUCCESS -> {
-                    result = CmdService.showDidCommitToday(); // 오늘 잔디심기 한 그룹원 목록 출력
-                }
+                case JDAController.CMD_ID -> ModalInteraction.showJandiMapById(event); // 특정 Github ID의 종합 잔디정보 출력
+                case JDAController.CMD_LIST_YESTERDAY_SUCCESS -> result = CmdService.showDidCommitYesterday(); // 어제 잔디심기 한 그룹원 목록 출력
+                case JDAController.CMD_LIST_YESTERDAY_FAIL -> result = CmdService.showNotCommittedYesterday(); // 어제 잔디심기 안 한 그룹원 목록 출력
+                case JDAController.CMD_LIST_TODAY_SUCCESS -> result = CmdService.showDidCommitToday(); // 오늘 잔디심기 한 그룹원 목록 출력
                 case JDAController.CMD_LIST_BY_DATE -> {
+                    // TODO: 텍스트 입력 모달
                     CmdService.showDidCommitSomedayWithButton(event); // 특정 날짜에 잔디를 심은 그룹원 목록 출력
                 }
-                case JDAController.CMD_ABOUT -> {
-                    result = Initializer.INFO_STRING; // 소개말
-                }
+                case JDAController.CMD_ABOUT -> result = Initializer.INFO_STRING; // 소개말
                 case JDAController.CMD_CLOSE -> {
                     event.getMessage().delete().queue();
                     return;
@@ -65,9 +57,10 @@ public class ButtonInteraction {
 
         // TODO
         // Switch문의 리턴값 중에 텍스트 모달 입력 등이 있는 경우 result가 null이다.
-        event.getMessage().delete().queue();
         if(!StringUtils.isEmpty(result)) {
             event.getChannel().sendMessage(result).queue();
+        } else {
+            System.out.println("result가 null입니다. 메세지를 표시하지 않습니다.");
         }
 
     }

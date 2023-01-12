@@ -7,7 +7,6 @@ import jda.JDAMsgSender;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
-import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import org.apache.commons.lang3.StringUtils;
 import translate.TranslationService;
 import utils.CommonUtils;
@@ -30,11 +29,6 @@ public class ChatService {
         return JDAMsgSender.msgTrim(unescaped);
     }
 
-    // Received event from button event
-    public static String getChatAnswerWithButton(ButtonInteractionEvent event) {
-        return null; // TODO
-    }
-
     // Received event from slash event
     public static String getChatAnswerWithSlash(SlashCommandInteractionEvent event, String questionKor) {
 
@@ -53,7 +47,8 @@ public class ChatService {
                 \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 ChatGPT AI님 가라사대... \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
                 ```
                 %s
-                (📌 "잔디야 bla bla..." 이런 식으로 질문하시면 약간 더 긴 답변을 받을 수 있습니다!)
+                
+                📌 "잔디야 bla bla..." 이런 식으로 질문하시면 약간 더 긴 답변을 받을 수 있습니다.
                 ```
                 """.formatted(name, questionKor, unescaped);
 
