@@ -10,6 +10,7 @@ import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import org.apache.commons.lang3.StringUtils;
+import translate.TranslationService;
 
 import java.util.Objects;
 
@@ -40,8 +41,8 @@ public class SlashInteraction {
                 case JDAController.CMD_LIST_YESTERDAY_FAIL    -> CmdService.getNotCommittedStringYesterday(); // 어제 잔디심기 안 한 그룹원 목록 출력
                 case JDAController.CMD_LIST_TODAY_SUCCESS     -> CmdService.getDidCommitStringToday(); // 오늘 잔디심기 한 그룹원 목록 출력
                 case JDAController.CMD_LIST_BY_DATE           -> CmdService.getDidCommitStringSomeday(option); // 특정 날짜에 잔디를 심은 그룹원 목록 출력
-                case JDAController.CMD_TRANSLATE_KR_TO_EN     -> CmdService.getTranslatedString_KR_to_EN(option); // 한영번역
-                case JDAController.CMD_TRANSLATE_EN_TO_KR     -> CmdService.getTranslatedString_EN_to_KR(option); // 영한번역
+                case JDAController.CMD_TRANSLATE_EN_TO_KR     -> getTranslatedString_EN_to_KR(event, option); // 영한번역
+                case JDAController.CMD_TRANSLATE_KR_TO_EN     -> getTranslatedString_KR_to_EN(event, option); // 한영번역
                 case JDAController.CMD_ABOUT                  -> Initializer.INFO_STRING; // 소개말
                 default -> throw new Exception();
             };
@@ -64,16 +65,54 @@ public class SlashInteraction {
         String answerKor = ChatService.getChatAnswer(questionKor);
 
         return """
-                        🤔 %s님의 질문... 🤔```md
-                        %s
-                        ```
-                        \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 ChatGPT AI님 가라사대... \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
-                        ```
-                        %s
-                                            
-                        📌 "잔디야 bla bla..." 이런 식으로 질문하시면 약간 더 긴 답변을 받을 수 있습니다.
-                        ```
-                        """.formatted(name, questionKor, answerKor);
+                🤔 %s님의 질문... 🤔```md
+                %s
+                ```
+                \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 ChatGPT AI님 가라사대... \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
+                ```
+                %s
+                
+                📌 "잔디야 bla bla..." 이런 식으로 질문하시면 약간 더 긴 답변을 받을 수 있습니다.
+                ```
+                """.formatted(name, questionKor, answerKor);
+
+    }
+
+    private static String getTranslatedString_EN_to_KR(SlashCommandInteractionEvent event, String contentKor) {
+
+        User user = Objects.requireNonNull(event.getMember()).getUser();
+        String name = user.getName();
+
+        String answerKor = TranslationService.translateEngToKor(contentKor);
+
+        return """
+                🤔 %s님의 입력... 🤔```md
+                %s
+                ```
+                \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 Google이 번역한 문장.. \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
+                ```
+                %s
+                ```
+                """.formatted(name, contentKor, answerKor);
+
+    }
+
+    private static String getTranslatedString_KR_to_EN(SlashCommandInteractionEvent event, String contentKor) {
+
+        User user = Objects.requireNonNull(event.getMember()).getUser();
+        String name = user.getName();
+
+        String answerKor = TranslationService.translateKorToEng(contentKor);
+
+        return """
+                🤔 %s님의 질문... 🤔```md
+                %s
+                ```
+                \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 Google이 번역한 문장.. \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
+                ```
+                %s
+                ```
+                """.formatted(name, contentKor, answerKor);
 
     }
 
