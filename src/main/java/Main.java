@@ -2,8 +2,8 @@
 import lombok.extern.slf4j.Slf4j;
 import jda.JDAController;
 
-import utils.logging.JTextAppender;
-import utils.scheduler.CronScheduler;
+import logging.JTextAppender;
+import scheduler.CronScheduler;
 
 import init.Initializer;
 

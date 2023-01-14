@@ -1,4 +1,4 @@
-package utils.logging;
+package logging;
 
 import ch.qos.logback.classic.Logger;
 import ch.qos.logback.classic.LoggerContext;

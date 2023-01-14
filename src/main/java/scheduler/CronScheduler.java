@@ -1,4 +1,4 @@
-package utils.scheduler;
+package scheduler;
 
 import static org.quartz.CronScheduleBuilder.cronSchedule;
 import static org.quartz.JobBuilder.newJob;
