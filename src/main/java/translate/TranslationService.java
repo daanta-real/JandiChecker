@@ -5,6 +5,7 @@ import com.google.cloud.translate.Translate;
 import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
 import lombok.extern.slf4j.Slf4j;
+import utils.CommonUtils;
 
 import java.io.FileInputStream;
 
@@ -35,12 +36,14 @@ public class TranslationService {
 
     // Translation method: Kor to Eng
     public static String translateKorToEng(String text) {
-        return executeTranslate("ko", "en", text);
+        String result = executeTranslate("ko", "en", text);
+        return CommonUtils.unescapeHTMLEntity(result);
     }
 
     // Translation method: Eng to Kor
     public static String translateEngToKor(String text) {
-        return executeTranslate("en", "ko", text);
+        String result = executeTranslate("en", "ko", text);
+        return CommonUtils.unescapeHTMLEntity(result);
     }
 
 }
