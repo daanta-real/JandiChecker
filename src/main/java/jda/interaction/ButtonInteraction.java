@@ -3,6 +3,7 @@ package jda.interaction;
 import cmd.CmdService;
 import init.Initializer;
 import jda.JDAController;
+import jda.menu.ModalMenu;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import org.apache.commons.lang3.StringUtils;
@@ -29,9 +30,9 @@ public class ButtonInteraction {
                     event.deferEdit().queue();
                     result = CmdService.getJandiMapStringOfMe(event.getUser()); // 내 잔디정보를 획득
                 }
-                case JDAController.CMD_JANDIYA -> ModalInteraction.getChatAnswer(event); // 일반적인 질문에 답하는 AI
-                case JDAController.CMD_NAME -> ModalInteraction.showJandiMapByName(event); // 특정 이름의 그룹원의 종합 잔디정보 출력
-                case JDAController.CMD_ID -> ModalInteraction.showJandiMapById(event); // 특정 Github ID의 종합 잔디정보 출력
+                case JDAController.CMD_JANDIYA -> ModalMenu.getChatAnswer(event); // 일반적인 질문에 답하는 AI
+                case JDAController.CMD_NAME -> ModalMenu.showJandiMapByName(event); // 특정 이름의 그룹원의 종합 잔디정보 출력
+                case JDAController.CMD_ID -> ModalMenu.showJandiMapById(event); // 특정 Github ID의 종합 잔디정보 출력
                 case JDAController.CMD_LIST_YESTERDAY_SUCCESS -> {
                     event.deferEdit().queue(); // Set defer
                     result = CmdService.getDidCommitStringYesterday(); // 어제 잔디심기 한 그룹원 목록 출력
@@ -44,7 +45,7 @@ public class ButtonInteraction {
                     event.deferEdit().queue(); // Set defer
                     result = CmdService.getDidCommitStringToday(); // 오늘 잔디심기 한 그룹원 목록 출력
                 }
-                case JDAController.CMD_LIST_BY_DATE -> ModalInteraction.showDidCommitSomeday(event); // 특정 날짜에 잔디를 심은 그룹원 목록 출력
+                case JDAController.CMD_LIST_BY_DATE -> ModalMenu.showDidCommitSomeday(event); // 특정 날짜에 잔디를 심은 그룹원 목록 출력
                 case JDAController.CMD_ABOUT -> {
                     event.deferEdit().queue(); // Set defer
                     result = Initializer.INFO_STRING; // 소개말
@@ -60,7 +61,8 @@ public class ButtonInteraction {
             result = "정보 획득에 실패하였습니다.";
         }
 
-        // Switch case문 중 모달 입력 등이 있다면, result가 초기값인 null이므로, 여기를 실행하지 않는다.
+        // 위의 switch문에서 모달 호출 없이 단순 String만 가져왔다면 여기가 실행된다.
+        // 반대로 모달 입력 등이 있다면 여기를 실행하지 않는다(result가 초기값인 null이므로).
         if(!StringUtils.isEmpty(result)) {
 
             // Show result

@@ -1,4 +1,4 @@
-package jda.interaction;
+package jda.menu;
 
 import jda.JDAController;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
@@ -8,7 +8,7 @@ import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SlashMenus {
+public class SlashMenu {
 
     public static List<CommandData> getMenusList() {
 

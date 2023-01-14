@@ -1,4 +1,4 @@
-package jda.interaction;
+package jda.menu;
 
 import jda.JDAController;
 import net.dv8tion.jda.api.entities.emoji.Emoji;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ButtonMenues extends ListenerAdapter {
+public class ButtonMenu extends ListenerAdapter {
 
     private static final Button[] btn = new Button[] {
             Button.success(JDAController.CMD_ME, "내 잔디 조회").withEmoji(Emoji.fromUnicode("📊")),

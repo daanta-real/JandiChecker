@@ -1,6 +1,7 @@
 package jda;
 
 import jda.interaction.*;
+import jda.menu.SlashMenu;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
@@ -60,7 +61,7 @@ public class JDAController extends ListenerAdapter {
 		// 슬래시 커맨드 추가
 		log.info("");
 		log.info("[잔디체커 슬래시 커맨드 로드]");
-		List<CommandData> cmdList = SlashMenus.getMenusList();
+		List<CommandData> cmdList = SlashMenu.getMenusList();
 		instance.updateCommands().addCommands(cmdList).queue();
 		log.info("슬래시 커맨드 추가 완료.");
 
