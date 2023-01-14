@@ -10,7 +10,7 @@ import utils.CommonUtils;
 
 // 메세지를 보내는 메소드를 모은 곳
 @Slf4j
-public class JDAMsgSender {
+public class JDAMsgService {
 
 	// 메세지 보내는 원본 메소드
 	public static void send(TextChannel channel, String msg) {

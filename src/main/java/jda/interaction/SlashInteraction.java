@@ -4,7 +4,7 @@ import chat.ChatService;
 import cmd.CmdService;
 import init.Initializer;
 import jda.JDAController;
-import jda.JDAMsgSender;
+import jda.JDAMsgService;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
@@ -62,7 +62,7 @@ public class SlashInteraction {
         }
 
         // Send
-        result = JDAMsgSender.msgTrim(result);
+        result = JDAMsgService.msgTrim(result);
         event.getHook().sendMessage(result).queue();
 
     }

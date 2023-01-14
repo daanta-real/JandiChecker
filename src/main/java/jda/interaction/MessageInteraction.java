@@ -1,7 +1,7 @@
 package jda.interaction;
 
 import chat.ChatService;
-import jda.JDAMsgSender;
+import jda.JDAMsgService;
 import jda.menu.ButtonMenu;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
@@ -26,7 +26,7 @@ public class MessageInteraction {
             String questionKor = message.substring(4);
             String answerKor = ChatService.getChatAnswer(questionKor);
             String saysAdded = "\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 ChatGPT AI님 가라사대... \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93```" + answerKor + "```";
-            JDAMsgSender.send(event, saysAdded); // 메세지를 바로 돌려준다
+            JDAMsgService.send(event, saysAdded); // 메세지를 바로 돌려준다
         }
 
     }
