@@ -1,3 +1,5 @@
+package chatTest;
+
 import com.theokanning.openai.OpenAiService;
 import com.theokanning.openai.completion.CompletionRequest;
 import init.Initializer;

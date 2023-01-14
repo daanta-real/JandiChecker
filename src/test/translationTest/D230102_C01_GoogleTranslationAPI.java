@@ -1,4 +1,4 @@
-
+package translationTest;
 // Imports the Google Cloud Translation library.
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
@@ -31,7 +31,7 @@ class GoogleTranslation {
     private GoogleTranslation() {
     }
 
-    // Set and pass variables to overloaded translateText() method for translation.
+    // Set and pass variables to overloaded translateText() method for translationTest.
     public static void translate() throws IOException {
 
         log.debug("translate() 시작");
@@ -54,7 +54,7 @@ class GoogleTranslation {
     // Translate text to target language.
     public static void translate(String projectId, String targetLanguage, String text) throws IOException {
 
-        log.debug("translation(A, B, C) 시작..");
+        log.debug("translationTest(A, B, C) 시작..");
 /*
         // Initialize client that will be used to send requests. This client only needs to be created
         // once, and can be reused for multiple requests. After completing all of your requests, call
@@ -83,10 +83,10 @@ class GoogleTranslation {
             TranslateTextResponse response = client.translateText(request);
             log.debug("번역을 완료했습니다.");
 
-            // Display the translation for each input text provided
+            // Display the translationTest for each input text provided
             log.debug("번역 결과를 표시합니다");
-            for (Translation translation: response.getTranslationsList()) {
-                System.out.printf("Translated text: %s\n", translation.getTranslatedText());
+            for (Translation translationTest: response.getTranslationsList()) {
+                System.out.printf("Translated text: %s\n", translationTest.getTranslatedText());
             }
 
             log.debug("최종 번역 완료");

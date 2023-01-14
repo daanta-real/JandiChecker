@@ -84,6 +84,7 @@ public class Initializer {
 	}
 
 
+
 	// Getters/Setters
 	public static String getToken_discordBot() { return token_discordBot; }
 	public static String getCron() { return cron; }
