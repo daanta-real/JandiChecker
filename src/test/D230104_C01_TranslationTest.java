@@ -11,7 +11,7 @@ import java.io.FileInputStream;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @Slf4j
-class D230104_C01_TranslateTest {
+class D230104_C01_TranslationTest {
 
     // Field
     private static Translate translate;
