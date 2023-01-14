@@ -20,7 +20,7 @@ import java.util.List;
 @Slf4j
 public class JDAController extends ListenerAdapter {
 
-	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	/////////////////////////// Fields
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public static JDA instance;
@@ -34,6 +34,8 @@ public class JDAController extends ListenerAdapter {
 	public static final String CMD_LIST_BY_DATE = "날짜";
 	public static final String CMD_ABOUT = "대하여";
 	public static final String CMD_CLOSE = "닫기";
+    public static final String CMD_TRANSLATE_KR_TO_EN = "한영";
+    public static final String CMD_TRANSLATE_EN_TO_KR = "영한";
 
 
 
@@ -49,21 +51,21 @@ public class JDAController extends ListenerAdapter {
 		instance = JDABuilder.createDefault(Initializer.getToken_discordBot())
 				.enableIntents(GatewayIntent.MESSAGE_CONTENT) // JDA 4.2.0부터 정책이 바뀌어 권한을 직접 활성화해줘야 함
 				.build(); // 봇을 만들어 로그인시킨 뒤, JdaObj의 인스턴스 값으로 할당
-		log.info("JDA 인스턴스 생성 완료:" + instance);
+		log.info("[JDA 인스턴스 생성 완료: {}]", instance);
 
 		// jda에 이벤트를 감지하는 리스너 봇을 넣는다.
 		log.info("");
 		log.info("[잔디체커 JDA 리스너 로드]");
 		ListenerAdapter bot = new JDAController(); // JDA 봇 객체. 리스너이기도 하다
 		instance.addEventListener(bot); // 만들어진 리스너 봇을 JdaObj의 인스턴스 내부에 할당
-		log.info("이벤트 리스너 생성: " + bot);
+		log.info("[이벤트 리스너 생성: {}]", bot);
 
 		// 슬래시 커맨드 추가
 		log.info("");
 		log.info("[잔디체커 슬래시 커맨드 로드]");
 		List<CommandData> cmdList = SlashMenu.getMenusList();
 		instance.updateCommands().addCommands(cmdList).queue();
-		log.info("슬래시 커맨드 추가 완료.");
+		log.info("[슬래시 커맨드 추가 완료]");
 
 	}
 

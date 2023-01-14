@@ -40,6 +40,8 @@ public class SlashInteraction {
                 case JDAController.CMD_LIST_YESTERDAY_FAIL    -> CmdService.getNotCommittedStringYesterday(); // 어제 잔디심기 안 한 그룹원 목록 출력
                 case JDAController.CMD_LIST_TODAY_SUCCESS     -> CmdService.getDidCommitStringToday(); // 오늘 잔디심기 한 그룹원 목록 출력
                 case JDAController.CMD_LIST_BY_DATE           -> CmdService.getDidCommitStringSomeday(option); // 특정 날짜에 잔디를 심은 그룹원 목록 출력
+                case JDAController.CMD_TRANSLATE_KR_TO_EN     -> CmdService.getTranslatedString_KR_to_EN(option); // 한영번역
+                case JDAController.CMD_TRANSLATE_EN_TO_KR     -> CmdService.getTranslatedString_EN_to_KR(option); // 영한번역
                 case JDAController.CMD_ABOUT                  -> Initializer.INFO_STRING; // 소개말
                 default -> throw new Exception();
             };
