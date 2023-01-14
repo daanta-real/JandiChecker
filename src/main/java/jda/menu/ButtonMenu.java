@@ -15,13 +15,19 @@ public class ButtonMenu extends ListenerAdapter {
     private static final Button[] btn = new Button[] {
             Button.success(JDAController.CMD_ME, "내 잔디 조회").withEmoji(Emoji.fromUnicode("📊")),
             Button.success(JDAController.CMD_JANDIYA, "AI에게 질문").withEmoji(Emoji.fromUnicode("\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93")),
-            Button.secondary(JDAController.CMD_NAME, "이름으로 잔디 조회").withEmoji(Emoji.fromUnicode("\uD83D\uDD0D")),
-            Button.secondary(JDAController.CMD_ID, "ID로 잔디 조회").withEmoji(Emoji.fromUnicode("\uD83D\uDD0D")),
+
             Button.primary(JDAController.CMD_LIST_YESTERDAY_SUCCESS, "어제 잔디 심은 사람").withEmoji(Emoji.fromUnicode("\uD83D\uDCAF")),
             Button.primary(JDAController.CMD_LIST_TODAY_SUCCESS, "오늘 잔디 심은 사람").withEmoji(Emoji.fromUnicode("\uD83D\uDCAF")),
+
+            Button.secondary(JDAController.CMD_NAME, "이름으로 잔디 조회").withEmoji(Emoji.fromUnicode("\uD83D\uDD0D")),
+            Button.secondary(JDAController.CMD_ID, "ID로 잔디 조회").withEmoji(Emoji.fromUnicode("\uD83D\uDD0D")),
+
             Button.secondary(JDAController.CMD_LIST_YESTERDAY_FAIL, "어제 잔디 건너뛴 사람").withEmoji(Emoji.fromUnicode("❕")),
             Button.secondary(JDAController.CMD_LIST_BY_DATE, "특정일 잔디 심은 사람").withEmoji(Emoji.fromUnicode("\uD83D\uDDD3")),
-            Button.primary(JDAController.CMD_ABOUT, "대하여..").withEmoji(Emoji.fromUnicode("❔")),
+
+            Button.secondary(JDAController.CMD_TRANSLATE_EN_TO_KR, "영어→한글").withEmoji(Emoji.fromUnicode("\uD83C\uDDF0\uD83C\uDDF7")),
+            Button.secondary(JDAController.CMD_TRANSLATE_KR_TO_EN, "한글→영어").withEmoji(Emoji.fromUnicode("\uD83C\uDDFA\uD83C\uDDF8")),
+            Button.secondary(JDAController.CMD_ABOUT, "대하여..").withEmoji(Emoji.fromUnicode("❔")),
             Button.danger(JDAController.CMD_CLOSE, "닫기").withEmoji(Emoji.fromUnicode("✖"))
     };
 
@@ -31,7 +37,7 @@ public class ButtonMenu extends ListenerAdapter {
                 .addActionRow(makeRow(btn[2], btn[3]))
                 .addActionRow(makeRow(btn[4], btn[5]))
                 .addActionRow(makeRow(btn[6], btn[7]))
-                .addActionRow(makeRow(btn[8], btn[9]))
+                .addActionRow(makeRow(btn[8], btn[9], btn[10], btn[11]))
                 .queue();
     }
 

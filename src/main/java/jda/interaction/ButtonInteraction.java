@@ -31,21 +31,23 @@ public class ButtonInteraction {
                     result = CmdService.getJandiMapStringOfMe(event.getUser()); // 내 잔디정보를 획득
                 }
                 case JDAController.CMD_JANDIYA -> ModalMenu.getChatAnswer(event); // 일반적인 질문에 답하는 AI
-                case JDAController.CMD_NAME -> ModalMenu.showJandiMapByName(event); // 특정 이름의 그룹원의 종합 잔디정보 출력
-                case JDAController.CMD_ID -> ModalMenu.showJandiMapById(event); // 특정 Github ID의 종합 잔디정보 출력
                 case JDAController.CMD_LIST_YESTERDAY_SUCCESS -> {
                     event.deferEdit().queue(); // Set defer
                     result = CmdService.getDidCommitStringYesterday(); // 어제 잔디심기 한 그룹원 목록 출력
-                }
-                case JDAController.CMD_LIST_YESTERDAY_FAIL -> {
-                    event.deferEdit().queue(); // Set defer
-                    result = CmdService.getNotCommittedStringYesterday(); // 어제 잔디심기 안 한 그룹원 목록 출력
                 }
                 case JDAController.CMD_LIST_TODAY_SUCCESS -> {
                     event.deferEdit().queue(); // Set defer
                     result = CmdService.getDidCommitStringToday(); // 오늘 잔디심기 한 그룹원 목록 출력
                 }
+                case JDAController.CMD_NAME -> ModalMenu.showJandiMapByName(event); // 특정 이름의 그룹원의 종합 잔디정보 출력
+                case JDAController.CMD_ID -> ModalMenu.showJandiMapById(event); // 특정 Github ID의 종합 잔디정보 출력
+                case JDAController.CMD_LIST_YESTERDAY_FAIL -> {
+                    event.deferEdit().queue(); // Set defer
+                    result = CmdService.getNotCommittedStringYesterday(); // 어제 잔디심기 안 한 그룹원 목록 출력
+                }
                 case JDAController.CMD_LIST_BY_DATE -> ModalMenu.showDidCommitSomeday(event); // 특정 날짜에 잔디를 심은 그룹원 목록 출력
+                case JDAController.CMD_TRANSLATE_EN_TO_KR -> ModalMenu.showTranslate_EN_to_KR(event); // 영한 번역
+                case JDAController.CMD_TRANSLATE_KR_TO_EN -> ModalMenu.showTranslate_KR_to_EN(event); // 한영 번역
                 case JDAController.CMD_ABOUT -> {
                     event.deferEdit().queue(); // Set defer
                     result = Initializer.INFO_STRING; // 소개말
