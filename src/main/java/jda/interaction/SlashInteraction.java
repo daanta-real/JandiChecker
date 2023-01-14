@@ -78,41 +78,41 @@ public class SlashInteraction {
 
     }
 
-    private static String getTranslatedString_EN_to_KR(SlashCommandInteractionEvent event, String contentKor) {
+    private static String getTranslatedString_EN_to_KR(SlashCommandInteractionEvent event, String questionKor) {
 
         User user = Objects.requireNonNull(event.getMember()).getUser();
         String name = user.getName();
 
-        String answerKor = TranslationService.translateEngToKor(contentKor);
+        String answerKor = TranslationService.translateEngToKor(questionKor);
 
         return """
-                🤔 %s님의 입력... 🤔```md
+                🤔 %s님의 입력.. 🤔```md
                 %s
                 ```
-                \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 Google이 번역한 문장.. \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
+                \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 Google신이 번역한 문장.. \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
                 ```
                 %s
                 ```
-                """.formatted(name, contentKor, answerKor);
+                """.formatted(name, questionKor, answerKor);
 
     }
 
-    private static String getTranslatedString_KR_to_EN(SlashCommandInteractionEvent event, String contentKor) {
+    private static String getTranslatedString_KR_to_EN(SlashCommandInteractionEvent event, String questionKor) {
 
         User user = Objects.requireNonNull(event.getMember()).getUser();
         String name = user.getName();
 
-        String answerKor = TranslationService.translateKorToEng(contentKor);
+        String answerKor = TranslationService.translateKorToEng(questionKor);
 
         return """
-                🤔 %s님의 질문... 🤔```md
+                🤔 %s님의 입력.. 🤔```md
                 %s
                 ```
-                \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 Google이 번역한 문장.. \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
+                \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 Google신이 번역한 문장.. \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
                 ```
                 %s
                 ```
-                """.formatted(name, contentKor, answerKor);
+                """.formatted(name, questionKor, answerKor);
 
     }
 

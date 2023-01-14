@@ -6,13 +6,9 @@ import init.Initializer;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
-import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
-import net.dv8tion.jda.api.interactions.components.ActionRow;
-import net.dv8tion.jda.api.interactions.components.text.TextInput;
-import net.dv8tion.jda.api.interactions.components.text.TextInputStyle;
-import net.dv8tion.jda.api.interactions.modals.Modal;
 import net.dv8tion.jda.api.interactions.modals.ModalMapping;
 import org.apache.commons.lang3.StringUtils;
+import translate.TranslationService;
 
 import java.util.Objects;
 
@@ -66,7 +62,7 @@ public class ModalInteraction {
                     ModalMapping m = event.getValue("getChatAnswerText");
                     assert m != null;
                     String questionKor = m.getAsString();
-                    log.debug("그룹원 {}님(디코ID {})의 질문: {}", memberName, discordID, questionKor);
+                    log.debug("그룹원 {}님의 질문: {}", memberName, questionKor);
 
                     // Compute
                     String answerKor = ChatService.getChatAnswer(questionKor);
@@ -78,7 +74,6 @@ public class ModalInteraction {
                         \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 ChatGPT AI님 가라사대... \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
                         ```
                         %s
-                                            
                         📌 "잔디야 bla bla..." 이런 식으로 질문하시면 약간 더 긴 답변을 받을 수 있습니다.
                         ```
                         """.formatted(memberName, questionKor, answerKor);
@@ -96,6 +91,62 @@ public class ModalInteraction {
 
                     // Compute
                     result = CmdService.getDidCommitStringSomeday(date);
+
+                    // Show the result
+                    event.getHook().sendMessage(result).queue();
+
+                }
+                case "showTranslate_EN_to_KR" -> {
+
+                    // Prepare
+                    User user = Objects.requireNonNull(event.getMember()).getUser();
+                    String discordID = user.getAsTag();
+                    String memberName = Initializer.getMemberNameByDiscordID(discordID);
+                    ModalMapping m = event.getValue("showTranslate_EN_to_KRText");
+                    assert m != null;
+                    String questionEng = m.getAsString();
+                    log.debug("그룹원 {}님의 영한 번역 요청: {}", memberName, questionEng);
+
+                    // Compute
+                    String answerKor = TranslationService.translateEngToKor(questionEng);
+                    log.debug("번역된 문장: {}", answerKor);
+                    result = """
+                        🤔 %s님의 입력.. 🤔```md
+                        %s
+                        ```
+                        \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 Google신이 번역한 문장.. \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
+                        ```
+                        %s
+                        ```
+                        """.formatted(memberName, questionEng, answerKor);
+
+                    // Show the result
+                    event.getHook().sendMessage(result).queue();
+
+                }
+                case "showTranslate_KR_to_EN" -> {
+
+                    // Prepare
+                    User user = Objects.requireNonNull(event.getMember()).getUser();
+                    String discordID = user.getAsTag();
+                    String memberName = Initializer.getMemberNameByDiscordID(discordID);
+                    ModalMapping m = event.getValue("showTranslate_KR_to_ENText");
+                    assert m != null;
+                    String questionKor = m.getAsString();
+                    log.debug("그룹원 {}님의 한영 번역 요청: {}", memberName, questionKor);
+
+                    // Compute
+                    String answereng = TranslationService.translateKorToEng(questionKor);
+                    log.debug("번역된 문장: {}", answereng);
+                    result = """
+                        🤔 %s님의 입력.. 🤔```md
+                        %s
+                        ```
+                        \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 Google신이 번역한 문장.. \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
+                        ```
+                        %s
+                        ```
+                        """.formatted(memberName, questionKor, answereng);
 
                     // Show the result
                     event.getHook().sendMessage(result).queue();
