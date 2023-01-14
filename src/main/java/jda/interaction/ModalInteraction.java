@@ -138,8 +138,8 @@ public class ModalInteraction {
                     log.debug("그룹원 {}님의 한영 번역 요청: {}", memberName, questionKor);
 
                     // Compute
-                    String answereng = TranslationService.translateKorToEng(questionKor);
-                    log.debug("번역된 문장: {}", answereng);
+                    String answerEng = TranslationService.translateKorToEng(questionKor);
+                    log.debug("번역된 문장: {}", answerEng);
                     result = """
                         🤔 %s님의 입력.. 🤔```md
                         %s
@@ -148,7 +148,7 @@ public class ModalInteraction {
                         ```
                         %s
                         ```
-                        """.formatted(memberName, questionKor, answereng);
+                        """.formatted(memberName, questionKor, answerEng);
 
                     // Show the result
                     event.getHook().sendMessage(result).queue();
