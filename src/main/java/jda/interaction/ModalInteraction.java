@@ -16,17 +16,17 @@ import java.util.Objects;
 @Slf4j
 public class ModalInteraction {
 
-    // Get displayed name from event. if fails it'll return discord name(tagname) as alt
-    private static String getDisplayName(ModalInteractionEvent event) {
+    // Get displayed name from event. If fails it'll return discord name(tagname) as alt
+    private static String getDisplayedName(ModalInteractionEvent event) {
         User user = Objects.requireNonNull(event.getMember()).getUser();
         String discordTag = user.getAsTag();
-        String memberName;
+        String displayedName;
         try {
-            memberName = Initializer.getMemberNameByDiscordID(discordTag);
+            displayedName = Initializer.getMemberNameByDiscordID(discordTag);
         } catch(Exception e) {
-            memberName = discordTag;
+            displayedName = discordTag;
         }
-        return memberName;
+        return displayedName;
     }
 
     // Get option text value. Only available for the text box's id named "value"
@@ -72,9 +72,9 @@ public class ModalInteraction {
                 case "getChatAnswer" -> {
 
                     // Prepare
-                    String memberName = getDisplayName(event);
+                    String name = getDisplayedName(event);
                     String questionKor = getOptionTextValue(event);
-                    log.debug("그룹원 {}님의 질문: {}", memberName, questionKor);
+                    log.debug("그룹원 {}님의 질문: {}", name, questionKor);
 
                     // Compute
                     String answerKor = ChatService.getChatAnswer(questionKor);
@@ -88,7 +88,7 @@ public class ModalInteraction {
                         %s
                         📌 "잔디야 bla bla..." 이런 식으로 질문하시면 약간 더 긴 답변을 받을 수 있습니다.
                         ```
-                        """.formatted(memberName, questionKor, answerKor);
+                        """.formatted(name, questionKor, answerKor);
 
                     // Show the result
                     event.getHook().sendMessage(result).queue();
@@ -109,9 +109,9 @@ public class ModalInteraction {
                 case "showTranslate_EN_to_KR" -> {
 
                     // Prepare
-                    String memberName = getDisplayName(event);
+                    String name = getDisplayedName(event);
                     String questionEng = getOptionTextValue(event);
-                    log.debug("그룹원 {}님의 영한 번역 요청: {}", memberName, questionEng);
+                    log.debug("그룹원 {}님의 영한 번역 요청: {}", name, questionEng);
 
                     // Compute
                     String answerKor = TranslationService.translateEngToKor(questionEng);
@@ -124,7 +124,7 @@ public class ModalInteraction {
                         ```
                         %s
                         ```
-                        """.formatted(memberName, questionEng, answerKor);
+                        """.formatted(name, questionEng, answerKor);
 
                     // Show the result
                     event.getHook().sendMessage(result).queue();
@@ -133,9 +133,9 @@ public class ModalInteraction {
                 case "showTranslate_KR_to_EN" -> {
 
                     // Prepare
-                    String memberName = getDisplayName(event);
+                    String name = getDisplayedName(event);
                     String questionKor = getOptionTextValue(event);
-                    log.debug("그룹원 {}님의 한영 번역 요청: {}", memberName, questionKor);
+                    log.debug("그룹원 {}님의 한영 번역 요청: {}", name, questionKor);
 
                     // Compute
                     String answerEng = TranslationService.translateKorToEng(questionKor);
@@ -148,7 +148,7 @@ public class ModalInteraction {
                         ```
                         %s
                         ```
-                        """.formatted(memberName, questionKor, answerEng);
+                        """.formatted(name, questionKor, answerEng);
 
                     // Show the result
                     event.getHook().sendMessage(result).queue();

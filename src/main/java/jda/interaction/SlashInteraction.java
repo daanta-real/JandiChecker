@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
-import org.apache.commons.lang3.StringUtils;
 import translate.TranslationService;
 
 import java.util.Objects;
@@ -17,6 +16,18 @@ import java.util.Objects;
 // 슬래시 메뉴판을 사용한 커맨드 입력에 따른 동작 실행
 @Slf4j
 public class SlashInteraction {
+
+    private static String getDisplayedName(SlashCommandInteractionEvent event) {
+        User user = Objects.requireNonNull(event.getMember()).getUser();
+        String discordTag = user.getAsTag();
+        String displayedName;
+        try {
+            displayedName = Initializer.getMemberNameByDiscordID(discordTag);
+        } catch(Exception e) {
+            displayedName = discordTag;
+        }
+        return displayedName;
+    }
 
     public static void run(SlashCommandInteractionEvent event) {
 
@@ -58,10 +69,7 @@ public class SlashInteraction {
 
     private static String makeChatAnswer(SlashCommandInteractionEvent event, String questionKor) {
 
-        User user = Objects.requireNonNull(event.getMember()).getUser();
-        String name = user.getName();
-        if(StringUtils.isEmpty(name)) return "질문자의 ID가 명확하지 않습니다.";
-
+        String name = getDisplayedName(event);
         String answerKor = ChatService.getChatAnswer(questionKor);
 
         return """
@@ -80,9 +88,7 @@ public class SlashInteraction {
 
     private static String getTranslatedString_EN_to_KR(SlashCommandInteractionEvent event, String questionKor) {
 
-        User user = Objects.requireNonNull(event.getMember()).getUser();
-        String name = user.getName();
-
+        String name = getDisplayedName(event);
         String answerKor = TranslationService.translateEngToKor(questionKor);
 
         return """
@@ -99,9 +105,7 @@ public class SlashInteraction {
 
     private static String getTranslatedString_KR_to_EN(SlashCommandInteractionEvent event, String questionKor) {
 
-        User user = Objects.requireNonNull(event.getMember()).getUser();
-        String name = user.getName();
-
+        String name = getDisplayedName(event);
         String answerKor = TranslationService.translateKorToEng(questionKor);
 
         return """
