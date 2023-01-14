@@ -19,12 +19,11 @@ public class ModalMenu {
             String mainTitle, String labelTitle, String valuePlaceholder,
             int minLength, int maxLength, boolean isParagraph) {
 
-        String idText = id + "Text";
         TextInputStyle style = isParagraph ? TextInputStyle.PARAGRAPH : TextInputStyle.SHORT;
 
         event.getMessage().delete().queue(); // 메뉴+오리지널 메세지 지우기
 
-        TextInput name = TextInput.create(idText, "잔디체커", style)
+        TextInput name = TextInput.create("option", "잔디체커", style)
                 .setMinLength(minLength)
                 .setMaxLength(maxLength)
                 .setLabel(labelTitle)
@@ -68,7 +67,7 @@ public class ModalMenu {
 
     // Translation: Korean to English
     public static void showTranslate_KR_to_EN(ButtonInteractionEvent event) {
-        sendSingleTextInput(event, "showTranslate_KR_to_EN", "영어어로 번역할 내용 입력", "한국 문장","조금 길어도 괜찮을지도..?", 1, 300, true);
+        sendSingleTextInput(event, "showTranslate_KR_to_EN", "영어로 번역할 내용 입력", "한국 문장","조금 길어도 괜찮을지도..?", 1, 300, true);
     }
 
 }

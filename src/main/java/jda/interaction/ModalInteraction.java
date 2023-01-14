@@ -16,6 +16,26 @@ import java.util.Objects;
 @Slf4j
 public class ModalInteraction {
 
+    // Get displayed name from event. if fails it'll return discord name(tagname) as alt
+    private static String getDisplayName(ModalInteractionEvent event) {
+        User user = Objects.requireNonNull(event.getMember()).getUser();
+        String discordTag = user.getAsTag();
+        String memberName;
+        try {
+            memberName = Initializer.getMemberNameByDiscordID(discordTag);
+        } catch(Exception e) {
+            memberName = discordTag;
+        }
+        return memberName;
+    }
+
+    // Get option text value. Only available for the text box's id named "value"
+    private static String getOptionTextValue(ModalInteractionEvent event) {
+        ModalMapping m = event.getValue("option");
+        assert m != null;
+        return m.getAsString();
+    }
+
     // Main interaction
     public static void run(ModalInteractionEvent event) {
 
@@ -27,9 +47,7 @@ public class ModalInteraction {
                 case "showJandiMapByName" -> {
 
                     // Prepare
-                    ModalMapping m = event.getValue("showJandiMapByNameText");
-                    assert m != null;
-                    String targetMemberName = m.getAsString();
+                    String targetMemberName = getOptionTextValue(event);
                     String gitHubID = Initializer.getGitHubIDByMemberName(targetMemberName);
 
                     // Compute
@@ -42,9 +60,7 @@ public class ModalInteraction {
                 case "showJandiMapById" -> {
 
                     // Prepare
-                    ModalMapping m = event.getValue("showJandiMapByIdText");
-                    assert m != null;
-                    String id = m.getAsString();
+                    String id = getOptionTextValue(event);
 
                     // Compute
                     result = CmdService.getJandiMapStringByById(id);
@@ -56,12 +72,8 @@ public class ModalInteraction {
                 case "getChatAnswer" -> {
 
                     // Prepare
-                    User user = Objects.requireNonNull(event.getMember()).getUser();
-                    String discordID = user.getAsTag();
-                    String memberName = Initializer.getMemberNameByDiscordID(discordID);
-                    ModalMapping m = event.getValue("getChatAnswerText");
-                    assert m != null;
-                    String questionKor = m.getAsString();
+                    String memberName = getDisplayName(event);
+                    String questionKor = getOptionTextValue(event);
                     log.debug("그룹원 {}님의 질문: {}", memberName, questionKor);
 
                     // Compute
@@ -85,9 +97,7 @@ public class ModalInteraction {
                 case "showDidCommitSomeday" -> {
 
                     // Prepare
-                    ModalMapping m = event.getValue("showDidCommitSomedayText");
-                    assert m != null;
-                    String date = m.getAsString();
+                    String date = getOptionTextValue(event);
 
                     // Compute
                     result = CmdService.getDidCommitStringSomeday(date);
@@ -99,12 +109,8 @@ public class ModalInteraction {
                 case "showTranslate_EN_to_KR" -> {
 
                     // Prepare
-                    User user = Objects.requireNonNull(event.getMember()).getUser();
-                    String discordID = user.getAsTag();
-                    String memberName = Initializer.getMemberNameByDiscordID(discordID);
-                    ModalMapping m = event.getValue("showTranslate_EN_to_KRText");
-                    assert m != null;
-                    String questionEng = m.getAsString();
+                    String memberName = getDisplayName(event);
+                    String questionEng = getOptionTextValue(event);
                     log.debug("그룹원 {}님의 영한 번역 요청: {}", memberName, questionEng);
 
                     // Compute
@@ -127,12 +133,8 @@ public class ModalInteraction {
                 case "showTranslate_KR_to_EN" -> {
 
                     // Prepare
-                    User user = Objects.requireNonNull(event.getMember()).getUser();
-                    String discordID = user.getAsTag();
-                    String memberName = Initializer.getMemberNameByDiscordID(discordID);
-                    ModalMapping m = event.getValue("showTranslate_KR_to_ENText");
-                    assert m != null;
-                    String questionKor = m.getAsString();
+                    String memberName = getDisplayName(event);
+                    String questionKor = getOptionTextValue(event);
                     log.debug("그룹원 {}님의 한영 번역 요청: {}", memberName, questionKor);
 
                     // Compute
