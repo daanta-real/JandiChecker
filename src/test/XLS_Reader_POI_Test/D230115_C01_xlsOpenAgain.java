@@ -41,7 +41,8 @@ public class D230115_C01_xlsOpenAgain {
             // 최종적으로 sheet 객체를 얻는다.
             XSSFSheet sheet = workbook.getSheetAt(0);
             log.debug("sheet loading success: {}", sheet);
-//            getMembersInfo(sheet);
+//            getMembersInfo_old(sheet);
+            getMembersInfo_new(sheet);
             getVersionInfo(sheet);
         } catch(Exception e) {
             e.printStackTrace();
@@ -66,7 +67,43 @@ public class D230115_C01_xlsOpenAgain {
         log.debug("FINISHED PROPS LOADING! {}", props);
     }
 
-    public static void getMembersInfo(XSSFSheet sheet) {
+    public static void getMembersInfo_new(XSSFSheet sheet) {
+
+        // Result
+        Map<String, Map<String, String>> membersInfo = new HashMap<>();
+
+        int count = 3; // start from 4th row
+        while(true) {
+
+            Row row = CellUtil.getRow(count, sheet);
+
+            Cell cellName = CellUtil.getCell(row, 1);
+            if(cellName.getCellType() == CellType.BLANK) break; // Name is required, and no more members info from this row
+            String name = cellName.getStringCellValue();
+
+            Map<String, String> memberParam = new HashMap<>();
+
+            Cell cellGitHubID = CellUtil.getCell(row, 2);
+            if(cellGitHubID.getCellType() == CellType.BLANK) continue; // GitHubID is required
+            String gitHubID = cellGitHubID.getStringCellValue();
+            memberParam.put("gitHubID", gitHubID);
+
+            Cell cellDiscordID = CellUtil.getCell(row, 3);
+            if(cellDiscordID.getCellType() != CellType.BLANK) {
+                String discordID = cellDiscordID.getStringCellValue(); // Discord ID is optional
+                memberParam.put("discordID", discordID);
+            }
+
+            membersInfo.put(name, memberParam);
+            count++;
+
+        }
+
+        props.put("members", membersInfo);
+
+    }
+
+    public static void getMembersInfo_old(XSSFSheet sheet) {
 
         // Result
         List<Map<String, String>> membersInfo = new ArrayList<>();
