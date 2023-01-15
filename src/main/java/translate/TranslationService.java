@@ -4,10 +4,11 @@ import com.google.auth.oauth2.ServiceAccountCredentials;
 import com.google.cloud.translate.Translate;
 import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
+import init.Initializer;
 import lombok.extern.slf4j.Slf4j;
 import utils.CommonUtils;
 
-import java.io.FileInputStream;
+import java.io.ByteArrayInputStream;
 
 @Slf4j
 public class TranslationService {
@@ -19,7 +20,7 @@ public class TranslationService {
     public static void init() throws Exception {
         translate = TranslateOptions.newBuilder().setCredentials(
                 ServiceAccountCredentials.fromStream(
-                        new FileInputStream("googleAPIKey.json")
+                        new ByteArrayInputStream(Initializer.props.get("GoogleCloudToken").getBytes())
                 )
         ).build().getService();
     }
