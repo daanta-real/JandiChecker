@@ -40,7 +40,7 @@ public class CronScheduler {
 
 	// 스케쥴러 실행
 	public static void run() throws Exception {
-		scheduleExecute(CronJob.class, Initializer.getCron());
+		scheduleExecute(CronJob.class, Initializer.props.get("cronSchedule"));
 	}
 
 }

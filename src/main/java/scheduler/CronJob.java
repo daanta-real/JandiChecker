@@ -20,9 +20,9 @@ public class CronJob implements Job {
 	public void execute(JobExecutionContext context) {
 		try {
 			String yesterdayCommitedString = CmdService.getDidCommitStringYesterday();
-			JDAMsgService.send(Initializer.getChId(), yesterdayCommitedString);
+			JDAMsgService.send(Initializer.props.get("cronTargetChannelID"), yesterdayCommitedString);
 		} catch (Exception e) {
-			JDAMsgService.send(Initializer.getChId(), "정보 획득에 실패하였습니다.");
+			JDAMsgService.send(Initializer.props.get("cronTargetChannelID"), "정보 획득에 실패하였습니다.");
 			log.error(ExceptionUtils.getStackTrace(e));
 		}
 	}

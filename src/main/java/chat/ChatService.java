@@ -29,7 +29,7 @@ public class ChatService {
 
         // 3. Make inquire
         StringBuilder sb = new StringBuilder();
-        OpenAiService service = new OpenAiService(Initializer.getToken_chatGPTAPI());
+        OpenAiService service = new OpenAiService(Initializer.props.get("ChatGPTToken"));
         CompletionRequest completionRequest = CompletionRequest.builder()
                 .prompt(unescapedEng) // The question
                 .model("text-davinci-001")   // Strongest AI (has very high risk of timeout)

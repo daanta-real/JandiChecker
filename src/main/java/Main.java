@@ -31,7 +31,7 @@ public class Main {
 					- JandiChecker {} Build {}
 					- Github 잔디 점검 프로그램
 					**********************************************
-					""", Initializer.VERSION, Initializer.BUILD);
+					""", Initializer.props.get("version"), Initializer.props.get("build"));
 
 			// Load JDA
 			log.info("");

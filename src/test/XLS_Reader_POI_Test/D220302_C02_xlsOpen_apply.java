@@ -17,7 +17,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 @Slf4j
-public class D220302_xlsOpen_apply {
+public class D220302_C02_xlsOpen_apply {
 
 	@Test
 	public void main() {

@@ -46,15 +46,16 @@ public class Checker {
 
 	// 그룹원 전원의 특정 날의 잔디심기 현황을 체크하여 (findNegative true일 시, 패스한) 사람의 명부를 회신
 	public static String[] getCommitListByDay(String day, boolean findNegative) throws Exception {
-		log.info("잔디를 {} 확인합니다. 확인할 날짜: {}", (findNegative ? "'안 심었는지'" : "'심었는지'"), day);
+		log.info("잔디를 '{}' 확인합니다. 확인할 날짜: {}", (findNegative ? "안 심었는지" : "심었는지"), day);
 
 		// 날짜 String 만들기
 		StringBuilder sb = new StringBuilder();
 		int count = 0;
-		for(String[] s: Initializer.getMembers()) {
-			String name = s[0];
-			String id = s[1];
-			boolean hasCommit = getGithubCommittedByDay(id, day);
+		for(Map.Entry<String, Map<String, String>> entry: Initializer.MEMBERS.entrySet()) {
+			Map<String, String> memberProps = entry.getValue();
+			String name = entry.getKey();
+			String gitHubId = memberProps.get("gitHubId");
+			boolean hasCommit = getGithubCommittedByDay(gitHubId, day);
 			if(
 				(!findNegative && hasCommit)    // 잔디 심은 사람을 찾는 모드일 때, 심은 경우
 				|| (findNegative && !hasCommit) // 잔디를 심지 않는 사람을 찾는 모드일 때, 심지 않은 경우

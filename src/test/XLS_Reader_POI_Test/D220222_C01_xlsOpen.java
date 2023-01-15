@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 import java.util.Iterator;
 
 @Slf4j
-public class D220222_xlsOpen {
+public class D220222_C01_xlsOpen {
 
 	@Test
 	public void main() throws Exception {

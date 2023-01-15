@@ -2,44 +2,112 @@ package init;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.util.CellUtil;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import translate.TranslationService;
 import ui.UIMain;
-
-import static utils.CommonUtils.waitForEnter;
 
 // 잔디체커가 실행되는 내내 환경설정을 담고 있게 되는 클래스.
 // 잔디체커가 시작되면 Jackson을 이용해 YAML 파일을 읽어오게 되고, 그 내용이 이 클래스의 각 변수에 채워진다.
 @Slf4j
 public class Initializer {
 
-	// 환경변수 (내부 properties.yaml)
-	public static String VERSION;
-	public static String BUILD;
+	// 1. Fields
 	public static final String PATH = Paths.get("").toAbsolutePath().toString(); // 잔디체커가 실행되는 경로
-
-	// 환경변수 (외부 settings.yaml)
-	private static String token_discordBot; // 토큰 (디코봇)
-	private static String cron; // 스케쥴러 실행 주기
-	private static String[][] members; // 참여인 목록
-	private static String targetChannelId; // CRON 스케쥴러 실행 결과 메세지가 전송될 타겟 채널 ID
-	private static String token_chatGPTAPI; // 토큰 (ChatGPT API)
-
-	// 소개말
+	public static Map<String, String> props = new HashMap<>();
+	public static Map<String, Map<String, String>> MEMBERS = new HashMap<>();
 	public static String INFO_STRING;
+
+	// 2. Methods
+	private static String getStringFromAddr(XSSFSheet sheet, int rowIndex, int colIndex) {
+		Row row = CellUtil.getRow(rowIndex, sheet);
+		return CellUtil.getCell(row, colIndex).getStringCellValue();
+	}
+
+	private static void getVersionInfo(XSSFSheet sheet) {
+		props.put("version", getStringFromAddr(sheet, 2, 6));
+		props.put("build", getStringFromAddr(sheet, 3, 6));
+		props.put("cronSchedule", getStringFromAddr(sheet, 6, 6));
+		props.put("cronTargetChannelID", getStringFromAddr(sheet, 7, 6));
+		props.put("JDAToken", getStringFromAddr(sheet, 10, 6));
+		props.put("ChatGPTToken", getStringFromAddr(sheet, 11, 6));
+		StringBuilder sb = new StringBuilder();
+		for(int i = 12; i <= 23; i++) {
+			sb.append(getStringFromAddr(sheet, i, 6));
+			if(i != 23) sb.append("\n");
+		}
+		props.put("GoogleCloudToken", sb.toString());
+		log.debug("FINISHED PROPS LOADING! {}", props);
+	}
+
+	private static void getMembersInfo(XSSFSheet sheet) {
+
+		// Result
+		Map<String, Map<String, String>> membersInfo = new HashMap<>();
+
+		int count = 3; // start from 4th row
+		while(true) {
+
+			Row row = CellUtil.getRow(count, sheet);
+
+			Cell cellName = CellUtil.getCell(row, 1);
+			if(cellName.getCellType() == CellType.BLANK) break; // Name is required, and no more members info from this row
+			String name = cellName.getStringCellValue();
+
+			Map<String, String> memberParam = new HashMap<>();
+
+			Cell cellGitHubID = CellUtil.getCell(row, 2);
+			if(cellGitHubID.getCellType() == CellType.BLANK) continue; // GitHubID is required
+			String gitHubID = cellGitHubID.getStringCellValue();
+			memberParam.put("gitHubID", gitHubID);
+
+			Cell cellDiscordID = CellUtil.getCell(row, 3);
+			if(cellDiscordID.getCellType() != CellType.BLANK) {
+				String discordID = cellDiscordID.getStringCellValue(); // Discord ID is optional
+				memberParam.put("discordID", discordID);
+			}
+
+			membersInfo.put(name, memberParam);
+			count++;
+
+		}
+
+		MEMBERS = membersInfo;
+
+	}
+
+	private static void loadProperties() throws Exception {
+		try(
+				// 파일 객체 부르기
+				FileInputStream file = new FileInputStream(new File(PATH, "settings.xlsx"));
+				// 파일 객체로부터 시트 객체 뽑아내기
+				XSSFWorkbook workbook = new XSSFWorkbook(file)
+				// try가 다 끝나면 위의 file과 workbook 객체에 대해 .close()가 실행되며 파일이 닫아진다.
+				// sheet 필드는 이 try 구문이 끝나면 소거되어 버리니, 처리할 것이 있으면 이 안에서 할 것.
+		) {
+			// 최종적으로 sheet 객체를 얻는다.
+			XSSFSheet sheet = workbook.getSheetAt(0);
+			log.debug("sheet loading success: {}", sheet);
+			getMembersInfo(sheet);
+			getVersionInfo(sheet);
+		} catch(Exception e) {
+			throw new Exception(e);
+		}
+	}
 
 	public static void ready(boolean needSwingWindow) throws Exception {
 
+		// Start
 		log.info("");
 		log.info("[환경설정 로드] 시작...");
 		log.info("");
@@ -54,68 +122,19 @@ public class Initializer {
 		log.info("완료.");
 		log.info("");
 
-		// 2. YAML로 된 내부 환경변수 파일을 로드
-		log.info("[환경설정 로드 2] 내부 환경변수 로드");
-		loadProperties_inner();
-		UIMain.getInstance().setTitle("잔디체커 " + Initializer.VERSION + " Build " + Initializer.BUILD);
+		// 2. 환경변수 로드
+		log.info("[환경설정 로드 2] 환경변수 로드");
+		loadProperties();
 		log.info("완료.");
 		log.info("");
 
-		// 3. YAML로 된 외부 환경변수 파일을 로드 (settings.yaml)
-		log.info("[환경설정 로드 3] 외부 환경변수 로드");
-		loadProperties_outer();
+		// 3. Load Google Translate API (googleAPIKey.json)
+		log.info("[환경설정 로드 3] 구글 번역 API 로드");
+		TranslationService.init();
 		log.info("완료.");
 		log.info("");
 
-		// 4. Load Google Translate API (googleAPIKey.json)
-		log.info("[환경설정 로드 4] 구글 번역 API 로드");
-		loadProperties_googleTranslationAPI();
-		log.info("완료.");
-		log.info("");
-
-		log.info("[환경설정 로드] 완료!");
-		log.info("");
-
-	}
-
-	// False option to not load Swing window logger
-	public static void ready() throws Exception {
-		ready(false);
-	}
-
-
-
-	// Getters/Setters
-	public static String getToken_discordBot() { return token_discordBot; }
-	public static String getCron() { return cron; }
-	public static String getChId() { return targetChannelId; }
-	public static String[][] getMembers() { return members ; }
-	public static String getToken_chatGPTAPI() { return token_chatGPTAPI; }
-
-
-
-	// Methods
-
-	private static void loadProperties_inner() throws Exception {
-
-		// load file contents to props
-		Properties props;
-		try(InputStream is = Initializer.class.getClassLoader().getResourceAsStream("properties.yaml")) {
-			props = new Properties();
-			props.load(is);
-		} catch(Exception e) {
-			log.error("properties.yaml 파일을 불러오는 중 오류가 발생했습니다.");
-			throw new Exception(e);
-		}
-
-		// load props
-		VERSION = props.getProperty("VERSION", "??????");
-		BUILD = props.getProperty("BUILD", "?????");
-
-		// show loaded props
-		log.info("버전: {}", VERSION);
-		log.info("빌드: {}", BUILD);
-
+		// 4. Load app info message
 		// Set info String
 		INFO_STRING = """
 			```md
@@ -154,111 +173,46 @@ public class Initializer {
 			* e-mail: daanta@naver.com
 			
 			```
-			""".formatted(VERSION, BUILD);
+			""".formatted(props.get("version"), props.get("build"));
+
+		// Finished
+		log.info("[환경설정 로드] 완료!");
+		log.info("");
 
 	}
 
-	private static void loadProperties_outer() throws Exception {
-
-		// 경로 확인
-		log.info("외부 셋팅파일의 절대위치: {}", PATH);
-
-		// 파일 객체 부르기
-		File settingsFile = new File(PATH, "settings.yaml");
-		if(!settingsFile.exists()) {
-			log.error("환경설정 파일을 찾지 못했습니다. 실행파일과 같은 폴더에 settings.yaml 파일을 넣어주세요.");
-			log.error("settings.yaml 파일의 작성법은 리포의 settings_form.yaml을 참고해 주시기 바랍니다.");
-			waitForEnter("엔터 키를 누르시면 종료됩니다..");
-			throw new Exception();
-		}
-		FileInputStream file = new FileInputStream(settingsFile);
-
-		// ObjectMapper 생성자가, YAML파일을 오브젝트로 읽어들인다.
-		// 그 다음 그 오브젝트를 MainSettings 클래스 각 변수에 맵핑시키는 식으로 그 내용을 읽어들인다. 자동이다!
-		ObjectMapper om = new ObjectMapper(new YAMLFactory());
-		InitializerSettingsFileVO vo = om.readValue(file, InitializerSettingsFileVO.class);
-		file.close();
-		log.info("MainSettings DTO 읽기 완료.");
-
-		// 읽어온 내용을 MainSettings 클래스의 static 값들에 집어넣는다.
-		token_discordBot = vo.getTokenJDA();
-		cron  = vo.getCron();
-		members = vo.getMembers();
-		targetChannelId = vo.getTargetChannelId();
-		token_chatGPTAPI = vo.getTokenChatGPTAPI();
-
-		// 로드된 환경변수들 일괄 출력
-		log.info("경로: {}", PATH);
-		log.info("토큰(디스코드 JDA): {}", token_discordBot);
-		log.info("크론: {}", cron);
-		log.info("채널: {}", targetChannelId);
-		log.info("명단 확인: ");
-		for(int i = 0; i < members.length; i++) {
-			String[] info = members[i];
-			String name = info[0], gitHubId = info[1];
-			String discordID = info.length >= 3 ? info[2] : null;
-			String stickTextLeft = (i == members.length - 1) ? "└" : "├";
-			log.info(
-					"    {}─ {}번째 인원: '{}' (Github ID: {}, Discord ID: {})",
-					stickTextLeft, i, name, gitHubId, discordID
-			);
-		}
-		log.info("토큰(ChatGPT API): {}", token_chatGPTAPI);
-
+	// False option to not load Swing window logger
+	public static void ready() throws Exception {
+		ready(false);
 	}
-
-	private static void loadProperties_googleTranslationAPI() throws Exception {
-		TranslationService.init();
-	}
-
 
 	// 그룹원명을 입력하면 깃헙 ID를 리턴
 	public static String getGitHubIDByMemberName(String memberName) throws Exception {
-		for(String[] s: Initializer.getMembers()) {
-			String yamlMemberName = s[0];
-			if(
-					yamlMemberName.equals(memberName)
-					|| yamlMemberName.substring(1).equals(memberName)
-			) {
-				return s[1]; // Member's GitHub ID from yaml
-			}
-		}
-		throw new Exception();
+		if(!MEMBERS.containsKey(memberName)) throw new Exception(); // TODO test
+		Map<String, String> member = MEMBERS.get(memberName);
+		return member.get("gitHubID");
 	}
 
 	// 디스코드 ID를 입력하면 멤버명을 리턴
 	public static String getMemberNameByDiscordID(String discordID) throws Exception {
-		for(String[] member: getMembers()) {
-			if(member.length < 3) continue;
-			String yamlDiscordID = member[2];
-			if(discordID.equals(yamlDiscordID)) {
-				String memberName = member[0];
-				if(!StringUtils.isEmpty(memberName)) return memberName;
-			}
+		for(Map.Entry<String, Map<String, String>> entry: MEMBERS.entrySet()) {
+			Map<String, String> memberProps = entry.getValue();
+			if(!memberProps.containsKey("discordID")) continue; // TODO test
+			String foundDiscordID = memberProps.get("discordID");
+			if(!StringUtils.isEmpty(foundDiscordID) && foundDiscordID.equals(discordID)) return foundDiscordID;
 		}
 		throw new Exception();
 	}
 
 	// 디스코드 ID로 그룹원의 이름과 GitHub ID를 Map으로 리턴
 	public static Map<String, String> getMemberInfoesByDiscordID(String discordID) throws Exception {
-
-		for(String[] member: Initializer.getMembers()) {
-			if(member.length < 3) continue;
-			String yamlDiscordID = member[2];
-			if(discordID.equals(yamlDiscordID)) {
-				String memberName = member[0];
-				String memberGitHubID = member[1];
-				if(!StringUtils.isEmpty(memberName) && !StringUtils.isEmpty(memberGitHubID)) {
-					Map<String, String> map = new HashMap<>();
-					map.put("name", memberName);
-					map.put("gitHubID", memberGitHubID);
-					return map;
-				}
-			}
+		for(Map.Entry<String, Map<String, String>> entry: MEMBERS.entrySet()) {
+			Map<String, String> memberProp = entry.getValue();
+			if(!memberProp.containsKey("gitHubID")) continue; // TODO test
+			String foundGitHubID = memberProp.get("gitHubID");
+			if(!StringUtils.isEmpty(foundGitHubID) && foundGitHubID.equals(discordID)) return memberProp;
 		}
-
 		throw new Exception();
-
 	}
 
 }
