@@ -1,6 +1,6 @@
 /target/
 /settings_backup.yaml
-/settings.yaml
+/settings.xlsx
 /*.json
 /settings/
 *.iml
