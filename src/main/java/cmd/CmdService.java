@@ -6,7 +6,6 @@ import init.Initializer;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.entities.User;
 import org.apache.commons.lang3.StringUtils;
-import translate.TranslationService;
 
 import java.util.Map;
 
@@ -23,10 +22,10 @@ public class CmdService {
 
 		// 이름과 ID 구하기
 		String name = null;
-		String discordID = user.getAsTag();
+		String discordTagID = user.getAsTag();
 		Map<String, String> memberInfo;
 		try {
-			memberInfo = Initializer.getMemberInfoesByDiscordID(discordID);
+			memberInfo = Initializer.getMemberInfoesByDiscordTagID(discordTagID);
 		} catch(Exception e) {
 			throw new Exception(name + "님의 GitHub ID를 찾는 데 실패했습니다.");
 		}
@@ -107,20 +106,6 @@ public class CmdService {
 	// 특정일에 잔디심기에 성공한 그룹원 목록을 리턴
 	public static String getDidCommitStringSomeday(String date) throws Exception {
 		return Checker.getDidCommittedSomeday(date);
-	}
-
-
-
-	/*
-	 * 3. Translation services
-	 */
-	public static String getTranslatedString_KR_to_EN(String contentKor) {
-		if(StringUtils.isEmpty(contentKor)) return "번역하고자 하는 문장을 입력해 주세요.";
-		return TranslationService.translateKorToEng(contentKor);
-	}
-	public static String getTranslatedString_EN_to_KR(String contentKor) {
-		if(StringUtils.isEmpty(contentKor)) return "번역하고자 하는 문장을 입력해 주세요.";
-		return TranslationService.translateEngToKor(contentKor);
 	}
 
 }

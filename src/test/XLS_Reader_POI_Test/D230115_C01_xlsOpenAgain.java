@@ -88,10 +88,10 @@ public class D230115_C01_xlsOpenAgain {
             String gitHubID = cellGitHubID.getStringCellValue();
             memberParam.put("gitHubID", gitHubID);
 
-            Cell cellDiscordID = CellUtil.getCell(row, 3);
-            if(cellDiscordID.getCellType() != CellType.BLANK) {
-                String discordID = cellDiscordID.getStringCellValue(); // Discord ID is optional
-                memberParam.put("discordID", discordID);
+            Cell cellDiscordTagID = CellUtil.getCell(row, 3);
+            if(cellDiscordTagID.getCellType() != CellType.BLANK) {
+                String discordTagID = cellDiscordTagID.getStringCellValue(); // Discord ID is optional
+                memberParam.put("discordTagID", discordTagID);
             }
 
             membersInfo.put(name, memberParam);

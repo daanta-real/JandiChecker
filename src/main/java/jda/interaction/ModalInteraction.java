@@ -19,12 +19,12 @@ public class ModalInteraction {
     // Get displayed name from event. If fails it'll return discord name(tagname) as alt
     private static String getDisplayedName(ModalInteractionEvent event) {
         User user = Objects.requireNonNull(event.getMember()).getUser();
-        String discordTag = user.getAsTag();
+        String discordTagID = user.getAsTag();
         String displayedName;
         try {
-            displayedName = Initializer.getMemberNameByDiscordID(discordTag);
+            displayedName = Initializer.getMemberNameByDiscordTagID(discordTagID);
         } catch(Exception e) {
-            displayedName = discordTag;
+            displayedName = discordTagID;
         }
         return displayedName;
     }

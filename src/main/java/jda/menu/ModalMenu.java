@@ -41,7 +41,7 @@ public class ModalMenu {
 
     // 특정 그룹원명의 종합 잔디정보를 리턴
     public static void showJandiMapByName(ButtonInteractionEvent event) {
-        sendSingleTextInput(event, "showJandiMapByName", "그룹원명 입력", "그룹원 이름", "최대 10글자. 성 빼고 이름만 입력해도 됨", 1, 10);
+        sendSingleTextInput(event, "showJandiMapByName", "그룹원명 입력", "그룹원 이름", "최대 10글자.", 1, 10);
     }
 
     // 특정 ID의 종합 잔디정보를 리턴

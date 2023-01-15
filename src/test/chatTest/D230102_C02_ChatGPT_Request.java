@@ -25,7 +25,7 @@ class D230102_C02_ChatGPT_Request {
 //        inputTxt = "대한민국의 올해 경제정책에 대해서 설명하시오";
         inputTxt = "Please explain Korean economic policy this year.";
 
-        OpenAiService service = new OpenAiService(Initializer.getToken_chatGPTAPI());
+        OpenAiService service = new OpenAiService(Initializer.props.get("ChatGPTToken"));
         CompletionRequest completionRequest = CompletionRequest.builder()
                 .prompt(inputTxt) // The question
                 .model("text-davinci-001")   // Strongest AI (has very high risk of timeout)

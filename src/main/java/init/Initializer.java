@@ -65,24 +65,27 @@ public class Initializer {
 			String name = cellName.getStringCellValue();
 
 			Map<String, String> memberParam = new HashMap<>();
+			memberParam.put("name", name);
 
 			Cell cellGitHubID = CellUtil.getCell(row, 2);
 			if(cellGitHubID.getCellType() == CellType.BLANK) continue; // GitHubID is required
 			String gitHubID = cellGitHubID.getStringCellValue();
 			memberParam.put("gitHubID", gitHubID);
 
-			Cell cellDiscordID = CellUtil.getCell(row, 3);
-			if(cellDiscordID.getCellType() != CellType.BLANK) {
-				String discordID = cellDiscordID.getStringCellValue(); // Discord ID is optional
-				memberParam.put("discordID", discordID);
+			Cell cellDiscordTagID = CellUtil.getCell(row, 3);
+			if(cellDiscordTagID.getCellType() != CellType.BLANK) {
+				String discordTagID = cellDiscordTagID.getStringCellValue(); // Discord ID is optional
+				memberParam.put("discordTagID", discordTagID);
 			}
 
+			log.debug("MEMBERS '{}' FOUND: {}", name, memberParam);
 			membersInfo.put(name, memberParam);
 			count++;
 
 		}
 
 		MEMBERS = membersInfo;
+		log.debug("FINISHED MEMBER LOADING: {}", MEMBERS);
 
 	}
 
@@ -188,29 +191,31 @@ public class Initializer {
 
 	// 그룹원명을 입력하면 깃헙 ID를 리턴
 	public static String getGitHubIDByMemberName(String memberName) throws Exception {
-		if(!MEMBERS.containsKey(memberName)) throw new Exception(); // TODO test
+		if(!MEMBERS.containsKey(memberName)) throw new Exception();
 		Map<String, String> member = MEMBERS.get(memberName);
 		return member.get("gitHubID");
 	}
 
 	// 디스코드 ID를 입력하면 멤버명을 리턴
-	public static String getMemberNameByDiscordID(String discordID) throws Exception {
+	public static String getMemberNameByDiscordTagID(String discordTagID) throws Exception {
 		for(Map.Entry<String, Map<String, String>> entry: MEMBERS.entrySet()) {
 			Map<String, String> memberProps = entry.getValue();
-			if(!memberProps.containsKey("discordID")) continue; // TODO test
-			String foundDiscordID = memberProps.get("discordID");
-			if(!StringUtils.isEmpty(foundDiscordID) && foundDiscordID.equals(discordID)) return foundDiscordID;
+			if(!memberProps.containsKey("discordTagID")) continue;
+			String foundDiscordTagID = memberProps.get("discordTagID");
+			if(!StringUtils.isEmpty(foundDiscordTagID) && foundDiscordTagID.equals(discordTagID)) {
+				return memberProps.get("name");
+			}
 		}
 		throw new Exception();
 	}
 
 	// 디스코드 ID로 그룹원의 이름과 GitHub ID를 Map으로 리턴
-	public static Map<String, String> getMemberInfoesByDiscordID(String discordID) throws Exception {
+	public static Map<String, String> getMemberInfoesByDiscordTagID(String discordTagID) throws Exception {
 		for(Map.Entry<String, Map<String, String>> entry: MEMBERS.entrySet()) {
 			Map<String, String> memberProp = entry.getValue();
-			if(!memberProp.containsKey("gitHubID")) continue; // TODO test
-			String foundGitHubID = memberProp.get("gitHubID");
-			if(!StringUtils.isEmpty(foundGitHubID) && foundGitHubID.equals(discordID)) return memberProp;
+			if(!memberProp.containsKey("discordTagID")) continue; // TODO test
+			String foundDiscordTagID = memberProp.get("discordTagID");
+			if(!StringUtils.isEmpty(foundDiscordTagID) && foundDiscordTagID.equals(discordTagID)) return memberProp;
 		}
 		throw new Exception();
 	}

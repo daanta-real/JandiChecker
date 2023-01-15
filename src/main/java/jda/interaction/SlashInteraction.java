@@ -22,7 +22,7 @@ public class SlashInteraction {
         String discordTag = user.getAsTag();
         String displayedName;
         try {
-            displayedName = Initializer.getMemberNameByDiscordID(discordTag);
+            displayedName = Initializer.getMemberNameByDiscordTagID(discordTag);
         } catch(Exception e) {
             displayedName = discordTag;
         }
