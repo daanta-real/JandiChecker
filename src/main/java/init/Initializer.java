@@ -37,14 +37,15 @@ public class Initializer {
 	private static void getVersionInfo(XSSFSheet sheet) {
 		props.put("version", getStringFromAddr(sheet, 2, 6));
 		props.put("build", getStringFromAddr(sheet, 3, 6));
-		props.put("cronSchedule", getStringFromAddr(sheet, 6, 6));
-		props.put("cronTargetChannelID", getStringFromAddr(sheet, 7, 6));
-		props.put("JDAToken", getStringFromAddr(sheet, 10, 6));
-		props.put("ChatGPTToken", getStringFromAddr(sheet, 11, 6));
+		props.put("language", getStringFromAddr(sheet, 6, 6));
+		props.put("cronSchedule", getStringFromAddr(sheet, 9, 6));
+		props.put("cronTargetChannelID", getStringFromAddr(sheet, 10, 6));
+		props.put("JDAToken", getStringFromAddr(sheet, 13, 6));
+		props.put("ChatGPTToken", getStringFromAddr(sheet, 14, 6));
 		StringBuilder sb = new StringBuilder();
-		for(int i = 12; i <= 23; i++) {
+		for(int i = 15; i <= 26; i++) {
 			sb.append(getStringFromAddr(sheet, i, 6));
-			if(i != 23) sb.append("\n");
+			if(i != 26) sb.append("\n");
 		}
 		props.put("GoogleCloudToken", sb.toString());
 		log.debug("FINISHED PROPS LOADING! {}", props);
