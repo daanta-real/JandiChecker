@@ -54,8 +54,8 @@ public class Checker {
 		for(Map.Entry<String, Map<String, String>> entry: Initializer.MEMBERS.entrySet()) {
 			Map<String, String> memberProps = entry.getValue();
 			String name = entry.getKey();
-			String gitHubId = memberProps.get("gitHubId");
-			boolean hasCommit = getGithubCommittedByDay(gitHubId, day);
+			String gitHubID = memberProps.get("gitHubID");
+			boolean hasCommit = getGithubCommittedByDay(gitHubID, day);
 			if(
 				(!findNegative && hasCommit)    // 잔디 심은 사람을 찾는 모드일 때, 심은 경우
 				|| (findNegative && !hasCommit) // 잔디를 심지 않는 사람을 찾는 모드일 때, 심지 않은 경우
