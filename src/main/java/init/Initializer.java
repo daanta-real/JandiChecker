@@ -34,7 +34,7 @@ public class Initializer {
 		return CellUtil.getCell(row, colIndex).getStringCellValue();
 	}
 
-	private static void getVersionInfo(XSSFSheet sheet) {
+	private static void getPropsInfo(XSSFSheet sheet) {
 		props.put("version", getStringFromAddr(sheet, 2, 6));
 		props.put("build", getStringFromAddr(sheet, 3, 6));
 		props.put("language", getStringFromAddr(sheet, 6, 6));
@@ -103,7 +103,7 @@ public class Initializer {
 			XSSFSheet sheet = workbook.getSheetAt(0);
 			log.debug("sheet loading success: {}", sheet);
 			getMembersInfo(sheet);
-			getVersionInfo(sheet);
+			getPropsInfo(sheet);
 		} catch(Exception e) {
 			throw new Exception(e);
 		}

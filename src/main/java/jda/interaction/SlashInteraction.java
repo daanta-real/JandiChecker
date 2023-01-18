@@ -89,7 +89,7 @@ public class SlashInteraction {
     private static String getTranslatedString_EN_to_KR(SlashCommandInteractionEvent event, String questionKor) {
 
         String name = getDisplayedName(event);
-        String answerKor = TranslationService.translateEngToKor(questionKor);
+        String answerKor = TranslationService.translateEngToMain(questionKor);
 
         return """
                 🤔 %s님의 입력.. 🤔```md
@@ -106,7 +106,7 @@ public class SlashInteraction {
     private static String getTranslatedString_KR_to_EN(SlashCommandInteractionEvent event, String questionKor) {
 
         String name = getDisplayedName(event);
-        String answerKor = TranslationService.translateKorToEng(questionKor);
+        String answerKor = TranslationService.translateMainToEng(questionKor);
 
         return """
                 🤔 %s님의 입력.. 🤔```md

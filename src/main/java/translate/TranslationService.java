@@ -15,9 +15,24 @@ public class TranslationService {
 
     // Field
     private static Translate translate;
+    public static String mainLanguageLong;
+    private static String mainLanguageShort;
 
     // Make translate instance
     public static void init() throws Exception {
+
+        // Set mother language
+        // English,Korean,Japanese,Chinese(Simplified),Chinese(Traditional)
+        mainLanguageLong = Initializer.props.get("language");
+        mainLanguageShort
+                = "Korean".equals(mainLanguageLong) ? "ko"
+                : "English".equals(mainLanguageLong) ? "en"
+                : "Japanese".equals(mainLanguageLong) ? "ja"
+                : "Chinese(Simplified)".equals(mainLanguageLong) ? "zh-CN"
+                : "Chinese(Traditional)".equals(mainLanguageLong) ? "zh-TW"
+                : "en"; // English default
+
+        // initialize translator instance
         translate = TranslateOptions.newBuilder().setCredentials(
                 ServiceAccountCredentials.fromStream(
                         new ByteArrayInputStream(Initializer.props.get("GoogleCloudToken").getBytes())
@@ -35,15 +50,15 @@ public class TranslationService {
         return translation.getTranslatedText();
     }
 
-    // Translation method: Kor to Eng
-    public static String translateKorToEng(String text) {
-        String result = executeTranslate("ko", "en", text);
+    // Translation method: Main to Eng
+    public static String translateMainToEng(String text) {
+        String result = executeTranslate(mainLanguageShort, "en", text);
         return CommonUtils.unescapeHTMLEntity(result);
     }
 
-    // Translation method: Eng to Kor
-    public static String translateEngToKor(String text) {
-        String result = executeTranslate("en", "ko", text);
+    // Translation method: Eng to Main
+    public static String translateEngToMain(String text) {
+        String result = executeTranslate("en", mainLanguageShort, text);
         return CommonUtils.unescapeHTMLEntity(result);
     }
 

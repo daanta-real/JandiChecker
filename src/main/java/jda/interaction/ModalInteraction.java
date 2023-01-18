@@ -114,7 +114,7 @@ public class ModalInteraction {
                     log.debug("그룹원 {}님의 영한 번역 요청: {}", name, questionEng);
 
                     // Compute
-                    String answerKor = TranslationService.translateEngToKor(questionEng);
+                    String answerKor = TranslationService.translateEngToMain(questionEng);
                     log.debug("번역된 문장: {}", answerKor);
                     result = """
                         🤔 %s님의 입력.. 🤔```md
@@ -138,7 +138,7 @@ public class ModalInteraction {
                     log.debug("그룹원 {}님의 한영 번역 요청: {}", name, questionKor);
 
                     // Compute
-                    String answerEng = TranslationService.translateKorToEng(questionKor);
+                    String answerEng = TranslationService.translateMainToEng(questionKor);
                     log.debug("번역된 문장: {}", answerEng);
                     result = """
                         🤔 %s님의 입력.. 🤔```md
