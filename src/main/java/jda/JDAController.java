@@ -34,8 +34,8 @@ public class JDAController extends ListenerAdapter {
 	public static final String CMD_LIST_BY_DATE = "날짜";
 	public static final String CMD_ABOUT = "대하여";
 	public static final String CMD_CLOSE = "닫기";
-    public static final String CMD_TRANSLATE_KR_TO_EN = "한영";
-    public static final String CMD_TRANSLATE_EN_TO_KR = "영한";
+    public static final String CMD_TRANSLATE_MAIN_TO_EN = "한영";
+    public static final String CMD_TRANSLATE_EN_TO_MAIN = "영한";
 
 
 

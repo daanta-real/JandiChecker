@@ -60,14 +60,14 @@ public class ModalMenu {
         sendSingleTextInput(event, "showDidCommitSomeday", "날짜 입력", "조회할 날짜","yyyyMMdd 형식", 8, 8);
     }
 
-    // Translation: English to Korean
-    public static void showTranslate_EN_to_KR(ButtonInteractionEvent event) {
-        sendSingleTextInput(event, "showTranslate_EN_to_KR", "한국어로 번역할 내용 입력", "영어 문장","조금 길어도 괜찮을지도..?", 1, 300, true);
+    // Translation: English to main language
+    public static void showTranslate_EN_to_MAIN(ButtonInteractionEvent event) {
+        sendSingleTextInput(event, "showTranslate_EN_to_MAIN", "한국어로 번역할 내용 입력", "영어 문장","조금 길어도 괜찮을지도..?", 1, 300, true);
     }
 
-    // Translation: Korean to English
-    public static void showTranslate_KR_to_EN(ButtonInteractionEvent event) {
-        sendSingleTextInput(event, "showTranslate_KR_to_EN", "영어로 번역할 내용 입력", "한국 문장","조금 길어도 괜찮을지도..?", 1, 300, true);
+    // Translation: Main language to English
+    public static void showTranslate_MAIN_to_EN(ButtonInteractionEvent event) {
+        sendSingleTextInput(event, "showTranslate_MAIN_to_EN", "영어로 번역할 내용 입력", "한국 문장","조금 길어도 괜찮을지도..?", 1, 300, true);
     }
 
 }

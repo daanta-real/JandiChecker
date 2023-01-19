@@ -52,8 +52,8 @@ public class SlashInteraction {
                 case JDAController.CMD_LIST_YESTERDAY_FAIL    -> CmdService.getNotCommittedStringYesterday(); // 어제 잔디심기 안 한 그룹원 목록 출력
                 case JDAController.CMD_LIST_TODAY_SUCCESS     -> CmdService.getDidCommitStringToday(); // 오늘 잔디심기 한 그룹원 목록 출력
                 case JDAController.CMD_LIST_BY_DATE           -> CmdService.getDidCommitStringSomeday(option); // 특정 날짜에 잔디를 심은 그룹원 목록 출력
-                case JDAController.CMD_TRANSLATE_EN_TO_KR     -> getTranslatedString_EN_to_KR(event, option); // 영한번역
-                case JDAController.CMD_TRANSLATE_KR_TO_EN     -> getTranslatedString_KR_to_EN(event, option); // 한영번역
+                case JDAController.CMD_TRANSLATE_EN_TO_MAIN -> getTranslatedString_EN_to_MAIN(event, option); // 영한번역
+                case JDAController.CMD_TRANSLATE_MAIN_TO_EN -> getTranslatedString_MAIN_to_EN(event, option); // 한영번역
                 case JDAController.CMD_ABOUT                  -> Initializer.INFO_STRING; // 소개말
                 default -> throw new Exception();
             };
@@ -67,10 +67,10 @@ public class SlashInteraction {
 
     }
 
-    private static String makeChatAnswer(SlashCommandInteractionEvent event, String questionKor) {
+    private static String makeChatAnswer(SlashCommandInteractionEvent event, String questionMain) {
 
         String name = getDisplayedName(event);
-        String answerKor = ChatService.getChatAnswer(questionKor);
+        String answerMain = ChatService.getChatAnswer(questionMain);
 
         return """
                 🤔 %s님의 질문... 🤔```md
@@ -82,14 +82,14 @@ public class SlashInteraction {
                 
                 📌 "잔디야 bla bla..." 이런 식으로 질문하시면 약간 더 긴 답변을 받을 수 있습니다.
                 ```
-                """.formatted(name, questionKor, answerKor);
+                """.formatted(name, questionMain, answerMain);
 
     }
 
-    private static String getTranslatedString_EN_to_KR(SlashCommandInteractionEvent event, String questionKor) {
+    private static String getTranslatedString_EN_to_MAIN(SlashCommandInteractionEvent event, String questionMain) {
 
         String name = getDisplayedName(event);
-        String answerKor = TranslationService.translateEngToMain(questionKor);
+        String answerMain = TranslationService.translateEngToMain(questionMain);
 
         return """
                 🤔 %s님의 입력.. 🤔```md
@@ -99,14 +99,14 @@ public class SlashInteraction {
                 ```
                 %s
                 ```
-                """.formatted(name, questionKor, answerKor);
+                """.formatted(name, questionMain, answerMain);
 
     }
 
-    private static String getTranslatedString_KR_to_EN(SlashCommandInteractionEvent event, String questionKor) {
+    private static String getTranslatedString_MAIN_to_EN(SlashCommandInteractionEvent event, String questionMain) {
 
         String name = getDisplayedName(event);
-        String answerKor = TranslationService.translateMainToEng(questionKor);
+        String answerMain = TranslationService.translateMainToEng(questionMain);
 
         return """
                 🤔 %s님의 입력.. 🤔```md
@@ -116,7 +116,7 @@ public class SlashInteraction {
                 ```
                 %s
                 ```
-                """.formatted(name, questionKor, answerKor);
+                """.formatted(name, questionMain, answerMain);
 
     }
 

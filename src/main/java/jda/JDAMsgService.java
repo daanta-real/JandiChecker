@@ -14,7 +14,7 @@ public class JDAMsgService {
 
 	// 메세지 보내는 원본 메소드
 	public static void send(TextChannel channel, String msg) {
-		log.info("메세지를 보내 보겠습니다. 현재 채널 메세지 발송 가능 여부: " + channel.canTalk());
+		log.info("메세지를 보내겠습니다. 현재 채널 메세지 발송 가능 여부: " + channel.canTalk());
 		if(channel.canTalk()) {
 			msg = msgTrim(msg);
 			msg = CommonUtils.unescapeHTMLEntity(msg);

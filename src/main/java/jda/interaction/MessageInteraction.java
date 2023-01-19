@@ -23,9 +23,9 @@ public class MessageInteraction {
         }
         // 2. "잔디야 뭐뭐머뭐..." 이런 식으로 치면 뭐뭐머뭐... ← 이 부분이 질문이므로 AI의 답변을 회신
         else if(message.startsWith("잔디야 ")) {
-            String questionKor = message.substring(4);
-            String answerKor = ChatService.getChatAnswer(questionKor);
-            String saysAdded = "\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 ChatGPT AI님 가라사대... \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93```" + answerKor + "```";
+            String questionMain = message.substring(4);
+            String answerMain = ChatService.getChatAnswer(questionMain);
+            String saysAdded = "\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 ChatGPT AI님 가라사대... \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93```" + answerMain + "```";
             JDAMsgService.send(event, saysAdded); // 메세지를 바로 돌려준다
         }
 

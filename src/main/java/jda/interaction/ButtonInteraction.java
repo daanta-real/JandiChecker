@@ -46,8 +46,9 @@ public class ButtonInteraction {
                     result = CmdService.getNotCommittedStringYesterday(); // 어제 잔디심기 안 한 그룹원 목록 출력
                 }
                 case JDAController.CMD_LIST_BY_DATE -> ModalMenu.showDidCommitSomeday(event); // 특정 날짜에 잔디를 심은 그룹원 목록 출력
-                case JDAController.CMD_TRANSLATE_EN_TO_KR -> ModalMenu.showTranslate_EN_to_KR(event); // 영한 번역
-                case JDAController.CMD_TRANSLATE_KR_TO_EN -> ModalMenu.showTranslate_KR_to_EN(event); // 한영 번역
+                // 2 translation cmds below are available only in non-English mode
+                case JDAController.CMD_TRANSLATE_EN_TO_MAIN -> ModalMenu.showTranslate_EN_to_MAIN(event); // 영한 번역
+                case JDAController.CMD_TRANSLATE_MAIN_TO_EN -> ModalMenu.showTranslate_MAIN_to_EN(event); // 한영 번역
                 case JDAController.CMD_ABOUT -> {
                     event.deferEdit().queue(); // Set defer
                     result = Initializer.INFO_STRING; // 소개말

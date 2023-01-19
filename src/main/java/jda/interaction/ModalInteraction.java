@@ -73,12 +73,12 @@ public class ModalInteraction {
 
                     // Prepare
                     String name = getDisplayedName(event);
-                    String questionKor = getOptionTextValue(event);
-                    log.debug("그룹원 {}님의 질문: {}", name, questionKor);
+                    String questionMain = getOptionTextValue(event);
+                    log.debug("그룹원 {}님의 질문: {}", name, questionMain);
 
                     // Compute
-                    String answerKor = ChatService.getChatAnswer(questionKor);
-                    log.debug("답변: {}", answerKor);
+                    String answerMain = ChatService.getChatAnswer(questionMain);
+                    log.debug("답변: {}", answerMain);
                     result = """
                         🤔 %s님의 질문... 🤔```md
                         %s
@@ -88,7 +88,7 @@ public class ModalInteraction {
                         %s
                         📌 "잔디야 bla bla..." 이런 식으로 질문하시면 약간 더 긴 답변을 받을 수 있습니다.
                         ```
-                        """.formatted(name, questionKor, answerKor);
+                        """.formatted(name, questionMain, answerMain);
 
                     // Show the result
                     event.getHook().sendMessage(result).queue();
@@ -106,7 +106,8 @@ public class ModalInteraction {
                     event.getHook().sendMessage(result).queue();
 
                 }
-                case "showTranslate_EN_to_KR" -> {
+                // 2 translation cmds below are available only in non-English mode
+                case "showTranslate_EN_to_MAIN" -> {
 
                     // Prepare
                     String name = getDisplayedName(event);
@@ -114,8 +115,8 @@ public class ModalInteraction {
                     log.debug("그룹원 {}님의 영한 번역 요청: {}", name, questionEng);
 
                     // Compute
-                    String answerKor = TranslationService.translateEngToMain(questionEng);
-                    log.debug("번역된 문장: {}", answerKor);
+                    String answerMain = TranslationService.translateEngToMain(questionEng);
+                    log.debug("번역된 문장: {}", answerMain);
                     result = """
                         🤔 %s님의 입력.. 🤔```md
                         %s
@@ -124,21 +125,21 @@ public class ModalInteraction {
                         ```
                         %s
                         ```
-                        """.formatted(name, questionEng, answerKor);
+                        """.formatted(name, questionEng, answerMain);
 
                     // Show the result
                     event.getHook().sendMessage(result).queue();
 
                 }
-                case "showTranslate_KR_to_EN" -> {
+                case "showTranslate_MAIN_to_EN" -> {
 
                     // Prepare
                     String name = getDisplayedName(event);
-                    String questionKor = getOptionTextValue(event);
-                    log.debug("그룹원 {}님의 한영 번역 요청: {}", name, questionKor);
+                    String questionMain = getOptionTextValue(event);
+                    log.debug("그룹원 {}님의 한영 번역 요청: {}", name, questionMain);
 
                     // Compute
-                    String answerEng = TranslationService.translateMainToEng(questionKor);
+                    String answerEng = TranslationService.translateMainToEng(questionMain);
                     log.debug("번역된 문장: {}", answerEng);
                     result = """
                         🤔 %s님의 입력.. 🤔```md
@@ -148,7 +149,7 @@ public class ModalInteraction {
                         ```
                         %s
                         ```
-                        """.formatted(name, questionKor, answerEng);
+                        """.formatted(name, questionMain, answerEng);
 
                     // Show the result
                     event.getHook().sendMessage(result).queue();

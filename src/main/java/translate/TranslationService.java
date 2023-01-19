@@ -16,19 +16,21 @@ public class TranslationService {
     // Field
     private static Translate translate;
     public static String mainLanguageLong;
-    private static String mainLanguageShort;
+    public static String mainLanguageShort;
 
     // Make translate instance
     public static void init() throws Exception {
 
         // Set mother language
-        // English,Korean,Japanese,Chinese(Simplified),Chinese(Traditional)
+        // JandiChecker supports 6 languages
+        // English, Korean, Japanese, Chinese(Simplified), Chinese(Traditional)
+        // You can change your language settings with 'settings.xlsx'
         mainLanguageLong = Initializer.props.get("language");
         mainLanguageShort
-                = "Korean".equals(mainLanguageLong) ? "ko"
-                : "English".equals(mainLanguageLong) ? "en"
-                : "Japanese".equals(mainLanguageLong) ? "ja"
-                : "Chinese(Simplified)".equals(mainLanguageLong) ? "zh-CN"
+                = "Korean".equals(mainLanguageLong)               ? "ko"
+                : "English".equals(mainLanguageLong)              ? "en"
+                : "Japanese".equals(mainLanguageLong)             ? "ja"
+                : "Chinese(Simplified)".equals(mainLanguageLong)  ? "zh-CN"
                 : "Chinese(Traditional)".equals(mainLanguageLong) ? "zh-TW"
                 : "en"; // English default
 

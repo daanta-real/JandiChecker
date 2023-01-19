@@ -7,6 +7,7 @@ import com.google.cloud.translate.Translation;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import translate.TranslationService;
 
 import java.io.FileInputStream;
 
@@ -38,14 +39,12 @@ class D230104_C01_TranslationTest {
         return translation.getTranslatedText();
     }
 
-    // Translation method: Kor to Eng
-    private String translateKorToEng(String text) {
-        return executeTranslate("ko", "en", text);
-    }
+    // Translation method: Main to Eng
+    private String translateMainToEng(String text) { return executeTranslate(TranslationService.mainLanguageShort, "en", text); }
 
-    // Translation method: Eng to Kor
-    private String translateEngToKor(String text) {
-        return executeTranslate("en", "ko", text);
+    // Translation method: Eng to Main
+    private String translateEngToMain(String text) {
+        return executeTranslate("en", TranslationService.mainLanguageShort, text);
     }
 
     @Test
@@ -54,10 +53,10 @@ class D230104_C01_TranslationTest {
         assertNotNull(translate);
 
         String text = "우리나라의 미래는 IT산업의 부흥에 달려 있다.";
-        log.debug(translateKorToEng(text));
+        log.debug(translateMainToEng(text));
 
         String text2 = "You have passed my exam";
-        log.debug(translateEngToKor(text2));
+        log.debug(translateEngToMain(text2));
 
     }
 
