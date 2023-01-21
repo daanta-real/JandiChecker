@@ -24,7 +24,7 @@ public class ChatService {
         CompletionRequest completionRequest = CompletionRequest.builder()
                 .prompt(questionEng) // The question
                 .model("text-davinci-001")   // Strongest AI (has very high risk of timeout)
-                .maxTokens(500)              // Max length of answer string
+                .maxTokens(1900)              // Max length of answer string
                 .temperature(1d)             // Changed Most strict answer(0d) to Chaos answer(1d)
                 .echo(false)                 // Don't print the caller's question again
                 .build();

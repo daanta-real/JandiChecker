@@ -70,10 +70,13 @@ dependencies {
 
     // 로깅 라이브러리
     // api 'org.apache.utils.logging.log4j:log4j-core' <<< 안쓸려고..
+    // https://mvnrepository.com/artifact/ch.qos.logback/logback-core
+    implementation 'ch.qos.logback:logback-core:latest.integration'
     // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
     implementation 'ch.qos.logback:logback-classic:latest.integration'
     // https://mvnrepository.com/artifact/org.slf4j/slf4j-api
     implementation 'org.slf4j:slf4j-api:latest.integration'
+
 
     // ChatGPT를 쓰기 위한 의존성
     // https://mvnrepository.com/artifact/com.theokanning.openai-gpt3-java/client
