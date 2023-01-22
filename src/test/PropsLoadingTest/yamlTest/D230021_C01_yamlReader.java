@@ -23,15 +23,16 @@ public class D230021_C01_yamlReader {
 
     // Save whole yaml file to props
     public void loadYaml() throws Exception {
+        String filePath = "languages/Korean.yaml";
         ClassLoader loader = Initializer.class.getClassLoader();
-        InputStream is = loader.getResourceAsStream("languages/Korean.yaml");
+        InputStream is = loader.getResourceAsStream(filePath);
         assert is != null;
         Reader reader = new InputStreamReader(is, StandardCharsets.UTF_8); // Attach UTF-8 reader
         try {
             props = new Properties();
             props.load(reader);
         } catch(Exception e) {
-            log.error("There was an error while loaidng properties.yaml");
+            log.error("There was an error while loading {}", filePath);
             throw new Exception(e);
         }
     }

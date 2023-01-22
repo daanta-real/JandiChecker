@@ -20,7 +20,7 @@ public class Main {
 			JTextAppender.init();
 
 			// Load all preferences
-			log.info("[[[잔디체커 환경설정 로드]]]");
+			log.info("<<< INITIALIZING JandiChecker >>>");
 			Initializer.ready(true);
 
 			// Show title
@@ -29,23 +29,23 @@ public class Main {
 
 					**********************************************
 					- JandiChecker {} Build {}
-					- Github 잔디 점검 프로그램
+					- {}
 					**********************************************
-					""", Initializer.props.get("version"), Initializer.props.get("build"));
+					""", Initializer.VERSION.get("version"), Initializer.VERSION.get("build"), Initializer.LANGUAGE.get("main_description"));
 
 			// Load JDA
 			log.info("");
-			log.info("[[[잔디체커 JDA 로드]]]");
+			log.info("{}", Initializer.LANGUAGE.get("main_jdaLoad"));
 			JDAController.init();
 
 			// Run scheduler
 			log.info("");
-			log.info("[[[스케쥴러 시작]]]");
+			log.info("{}", Initializer.LANGUAGE.get("main_startScheduler"));
 			CronScheduler.run();
 
 			// Done!
 			log.info("");
-			log.info("[[[잔디체커 실행 완료]]]");
+			log.info("{}", Initializer.LANGUAGE.get("main_execute"));
 			log.info("");
 
 		} catch(Exception e) {
