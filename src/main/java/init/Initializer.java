@@ -159,10 +159,11 @@ public class Initializer {
 		// Set info String
 		INFO_STRING = """
 			```md
-			{}```
+			%s```
 			""".formatted(LANGUAGE.get("appInfo"))
-				.formatted(VERSION.get("version"), VERSION.get("build"));
-// TODO
+				.formatted(VERSION.get("version"))
+				.formatted(VERSION.get("build"));
+// TODO: Multiline problem
 		// Finished
 		log.info("{}", LANGUAGE.get("initializer_6_finishedLoading"));
 		log.info("");

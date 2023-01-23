@@ -30,7 +30,7 @@ appInfo: |
   질문을 정확하게 정의할수록 답변도 정확하게 돌아옵니다.
   
   # App information
-  [잔디체커(JandiChecker)] ({} Build {})
+  [잔디체커(JandiChecker)] (%s Build %s)
   * Stacks used: Java 17, Gradle, IntelliJ, JDA, Quartz, ChatGPT API, Google Cloud API(for translation), Swing, JUnit5, Logback
   * Have taking an effort to comply with TDD.
   
@@ -39,6 +39,7 @@ appInfo: |
   * GitHub: http://github.com/daanta-real
   * Blog  : http://blog.naver.com/daanta
   * e-mail: daanta@naver.com
+
 initializer_6_finishedLoading: <<< 환경설정 로드 완료 >>>
 main_description: Github 잔디 점검 프로그램
 main_jdaLoad: <<< 잔디체커 JDA 로드 >>>
