@@ -88,10 +88,22 @@ public class CommonUtils {
     }
 
     // Load a yaml file and return the prop
-    public static HashMap<?, ?> loadYaml(String filePath) throws Exception {
+    public static HashMap<String, String> loadYaml(String filePath) throws Exception {
         ClassLoader loader = Initializer.class.getClassLoader();
         InputStream is = loader.getResourceAsStream(filePath);
-        return new ObjectMapper(new YAMLFactory()).readValue(is, HashMap.class);
+        HashMap<?, ?> loadedProps = new ObjectMapper(new YAMLFactory()).readValue(is, HashMap.class);
+        return convertHashMap(loadedProps);
+    }
+
+    // HashMap<?, ?> to HashMap<String, Object>
+    private static HashMap<String, String> convertHashMap(HashMap<?, ?> org) {
+        HashMap<String, String> map = new HashMap<>();
+        for(Object key: org.keySet()) {
+            String keyStr = String.valueOf(key);
+            String value = String.valueOf(org.get(key));
+            map.put(keyStr, value);
+        }
+        return map;
     }
 
 }

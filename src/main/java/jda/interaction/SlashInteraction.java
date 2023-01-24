@@ -47,7 +47,7 @@ public class SlashInteraction {
                 case JDAController.CMD_ME                     -> CmdService.getJandiMapStringOfMe(event.getUser()); // 내 잔디정보를 출력
                 case JDAController.CMD_JANDIYA                -> makeChatAnswer(event, option); // 일반적인 질문에 답하는 AI
                 case JDAController.CMD_NAME                   -> CmdService.getJandiMapStringByName(option); // 특정 이름의 그룹원의 종합 잔디정보 출력
-                case JDAController.CMD_ID                     -> CmdService.getJandiMapStringByById(option); // 특정 Github ID의 종합 잔디정보 출력
+                case JDAController.CMD_ID                     -> CmdService.getJandiMapStringById(option); // 특정 Github ID의 종합 잔디정보 출력
                 case JDAController.CMD_LIST_YESTERDAY_SUCCESS -> CmdService.getDidCommitStringYesterday(); // 어제 잔디심기 한 그룹원 목록 출력
                 case JDAController.CMD_LIST_YESTERDAY_FAIL    -> CmdService.getNotCommittedStringYesterday(); // 어제 잔디심기 안 한 그룹원 목록 출력
                 case JDAController.CMD_LIST_TODAY_SUCCESS     -> CmdService.getDidCommitStringToday(); // 오늘 잔디심기 한 그룹원 목록 출력

@@ -33,7 +33,7 @@ public class ChatService {
 
         // 2. Convert the answer in StringBuilder instance
         service.createCompletion(completionRequest).getChoices().forEach(response -> {
-            log.debug(String.valueOf(LANGUAGE.get("chat_response")), response.getText());
+            log.debug(LANGUAGE.get("chat_response"), response.getText());
             sb.append(response.getText());
             sb.append("\n");
         });
@@ -41,7 +41,7 @@ public class ChatService {
         // 3. Make clean the answer string
         String answer = sb.toString().replaceAll("\n\n", "\n");
         String answerEscaped = CommonUtils.unescapeHTMLEntity(answer);
-        log.debug(String.valueOf(LANGUAGE.get("chat_originalAnswer")), answerEscaped);
+        log.debug(LANGUAGE.get("chat_originalAnswer"), answerEscaped);
 
         return answerEscaped;
 
@@ -51,18 +51,18 @@ public class ChatService {
     public static String getChatAnswer(String question) {
 
         // 1. Prepare
-        log.debug(String.valueOf(LANGUAGE.get("chat_query")), question, question.length());
+        log.debug(LANGUAGE.get("chat_query"), question, question.length());
 
         // 2. Use ChatGPT
 
-        // 2-1. If mother language is not English, apply bridge translation
+        // 2-1. If your selected language is not English, apply bridge translation
         String answer;
         if(!TranslationService.mainLanguageLong.equals("English")) {
 
             // 2. Mother language -> English
             String questionEng = TranslationService.translateMainToEng(question);
             String unescapedEng = CommonUtils.unescapeHTMLEntity(questionEng);
-            log.debug(String.valueOf(LANGUAGE.get("chat_queryTranslated")), unescapedEng, unescapedEng.length());
+            log.debug(LANGUAGE.get("chat_queryTranslated"), unescapedEng, unescapedEng.length());
 
             String answerEng = requestChatGPT(unescapedEng);
 
@@ -73,7 +73,7 @@ public class ChatService {
         else {
             answer = requestChatGPT(question);
         }
-        log.debug(String.valueOf(LANGUAGE.get("chat_finalAnswer")), answer);
+        log.debug(LANGUAGE.get("chat_finalAnswer"), answer);
 
         // 6. If the result have unintentional chars("? "), trim it
         if(answer.startsWith("? ")) {

@@ -63,7 +63,7 @@ public class ModalInteraction {
                     String id = getOptionTextValue(event);
 
                     // Compute
-                    result = CmdService.getJandiMapStringByById(id);
+                    result = CmdService.getJandiMapStringById(id);
 
                     // Show the result
                     event.getHook().sendMessage(result).queue();

@@ -9,6 +9,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Map;
 
+import static init.Initializer.LANGUAGE;
+
 // 정보 출력 메소드 모음
 @Slf4j
 public class CmdService {
@@ -20,17 +22,18 @@ public class CmdService {
 	// 커맨드를 요청한 사람 스스로의 잔디정보를 리턴
 	public static String getJandiMapStringOfMe(User user) throws Exception {
 
-		// 이름과 ID 구하기
-		String name = null;
+		// Get discord tag ID
 		String discordTagID = user.getAsTag();
+
+		// Find info of the member by discord tag ID
 		Map<String, String> memberInfo;
 		try {
 			memberInfo = Initializer.getMemberInfoesByDiscordTagID(discordTagID);
 		} catch(Exception e) {
-			throw new Exception(name + "님의 GitHub ID를 찾는 데 실패했습니다.");
+			throw new Exception(discordTagID + LANGUAGE.get("cmd_failedToFindGitHubID"));
 		}
 
-		// 종합잔디정보 리턴
+		// Return the total information
 		try {
 			return getJandiMapStringByIdAndName(memberInfo.get("name"), memberInfo.get("gitHubID"));
 		} catch(Exception e) {
@@ -39,13 +42,13 @@ public class CmdService {
 
 	}
 
-	public static String getJandiMapStringByById(String id) { // id로만
+	public static String getJandiMapStringById(String id) { // id로만
 
 		// 미입력 걸러내기
-		if (StringUtils.isEmpty(id)) return "정확히 입력해 주세요.";
+		if (StringUtils.isEmpty(id)) return LANGUAGE.get("plzInputCorrectly");
 
 		// 종합잔디정보 리턴
-		log.info("ID '{}'의 종합 잔디정보 호출을 명령받았습니다.", id);
+		log.info(LANGUAGE.get("cmd_getJandiMapStringById"), id);
 		return GithubMap.getGithubInfoString(id, id);
 
 	}
@@ -54,10 +57,12 @@ public class CmdService {
 	public static String getJandiMapStringByIdAndName(String name, String id) { // id로만
 
 		// 미입력 걸러내기
-		if(StringUtils.isEmpty(name) || StringUtils.isEmpty(id)) return "정확히 입력해 주세요.";
+		if(StringUtils.isEmpty(name) || StringUtils.isEmpty(id)) {
+			return LANGUAGE.get("plzInputCorrectly");
+		}
 
 		// 종합잔디정보 리턴
-		log.info("'{}'님 (ID '{}')의 종합 잔디정보 호출을 명령받았습니다.", name, id);
+		log.info(LANGUAGE.get("cmd_getJandiMapStringByIdAndName"), name, id);
 		return GithubMap.getGithubInfoString(name, id);
 
 	}
@@ -65,20 +70,22 @@ public class CmdService {
 	public static String getJandiMapStringByName(String name) { // 이름으로만
 
 		// 미입력 걸러내기
-		if(StringUtils.isEmpty(name)) return "찾고자 하는 그룹원 이름을 입력해 주세요.";
+		if(StringUtils.isEmpty(name)) {
+			return LANGUAGE.get("cmd_needMemberName");
+		}
 
 		// 이름이 있으니 ID를 구함
-		String id;
+		String gitHubID;
 		try {
-			id = Initializer.getGitHubIDByMemberName(name);
-			if (StringUtils.isEmpty(id)) throw new Exception();
+			gitHubID = Initializer.getGitHubIDByMemberName(name);
+			if (StringUtils.isEmpty(gitHubID)) throw new Exception();
 		} catch (Exception e) {
-			return name + "님의 ID를 찾지 못하였습니다.";
+			return name + LANGUAGE.get("cmd_failedToFindGitHubID");
 		}
 
 		// 이름과 ID로 종합잔디정보 리턴
-		log.info("그룹원 '{}' (ID '{}')의 종합 잔디정보 호출을 명령받았습니다.", name, id);
-		return GithubMap.getGithubInfoString(name, id);
+		log.info(LANGUAGE.get("cmd_getJandiMapStringByName"), name, gitHubID);
+		return GithubMap.getGithubInfoString(name, gitHubID);
 
 	}
 

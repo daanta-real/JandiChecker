@@ -1,5 +1,6 @@
 # 공용
 fin: 완료.
+plzInputCorrectly: 정확히 입력해 주세요.
 
 # 최초 로딩 시 필요한 문자열
 initializer_3_loadVersion: <<< 환경설정 3. 버전 정보 로드 >>>
@@ -52,3 +53,10 @@ chat_queryTranslated: "영어로 번역된 질문: <<<{}>>> (길이 {})"
 chat_response: "응답 수신: <<<{}>>>"
 chat_originalAnswer: "답변: <<<{}>>>"
 chat_finalAnswer: "최종 답변: <<<{}>>>"
+
+# CmdService
+cmd_failedToFindGitHubID: "님의 GitHub ID를 찾는 데 실패했습니다."
+cmd_getJandiMapStringById: "ID '{}'의 종합 잔디정보 호출을 명령받았습니다."
+cmd_getJandiMapStringByIdAndName: "'{}'님 (ID '{}')의 종합 잔디정보 호출을 명령받았습니다."
+cmd_needMemberName: "찾고자 하는 그룹원 이름을 입력해 주세요."
+cmd_getJandiMapStringByName: "그룹원 '{}' (ID '{}')의 종합 잔디정보 호출을 명령받았습니다."

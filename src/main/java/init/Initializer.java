@@ -25,9 +25,9 @@ public class Initializer {
 
 	// 1. Fields
 	public static final String PATH = Paths.get("").toAbsolutePath().toString(); // 잔디체커가 실행되는 경로
-	public static HashMap<?, ?> VERSION;
+	public static HashMap<String, String> VERSION;
 	public static Map<String, String> props = new HashMap<>();
-	public static HashMap<?, ?> LANGUAGE;
+	public static HashMap<String, String> LANGUAGE;
 	public static Map<String, Map<String, String>> MEMBERS = new HashMap<>();
 	public static String INFO_STRING;
 
@@ -129,29 +129,29 @@ public class Initializer {
 		log.info("<<< CONFIGURATION 2. LOADING LANGUAGE FILE >>>");
 		String language = Initializer.props.get("language");
 		LANGUAGE = CommonUtils.loadYaml("languages/" + language + ".yaml"); // Language props loaded
-		log.info("{}", LANGUAGE.get("fin"));
+		log.info(LANGUAGE.get("fin"));
 		log.info("");
 
 		// 3. Load version & build settings (version.yaml)
-		log.info("{}", LANGUAGE.get("initializer_3_loadVersion"));
+		log.info(LANGUAGE.get("initializer_3_loadVersion"));
 		VERSION = CommonUtils.loadYaml("version.yaml");
-		log.info("{}", LANGUAGE.get("fin"));
+		log.info(LANGUAGE.get("fin"));
 		log.info("");
 
 		// 4. 윈도 컨트롤, 트레이 등 ui 준비
 		if(needSwingWindow) {
-			log.info("{}", LANGUAGE.get("initializer_4_loadSwingWindow"));
+			log.info(LANGUAGE.get("initializer_4_loadSwingWindow"));
 			UIMain.getInstance().init();
 		} else {
-			log.info("{}", LANGUAGE.get("initializer_4_notLoadSwingWindow"));
+			log.info(LANGUAGE.get("initializer_4_notLoadSwingWindow"));
 		}
 		log.info("{}", LANGUAGE.get("fin"));
 		log.info("");
 
 		// 5. Load Google Translate API (googleAPIKey.json)
-		log.info("{}", LANGUAGE.get("initializer_5_loadGoogleTranslate"));
+		log.info(LANGUAGE.get("initializer_5_loadGoogleTranslate"));
 		TranslationService.init();
-		log.info("{}", LANGUAGE.get("fin"));
+		log.info(LANGUAGE.get("fin"));
 		log.info("");
 
 		// 4. Load app info message
@@ -163,7 +163,7 @@ public class Initializer {
 				.formatted(VERSION.get("version"), VERSION.get("build"));
 		System.out.println(VERSION.get("build"));
 		// Finished
-		log.info("{}", LANGUAGE.get("initializer_6_finishedLoading"));
+		log.info(LANGUAGE.get("initializer_6_finishedLoading"));
 		log.info("");
 
 	}
