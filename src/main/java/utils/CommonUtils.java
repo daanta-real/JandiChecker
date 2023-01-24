@@ -1,6 +1,8 @@
 package utils;
 
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import init.Initializer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.text.StringEscapeUtils;
@@ -11,7 +13,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Properties;
+import java.util.HashMap;
 
 @Slf4j
 public class CommonUtils {
@@ -86,21 +88,10 @@ public class CommonUtils {
     }
 
     // Load a yaml file and return the prop
-    public static Properties loadYaml(String filePath) throws Exception {
+    public static HashMap<?, ?> loadYaml(String filePath) throws Exception {
         ClassLoader loader = Initializer.class.getClassLoader();
         InputStream is = loader.getResourceAsStream(filePath);
-        assert is != null;
-        Reader reader = new InputStreamReader(is, StandardCharsets.UTF_8); // Attach UTF-8 reader
-        Properties props;
-        try {
-            props = new Properties();
-            props.load(reader);
-        } catch(Exception e) {
-            log.error("There was an error while loaidng '{}'", filePath);
-            throw new Exception(e);
-        }
-        log.debug("{} = {}", filePath, props);
-        return props;
+        return new ObjectMapper(new YAMLFactory()).readValue(is, HashMap.class);
     }
 
 }
