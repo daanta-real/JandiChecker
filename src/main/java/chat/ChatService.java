@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import translate.TranslationService;
 import utils.CommonUtils;
 
+import static init.Initializer.LANGUAGE;
+
 // ChatGPT API related services
 @Slf4j
 public class ChatService {
@@ -31,7 +33,7 @@ public class ChatService {
 
         // 2. Convert the answer in StringBuilder instance
         service.createCompletion(completionRequest).getChoices().forEach(response -> {
-            log.debug("응답 수신: <<<{}>>>", response.getText());
+            log.debug(String.valueOf(LANGUAGE.get("chat_response")), response.getText());
             sb.append(response.getText());
             sb.append("\n");
         });
@@ -39,7 +41,7 @@ public class ChatService {
         // 3. Make clean the answer string
         String answer = sb.toString().replaceAll("\n\n", "\n");
         String answerEscaped = CommonUtils.unescapeHTMLEntity(answer);
-        log.debug("답변: <<<{}>>>", answerEscaped);
+        log.debug(String.valueOf(LANGUAGE.get("chat_originalAnswer")), answerEscaped);
 
         return answerEscaped;
 
@@ -49,7 +51,7 @@ public class ChatService {
     public static String getChatAnswer(String question) {
 
         // 1. Prepare
-        log.debug("접수된 원본 질문: <<<{}>>> (길이 {})", question, question.length());
+        log.debug(String.valueOf(LANGUAGE.get("chat_query")), question, question.length());
 
         // 2. Use ChatGPT
 
@@ -60,7 +62,7 @@ public class ChatService {
             // 2. Mother language -> English
             String questionEng = TranslationService.translateMainToEng(question);
             String unescapedEng = CommonUtils.unescapeHTMLEntity(questionEng);
-            log.debug("영어로 번역된 질문: <<<{}>>> (길이 {})", unescapedEng, unescapedEng.length());
+            log.debug(String.valueOf(LANGUAGE.get("chat_queryTranslated")), unescapedEng, unescapedEng.length());
 
             String answerEng = requestChatGPT(unescapedEng);
 
@@ -71,7 +73,7 @@ public class ChatService {
         else {
             answer = requestChatGPT(question);
         }
-        log.debug("최종 답변: <<<{}>>>", answer);
+        log.debug(String.valueOf(LANGUAGE.get("chat_finalAnswer")), answer);
 
         // 6. If the result have unintentional chars("? "), trim it
         if(answer.startsWith("? ")) {

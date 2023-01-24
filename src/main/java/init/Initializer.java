@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -26,9 +25,9 @@ public class Initializer {
 
 	// 1. Fields
 	public static final String PATH = Paths.get("").toAbsolutePath().toString(); // 잔디체커가 실행되는 경로
-	public static Properties VERSION;
+	public static HashMap<?, ?> VERSION;
 	public static Map<String, String> props = new HashMap<>();
-	public static Properties LANGUAGE;
+	public static HashMap<?, ?> LANGUAGE;
 	public static Map<String, Map<String, String>> MEMBERS = new HashMap<>();
 	public static String INFO_STRING;
 
@@ -161,9 +160,8 @@ public class Initializer {
 			```md
 			%s```
 			""".formatted(LANGUAGE.get("appInfo"))
-				.formatted(VERSION.get("version"))
-				.formatted(VERSION.get("build"));
-// TODO: Multiline problem
+				.formatted(VERSION.get("version"), VERSION.get("build"));
+		System.out.println(VERSION.get("build"));
 		// Finished
 		log.info("{}", LANGUAGE.get("initializer_6_finishedLoading"));
 		log.info("");

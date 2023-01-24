@@ -45,3 +45,10 @@ main_description: Github 잔디 점검 프로그램
 main_jdaLoad: <<< 잔디체커 JDA 로드 >>>
 main_startScheduler: <<< 스케쥴러 시작 >>>
 main_execute: <<< 잔디체커 실행 완료 >>>
+
+# ChatService
+chat_query: "접수된 원본 질문: <<<{}>>> (길이 {})"
+chat_queryTranslated: "영어로 번역된 질문: <<<{}>>> (길이 {})"
+chat_response: "응답 수신: <<<{}>>>"
+chat_originalAnswer: "답변: <<<{}>>>"
+chat_finalAnswer: "최종 답변: <<<{}>>>"

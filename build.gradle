@@ -51,8 +51,7 @@ dependencies {
     // https://mvnrepository.com/artifact/org.apache.commons/commons-text
     implementation 'org.apache.commons:commons-text:1.10.0'
 
-    // YAML 설정파일을 읽어오기 위해 import했던 JACKSON-YAML 라이브러리
-    // 그러나 지금은 ObjectMapper 때문에 쓴다.
+    // YAML 설정파일을 읽어오기 위해 import한 JACKSON-YAML 라이브러리
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:latest.integration'
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
