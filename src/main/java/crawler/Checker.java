@@ -131,7 +131,7 @@ public class Checker {
 	public static String getDidCommittedSomeday(String date) throws Exception {
 
 		// 미입력 걸러내기
-		if (StringUtils.isEmpty(date)) return LANGUAGE.get("plzInputCorrectly");
+		if (StringUtils.isEmpty(date)) return LANGUAGE.get("err_incorrectInput");
 
 		// 값 검사: 날짜 양식 불만족 시 리턴
 		String date_today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));

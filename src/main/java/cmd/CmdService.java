@@ -45,7 +45,7 @@ public class CmdService {
 	public static String getJandiMapStringById(String id) { // id로만
 
 		// 미입력 걸러내기
-		if (StringUtils.isEmpty(id)) return LANGUAGE.get("plzInputCorrectly");
+		if (StringUtils.isEmpty(id)) return LANGUAGE.get("err_incorrectInput");
 
 		// 종합잔디정보 리턴
 		log.info(LANGUAGE.get("cmd_getJandiMapStringById"), id);
@@ -58,7 +58,7 @@ public class CmdService {
 
 		// 미입력 걸러내기
 		if(StringUtils.isEmpty(name) || StringUtils.isEmpty(id)) {
-			return LANGUAGE.get("plzInputCorrectly");
+			return LANGUAGE.get("err_incorrectInput");
 		}
 
 		// 종합잔디정보 리턴
