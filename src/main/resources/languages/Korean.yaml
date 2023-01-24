@@ -1,6 +1,8 @@
 # 공용
 fin: 완료.
 plzInputCorrectly: 정확히 입력해 주세요.
+err_dateStr: "형식에 맞지 않는 날짜 문자열을 입력하셨습니다."
+err_dateValue: "날짜를 잘못 입력하셨습니다."
 
 # 최초 로딩 시 필요한 문자열
 initializer_3_loadVersion: <<< 환경설정 3. 버전 정보 로드 >>>
@@ -60,3 +62,17 @@ cmd_getJandiMapStringById: "ID '{}'의 종합 잔디정보 호출을 명령받�
 cmd_getJandiMapStringByIdAndName: "'{}'님 (ID '{}')의 종합 잔디정보 호출을 명령받았습니다."
 cmd_needMemberName: "찾고자 하는 그룹원 이름을 입력해 주세요."
 cmd_getJandiMapStringByName: "그룹원 '{}' (ID '{}')의 종합 잔디정보 호출을 명령받았습니다."
+
+# Checker
+checker_getGithubCommittedByDay: "{}의 {} 날의 잔디를 확인합니다."
+checker_scoreOfDay: "{}일의 잔디심기 점수: {}"
+checker_getCommitListByDay: "잔디를 '{}' 확인합니다. 확인할 날짜: {}"
+checker_getNotCommittedYesterday: "어제 잔디를 심지 않은 사람의 목록을 회신 요청받았습니다."
+checker_getNotCommittedYesterday_result: "어제 잔디심기를 패스한 사람 %s명"
+checker_getDidCommitYesterday: "어제 잔디를 심은 사람의 목록을 회신 요청받았습니다."
+checker_getDidCommitYesterday_result: "어제 잔디 심기에 성공한 사람은 %s명...!"
+checker_getDidCommittedToday: "오늘 잔디를 심은 사람의 목록을 회신 요청받았습니다."
+checker_getDidCommittedToday_result_success: "오늘 잔디 심기에 성공한 사람은 %s명...!"
+checker_getDidCommittedToday_result_fail_title: "정보 획득에 실패하였습니다."
+checker_getDidCommittedToday_result_fail_md: "아직 오늘자의 커밋이 비회원 유저에게 공개되기 전이라면, 오늘자 잔디가 조회되지 않을 수도 있습니다."
+checker_getDidCommittedSomeday: "%s에 잔디심기에 성공한 사람 %s명"
