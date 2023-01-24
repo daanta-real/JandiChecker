@@ -161,7 +161,6 @@ public class Initializer {
 			%s```
 			""".formatted(LANGUAGE.get("appInfo"))
 				.formatted(VERSION.get("version"), VERSION.get("build"));
-		System.out.println(VERSION.get("build"));
 		// Finished
 		log.info(LANGUAGE.get("initializer_6_finishedLoading"));
 		log.info("");

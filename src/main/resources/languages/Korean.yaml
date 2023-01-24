@@ -1,6 +1,7 @@
 # 공용
-fin: 완료.
-err_incorrectInput: 정확히 입력해 주세요.
+fin: "완료."
+period: "기간"
+err_incorrectInput: "정확히 입력해 주세요."
 err_dateStr: "형식에 맞지 않는 날짜 문자열을 입력하셨습니다."
 err_dateValue: "날짜를 잘못 입력하셨습니다."
 err_gitHubIDNotExists: "없는 GitHub ID입니다."
@@ -82,3 +83,12 @@ checker_getDidCommittedSomeday: "%s에 잔디심기에 성공한 사람 %s명"
 # Crawler
 crawler_trimResultOne: "트림 결과: 총 {}개 ({} ~ {})"
 crawler_trimResultAll: "모든 트림 결과: {}"
+
+# GitHubMap
+gitHubMap_firstSunday: "일요일 날짜: {}일 전"
+gitHubMap_mapInfo: "맵 현황"
+gitHubMap_sirStr: "님"
+gitHubMap_mapOf: "의 최근 잔디 현황"
+gitHubMap_CommittedInLast30: "최근 30일 간 잔디 심은 날"
+gitHubMap_count: "일 (1일 1잔디율"
+gitHubMap_CommitMapOfRecent1Year: "최근 1년 간 잔디 상세"
