@@ -37,12 +37,16 @@ public class D230021_C01_yamlReader {
         }
     }
 
+    // FAILED: Reading string array
     @Test
     public void main() throws Exception {
         log.debug("시작");
         loadYaml();
         log.debug("{}", props.keySet());
         log.debug("{}", props.entrySet());
+        String appInfoStr = props.get("appInfo").toString();
+        log.debug("{}", appInfoStr);
+
     }
 
 }
