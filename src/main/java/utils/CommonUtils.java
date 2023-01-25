@@ -15,6 +15,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 
+import static init.Initializer.LANGUAGE;
+
 @Slf4j
 public class CommonUtils {
 
@@ -49,7 +51,7 @@ public class CommonUtils {
         if (c != null) {
             // printf-like arguments
             if (message != null) c.format(message, args);
-            c.format("\n엔터 키를 누르십시오...\n");
+            c.format("\n" + LANGUAGE.get("pressTheEnterKey") + "...\n");
             c.readLine();
         }
     }

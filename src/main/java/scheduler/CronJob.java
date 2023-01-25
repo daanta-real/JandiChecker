@@ -9,6 +9,8 @@ import cmd.CmdService;
 import jda.JDAMsgService;
 import init.Initializer;
 
+import static init.Initializer.LANGUAGE;
+
 // 실제 실행될 JOB 내용만을 담고 있는 실행내용 객체
 @Slf4j
 public class CronJob implements Job {
@@ -22,7 +24,7 @@ public class CronJob implements Job {
 			String yesterdayCommitedString = CmdService.getDidCommitStringYesterday();
 			JDAMsgService.send(Initializer.props.get("cronTargetChannelID"), yesterdayCommitedString);
 		} catch (Exception e) {
-			JDAMsgService.send(Initializer.props.get("cronTargetChannelID"), "정보 획득에 실패하였습니다.");
+			JDAMsgService.send(Initializer.props.get("cronTargetChannelID"), LANGUAGE.get("err_failedToGetInfo"));
 			log.error(ExceptionUtils.getStackTrace(e));
 		}
 	}

@@ -6,6 +6,8 @@ err_dateStr: "형식에 맞지 않는 날짜 문자열을 입력하셨습니다.
 err_dateValue: "날짜를 잘못 입력하셨습니다."
 err_gitHubIDNotExists: "없는 GitHub ID입니다."
 err_noCommitMapInGitHubProfile: "프로필 페이지에 잔디밭이 없어 조회하지 못했습니다."
+err_failedToGetInfo: "정보 획득에 실패했습니다."
+pressTheEnterKey: "엔터 키를 누르십시오"
 
 # 최초 로딩 시 필요한 문자열
 initializer_3_loadVersion: <<< 환경설정 3. 버전 정보 로드 >>>
