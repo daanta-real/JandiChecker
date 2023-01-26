@@ -94,3 +94,10 @@ gitHubMap_mapOf: "의 최근 잔디 현황"
 gitHubMap_CommittedInLast30: "최근 30일 간 잔디 심은 날"
 gitHubMap_count: "일 (1일 1잔디율"
 gitHubMap_CommitMapOfRecent1Year: "최근 1년 간 잔디 상세"
+
+# UIMenu
+uiMenu_createdInstance: "인스턴스 생성 완료"
+uiMenu_trayCreationError: "트레이 아이콘 생성에 실패하였습니다."
+uiMenu_trayInitializationError: "트레이 초기화 중 기타 에러가 발생하셨습니다."
+uiMenu_createdTray: "트레이 생성 완료"
+uiMenu_trayDoubleClicked: "트레이 아이콘이 더블 클릭되었습니다."

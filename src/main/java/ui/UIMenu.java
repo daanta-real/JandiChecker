@@ -7,6 +7,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import static init.Initializer.LANGUAGE;
+
 @Slf4j
 public class UIMenu {
 
@@ -22,11 +24,11 @@ public class UIMenu {
         try {
             
             // Set SystemTray instance
-            log.info("UIMenu.SystemTray 인스턴스 생성 완료");
+            log.info("UIMenu.SystemTray {}", LANGUAGE.get("uiMenu_createdInstance"));
             MenuItem MENU_SHOW_WINDOW = new MenuItem();
             MenuItem MENU_EXIT = new MenuItem();
-            log.info("UIMenu.MenuItem 인스턴스 생성 완료");
-            log.info("UIMenu.PopupMenu 인스턴스 생성 완료");
+            log.info("UIMenu.MenuItem {}", LANGUAGE.get("uiMenu_createdInstance"));
+            log.info("UIMenu.PopupMenu {}", LANGUAGE.get("uiMenu_createdInstance"));
     
             // shortcuts
             MENU_SHOW_WINDOW.setShortcut(new MenuShortcut(KeyEvent.VK_O));
@@ -45,11 +47,11 @@ public class UIMenu {
             POPUP.add(MENU_EXIT);
             
         } catch (Exception e) { // etc.
-            log.info("트레이 생성 중 기타 에러가 발생하셨습니다.", e);
+            log.info(LANGUAGE.get("uiMenu_trayCreationError"), e);
             throw e;
         }
 
-        log.info("트레이 생성 완료.");
+        log.info(LANGUAGE.get("uiMenu_createdTray"));
         
     }
 
@@ -72,7 +74,7 @@ public class UIMenu {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     if(e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
-                        log.info("트레이 아이콘이 더블 클릭되었습니다.");
+                        log.info(LANGUAGE.get("uiMenu_trayDoubleClicked"));
                         uiMain.runGoActivate();
                     }
                 }
@@ -86,7 +88,7 @@ public class UIMenu {
             // }
 
         } catch (Exception e) { // etc.
-            log.error("트레이 초기화 중 기타 에러가 발생하셨습니다.", e);
+            log.error(LANGUAGE.get("uiMenu_trayInitializationError"), e);
             throw e;
         }
 
@@ -109,7 +111,7 @@ public class UIMenu {
             UIMenu ui = UIMenu.getInstance();
             ui.TRAY.add(ui.ICON);
         } catch(AWTException e) {
-            log.error("트레이 아이콘 생성에 실패하였습니다.");
+            log.error(LANGUAGE.get("uiMenu_trayCreationError"));
         }
     }
 
