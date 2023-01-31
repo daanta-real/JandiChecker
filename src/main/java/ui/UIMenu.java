@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import static init.Initializer.LANGUAGE;
+import static init.Initializer.props;
 
 @Slf4j
 public class UIMenu {
@@ -24,11 +24,11 @@ public class UIMenu {
         try {
             
             // Set SystemTray instance
-            log.info("UIMenu.SystemTray {}", LANGUAGE.get("uiMenu_createdInstance"));
+            log.info("UIMenu.SystemTray {}", props.lang("uiMenu_createdInstance"));
             MenuItem MENU_SHOW_WINDOW = new MenuItem();
             MenuItem MENU_EXIT = new MenuItem();
-            log.info("UIMenu.MenuItem {}", LANGUAGE.get("uiMenu_createdInstance"));
-            log.info("UIMenu.PopupMenu {}", LANGUAGE.get("uiMenu_createdInstance"));
+            log.info("UIMenu.MenuItem {}", props.lang("uiMenu_createdInstance"));
+            log.info("UIMenu.PopupMenu {}", props.lang("uiMenu_createdInstance"));
     
             // shortcuts
             MENU_SHOW_WINDOW.setShortcut(new MenuShortcut(KeyEvent.VK_O));
@@ -47,11 +47,11 @@ public class UIMenu {
             POPUP.add(MENU_EXIT);
             
         } catch (Exception e) { // etc.
-            log.info(LANGUAGE.get("uiMenu_trayCreationError"), e);
+            log.info(props.lang("uiMenu_trayCreationError"), e);
             throw e;
         }
 
-        log.info(LANGUAGE.get("uiMenu_createdTray"));
+        log.info(props.lang("uiMenu_createdTray"));
         
     }
 
@@ -74,7 +74,7 @@ public class UIMenu {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     if(e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
-                        log.info(LANGUAGE.get("uiMenu_trayDoubleClicked"));
+                        log.info(props.lang("uiMenu_trayDoubleClicked"));
                         uiMain.runGoActivate();
                     }
                 }
@@ -88,7 +88,7 @@ public class UIMenu {
             // }
 
         } catch (Exception e) { // etc.
-            log.error(LANGUAGE.get("uiMenu_trayInitializationError"), e);
+            log.error(props.lang("uiMenu_trayInitializationError"), e);
             throw e;
         }
 
@@ -111,7 +111,7 @@ public class UIMenu {
             UIMenu ui = UIMenu.getInstance();
             ui.TRAY.add(ui.ICON);
         } catch(AWTException e) {
-            log.error(LANGUAGE.get("uiMenu_trayCreationError"));
+            log.error(props.lang("uiMenu_trayCreationError"));
         }
     }
 

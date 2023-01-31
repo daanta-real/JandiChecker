@@ -7,9 +7,8 @@ import org.quartz.JobExecutionContext;
 
 import cmd.CmdService;
 import jda.JDAMsgService;
-import init.Initializer;
 
-import static init.Initializer.LANGUAGE;
+import static init.Initializer.props;
 
 // 실제 실행될 JOB 내용만을 담고 있는 실행내용 객체
 @Slf4j
@@ -22,9 +21,9 @@ public class CronJob implements Job {
 	public void execute(JobExecutionContext context) {
 		try {
 			String yesterdayCommitedString = CmdService.getDidCommitStringYesterday();
-			JDAMsgService.send(Initializer.props.get("cronTargetChannelID"), yesterdayCommitedString);
+			JDAMsgService.send(props.lang("cronTargetChannelID"), yesterdayCommitedString);
 		} catch (Exception e) {
-			JDAMsgService.send(Initializer.props.get("cronTargetChannelID"), LANGUAGE.get("err_failedToGetInfo"));
+			JDAMsgService.send(props.lang("cronTargetChannelID"), props.lang("err_failedToGetInfo"));
 			log.error(ExceptionUtils.getStackTrace(e));
 		}
 	}

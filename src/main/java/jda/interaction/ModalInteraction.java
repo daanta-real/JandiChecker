@@ -2,7 +2,6 @@ package jda.interaction;
 
 import chat.ChatService;
 import cmd.CmdService;
-import init.Initializer;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
@@ -11,6 +10,8 @@ import org.apache.commons.lang3.StringUtils;
 import translate.TranslationService;
 
 import java.util.Objects;
+
+import static init.Initializer.props;
 
 // 모달 관련된 각종 동작(UI 생성, 표시 및 이에 대한 사용자 입력에 따른 후속 동작까지)
 @Slf4j
@@ -22,7 +23,7 @@ public class ModalInteraction {
         String discordTagID = user.getAsTag();
         String displayedName;
         try {
-            displayedName = Initializer.getMemberNameByDiscordTagID(discordTagID);
+            displayedName = props.getMemberNameByDiscordTagID(discordTagID);
         } catch(Exception e) {
             displayedName = discordTagID;
         }
@@ -48,7 +49,7 @@ public class ModalInteraction {
 
                     // Prepare
                     String targetMemberName = getOptionTextValue(event);
-                    String gitHubID = Initializer.getGitHubIDByMemberName(targetMemberName);
+                    String gitHubID = props.getGitHubIDByMemberName(targetMemberName);
 
                     // Compute
                     result = CmdService.getJandiMapStringByIdAndName(targetMemberName, gitHubID);

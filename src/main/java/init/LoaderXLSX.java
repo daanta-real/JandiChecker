@@ -79,7 +79,7 @@ public class LoaderXLSX {
         log.debug("FINISHED PROPS LOADING! {}", props);
     }
 
-    public static void loadXLSXSettings(Props props) throws Exception {
+    public static void loadXLSXSettings() throws Exception {
         try(
                 // 파일 객체 부르기
                 FileInputStream file = new FileInputStream(new File(props.getPath(), "settings.xlsx"));

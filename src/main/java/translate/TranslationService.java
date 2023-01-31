@@ -4,11 +4,12 @@ import com.google.auth.oauth2.ServiceAccountCredentials;
 import com.google.cloud.translate.Translate;
 import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
-import init.Initializer;
 import lombok.extern.slf4j.Slf4j;
 import utils.CommonUtils;
 
 import java.io.ByteArrayInputStream;
+
+import static init.Initializer.props;
 
 @Slf4j
 public class TranslationService {
@@ -25,7 +26,7 @@ public class TranslationService {
         // JandiChecker supports 6 languages
         // English, Korean, Japanese, Chinese(Simplified), Chinese(Traditional)
         // You can change your language settings with 'settings.xlsx'
-        mainLanguageLong = Initializer.props.get("language");
+        mainLanguageLong = props.lang("language");
         mainLanguageShort
                 = "Korean".equals(mainLanguageLong)               ? "ko"
                 : "English".equals(mainLanguageLong)              ? "en"
@@ -37,7 +38,7 @@ public class TranslationService {
         // initialize translator instance
         translate = TranslateOptions.newBuilder().setCredentials(
                 ServiceAccountCredentials.fromStream(
-                        new ByteArrayInputStream(Initializer.props.get("GoogleCloudToken").getBytes())
+                        new ByteArrayInputStream(props.lang("GoogleCloudToken").getBytes())
                 )
         ).build().getService();
     }

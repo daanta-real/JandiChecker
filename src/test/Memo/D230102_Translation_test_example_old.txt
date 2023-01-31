@@ -9,7 +9,7 @@
 
         // API 테스트 시작
         log.debug("테스트 시작.");
-        log.debug("Google translationTest API 키: {}", Initializer.getToken_googleTranslateAPI());
+        log.debug("Google translationTest API 키: {}", props.getToken_GoogleCloud());
         log.debug("Google translationTest API 주소: {}", trAPIURL);
 
         // API REQUEST

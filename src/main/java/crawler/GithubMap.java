@@ -6,7 +6,7 @@ import java.util.*;
 
 import lombok.extern.slf4j.Slf4j;
 
-import static init.Initializer.LANGUAGE;
+import static init.Initializer.props;
 import static utils.CommonUtils.getCalendar;
 
 // 크롤러에서 읽어온 데이터에서 특정 정보를 빼내오거나, 특정 인원들의 깃헙 정보를 출력해줌
@@ -40,13 +40,13 @@ public class GithubMap {
 		// 첫 날과 마지막 날을 구함
 		Calendar firstDay = getDate(Collections.min(map.keySet()));
 		Calendar lastDay  = getDate(Collections.max(map.keySet()));
-		String periodStr = LANGUAGE.get("period") + ": {} ~ {}";
+		String periodStr = props.lang("period") + ": {} ~ {}";
 		log.info(periodStr, sdf.format(firstDay.getTime()), sdf.format(lastDay.getTime()));
 
 		// 첫 원소의 일요일 날짜부터 시작일 직전일까지 필요한 칸수를 확인하여 점을 다 찍어줌
 		int move = -firstDay.get(Calendar.DAY_OF_WEEK) + 1; // amount needed to go back to sunday
 		for(int i = 0; i < move; i++) sb[move].append('.');
-		String firstSundayStr = LANGUAGE.get("gitHubMap_firstSunday") + ", sb[0] = {}";
+		String firstSundayStr = props.lang("gitHubMap_firstSunday") + ", sb[0] = {}";
 		log.info(firstSundayStr, move, sb[0].toString());
 
 		// 데이터 만들기
@@ -85,7 +85,7 @@ public class GithubMap {
 			sbResult.append("\n");
 		}
 		result.put("totalMap", sbResult.toString());
-		String mapInfo = LANGUAGE.get("gitHubMap_mapInfo") + ":\n{}";
+		String mapInfo = props.lang("gitHubMap_mapInfo") + ":\n{}";
 		log.info(mapInfo, sbResult);
 
 		// 최근 2주 간의 TF
@@ -119,7 +119,7 @@ public class GithubMap {
 
 		result.add(
 				"%s %s%s(<http://github.com/%s>)%s %s\n```md"
-				.formatted(emoji, name, LANGUAGE.get("gitHubMap_sirStr"), id, LANGUAGE.get("gitHubMap_mapOf"), emoji)
+				.formatted(emoji, name, props.lang("gitHubMap_sirStr"), id, props.lang("gitHubMap_mapOf"), emoji)
 		);
 
 		int count = (int) map.get("recentCount");
@@ -131,11 +131,11 @@ public class GithubMap {
 		log.info("Committed rate in 30 days: {}" + perc);
 		result.add(
 				"# %s: %s%s %s%%)".formatted(
-						LANGUAGE.get("gitHubMap_CommittedInLast30"), count,
-						LANGUAGE.get("gitHubMap_count"), perc)
+						props.lang("gitHubMap_CommittedInLast30"), count,
+						props.lang("gitHubMap_count"), perc)
 		);
 
-		result.add("# " + LANGUAGE.get("gitHubMap_CommitMapOfRecent1Year"));
+		result.add("# " + props.lang("gitHubMap_CommitMapOfRecent1Year"));
 
 		result.add(String.valueOf(map.get("totalMap")));
 

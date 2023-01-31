@@ -1,12 +1,13 @@
 package jda.interaction;
 
 import cmd.CmdService;
-import init.Initializer;
 import jda.JDAController;
 import jda.menu.ModalMenu;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import org.apache.commons.lang3.StringUtils;
+
+import static init.Initializer.props;
 
 @Slf4j
 public class ButtonInteraction {
@@ -51,7 +52,7 @@ public class ButtonInteraction {
                 case JDAController.CMD_TRANSLATE_MAIN_TO_EN -> ModalMenu.showTranslate_MAIN_to_EN(event); // 한영 번역
                 case JDAController.CMD_ABOUT -> {
                     event.deferEdit().queue(); // Set defer
-                    result = Initializer.INFO_STRING; // 소개말
+                    result = props.getInformation(); // 소개말
                 }
                 case JDAController.CMD_CLOSE -> {
                     event.getMessage().delete().queue();

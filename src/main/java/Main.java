@@ -7,6 +7,7 @@ import scheduler.CronScheduler;
 
 import init.Initializer;
 
+import static init.Initializer.props;
 import static utils.CommonUtils.waitForEnter;
 
 @Slf4j
@@ -31,21 +32,21 @@ public class Main {
 					- JandiChecker {} Build {}
 					- {}
 					**********************************************
-					""", Initializer.VERSION.get("version"), Initializer.VERSION.get("build"), Initializer.LANGUAGE.get("main_description"));
+					""", props.getVersion(), props.getBuild(), props.lang("main_description"));
 
 			// Load JDA
 			log.info("");
-			log.info("{}", Initializer.LANGUAGE.get("main_jdaLoad"));
+			log.info("{}", props.lang("main_jdaLoad"));
 			JDAController.init();
 
 			// Run scheduler
 			log.info("");
-			log.info("{}", Initializer.LANGUAGE.get("main_startScheduler"));
+			log.info("{}", props.lang("main_startScheduler"));
 			CronScheduler.run();
 
 			// Done!
 			log.info("");
-			log.info("{}", Initializer.LANGUAGE.get("main_execute"));
+			log.info("{}", props.lang("main_execute"));
 			log.info("");
 
 		} catch(Exception e) {

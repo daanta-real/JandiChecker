@@ -13,9 +13,10 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import org.jetbrains.annotations.NotNull;
-import init.Initializer;
 
 import java.util.List;
+
+import static init.Initializer.props;
 
 @Slf4j
 public class JDAController extends ListenerAdapter {
@@ -48,7 +49,7 @@ public class JDAController extends ListenerAdapter {
 		log.info("");
 		log.info("[잔디체커 JDA 인스턴스 생성]");
 		// 원래 옛날 버전에서는 여기를 try catch를 감싸서 예외처리를 해야 했으나 패치로 없어진 모양
-		instance = JDABuilder.createDefault(Initializer.props.get("JDAToken"))
+		instance = JDABuilder.createDefault(props.getToken_JDA())
 				.enableIntents(GatewayIntent.MESSAGE_CONTENT) // JDA 4.2.0부터 정책이 바뀌어 권한을 직접 활성화해줘야 함
 				.build(); // 봇을 만들어 로그인시킨 뒤, JdaObj의 인스턴스 값으로 할당
 		log.info("[JDA 인스턴스 생성 완료: {}]", instance);

@@ -2,14 +2,13 @@ package cmd;
 
 import crawler.Checker;
 import crawler.GithubMap;
-import init.Initializer;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.entities.User;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Map;
 
-import static init.Initializer.LANGUAGE;
+import static init.Initializer.props;
 
 // 정보 출력 메소드 모음
 @Slf4j
@@ -28,9 +27,9 @@ public class CmdService {
 		// Find info of the member by discord tag ID
 		Map<String, String> memberInfo;
 		try {
-			memberInfo = Initializer.getMemberInfoesByDiscordTagID(discordTagID);
+			memberInfo = props.getMemberInfoesByDiscordTagID(discordTagID);
 		} catch(Exception e) {
-			throw new Exception(discordTagID + LANGUAGE.get("cmd_failedToFindGitHubID"));
+			throw new Exception(discordTagID + props.lang("cmd_failedToFindGitHubID"));
 		}
 
 		// Return the total information
@@ -45,10 +44,10 @@ public class CmdService {
 	public static String getJandiMapStringById(String id) { // id로만
 
 		// 미입력 걸러내기
-		if (StringUtils.isEmpty(id)) return LANGUAGE.get("err_incorrectInput");
+		if (StringUtils.isEmpty(id)) return props.lang("err_incorrectInput");
 
 		// 종합잔디정보 리턴
-		log.info(LANGUAGE.get("cmd_getJandiMapStringById"), id);
+		log.info(props.lang("cmd_getJandiMapStringById"), id);
 		return GithubMap.getGithubInfoString(id, id);
 
 	}
@@ -58,11 +57,11 @@ public class CmdService {
 
 		// 미입력 걸러내기
 		if(StringUtils.isEmpty(name) || StringUtils.isEmpty(id)) {
-			return LANGUAGE.get("err_incorrectInput");
+			return props.lang("err_incorrectInput");
 		}
 
 		// 종합잔디정보 리턴
-		log.info(LANGUAGE.get("cmd_getJandiMapStringByIdAndName"), name, id);
+		log.info(props.lang("cmd_getJandiMapStringByIdAndName"), name, id);
 		return GithubMap.getGithubInfoString(name, id);
 
 	}
@@ -71,20 +70,20 @@ public class CmdService {
 
 		// 미입력 걸러내기
 		if(StringUtils.isEmpty(name)) {
-			return LANGUAGE.get("cmd_needMemberName");
+			return props.lang("cmd_needMemberName");
 		}
 
 		// 이름이 있으니 ID를 구함
 		String gitHubID;
 		try {
-			gitHubID = Initializer.getGitHubIDByMemberName(name);
+			gitHubID = props.getGitHubIDByMemberName(name);
 			if (StringUtils.isEmpty(gitHubID)) throw new Exception();
 		} catch (Exception e) {
-			return name + LANGUAGE.get("cmd_failedToFindGitHubID");
+			return name + props.lang("cmd_failedToFindGitHubID");
 		}
 
 		// 이름과 ID로 종합잔디정보 리턴
-		log.info(LANGUAGE.get("cmd_getJandiMapStringByName"), name, gitHubID);
+		log.info(props.lang("cmd_getJandiMapStringByName"), name, gitHubID);
 		return GithubMap.getGithubInfoString(name, gitHubID);
 
 	}

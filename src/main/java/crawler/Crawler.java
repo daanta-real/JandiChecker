@@ -5,7 +5,7 @@ import utils.CommonUtils;
 
 import java.util.*;
 
-import static init.Initializer.LANGUAGE;
+import static init.Initializer.props;
 
 // 깃헙 긁어오기 관련 모든 소스코드. 크롤링 및 데이터 획득
 @Slf4j
@@ -17,7 +17,7 @@ public class Crawler {
 			return CommonUtils.httpRequestUrl_GET("https://github.com/" + id);
 		} catch(Exception e) {
 			String msg = e.getMessage().equals("404")
-					? LANGUAGE.get("err_gitHubIDNotExists")
+					? props.lang("err_gitHubIDNotExists")
 					: e.getMessage();
 			throw new Exception(msg);
 		}
@@ -53,12 +53,12 @@ public class Crawler {
 			m.put(date, hasCommitted);
 
 		}
-		if(m.size() == 0) throw new Exception(LANGUAGE.get("프로필 페이지에 잔디밭이 없어 조회하지 못했습니다."));
+		if(m.size() == 0) throw new Exception(props.lang("프로필 페이지에 잔디밭이 없어 조회하지 못했습니다."));
 
 		String first = Collections.min(m.keySet());
 		String last = Collections.max(m.keySet());
-		log.debug(LANGUAGE.get("crawler_trimResultOne"), m.size(), first, last);
-		log.debug(LANGUAGE.get("crawler_trimResultAll"), m);
+		log.debug(props.lang("crawler_trimResultOne"), m.size(), first, last);
+		log.debug(props.lang("crawler_trimResultAll"), m);
 		return m;
 
 	}

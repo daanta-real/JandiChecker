@@ -2,7 +2,6 @@ package jda.interaction;
 
 import chat.ChatService;
 import cmd.CmdService;
-import init.Initializer;
 import jda.JDAController;
 import jda.JDAMsgService;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +12,8 @@ import translate.TranslationService;
 
 import java.util.Objects;
 
+import static init.Initializer.props;
+
 // 슬래시 메뉴판을 사용한 커맨드 입력에 따른 동작 실행
 @Slf4j
 public class SlashInteraction {
@@ -22,7 +23,7 @@ public class SlashInteraction {
         String discordTag = user.getAsTag();
         String displayedName;
         try {
-            displayedName = Initializer.getMemberNameByDiscordTagID(discordTag);
+            displayedName = props.getMemberNameByDiscordTagID(discordTag);
         } catch(Exception e) {
             displayedName = discordTag;
         }
@@ -54,7 +55,7 @@ public class SlashInteraction {
                 case JDAController.CMD_LIST_BY_DATE           -> CmdService.getDidCommitStringSomeday(option); // 특정 날짜에 잔디를 심은 그룹원 목록 출력
                 case JDAController.CMD_TRANSLATE_EN_TO_MAIN -> getTranslatedString_EN_to_MAIN(event, option); // 영한번역
                 case JDAController.CMD_TRANSLATE_MAIN_TO_EN -> getTranslatedString_MAIN_to_EN(event, option); // 한영번역
-                case JDAController.CMD_ABOUT                  -> Initializer.INFO_STRING; // 소개말
+                case JDAController.CMD_ABOUT                  -> props.getInformation(); // 소개말
                 default -> throw new Exception();
             };
         } catch (Exception e) {

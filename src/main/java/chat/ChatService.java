@@ -2,10 +2,11 @@ package chat;
 
 import com.theokanning.openai.OpenAiService;
 import com.theokanning.openai.completion.CompletionRequest;
-import init.Initializer;
 import lombok.extern.slf4j.Slf4j;
 import translate.TranslationService;
 import utils.CommonUtils;
+
+import static init.Initializer.props;
 
 // ChatGPT API related services
 @Slf4j
@@ -20,7 +21,7 @@ public class ChatService {
 
         // 1. Request
         StringBuilder sb = new StringBuilder();
-        OpenAiService service = new OpenAiService(Initializer.props.get("ChatGPTToken"));
+        OpenAiService service = new OpenAiService(props.getToken_ChatGPT());
         CompletionRequest completionRequest = CompletionRequest.builder()
                 .prompt(questionEng) // The question
                 .model("text-davinci-001")   // Strongest AI (has very high risk of timeout)
@@ -31,7 +32,7 @@ public class ChatService {
 
         // 2. Convert the answer in StringBuilder instance
         service.createCompletion(completionRequest).getChoices().forEach(response -> {
-            log.debug(LANGUAGE.get("chat_response"), response.getText());
+            log.debug(props.lang("chat_response"), response.getText());
             sb.append(response.getText());
             sb.append("\n");
         });
@@ -39,7 +40,7 @@ public class ChatService {
         // 3. Make clean the answer string
         String answer = sb.toString().replaceAll("\n\n", "\n");
         String answerEscaped = CommonUtils.unescapeHTMLEntity(answer);
-        log.debug(LANGUAGE.get("chat_originalAnswer"), answerEscaped);
+        log.debug(props.lang("chat_originalAnswer"), answerEscaped);
 
         return answerEscaped;
 
@@ -49,7 +50,7 @@ public class ChatService {
     public static String getChatAnswer(String question) {
 
         // 1. Prepare
-        log.debug(LANGUAGE.get("chat_query"), question, question.length());
+        log.debug(props.lang("chat_query"), question, question.length());
 
         // 2. Use ChatGPT
 
@@ -60,7 +61,7 @@ public class ChatService {
             // 2. Mother language -> English
             String questionEng = TranslationService.translateMainToEng(question);
             String unescapedEng = CommonUtils.unescapeHTMLEntity(questionEng);
-            log.debug(LANGUAGE.get("chat_queryTranslated"), unescapedEng, unescapedEng.length());
+            log.debug(props.lang("chat_queryTranslated"), unescapedEng, unescapedEng.length());
 
             String answerEng = requestChatGPT(unescapedEng);
 
@@ -71,7 +72,7 @@ public class ChatService {
         else {
             answer = requestChatGPT(question);
         }
-        log.debug(LANGUAGE.get("chat_finalAnswer"), answer);
+        log.debug(props.lang("chat_finalAnswer"), answer);
 
         // 6. If the result have unintentional chars("? "), trim it
         if(answer.startsWith("? ")) {
