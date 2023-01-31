@@ -4,6 +4,7 @@ import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 import utils.CommonUtils;
 
+import java.nio.file.Paths;
 import java.util.Map;
 
 @Data
@@ -21,6 +22,10 @@ public class Props {
     private String token_GoogleCloud;
     private Map<String, String> translation;
     private Map<String, Map<String, String>> members;
+
+    public Props() {
+        path = Paths.get("").toAbsolutePath().toString();
+    }
 
     public String lang(String optionName) {
         return translation.get(optionName);

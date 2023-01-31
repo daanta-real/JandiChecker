@@ -67,7 +67,7 @@ public class Initializer {
 		log.info("");
 
 	}
-	
+
 	// False option to not load Swing window logger
 	public static void ready() throws Exception {
 		ready(false);
