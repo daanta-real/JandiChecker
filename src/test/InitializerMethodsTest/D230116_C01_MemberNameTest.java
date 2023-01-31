@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import java.util.Map;
 
-import init.Initializer;
+import static init.Initializer.props;
 
 @Slf4j
 public class D230116_C01_MemberNameTest {
