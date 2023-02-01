@@ -29,7 +29,7 @@ public class ButtonInteraction {
                     // "원본 메시지가 삭제되었어요"라는 꼬리표가 붙고 또 spinner도 없어지지 않는다.
                     // deferEdit()를 사용해야 되는 것 같다.
                     event.deferEdit().queue();
-                    result = CmdService.getJandiMapStringOfMe(event.getUser()); // 내 잔디정보를 획득
+                    result = CmdService.getJandiMapStringOfMine(event.getUser()); // 내 잔디정보를 획득
                 }
                 case JDAController.CMD_JANDIYA -> ModalMenu.getChatAnswer(event); // 일반적인 질문에 답하는 AI
                 case JDAController.CMD_LIST_YESTERDAY_SUCCESS -> {

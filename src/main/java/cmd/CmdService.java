@@ -10,16 +10,14 @@ import java.util.Map;
 
 import static init.Initializer.props;
 
-// 정보 출력 메소드 모음
+// JandiChecker's actual service execution from the user's order starts here.
 @Slf4j
 public class CmdService {
 
-	/*
-	 * 1. Single jandi map services
-	 */
+	// 1. Summary services
 
-	// 커맨드를 요청한 사람 스스로의 잔디정보를 리턴
-	public static String getJandiMapStringOfMe(User user) throws Exception {
+	// Shows the commit summary information of the requested member himself.
+	public static String getJandiMapStringOfMine(User user) throws Exception {
 
 		// Get discord tag ID
 		String discordTagID = user.getAsTag();
@@ -41,48 +39,33 @@ public class CmdService {
 
 	}
 
-	public static String getJandiMapStringById(String id) { // id로만
-
-		// 미입력 걸러내기
+	// Summary information by GitHub ID
+	public static String getJandiMapStringById(String id) {
 		if (StringUtils.isEmpty(id)) return props.lang("err_incorrectInput");
-
-		// 종합잔디정보 리턴
 		log.info(props.lang("cmd_getJandiMapStringById"), id);
 		return GithubMap.getGithubInfoString(id, id);
-
 	}
 
-	// 특정 이름과 ID의 종합 잔디정보를 리턴
-	public static String getJandiMapStringByIdAndName(String name, String id) { // id로만
-
-		// 미입력 걸러내기
-		if(StringUtils.isEmpty(name) || StringUtils.isEmpty(id)) {
-			return props.lang("err_incorrectInput");
-		}
-
-		// 종합잔디정보 리턴
+	// Summary information by GitHub ID and specific member name
+	public static String getJandiMapStringByIdAndName(String name, String id) {
+		if(StringUtils.isEmpty(name) || StringUtils.isEmpty(id)) return props.lang("err_incorrectInput");
 		log.info(props.lang("cmd_getJandiMapStringByIdAndName"), name, id);
 		return GithubMap.getGithubInfoString(name, id);
-
 	}
 
-	public static String getJandiMapStringByName(String name) { // 이름으로만
+	// Summary information by member name
+	public static String getJandiMapStringByName(String name) {
 
-		// 미입력 걸러내기
-		if(StringUtils.isEmpty(name)) {
-			return props.lang("cmd_needMemberName");
-		}
+		if(StringUtils.isEmpty(name)) return props.lang("cmd_needMemberName");
 
-		// 이름이 있으니 ID를 구함
 		String gitHubID;
 		try {
 			gitHubID = props.getGitHubIDByMemberName(name);
-			if (StringUtils.isEmpty(gitHubID)) throw new Exception();
-		} catch (Exception e) {
+			if(StringUtils.isEmpty(gitHubID)) throw new Exception();
+		} catch(Exception e) {
 			return name + props.lang("cmd_failedToFindGitHubID");
 		}
 
-		// 이름과 ID로 종합잔디정보 리턴
 		log.info(props.lang("cmd_getJandiMapStringByName"), name, gitHubID);
 		return GithubMap.getGithubInfoString(name, gitHubID);
 
@@ -90,26 +73,20 @@ public class CmdService {
 
 
 
-	/*
-	 * 2. Jandi map list services
-	 */
+	// 2. Get list of group members satisfied with specific conditions
 
-	// 어제 잔디심기를 패스한 그룹원 목록을 리턴
 	public static String getNotCommittedStringYesterday() throws Exception {
 		return Checker.getNotCommittedYesterday();
 	}
 
-	// 어제 잔디심기에 성공한 그룹원 목록을 리턴
 	public static String getDidCommitStringYesterday() throws Exception {
 		return Checker.getDidCommitYesterday();
 	}
 
-	// 오늘 잔디심기에 성공한 그룹원 목록을 리턴
 	public static String getDidCommitStringToday() {
 		return Checker.getDidCommittedToday();
 	}
 
-	// 특정일에 잔디심기에 성공한 그룹원 목록을 리턴
 	public static String getDidCommitStringSomeday(String date) throws Exception {
 		return Checker.getDidCommittedSomeday(date);
 	}
