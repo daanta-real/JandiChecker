@@ -12,12 +12,12 @@ import utils.CommonUtils;
 
 import static init.Initializer.props;
 
-// 깃헙 제출한 사람과 안 한 사람들의 정보를 정리
+// Check and get the list of the members who committed or not in specific day
 @Slf4j
 public class Checker {
 
-	// id와 특정 일자 문자열(yyyy-MM-dd)을 넣으면 그 사람이 그날 잔디를 심었는지를 true/false 로 리턴해줌
-	public static boolean getGithubCommittedByDay(String id, String day) throws Exception {
+	// Input the target GitHub ID and date(format: yyyy-MM-dd) and get a T/F where he committed or not
+	public static boolean getGitHubCommittedByDay(String id, String day) throws Exception {
 
 		// 1. Preparing
 		log.info(props.lang("checker_getGithubCommittedByDay"), id, day);
@@ -45,7 +45,7 @@ public class Checker {
 
 	}
 
-	// 그룹원 전원의 특정 날의 잔디심기 현황을 체크하여 (findNegative true일 시, 패스한) 사람의 명부를 회신
+	// Check the all members and returns the list who succeeded to commit (if findNegative = true then not succedded)
 	public static String[] getCommitListByDay(String day, boolean findNegative) throws Exception {
 		log.info(props.lang("checker_getCommitListByDay"), (findNegative ? "안 심었는지" : "심었는지"), day);
 
@@ -56,7 +56,7 @@ public class Checker {
 			Map<String, String> memberProps = entry.getValue();
 			String name = entry.getKey();
 			String gitHubID = memberProps.get("gitHubID");
-			boolean hasCommit = getGithubCommittedByDay(gitHubID, day);
+			boolean hasCommit = getGitHubCommittedByDay(gitHubID, day);
 			if(
 				(!findNegative && hasCommit)    // 잔디 심은 사람을 찾는 모드일 때, 심은 경우
 				|| (findNegative && !hasCommit) // 잔디를 심지 않는 사람을 찾는 모드일 때, 심지 않은 경우
