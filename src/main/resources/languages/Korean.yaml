@@ -81,6 +81,8 @@ checker_getDidCommittedToday_result_success: "오늘 잔디 심기에 성공한 
 checker_getDidCommittedToday_result_fail_title: "정보 획득에 실패하였습니다."
 checker_getDidCommittedToday_result_fail_md: "아직 오늘자의 커밋이 비회원 유저에게 공개되기 전이라면, 오늘자 잔디가 조회되지 않을 수도 있습니다."
 checker_getDidCommittedSomeday: "%s에 잔디심기에 성공한 사람 %s명"
+checker_he_DID_Commit: "심었는지"
+checker_he_DID_NOT_commit: "안 심었는지"
 
 # Crawler
 crawler_trimResultOne: "트림 결과: 총 {}개 ({} ~ {})"

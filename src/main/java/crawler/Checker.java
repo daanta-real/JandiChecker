@@ -45,21 +45,28 @@ public class Checker {
 
 	}
 
-	// Check the all members and returns the list who succeeded to commit (if findNegative = true then not succedded)
+	// Check the all members and returns the count and the list who DID or DID NOT commited
+	// * if findNegative is true then only find DID list
+	// * if findNegative is true then only find NOT DID list
 	public static String[] getCommitListByDay(String day, boolean findNegative) throws Exception {
-		log.info(props.lang("checker_getCommitListByDay"), (findNegative ? "안 심었는지" : "심었는지"), day);
 
-		// 날짜 String 만들기
-		StringBuilder sb = new StringBuilder();
-		int count = 0;
+		log.info(
+				props.lang("checker_getCommitListByDay"),
+				(findNegative
+						? props.lang("checker_he_DID_NOT_commit")
+						: props.lang("checker_he_DID_Commit")), day);
+
+		// result values
+		StringBuilder sb = new StringBuilder(); // name list (one name by one line)
+		int count = 0; // person totalCount of DID or DID NOT
 		for(Map.Entry<String, Map<String, String>> entry: props.getMembers().entrySet()) {
 			Map<String, String> memberProps = entry.getValue();
 			String name = entry.getKey();
 			String gitHubID = memberProps.get("gitHubID");
 			boolean hasCommit = getGitHubCommittedByDay(gitHubID, day);
 			if(
-				(!findNegative && hasCommit)    // 잔디 심은 사람을 찾는 모드일 때, 심은 경우
-				|| (findNegative && !hasCommit) // 잔디를 심지 않는 사람을 찾는 모드일 때, 심지 않은 경우
+				(!findNegative && hasCommit)    // find only DID committed     and he DID commit
+				|| (findNegative && !hasCommit) // find only DID NOT committed and he DID NOT commit
 				) {
 					count++;
 					sb.append(name);
@@ -69,12 +76,11 @@ public class Checker {
 		return new String[] { String.valueOf(count), sb.toString() };
 	}
 
-	// 어제 잔디를 심지 않은 사람의 목록을 회신
+	// Check the all members and returns the list who DID NOT commit yesterday
 	public static String getNotCommittedYesterday() throws Exception {
 
 		log.info(props.lang("checker_getNotCommittedYesterday"));
 
-		// 날짜 String 만들기
 		Calendar c = Calendar.getInstance();
 		c.add(Calendar.DATE, -1);
 		String day = CommonUtils.sdf_thin.format(c.getTime());
@@ -86,12 +92,11 @@ public class Checker {
 
 	}
 
-	// 어제 잔디를 심은 그룹원 목록을 회신
+	// Check the all members and returns the list who DID commit yesterday
 	public static String getDidCommitYesterday() throws Exception {
 
 		log.info(props.lang("checker_getDidCommitYesterday"));
 
-		// 날짜 String 만들기
 		Calendar c = Calendar.getInstance();
 		c.add(Calendar.DATE, -1);
 		String day = CommonUtils.sdf_thin.format(c.getTime());
@@ -103,13 +108,13 @@ public class Checker {
 
 	}
 
-	// 오늘 잔디를 심은 그룹원 목록을 회신
+	// Check the all members and returns the list who DID commit today
+	// maybe it gets an error before 6 o'clock
 	public static String getDidCommittedToday() {
 
 		log.info(props.lang("checker_getDidCommittedToday"));
 
 		try {
-			// 날짜 String 만들기
 			Calendar c = Calendar.getInstance();
 			String day = CommonUtils.sdf_thin.format(c.getTime());
 
@@ -126,18 +131,16 @@ public class Checker {
 
 	}
 
-	// 특정 날짜에 잔디를 심은 그룹원 목록을 회신
+	// Check the all members and returns the list who DID commit in specific day
 	public static String getDidCommittedSomeday(String date) throws Exception {
 
-		// 미입력 걸러내기
+		// chksum: null check, date String format
 		if (StringUtils.isEmpty(date)) return props.lang("err_incorrectInput");
-
-		// 값 검사: 날짜 양식 불만족 시 리턴
 		String date_today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 		if(!CommonUtils.isValidDate(date)) return props.lang("err_dateStr");
-		if(date_today.compareTo(date) < 0) return props.lang("err_dateValue"); // date가 현재보다 미래 날짜일 경우 -1이 되어 불만족
+		if(date_today.compareTo(date) < 0) return props.lang("err_dateValue"); // if date's day is future then this is -1 so can't satisfy
 
-		// 연, 월, 일 문자열 만들어 날짜 객체 구하기
+		// Calendar instance of picked day
 		String y = date.substring(0, 4);
 		String m = String.valueOf(Integer.parseInt(date.substring(4, 6)) - 1);
 		String d = date.substring(6, 8);
