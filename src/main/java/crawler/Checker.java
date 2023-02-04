@@ -140,16 +140,13 @@ public class Checker {
 		if(!CommonUtils.isValidDate(date)) return props.lang("err_dateStr");
 		if(date_today.compareTo(date) < 0) return props.lang("err_dateValue"); // if date's day is future then this is -1 so can't satisfy
 
-		// Calendar instance of picked day
+		// Calendar instance, and date String of picked day
 		String y = date.substring(0, 4);
 		String m = String.valueOf(Integer.parseInt(date.substring(4, 6)) - 1);
 		String d = date.substring(6, 8);
 		Calendar c = CommonUtils.getCalendar(y, m, d);
-
-		// 조회하고자 하는 날짜 문자열 만들기
 		String day = CommonUtils.sdf_thin.format(c.getTime());
 
-		// 본실행
 		try {
 			String[] list = getCommitListByDay(day, false);
 			String day_notice = CommonUtils.sdf_dayweek.format(c.getTime());
