@@ -7,7 +7,7 @@ import java.util.*;
 
 import static init.Initializer.props;
 
-// 깃헙 긁어오기 관련 모든 소스코드. 크롤링 및 데이터 획득
+// Core codes about GitHub scrapping
 @Slf4j
 public class Crawler {
 
@@ -29,13 +29,13 @@ public class Crawler {
 		String[] htmlArr = html.split("\n");
 
 		TreeMap<String, Boolean> m = new TreeMap<>();
-		// log.debug("전체 HTML:\n{}", html);
+		// log.debug("ORIGINAL WHOLE HTML:\n{}", html);
 		for(String oneline: htmlArr) {
 
 			// Target only the lines including the rect tag
-			if(!oneline.contains("<rect width")) continue; // 잔디 있는 줄은 모두 <rect로 시작
+			if(!oneline.contains("<rect width")) continue; // All lines which have comitt data start with <rect
 			int idx_date = oneline.indexOf("data-date");
-			if(idx_date < 0) continue; // data-date가 없는데 <rect로 시작하는 애들이 있다.
+			if(idx_date < 0) continue; // While some lines don't have "data-date" attribute but start with <rect
 
 			// Date extraction
 			int idx_date_start = idx_date + 11;
@@ -49,11 +49,11 @@ public class Crawler {
 			String data = oneline.substring(idx_data + 12, idx_data + 13);
 			boolean hasCommitted = Integer.parseInt(data) > 0;
 
-//			log.debug("makeMapFromTrimmed > {} 날의 잔디 여부 {}", date, hasCommitted);
+//			log.debug("makeMapFromTrimmed > {} -> committed? {}", date, hasCommitted);
 			m.put(date, hasCommitted);
 
 		}
-		if(m.size() == 0) throw new Exception(props.lang("프로필 페이지에 잔디밭이 없어 조회하지 못했습니다."));
+		if(m.size() == 0) throw new Exception(props.lang("err_noCommitMapInGitHubProfile"));
 
 		String first = Collections.min(m.keySet());
 		String last = Collections.max(m.keySet());
@@ -63,7 +63,7 @@ public class Crawler {
 
 	}
 
-	// ID를 넘기면 연간 잔디정보를 Map으로 리턴
+	// Gets a GitHub ID and returns his annual commit map
 	public static TreeMap<String, Boolean> getGithubMap(String id) throws Exception {
 
 		String html;
