@@ -9,11 +9,12 @@ import lombok.extern.slf4j.Slf4j;
 import static init.Initializer.props;
 import static utils.CommonUtils.getCalendar;
 
-// 크롤러에서 읽어온 데이터에서 특정 정보를 빼내오거나, 특정 인원들의 깃헙 정보를 출력해줌
+
+// Extract specific data gathered with Crawler, or return info about some member's GitHub repo
 @Slf4j
 public class GithubMap {
 
-	// 특정 날짜의 객체 획득
+	// Returns date Strings of given day
 	private static Calendar getDate(String dateStr) {
 		String y = dateStr.substring(0, 4);
 		String m = String.valueOf(Integer.parseInt(dateStr.substring(4, 6)) - 1);
@@ -21,15 +22,15 @@ public class GithubMap {
 		return getCalendar(y, m, d);
 	}
 
-	// 깃헙 잔디 정보 획득
+	// Get total commit information as Map by GitHub ID
 	public static TreeMap<String, Object> getGithubMapInfo(String id) throws Exception {
 
-		// 변수정의
+		// 1. Definitions
 		SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd (EEEE)");
 		StringBuilder[] sb = new StringBuilder[7];
 		for(int i = 0; i < 7; i++) sb[i] = new StringBuilder();
 
-		// 맵 갖고 오기
+		// 2. Get whole commit map
 		TreeMap<String, Boolean> map;
 		try {
 			map = Crawler.getGithubMap(id);
@@ -37,48 +38,46 @@ public class GithubMap {
 			throw new Exception(e.getMessage());
 		}
 
-		// 첫 날과 마지막 날을 구함
+		// 3. Calc first and last day of the map
 		Calendar firstDay = getDate(Collections.min(map.keySet()));
 		Calendar lastDay  = getDate(Collections.max(map.keySet()));
 		String periodStr = props.lang("period") + ": {} ~ {}";
 		log.info(periodStr, sdf.format(firstDay.getTime()), sdf.format(lastDay.getTime()));
 
-		// 첫 원소의 일요일 날짜부터 시작일 직전일까지 필요한 칸수를 확인하여 점을 다 찍어줌
+		// 4. Calculate the first Sunday of the week of the day of the first commit occur.
+		//    Prepare the map String arrays, put dots from that Sunday to the day before the first day.
 		int move = -firstDay.get(Calendar.DAY_OF_WEEK) + 1; // amount needed to go back to sunday
 		for(int i = 0; i < move; i++) sb[move].append('.');
 		String firstSundayStr = props.lang("gitHubMap_firstSunday") + ", sb[0] = {}";
 		log.info(firstSundayStr, move, sb[0].toString());
 
-		// 데이터 만들기
+		// 5. Make map data
 		Calendar cal;
 		int count = 0;
 		boolean[] commitTFs = new boolean[500]; // Stores success status of commits (from the first day to the end)
 		for(Map.Entry<String, Boolean> entry: map.entrySet()) {
 
-			// 변수준비
+			// Definitions
 			String k = entry.getKey();
 			cal = getDate(k);
 			int weekday = count % 7;
 
-			// 기록
+			// Record
 			boolean commitSuccess = entry.getValue();
 			char text = commitSuccess ? '●' : '○';
-			sb[weekday].append(text); // 상세현황 문자열
-			commitTFs[count] = commitSuccess; // 상세현황 tf
+			sb[weekday].append(text); // detailed Strings
+			commitTFs[count] = commitSuccess; // detailed T/F
 
-			// 정리
+			// Clean
 			log.info("FOUND DATE ({}th, %7 = {}): {} > {}", count, weekday, sdf.format(cal.getTime()), map.get(k));
 			count++;
 
 		}
 
-
-
-		// 결과부
-		// 결과 변수
+		// Result
 		TreeMap<String, Object> result = new TreeMap<>();
 
-		// 전체맵
+		// Integrate whole map data into one String
 		StringBuilder sbResult = new StringBuilder();
 		for(StringBuilder s: sb) {
 			sbResult.append(s.toString());
@@ -88,7 +87,7 @@ public class GithubMap {
 		String mapInfo = props.lang("gitHubMap_mapInfo") + ":\n{}";
 		log.info(mapInfo, sbResult);
 
-		// 최근 2주 간의 TF
+		// Get count of committed / not committed in last 2 weeks
 		int recentCount = 0, recentTotal = 0;
 		for(int i = count - 30; i < count; i++) {
 			recentTotal++;
@@ -98,12 +97,12 @@ public class GithubMap {
 		result.put("recentTotal", recentTotal);
 		result.put("recentCount", recentCount);
 
-		// 결과 변수 리턴
+		// Done!
 		return result;
 
 	}
 
-	// 특정 인원에 대한 잔디 정보를 최종 구성해서 회신
+	// Returns commit information of specific member name
 	public static String getGithubInfoString(String name, String id) {
 
 		TreeMap<String, Object> map;
