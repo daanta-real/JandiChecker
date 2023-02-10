@@ -84,8 +84,16 @@ public class CommonUtils {
         String unescaped = StringEscapeUtils.unescapeHtml4(msg);
 
         // Forced unescape the chars StringEscapeUtils doesn't support
-        return unescaped.replaceAll("&#39;", "'")
-                .replaceAll("&quot;", "\"");
+        String[] entityNames    = new String[] {"&nbsp;", "&lt;" ,"&gt;" , "&amp;", "&quot;", "&apos;"};
+        String[] entityNumbers  = new String[] {"&#160;", "&#60;","&#62;", "&#38;", "&#34;" , "&#39;" };
+        String[] originalChars  = new String[] {" "     , "<"    ,">"    , "&"    , "\""    , "'"     };
+        for(int i = 0; i < entityNames.length; i++) {
+            unescaped = unescaped
+                    .replaceAll(entityNames[i], originalChars[i])
+                    .replaceAll(entityNumbers[i], originalChars[i]);
+        }
+
+        return unescaped;
 
     }
 
