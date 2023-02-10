@@ -81,14 +81,13 @@ public class LoaderXLSX {
 
     public static void loadXLSXSettings() throws Exception {
         try(
-                // 파일 객체 부르기
+                // Load the file instance
                 FileInputStream file = new FileInputStream(new File(props.getPath(), "settings.xlsx"));
-                // 파일 객체로부터 시트 객체 뽑아내기
+                // Make the sheet instance from it
                 XSSFWorkbook workbook = new XSSFWorkbook(file)
-                // try가 다 끝나면 위의 file과 workbook 객체에 대해 .close()가 실행되며 파일이 닫아진다.
-                // sheet 필드는 이 try 구문이 끝나면 소거되어 버리니, 처리할 것이 있으면 이 안에서 할 것.
+                // After the try and catch statement block JVM automatically load .close() methods of each to close
         ) {
-            // 최종적으로 sheet 객체를 얻는다.
+            // Finally get the sheet instance we wanted
             XSSFSheet sheet = workbook.getSheetAt(0);
             log.debug("sheet loading success: {}", sheet);
             getMembersInfo(sheet);

@@ -4,8 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import translate.TranslationService;
 import ui.UIMain;
 
-// 잔디체커가 실행되는 내내 환경설정을 담고 있게 되는 클래스.
-// 잔디체커가 시작되면 Jackson을 이용해 YAML 파일을 읽어오게 되고, 그 내용이 이 클래스의 각 변수에 채워진다.
+// This is used to loading and holding JandiChecker's all the properties like words, members and UI, etc.
 @Slf4j
 public class Initializer {
 
@@ -39,7 +38,7 @@ public class Initializer {
 		log.info(props.lang("fin"));
 		log.info("");
 
-		// 4. 윈도 컨트롤, 트레이 등 ui 준비
+		// 4. Load all UIs including Swing window instance, icon, tray, etc.
 		if(needSwingWindow) {
 			log.info(props.lang("initializer_4_loadSwingWindow"));
 			UIMain.getInstance().init();
@@ -68,7 +67,7 @@ public class Initializer {
 
 	}
 
-	// False option to not load Swing window logger
+	// The false executing option to not load Swing window logger
 	public static void ready() throws Exception {
 		ready(false);
 	}
