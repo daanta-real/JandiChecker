@@ -6,6 +6,8 @@ import net.dv8tion.jda.api.interactions.components.text.TextInput;
 import net.dv8tion.jda.api.interactions.components.text.TextInputStyle;
 import net.dv8tion.jda.api.interactions.modals.Modal;
 
+import static init.Initializer.pr;
+
 public class ModalMenu {
 
     private static void sendSingleTextInput(
@@ -23,7 +25,7 @@ public class ModalMenu {
 
         event.getMessage().delete().queue(); // Remove all the menu and the original messages
 
-        TextInput name = TextInput.create("option", "잔디체커", style)
+        TextInput name = TextInput.create("option", pr.l("appName"), style)
                 .setMinLength(minLength)
                 .setMaxLength(maxLength)
                 .setLabel(labelTitle)
@@ -39,35 +41,57 @@ public class ModalMenu {
 
     }
 
-    // 특정 그룹원명의 종합 잔디정보를 리턴
+    // Show the total commit info of the member by the specific name
     public static void showJandiMapByName(ButtonInteractionEvent event) {
-        sendSingleTextInput(event, "showJandiMapByName", "그룹원명 입력", "그룹원 이름", "최대 10글자.", 1, 10);
+        sendSingleTextInput(event, "showJandiMapByName",
+                pr.l("modal_inputMemberName"),
+                pr.l("modal_inputMemberName_description"),
+                pr.l("modal_maxLen10"),
+                1, 10);
     }
 
-    // 특정 ID의 종합 잔디정보를 리턴
+    // Show the total commit info of the member by the GitHub ID
     public static void showJandiMapById(ButtonInteractionEvent event) {
-        sendSingleTextInput(event, "showJandiMapById", "아이디 입력", "GitHub ID", "최대 20글자", 1, 20);
+        sendSingleTextInput(event, "showJandiMapById",
+                pr.l("modal_inputGitHubID"),
+                "GitHub ID", pr.l("modal_maxLen20"),
+                1, 20);
     }
 
-    // ChatGPT를 불러 답변을 받아 리턴
+    // The ChatGPT answers for general questions
     public static void getChatAnswer(ButtonInteractionEvent event) {
-        sendSingleTextInput(event, "getChatAnswer", "질문 입력", "하고 싶은 질문",
-                "최대 300글자. 글자수 제한 없이 하려면 이 버튼 메뉴를 통하지 말고 채팅으로 직접 \"잔디야 [질문내용]\"이라고 타이핑해 주세요.", 1, 300, true);
+        sendSingleTextInput(event, "getChatAnswer",
+                pr.l("modal_inputTheQuestion"),
+                pr.l("modal_inputTheQuestion_description"),
+                pr.l("modal_inputTheQuestion_placeholder"),
+                1, 300, true);
     }
 
-    // 특정 날짜에 잔디를 심은 그룹원 목록 출력
+    // Show the member list succeed to commit in specific day
     public static void showDidCommitSomeday(ButtonInteractionEvent event) {
-        sendSingleTextInput(event, "showDidCommitSomeday", "날짜 입력", "조회할 날짜","yyyyMMdd 형식", 8, 8);
+        sendSingleTextInput(event, "showDidCommitSomeday",
+                pr.l("modal_inputTheDate"),
+                pr.l("modal_inputTheDate_description"),
+                pr.l("modal_inputTheDate_placeholder"),
+                8, 8);
     }
 
-    // Translation: English to main language
+    // English → Main language translation
     public static void showTranslate_EN_to_MAIN(ButtonInteractionEvent event) {
-        sendSingleTextInput(event, "showTranslate_EN_to_MAIN", "한국어로 번역할 내용 입력", "영어 문장","조금 길어도 괜찮을지도..?", 1, 300, true);
+        sendSingleTextInput(event, "showTranslate_EN_to_MAIN",
+                pr.l("modal_inputTheEnglish"),
+                pr.l("modal_inputTheEnglish_description"),
+                pr.l("modal_maybeLongerBeOk"),
+                1, 300, true);
     }
 
-    // Translation: Main language to English
+    // Main language → English translation
     public static void showTranslate_MAIN_to_EN(ButtonInteractionEvent event) {
-        sendSingleTextInput(event, "showTranslate_MAIN_to_EN", "영어로 번역할 내용 입력", "한국 문장","조금 길어도 괜찮을지도..?", 1, 300, true);
+        sendSingleTextInput(event, "showTranslate_MAIN_to_EN",
+                pr.l("modal_inputTheMainLang"),
+                pr.l("modal_inputTheMainLang_description"),
+                pr.l("modal_maybeLongerBeOk"),
+                1, 300, true);
     }
 
 }

@@ -1,6 +1,6 @@
 package scheduler;
 
-import static init.Initializer.props;
+import static init.Initializer.pr;
 import static org.quartz.CronScheduleBuilder.cronSchedule;
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.TriggerBuilder.newTrigger;
@@ -41,7 +41,7 @@ public class CronScheduler {
 
 	// Execute the scheduler
 	public static void run() throws Exception {
-		scheduleExecute(CronJob.class, props.getCronSchedule());
+		scheduleExecute(CronJob.class, pr.getCronSchedule());
 	}
 
 }

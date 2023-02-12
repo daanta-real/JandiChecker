@@ -11,7 +11,7 @@ import translate.TranslationService;
 
 import java.util.Objects;
 
-import static init.Initializer.props;
+import static init.Initializer.pr;
 
 // All the execution methods about modal menus(making and showing UI, getting users' input, interactions after it..)
 @Slf4j
@@ -23,7 +23,7 @@ public class ModalInteraction {
         String discordTagID = user.getAsTag();
         String displayedName;
         try {
-            displayedName = props.getMemberNameByDiscordTagID(discordTagID);
+            displayedName = pr.getMemberNameByDiscordTagID(discordTagID);
         } catch(Exception e) {
             displayedName = discordTagID;
         }
@@ -49,7 +49,7 @@ public class ModalInteraction {
 
                     // Prepare
                     String targetMemberName = getOptionTextValue(event);
-                    String gitHubID = props.getGitHubIDByMemberName(targetMemberName);
+                    String gitHubID = pr.getGitHubIDByMemberName(targetMemberName);
 
                     // Compute
                     result = CmdService.getJandiMapStringByIdAndName(targetMemberName, gitHubID);
@@ -75,12 +75,12 @@ public class ModalInteraction {
                     // Prepare
                     String name = getDisplayedName(event);
                     String questionMain = getOptionTextValue(event);
-                    log.debug(props.lang("chat_theQueryByName"), name, questionMain);
+                    log.debug(pr.l("chat_theQueryByName"), name, questionMain);
 
                     // Compute
                     String answerMain = ChatService.getChatAnswer(questionMain);
-                    log.debug(props.lang("chat_theAnswer"), answerMain);
-                    String hisQuestion = props.lang("chat_questionByName").formatted(name);
+                    log.debug(pr.l("chat_theAnswer"), answerMain);
+                    String hisQuestion = pr.l("chat_questionByName").formatted(name);
                     result = """
                         🤔 %s.. 🤔```md
                         %s
@@ -90,8 +90,8 @@ public class ModalInteraction {
                         %s
                         📌 %s
                         ```
-                        """.formatted(hisQuestion, questionMain, props.lang("chat_GPTSays"),
-                            answerMain, props.lang("tip_howToGetLongAnswer"));
+                        """.formatted(hisQuestion, questionMain, pr.l("chat_GPTSays"),
+                            answerMain, pr.l("tip_howToGetLongAnswer"));
 
                     // Show the result
                     event.getHook().sendMessage(result).queue();
@@ -121,7 +121,7 @@ public class ModalInteraction {
                     // Compute
                     String answerMain = TranslationService.translateEngToMain(questionEng);
                     log.debug("Translated text to {}: {}", TranslationService.mainLanguageLong, answerMain);
-                    String inputByName = props.lang("transl_inputByName").formatted(name);
+                    String inputByName = pr.l("transl_inputByName").formatted(name);
 
                     result = """
                         🤔 %s.. 🤔```md
@@ -131,7 +131,7 @@ public class ModalInteraction {
                         ```
                         %s
                         ```
-                        """.formatted(inputByName, questionEng, props.lang("transl_textByGoogle"), answerMain);
+                        """.formatted(inputByName, questionEng, pr.l("transl_textByGoogle"), answerMain);
 
                     // Show the result
                     event.getHook().sendMessage(result).queue();
@@ -148,7 +148,7 @@ public class ModalInteraction {
                     // Compute
                     String answerEng = TranslationService.translateMainToEng(questionMain);
                     log.debug("Translated text to English: {}", answerEng);
-                    String inputByName = props.lang("transl_inputByName").formatted(name);
+                    String inputByName = pr.l("transl_inputByName").formatted(name);
 
                     result = """
                         🤔 %s.. 🤔```md
@@ -158,20 +158,20 @@ public class ModalInteraction {
                         ```
                         %s
                         ```
-                        """.formatted(inputByName, questionMain, props.lang("transl_textByGoogle"), answerEng);
+                        """.formatted(inputByName, questionMain, pr.l("transl_textByGoogle"), answerEng);
 
                     // Show the result
                     event.getHook().sendMessage(result).queue();
 
                 }
-                default -> result = props.lang("err_failedToGetInfo");
+                default -> result = pr.l("err_failedToGetInfo");
             }
 
             // If the result is null or blank String then throw an AssertException
             assert !StringUtils.isEmpty(result);
 
         } catch(Exception e) {
-            result = props.lang("err_incorrectInput");
+            result = pr.l("err_incorrectInput");
             event.getHook().sendMessage(result).queue();
         }
 

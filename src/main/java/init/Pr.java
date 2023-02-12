@@ -7,8 +7,9 @@ import utils.CommonUtils;
 import java.nio.file.Paths;
 import java.util.Map;
 
+// The class handling all properties
 @Data
-public class Props {
+public class Pr {
 
     private String path;
     private String version;
@@ -23,11 +24,12 @@ public class Props {
     private Map<String, String> translation;
     private Map<String, Map<String, String>> members;
 
-    public Props() {
+    public Pr() {
         path = Paths.get("").toAbsolutePath().toString();
     }
 
-    public String lang(String optionName) {
+    // ★★★ Get the string as Main language from props
+    public String l(String optionName) {
         return translation.get(optionName);
     }
 

@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Map;
 
-import static init.Initializer.props;
+import static init.Initializer.pr;
 
 // JandiChecker's actual service execution from the user's order starts here.
 @Slf4j
@@ -25,9 +25,9 @@ public class CmdService {
 		// Find info of the member by discord tag ID
 		Map<String, String> memberInfo;
 		try {
-			memberInfo = props.getMemberInfoesByDiscordTagID(discordTagID);
+			memberInfo = pr.getMemberInfoesByDiscordTagID(discordTagID);
 		} catch(Exception e) {
-			throw new Exception(discordTagID + props.lang("cmd_failedToFindGitHubID"));
+			throw new Exception(discordTagID + pr.l("cmd_failedToFindGitHubID"));
 		}
 
 		// Return the total information
@@ -41,32 +41,38 @@ public class CmdService {
 
 	// Summary information by GitHub ID
 	public static String getJandiMapStringById(String id) {
-		if (StringUtils.isEmpty(id)) return props.lang("err_incorrectInput");
-		log.info(props.lang("cmd_getJandiMapStringById"), id);
+		if (StringUtils.isEmpty(id)) {
+			return pr.l("err_incorrectInput");
+		}
+		log.info(pr.l("cmd_getJandiMapStringById"), id);
 		return GithubMap.getGithubInfoString(id, id);
 	}
 
 	// Summary information by GitHub ID and specific member name
 	public static String getJandiMapStringByIdAndName(String name, String id) {
-		if(StringUtils.isEmpty(name) || StringUtils.isEmpty(id)) return props.lang("err_incorrectInput");
-		log.info(props.lang("cmd_getJandiMapStringByIdAndName"), name, id);
+		if(StringUtils.isEmpty(name) || StringUtils.isEmpty(id)) {
+			return pr.l("err_incorrectInput");
+		}
+		log.info(pr.l("cmd_getJandiMapStringByIdAndName"), name, id);
 		return GithubMap.getGithubInfoString(name, id);
 	}
 
 	// Summary information by member name
 	public static String getJandiMapStringByName(String name) {
 
-		if(StringUtils.isEmpty(name)) return props.lang("cmd_needMemberName");
+		if(StringUtils.isEmpty(name)) {
+			return pr.l("cmd_needMemberName");
+		}
 
 		String gitHubID;
 		try {
-			gitHubID = props.getGitHubIDByMemberName(name);
+			gitHubID = pr.getGitHubIDByMemberName(name);
 			if(StringUtils.isEmpty(gitHubID)) throw new Exception();
 		} catch(Exception e) {
-			return name + props.lang("cmd_failedToFindGitHubID");
+			return name + pr.l("cmd_failedToFindGitHubID");
 		}
 
-		log.info(props.lang("cmd_getJandiMapStringByName"), name, gitHubID);
+		log.info(pr.l("cmd_getJandiMapStringByName"), name, gitHubID);
 		return GithubMap.getGithubInfoString(name, gitHubID);
 
 	}

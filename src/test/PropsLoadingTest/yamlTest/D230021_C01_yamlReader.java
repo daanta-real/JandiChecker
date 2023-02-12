@@ -18,8 +18,8 @@ import java.util.Properties;
 public class D230021_C01_yamlReader {
 
     // Fields
-    //public static final String PATH = Paths.get("").toAbsolutePath().toString(); // 잔디체커가 실행되는 경로
-    Properties props;
+    // public static final String PATH = Paths.get("").toAbsolutePath().toString(); // 잔디체커가 실행되는 경로
+    Properties properties; // This is NOT the Pr class I made. Just java's default prop class
 
     // Save whole yaml file to props
     public void loadYaml() throws Exception {
@@ -29,8 +29,8 @@ public class D230021_C01_yamlReader {
         assert is != null;
         Reader reader = new InputStreamReader(is, StandardCharsets.UTF_8); // Attach UTF-8 reader
         try {
-            props = new Properties();
-            props.load(reader);
+            properties = new Properties();
+            properties.load(reader);
         } catch(Exception e) {
             log.error("There was an error while loading {}", filePath);
             throw new Exception(e);
@@ -42,9 +42,9 @@ public class D230021_C01_yamlReader {
     public void main() throws Exception {
         log.debug("시작");
         loadYaml();
-        log.debug("{}", props.keySet());
-        log.debug("{}", props.entrySet());
-        String appInfoStr = props.get("appInfo").toString();
+        log.debug("{}", properties.keySet());
+        log.debug("{}", properties.entrySet());
+        String appInfoStr = properties.get("appInfo").toString();
         log.debug("{}", appInfoStr);
 
     }

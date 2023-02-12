@@ -9,7 +9,7 @@ import utils.CommonUtils;
 
 import java.io.ByteArrayInputStream;
 
-import static init.Initializer.props;
+import static init.Initializer.pr;
 
 @Slf4j
 public class TranslationService {
@@ -26,7 +26,7 @@ public class TranslationService {
         // JandiChecker supports 6 languages
         // English, Korean, Japanese, Chinese(Simplified), Chinese(Traditional)
         // You can change your language settings with 'settings.xlsx'
-        mainLanguageLong = props.getLanguage();
+        mainLanguageLong = pr.getLanguage();
         mainLanguageShort
                 = "Korean".equals(mainLanguageLong)               ? "ko"
                 : "English".equals(mainLanguageLong)              ? "en"
@@ -38,7 +38,7 @@ public class TranslationService {
         // initialize translator instance
         translate = TranslateOptions.newBuilder().setCredentials(
                 ServiceAccountCredentials.fromStream(
-                        new ByteArrayInputStream(props.getToken_GoogleCloud().getBytes())
+                        new ByteArrayInputStream(pr.getToken_GoogleCloud().getBytes())
                 )
         ).build().getService();
     }

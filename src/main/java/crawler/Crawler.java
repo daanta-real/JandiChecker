@@ -5,7 +5,7 @@ import utils.CommonUtils;
 
 import java.util.*;
 
-import static init.Initializer.props;
+import static init.Initializer.pr;
 
 // Core codes about GitHub scrapping
 @Slf4j
@@ -17,7 +17,7 @@ public class Crawler {
 			return CommonUtils.httpRequestUrl_GET("https://github.com/" + id);
 		} catch(Exception e) {
 			String msg = e.getMessage().equals("404")
-					? props.lang("err_gitHubIDNotExists")
+					? pr.l("err_gitHubIDNotExists")
 					: e.getMessage();
 			throw new Exception(msg);
 		}
@@ -30,35 +30,39 @@ public class Crawler {
 
 		TreeMap<String, Boolean> m = new TreeMap<>();
 		// log.debug("ORIGINAL WHOLE HTML:\n{}", html);
-		for(String oneline: htmlArr) {
+		for(String oneLine: htmlArr) {
 
 			// Target only the lines including the rect tag
-			if(!oneline.contains("<rect width")) continue; // All lines which have comitt data start with <rect
-			int idx_date = oneline.indexOf("data-date");
+			if(!oneLine.contains("<rect width")) { // All lines which have commit data start with <rect
+				continue;
+			}
+			int idx_date = oneLine.indexOf("data-date");
 			if(idx_date < 0) continue; // While some lines don't have "data-date" attribute but start with <rect
 
 			// Date extraction
 			int idx_date_start = idx_date + 11;
 			String date
-					= oneline.substring(idx_date_start, idx_date_start + 4)
-					+ oneline.substring(idx_date_start + 5, idx_date_start + 7)
-					+ oneline.substring(idx_date_start + 8, idx_date_start + 10);
+					= oneLine.substring(idx_date_start, idx_date_start + 4)
+					+ oneLine.substring(idx_date_start + 5, idx_date_start + 7)
+					+ oneLine.substring(idx_date_start + 8, idx_date_start + 10);
 
 			// Data extraction
-			int idx_data = oneline.indexOf("data-level");
-			String data = oneline.substring(idx_data + 12, idx_data + 13);
+			int idx_data = oneLine.indexOf("data-level");
+			String data = oneLine.substring(idx_data + 12, idx_data + 13);
 			boolean hasCommitted = Integer.parseInt(data) > 0;
 
 //			log.debug("makeMapFromTrimmed > {} -> committed? {}", date, hasCommitted);
 			m.put(date, hasCommitted);
 
 		}
-		if(m.size() == 0) throw new Exception(props.lang("err_noCommitMapInGitHubProfile"));
+		if(m.size() == 0) {
+			throw new Exception(pr.l("err_noCommitMapInGitHubProfile"));
+		}
 
 		String first = Collections.min(m.keySet());
 		String last = Collections.max(m.keySet());
-		log.debug(props.lang("crawler_trimResultOne"), m.size(), first, last);
-		log.debug(props.lang("crawler_trimResultAll"), m);
+		log.debug(pr.l("crawler_trimResultOne"), m.size(), first, last);
+		log.debug(pr.l("crawler_trimResultAll"), m);
 		return m;
 
 	}

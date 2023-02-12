@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Objects;
 
+import static init.Initializer.pr;
+
 @Slf4j
 public final class UIMain extends JFrame {
 
@@ -19,7 +21,9 @@ public final class UIMain extends JFrame {
         try {
             INSTANCE = new UIMain();
         } catch (Exception e) {
-            log.info("UIMain 객체 생성 중 오류가 발생했습니다.");
+            log.info("UIMain - {} - {}",
+                    pr.l("instance"),
+                    pr.l("error_occurred"));
             throw new RuntimeException(e);
         }
     }
@@ -32,37 +36,52 @@ public final class UIMain extends JFrame {
     // 2. Constructor
     private UIMain() throws Exception {
 
-        log.info("WindowService 초기화 시작");
+        log.info("WindowService - {} - {}",
+                pr.l("initialization"),
+                pr.l("start"));
 
         // Set JPanel(main window) instance
         WINDOW = new JPanel();
-        log.info("WindowService 인스턴스 생성 완료");
+        log.info("WindowService - {} - creation - {}",
+                pr.l("instance"),
+                pr.l("fin"));
 
         // Set an image icon
         URL imgUrl;
         try {
             imgUrl = getClass().getClassLoader().getResource("windows_16x16.png");
         } catch(Exception e) {
-            log.debug("잔디체커 아이콘 로드에 실패했습니다.");
+            log.debug("{} - {} - {}",
+                    pr.l("icon"),
+                    pr.l("initialization"),
+                    pr.l("err_occurred"));
             throw new Exception();
         }
         IMAGE = Toolkit.getDefaultToolkit().getImage(imgUrl);
-        log.info("잔디체커 이미지 로드 완료");
+        log.info("{} - {} - {}",
+                pr.l("icon"),
+                pr.l("initialization"),
+                pr.l("fin"));
 
         // Set font
         InputStream fontStream;
         try {
             fontStream = Objects.requireNonNull(getClass().getResourceAsStream("/font.otf"));
         } catch(Exception e) {
-            log.debug("폰트 파일 로드에 실패했습니다.");
+            log.debug("{} - {} - {}",
+                    pr.l("font"),
+                    pr.l("initialization"),
+                    pr.l("err_occurred"));
             throw new Exception();
         }
         FONT = Font
                 .createFont(Font.TRUETYPE_FONT, fontStream)
                 .deriveFont(16f); // Make sure to derive the size;
-        log.info("폰트 로딩 완료");
         UIManager.getLookAndFeelDefaults().put("defaultFont", FONT);
-        log.info("폰트를 디폴트 폰트에 적용 완료");
+        log.debug("{} - {} - {}",
+                pr.l("font"),
+                pr.l("initialization"),
+                pr.l("fin"));
 
     }
 
@@ -119,7 +138,9 @@ public final class UIMain extends JFrame {
             });
 
         } catch (Exception e) {
-            log.error("창 초기화 중 에러가 발생하였습니다.");
+            log.info("Window - {} - {}",
+                    pr.l("initialization"),
+                    pr.l("err_occurred"));
             throw e;
         }
 
@@ -137,13 +158,19 @@ public final class UIMain extends JFrame {
 
     // Minimization
     public void runGoTray() {
-        log.info("요청에 의해 윈도우를 트레이로 보냅니다.");
+        log.info("{}: {} → {}",
+                pr.l("request"),
+                pr.l("window"),
+                pr.l("tray"));
         setVisible(false);
         UIMenu.trayIconOn();
     }
 
     public void runGoActivate() {
-        log.info("요청에 의해 윈도우를 활성화합니다.");
+        log.info("{}: {} → {}",
+                pr.l("request"),
+                pr.l("window"),
+                pr.l("activation"));
         UIMenu.trayIconOff();
         setVisible(true);
         toFront();
@@ -151,7 +178,9 @@ public final class UIMain extends JFrame {
     }
 
     public void runExit() {
-        log.info("요청에 의해 종료합니다.");
+        log.info("{}: {}",
+                pr.l("request"),
+                pr.l("exit"));
         System.exit(0);
     }
 

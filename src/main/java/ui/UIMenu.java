@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import static init.Initializer.props;
+import static init.Initializer.pr;
 
 @Slf4j
 public class UIMenu {
@@ -24,11 +24,19 @@ public class UIMenu {
         try {
             
             // Set SystemTray instance
-            log.info("UIMenu.SystemTray {}", props.lang("uiMenu_createdInstance"));
+            log.info("UIMenu.SystemTray {} - {} - {}",
+                    pr.l("instance"),
+                    pr.l("initialization"),
+                    pr.l("fin"));
             MenuItem MENU_SHOW_WINDOW = new MenuItem();
             MenuItem MENU_EXIT = new MenuItem();
-            log.info("UIMenu.MenuItem {}", props.lang("uiMenu_createdInstance"));
-            log.info("UIMenu.PopupMenu {}", props.lang("uiMenu_createdInstance"));
+            log.info("UIMenu.MenuItem {} - {} - {}",
+                    pr.l("instance"),
+                    pr.l("initialization"),
+                    pr.l("fin"));
+            log.info("UIMenu.PopupMenu {} - {} - {}",
+                    pr.l("instance"), pr.l("initialization"),
+                    pr.l("fin"));
     
             // shortcuts
             MENU_SHOW_WINDOW.setShortcut(new MenuShortcut(KeyEvent.VK_O));
@@ -47,11 +55,18 @@ public class UIMenu {
             POPUP.add(MENU_EXIT);
             
         } catch (Exception e) { // etc.
-            log.info(props.lang("uiMenu_trayCreationError"), e);
+            log.debug("{} - {} - {} - {}",
+                    pr.l("tray"),
+                    pr.l("icon"),
+                    pr.l("initialization"),
+                    pr.l("err_occurred"));
             throw e;
         }
 
-        log.info("FIINISHED TO CREATE THE TRAY.");
+        log.debug("{} - {} - {}",
+                pr.l("tray"),
+                pr.l("initialization"),
+                pr.l("fin"));
         
     }
 
@@ -111,7 +126,11 @@ public class UIMenu {
             UIMenu ui = UIMenu.getInstance();
             ui.TRAY.add(ui.ICON);
         } catch(AWTException e) {
-            log.error(props.lang("uiMenu_trayCreationError"));
+            log.debug("{} - {} - {} - {}",
+                    pr.l("tray"),
+                    pr.l("icon"),
+                    pr.l("initialization"),
+                    pr.l("err_occurred"));
         }
     }
 

@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import translate.TranslationService;
 import utils.CommonUtils;
 
-import static init.Initializer.props;
+import static init.Initializer.pr;
 
 // ChatGPT API related services
 @Slf4j
@@ -21,7 +21,7 @@ public class ChatService {
 
         // 1. Request
         StringBuilder sb = new StringBuilder();
-        OpenAiService service = new OpenAiService(props.getToken_ChatGPT());
+        OpenAiService service = new OpenAiService(pr.getToken_ChatGPT());
         CompletionRequest completionRequest = CompletionRequest.builder()
                 .prompt(questionEng) // The question
                 .model("text-davinci-001")   // Strongest AI (has very high risk of timeout)
@@ -32,7 +32,7 @@ public class ChatService {
 
         // 2. Convert the answer in StringBuilder instance
         service.createCompletion(completionRequest).getChoices().forEach(response -> {
-            log.debug(props.lang("chat_response"), response.getText());
+            log.debug(pr.l("chat_response"), response.getText());
             sb.append(response.getText());
             sb.append("\n");
         });
@@ -40,7 +40,7 @@ public class ChatService {
         // 3. Make clean the answer string
         String answer = sb.toString().replaceAll("\n\n", "\n");
         String answerEscaped = CommonUtils.unescapeHTMLEntity(answer);
-        log.debug(props.lang("chat_originalAnswer"), answerEscaped);
+        log.debug(pr.l("chat_originalAnswer"), answerEscaped);
 
         return answerEscaped;
 
@@ -50,7 +50,7 @@ public class ChatService {
     public static String getChatAnswer(String question) {
 
         // 1. Prepare
-        log.debug(props.lang("chat_query"), question, question.length());
+        log.debug(pr.l("chat_query"), question, question.length());
 
         // 2. Use ChatGPT
 
@@ -72,7 +72,7 @@ public class ChatService {
         else {
             answer = requestChatGPT(question);
         }
-        log.debug(props.lang("chat_finalAnswer"), answer);
+        log.debug(pr.l("chat_finalAnswer"), answer);
 
         // 6. If the result have unintentional chars("? "), trim it
         if(answer.startsWith("? ")) {

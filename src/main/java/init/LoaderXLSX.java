@@ -13,7 +13,7 @@ import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import static init.Initializer.props;
+import static init.Initializer.pr;
 
 @Slf4j
 public class LoaderXLSX {
@@ -57,32 +57,32 @@ public class LoaderXLSX {
 
         }
 
-        props.setMembers(membersInfo);
+        pr.setMembers(membersInfo);
         log.debug("FINISHED MEMBER LOADING: {}", membersInfo);
 
     }
 
     private static void getPropsInfo(XSSFSheet sheet) {
-        props.setVersion(getStringFromAddr(sheet, 2, 6));
-        props.setBuild(getStringFromAddr(sheet, 3, 6));
-        props.setLanguage(getStringFromAddr(sheet, 6, 6));
-        props.setCronSchedule(getStringFromAddr(sheet, 9, 6));
-        props.setCronTargetChannelID(getStringFromAddr(sheet, 10, 6));
-        props.setToken_JDA(getStringFromAddr(sheet, 13, 6));
-        props.setToken_ChatGPT(getStringFromAddr(sheet, 14, 6));
+        pr.setVersion(getStringFromAddr(sheet, 2, 6));
+        pr.setBuild(getStringFromAddr(sheet, 3, 6));
+        pr.setLanguage(getStringFromAddr(sheet, 6, 6));
+        pr.setCronSchedule(getStringFromAddr(sheet, 9, 6));
+        pr.setCronTargetChannelID(getStringFromAddr(sheet, 10, 6));
+        pr.setToken_JDA(getStringFromAddr(sheet, 13, 6));
+        pr.setToken_ChatGPT(getStringFromAddr(sheet, 14, 6));
         StringBuilder sb = new StringBuilder();
         for(int i = 15; i <= 26; i++) {
             sb.append(getStringFromAddr(sheet, i, 6));
             if(i != 26) sb.append("\n");
         }
-        props.setToken_GoogleCloud(sb.toString());
-        log.debug("FINISHED PROPS LOADING! {}", props);
+        pr.setToken_GoogleCloud(sb.toString());
+        log.debug("FINISHED PROPS LOADING! {}", pr);
     }
 
     public static void loadXLSXSettings() throws Exception {
         try(
                 // Load the file instance
-                FileInputStream file = new FileInputStream(new File(props.getPath(), "settings.xlsx"));
+                FileInputStream file = new FileInputStream(new File(pr.getPath(), "settings.xlsx"));
                 // Make the sheet instance from it
                 XSSFWorkbook workbook = new XSSFWorkbook(file)
                 // After the try and catch statement block JVM automatically load .close() methods of each to close

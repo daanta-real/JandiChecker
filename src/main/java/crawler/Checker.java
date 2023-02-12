@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import utils.CommonUtils;
 
-import static init.Initializer.props;
+import static init.Initializer.pr;
 
 // Check and get the list of the members who committed or not in specific day
 @Slf4j
@@ -20,7 +20,7 @@ public class Checker {
 	public static boolean getGitHubCommittedByDay(String id, String day) throws Exception {
 
 		// 1. Preparing
-		log.info(props.lang("checker_getGithubCommittedByDay"), id, day);
+		log.info(pr.l("checker_getGithubCommittedByDay"), id, day);
 
 		// 2. Get full HTML
 		String html_org;
@@ -38,7 +38,7 @@ public class Checker {
 		// If commit box is not found here throws an Exception
 		if(map.get(day) == null) throw new Exception();
 		boolean committed = map.get(day);
-		log.debug(props.lang("checker_scoreOfDay"), day, committed);
+		log.debug(pr.l("checker_scoreOfDay"), day, committed);
 
 		// 5. Return result
 		return committed;
@@ -51,15 +51,15 @@ public class Checker {
 	public static String[] getCommitListByDay(String day, boolean findNegative) throws Exception {
 
 		log.info(
-				props.lang("checker_getCommitListByDay"),
+				pr.l("checker_getCommitListByDay"),
 				(findNegative
-						? props.lang("checker_he_DID_NOT_commit")
-						: props.lang("checker_he_DID_Commit")), day);
+						? pr.l("checker_he_DID_NOT_commit")
+						: pr.l("checker_he_DID_Commit")), day);
 
 		// result values
 		StringBuilder sb = new StringBuilder(); // name list (one name by one line)
 		int count = 0; // person totalCount of DID or DID NOT
-		for(Map.Entry<String, Map<String, String>> entry: props.getMembers().entrySet()) {
+		for(Map.Entry<String, Map<String, String>> entry: pr.getMembers().entrySet()) {
 			Map<String, String> memberProps = entry.getValue();
 			String name = entry.getKey();
 			String gitHubID = memberProps.get("gitHubID");
@@ -79,7 +79,7 @@ public class Checker {
 	// Check the all members and returns the list who DID NOT commit yesterday
 	public static String getNotCommittedYesterday() throws Exception {
 
-		log.info(props.lang("checker_getNotCommittedYesterday"));
+		log.info(pr.l("checker_getNotCommittedYesterday"));
 
 		Calendar c = Calendar.getInstance();
 		c.add(Calendar.DATE, -1);
@@ -87,7 +87,7 @@ public class Checker {
 
 		String[] list = getCommitListByDay(day, true);
 		String date_notice = CommonUtils.sdf_dayweek.format(c.getTime());
-		String result = "```md\n[" + props.lang("checker_getNotCommittedYesterday_result") + "]: %s\n%s\n```";
+		String result = "```md\n[" + pr.l("checker_getNotCommittedYesterday_result") + "]: %s\n%s\n```";
 		return result.formatted(list[0], date_notice, list[1]);
 
 	}
@@ -95,7 +95,7 @@ public class Checker {
 	// Check the all members and returns the list who DID commit yesterday
 	public static String getDidCommitYesterday() throws Exception {
 
-		log.info(props.lang("checker_getDidCommitYesterday"));
+		log.info(pr.l("checker_getDidCommitYesterday"));
 
 		Calendar c = Calendar.getInstance();
 		c.add(Calendar.DATE, -1);
@@ -103,7 +103,7 @@ public class Checker {
 
 		String[] list = getCommitListByDay(day, false);
 		String date_notice = CommonUtils.sdf_dayweek.format(c.getTime());
-		String result = "```md\n[" + props.lang("checker_getDidCommitYesterday_result") + "]: %s\n%s\n```";
+		String result = "```md\n[" + pr.l("checker_getDidCommitYesterday_result") + "]: %s\n%s\n```";
 		return result.formatted(list[0], date_notice, list[1]);
 
 	}
@@ -112,7 +112,7 @@ public class Checker {
 	// maybe it gets an error before 6 o'clock
 	public static String getDidCommittedToday() {
 
-		log.info(props.lang("checker_getDidCommittedToday"));
+		log.info(pr.l("checker_getDidCommittedToday"));
 
 		try {
 			Calendar c = Calendar.getInstance();
@@ -120,12 +120,12 @@ public class Checker {
 
 			String date_notice = CommonUtils.sdf_dayweek.format(new Date());
 			String[] list = getCommitListByDay(day, false);
-			String result = "```md\n[" + props.lang("checker_getDidCommittedToday_result_success") + "]: %s\n%s\n```";
+			String result = "```md\n[" + pr.l("checker_getDidCommittedToday_result_success") + "]: %s\n%s\n```";
 			return result.formatted(list[0], date_notice, list[1]);
 		} catch(Exception e) {
 			return "%s\n```md\n%s```".formatted(
-					props.lang("checker_getDidCommittedToday_result_fail_title"),
-					props.lang("checker_getDidCommittedToday_result_fail_md")
+					pr.l("checker_getDidCommittedToday_result_fail_title"),
+					pr.l("checker_getDidCommittedToday_result_fail_md")
 			);
 		}
 
@@ -135,10 +135,16 @@ public class Checker {
 	public static String getDidCommittedSomeday(String date) throws Exception {
 
 		// chksum: null check, date String format
-		if (StringUtils.isEmpty(date)) return props.lang("err_incorrectInput");
+		if (StringUtils.isEmpty(date)) {
+			return pr.l("err_incorrectInput");
+		}
 		String date_today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-		if(!CommonUtils.isValidDate(date)) return props.lang("err_dateStr");
-		if(date_today.compareTo(date) < 0) return props.lang("err_dateValue"); // if date's day is future then this is -1 so can't satisfy
+		if(!CommonUtils.isValidDate(date)) {
+			return pr.l("err_dateStr");
+		}
+		if(date_today.compareTo(date) < 0) {
+			return pr.l("err_dateValue"); // if date's day is future then this is -1 so can't satisfy
+		}
 
 		// Calendar instance, and date String of picked day
 		String y = date.substring(0, 4);
@@ -150,15 +156,15 @@ public class Checker {
 		try {
 			String[] list = getCommitListByDay(day, false);
 			String day_notice = CommonUtils.sdf_dayweek.format(c.getTime());
-			String result = "```md\n[" + props.lang("checker_getDidCommittedSomeday") + "]: %s\n%s```";
+			String result = "```md\n[" + pr.l("checker_getDidCommittedSomeday") + "]: %s\n%s```";
 			return result.formatted(day_notice, list[0], day_notice, list[1]);
 		} catch(Exception e) {
 			Calendar todayCalendar = Calendar.getInstance();
 			String todayStr = CommonUtils.sdf_thin.format(todayCalendar.getTime());
 			if(todayStr.equals(date)) {
 				return "%s\n```md\n%s```".formatted(
-						props.lang("checker_getDidCommittedToday_result_fail_title"),
-						props.lang("checker_getDidCommittedToday_result_fail_md"));
+						pr.l("checker_getDidCommittedToday_result_fail_title"),
+						pr.l("checker_getDidCommittedToday_result_fail_md"));
 			} else {
 				throw new Exception();
 			}

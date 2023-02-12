@@ -12,7 +12,7 @@ import translate.TranslationService;
 
 import java.util.Objects;
 
-import static init.Initializer.props;
+import static init.Initializer.pr;
 
 // All the execution methods about command inputs
 @Slf4j
@@ -23,7 +23,7 @@ public class SlashInteraction {
         String discordTag = user.getAsTag();
         String displayedName;
         try {
-            displayedName = props.getMemberNameByDiscordTagID(discordTag);
+            displayedName = pr.getMemberNameByDiscordTagID(discordTag);
         } catch(Exception e) {
             displayedName = discordTag;
         }
@@ -39,27 +39,27 @@ public class SlashInteraction {
         String cmd = event.getName(); // Command
         OptionMapping o = event.getOption("option");
         String option = o != null ? o.getAsString() : ""; // Option string
-        log.debug("{} [{}: '{}']", props.lang("si_receivedTheCommandBySlashCommand"), cmd, option);
+        log.debug("{} [{}: '{}']", pr.l("si_receivedTheCommandBySlashCommand"), cmd, option);
 
         // Make result
         String result;
         try {
             result = switch (cmd) {
                 case JDAController.CMD_ME                     -> CmdService.getJandiMapStringOfMine(event.getUser()); // Get my Commit map info
-                case JDAController.CMD_JANDIYA                -> makeChatAnswer(event, option); // The AI answers for general questions
+                case JDAController.CMD_JANDIYA                -> makeChatAnswer(event, option); // The ChatGPT answers for general questions
                 case JDAController.CMD_NAME                   -> CmdService.getJandiMapStringByName(option); // Show the total commit info of the member by the specific name
                 case JDAController.CMD_ID                     -> CmdService.getJandiMapStringById(option); // Show the total commit info of the member by the GitHub ID
                 case JDAController.CMD_LIST_YESTERDAY_SUCCEED -> CmdService.getDidCommitStringYesterday(); // Show the member list succeed to commit yesterday
                 case JDAController.CMD_LIST_YESTERDAY_FAIL    -> CmdService.getNotCommittedStringYesterday(); // Show the member list failed to commit yesterday
-                case JDAController.CMD_LIST_TODAY_SUCCEED -> CmdService.getDidCommitStringToday(); // Show the member list succeed to commit today
+                case JDAController.CMD_LIST_TODAY_SUCCEED     -> CmdService.getDidCommitStringToday(); // Show the member list succeed to commit today
                 case JDAController.CMD_LIST_BY_DATE           -> CmdService.getDidCommitStringSomeday(option); // Show the member list succeed to commit in specific day
-                case JDAController.CMD_TRANSLATE_EN_TO_MAIN -> getTranslatedString_EN_to_MAIN(event, option); // English → Main language translation
-                case JDAController.CMD_TRANSLATE_MAIN_TO_EN -> getTranslatedString_MAIN_to_EN(event, option); // Main language → English translation
-                case JDAController.CMD_ABOUT                  -> props.getInformation(); // Introduce of JandiChecker
+                case JDAController.CMD_TRANSLATE_EN_TO_MAIN   -> getTranslatedString_EN_to_MAIN(event, option); // English → Main language translation
+                case JDAController.CMD_TRANSLATE_MAIN_TO_EN   -> getTranslatedString_MAIN_to_EN(event, option); // Main language → English translation
+                case JDAController.CMD_ABOUT                  -> pr.getInformation(); // Introduce of JandiChecker
                 default -> throw new Exception();
             };
         } catch (Exception e) {
-            result = props.lang("err_failedToGetInfo");
+            result = pr.l("err_failedToGetInfo");
         }
 
         // Send
@@ -72,7 +72,7 @@ public class SlashInteraction {
 
         String name = getDisplayedName(event);
         String answerMain = ChatService.getChatAnswer(questionMain);
-        String chatQuestionByName = props.lang("chat_questionByName").formatted(name);
+        String chatQuestionByName = pr.l("chat_questionByName").formatted(name);
 
         return """
                 🤔 %s... 🤔```md
@@ -84,8 +84,8 @@ public class SlashInteraction {
                 
                 📌 %s
                 ```
-                """.formatted(chatQuestionByName, questionMain, props.lang("chat_GPTSays"),
-                answerMain, props.lang("tip_howToGetLongAnswer"));
+                """.formatted(chatQuestionByName, questionMain, pr.l("chat_GPTSays"),
+                answerMain, pr.l("tip_howToGetLongAnswer"));
 
     }
 
@@ -93,7 +93,7 @@ public class SlashInteraction {
 
         String name = getDisplayedName(event);
         String answerMain = TranslationService.translateEngToMain(questionMain);
-        String inputByName = props.lang("transl_inputByName").formatted(name);
+        String inputByName = pr.l("transl_inputByName").formatted(name);
 
         return """
                 🤔 %s.. 🤔```md
@@ -103,7 +103,7 @@ public class SlashInteraction {
                 ```
                 %s
                 ```
-                """.formatted(inputByName, questionMain, props.lang("transl_textByGoogle"), answerMain);
+                """.formatted(inputByName, questionMain, pr.l("transl_textByGoogle"), answerMain);
 
     }
 
@@ -111,7 +111,7 @@ public class SlashInteraction {
 
         String name = getDisplayedName(event);
         String answerMain = TranslationService.translateMainToEng(questionMain);
-        String inputByName = props.lang("transl_inputByName").formatted(name);
+        String inputByName = pr.l("transl_inputByName").formatted(name);
 
         return """
                 🤔 %s.. 🤔```md
@@ -121,7 +121,7 @@ public class SlashInteraction {
                 ```
                 %s
                 ```
-                """.formatted(inputByName, questionMain, props.lang("transl_textByGoogle"), answerMain);
+                """.formatted(inputByName, questionMain, pr.l("transl_textByGoogle"), answerMain);
 
     }
 

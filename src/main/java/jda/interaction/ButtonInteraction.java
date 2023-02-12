@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import org.apache.commons.lang3.StringUtils;
 
-import static init.Initializer.props;
+import static init.Initializer.pr;
 
 @Slf4j
 public class ButtonInteraction {
@@ -16,14 +16,14 @@ public class ButtonInteraction {
 
         // Get command and options
         String cmd = event.getComponentId(); // Command
-        log.debug(props.lang("bi_receivedTheCommandByClickingButton"), cmd);
+        log.debug(pr.l("bi_receivedTheCommandByClickingButton"), cmd);
 
         String result = null;
         try {
 
             // Run each command
             switch(cmd) {
-                case JDAController.CMD_ME -> {
+                case JDAController.getCmdMe() -> {
                     // Convert the instant got from Interaction to a spinner
                     // I guess I should use .deferEdit() not .deferReply().
                     // Because if I use .deferReply() the answer will be got as reply not the additional message.
@@ -32,28 +32,28 @@ public class ButtonInteraction {
                     event.deferEdit().queue();
                     result = CmdService.getJandiMapStringOfMine(event.getUser()); // Get my Commit map info
                 }
-                case JDAController.CMD_JANDIYA -> ModalMenu.getChatAnswer(event); // The AI answers for general questions
+                case JDAController.CMD_JANDIYA                -> ModalMenu.getChatAnswer(event); // The AI answers for general questions
                 case JDAController.CMD_LIST_YESTERDAY_SUCCEED -> {
                     event.deferEdit().queue(); // Set defer
                     result = CmdService.getDidCommitStringYesterday(); // Show the member list succeed to commit yesterday
                 }
-                case JDAController.CMD_LIST_TODAY_SUCCEED -> {
+                case JDAController.CMD_LIST_TODAY_SUCCEED     -> {
                     event.deferEdit().queue(); // Set defer
                     result = CmdService.getDidCommitStringToday(); // Show the member list succeed to commit today
                 }
                 case JDAController.CMD_NAME -> ModalMenu.showJandiMapByName(event); // Show the total commit info of the member by the specific name
                 case JDAController.CMD_ID -> ModalMenu.showJandiMapById(event); // Show the total commit info of the member by the GitHub ID
-                case JDAController.CMD_LIST_YESTERDAY_FAIL -> {
+                case JDAController.CMD_LIST_YESTERDAY_FAIL    -> {
                     event.deferEdit().queue(); // Set defer
                     result = CmdService.getNotCommittedStringYesterday(); // Show the member list failed to commit yesterday
                 }
-                case JDAController.CMD_LIST_BY_DATE -> ModalMenu.showDidCommitSomeday(event); // Show the member list succeed to commit in specific day
+                case JDAController.CMD_LIST_BY_DATE           -> ModalMenu.showDidCommitSomeday(event); // Show the member list succeed to commit in specific day
                 // 2 translation cmds below are available only in non-English mode
-                case JDAController.CMD_TRANSLATE_EN_TO_MAIN -> ModalMenu.showTranslate_EN_to_MAIN(event); // English → Main language translation
-                case JDAController.CMD_TRANSLATE_MAIN_TO_EN -> ModalMenu.showTranslate_MAIN_to_EN(event); // Main language → English translation
+                case JDAController.CMD_TRANSLATE_EN_TO_MAIN   -> ModalMenu.showTranslate_EN_to_MAIN(event); // English → Main language translation
+                case JDAController.CMD_TRANSLATE_MAIN_TO_EN   -> ModalMenu.showTranslate_MAIN_to_EN(event); // Main language → English translation
                 case JDAController.CMD_ABOUT -> { // Introduce of JandiChecker
                     event.deferEdit().queue(); // Set defer
-                    result = props.getInformation();
+                    result = pr.getInformation();
                 }
                 case JDAController.CMD_CLOSE -> {
                     event.getMessage().delete().queue();
@@ -63,7 +63,7 @@ public class ButtonInteraction {
             }
 
         } catch(Exception e) {
-            result = props.lang("err_failedToGetInfo");
+            result = pr.l("err_failedToGetInfo");
         }
 
         // If you didn't call any modal and bring here just String,

@@ -79,22 +79,22 @@ public class JTextAppender extends AppenderBase<ILoggingEvent> {
             JTextArea textarea = UIMain.getTextarea();
             int maxLines = 2000;
             int totalLines = textarea.getLineCount();
-            // System.out.printf("  - 라인 수: %d/%d\n", totalLines, maxLines);
+            // System.out.printf("  - line counts: %d/%d\n", totalLines, maxLines);
 
             // 2. Trim
             if (totalLines <= maxLines) {
-                // System.out.println("  - 라인을 자를 필요가 없습니다.");
+                // System.out.println("  - not needed to trim the line");
                 return;
             }
             int trimLineEnd = totalLines - maxLines;
-            int endChar = textarea.getLineEndOffset(trimLineEnd);
-            // System.out.printf("  - 자를 구간: 0 ~ %d (끝문자: %d번째)", trimLineEnd, endChar);
-            textarea.replaceRange("", 0, endChar);
+            int lastChar = textarea.getLineEndOffset(trimLineEnd);
+            // System.out.printf("  - trimming section: 0 ~ %d (last char: %dth)", trimLineEnd, lastChar);
+            textarea.replaceRange("", 0, lastChar);
 
         } catch(BadLocationException e) {
-            // System.out.println("  - 자를 구간을 찾는데 실패했습니다.");
+            // System.out.println("  - failed to find trimming section.");
         } catch(Exception e) {
-            // System.out.println("  - 오래된 로그를 잘라내는 데 실패했습니다.");
+            // System.out.println("  - failed to trim the old logs.");
         }
 
     }

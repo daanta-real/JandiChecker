@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import static init.Initializer.props;
+import static init.Initializer.pr;
 
 @Slf4j
 public class JDAController extends ListenerAdapter {
@@ -25,19 +25,18 @@ public class JDAController extends ListenerAdapter {
 	/////////////////////////// Fields
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public static JDA instance;
-	public static final String CMD_ME = "나";
-	public static final String CMD_JANDIYA = "잔디야";
-	public static final String CMD_NAME = "정보";
-	public static final String CMD_ID = "id";
-	public static final String CMD_LIST_YESTERDAY_SUCCEED = "어제";
-	public static final String CMD_LIST_YESTERDAY_FAIL = "어제안함";
-	public static final String CMD_LIST_TODAY_SUCCEED = "오늘";
-	public static final String CMD_LIST_BY_DATE = "날짜";
-	public static final String CMD_ABOUT = "대하여";
-	public static final String CMD_CLOSE = "닫기";
-    public static final String CMD_TRANSLATE_MAIN_TO_EN = "한영";
-    public static final String CMD_TRANSLATE_EN_TO_MAIN = "영한";
-
+	public static String CMD_ME;
+	public static String CMD_JANDIYA;
+	public static String CMD_NAME;
+	public static String CMD_ID;
+	public static String CMD_LIST_YESTERDAY_SUCCEED;
+	public static String CMD_LIST_YESTERDAY_FAIL;
+	public static String CMD_LIST_TODAY_SUCCEED;
+	public static String CMD_LIST_BY_DATE;
+	public static String CMD_ABOUT;
+	public static String CMD_CLOSE;
+    public static String CMD_TRANSLATE_MAIN_TO_EN;
+    public static String CMD_TRANSLATE_EN_TO_MAIN;
 
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -45,31 +44,118 @@ public class JDAController extends ListenerAdapter {
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	public static void init() {
 
-		// JDA의 기본 인스턴스를 만든다.
-		log.info("");
-		log.info("[잔디체커 JDA 인스턴스 생성]");
-		// 원래 옛날 버전에서는 여기를 try catch를 감싸서 예외처리를 해야 했으나 패치로 없어진 모양
-		instance = JDABuilder.createDefault(props.getToken_JDA())
-				.enableIntents(GatewayIntent.MESSAGE_CONTENT) // JDA 4.2.0부터 정책이 바뀌어 권한을 직접 활성화해줘야 함
-				.build(); // 봇을 만들어 로그인시킨 뒤, JdaObj의 인스턴스 값으로 할당
-		log.info("[JDA 인스턴스 생성 완료: {}]", instance);
+		// Set props
+		CMD_ME = pr.l("cmdName_me");
+		CMD_JANDIYA = pr.l("cmdName_heyJandi");
+		CMD_NAME = pr.l("cmdName_name");
+		CMD_ID = "id";
+		CMD_LIST_YESTERDAY_SUCCEED = pr.l("cmdName_yesterday_succeed");
+		CMD_LIST_YESTERDAY_FAIL = pr.l("cmdName_yesterday_fail");
+		CMD_LIST_TODAY_SUCCEED = pr.l("cmdName_today_succeed");
+		CMD_LIST_BY_DATE = pr.l("cmdName_list_by_date");
+		CMD_ABOUT = pr.l("cmdName_about");
+		CMD_CLOSE = pr.l("cmdName_close");
+		CMD_TRANSLATE_MAIN_TO_EN = pr.l("cmdName_MainToEN");
+		CMD_TRANSLATE_EN_TO_MAIN = pr.l("cmdName_ENToMain");
 
-		// jda에 이벤트를 감지하는 리스너 봇을 넣는다.
+		// Create JDA instance
 		log.info("");
-		log.info("[잔디체커 JDA 리스너 로드]");
-		ListenerAdapter bot = new JDAController(); // JDA 봇 객체. 리스너이기도 하다
+		log.info("[{} JDA {} {}]",
+				pr.l("appName"),
+				pr.l("instance"),
+				pr.l("creation"));
+		// Originally in the old version of JDA the try ~ catch block is needed
+		// but seems gone after several patches
+		instance = JDABuilder.createDefault(pr.getToken_JDA())
+				.enableIntents(GatewayIntent.MESSAGE_CONTENT) // From JDA 4.2.0 the policy has changed so have to activate the authority yourself
+				.build(); // Make a bot, make it logged in, and set as the instance of JdaObj
+		log.info("[JDA {} {} {}: {}]",
+				pr.l("instance"),
+				pr.l("creation"),
+				pr.l("fin"),
+				instance);
+
+		// Put the Event Listener bot in JDA
+		log.info("");
+		log.info("[{} JDA Listener {}]",
+				pr.l("appName"),
+				pr.l("initialization"));
+		ListenerAdapter bot = new JDAController(); // JDA Bot instance. also the Listener
 		instance.addEventListener(bot); // 만들어진 리스너 봇을 JdaObj의 인스턴스 내부에 할당
-		log.info("[이벤트 리스너 생성: {}]", bot);
+		log.info("[Event Listener {}: {}]",
+				pr.l("creation"),
+				bot);
 
 		// 슬래시 커맨드 추가
 		log.info("");
-		log.info("[잔디체커 슬래시 커맨드 로드]");
+		log.info("[{} {} {} {}]",
+				pr.l("appName"),
+				pr.l("slash"),
+				pr.l("command"),
+				pr.l("creation"));
 		List<CommandData> cmdList = SlashMenu.getMenusList();
 		instance.updateCommands().addCommands(cmdList).queue();
-		log.info("[슬래시 커맨드 추가 완료]");
+		log.info("[{} {} {} {}]",
+				pr.l("slash"),
+				pr.l("command"),
+				pr.l("creation"),
+				pr.l("fin"));
 
 	}
 
+
+
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	/////////////////////////// Getters
+	//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public static String getCmdMe() {
+		return CMD_ME;
+	}
+
+	public static String getCmdJandiya() {
+		return CMD_JANDIYA;
+	}
+
+	public static String getCmdName() {
+		return CMD_NAME;
+	}
+
+	public static String getCmdId() {
+		return CMD_ID;
+	}
+
+	public static String getCmdListYesterdaySucceed() {
+		return CMD_LIST_YESTERDAY_SUCCEED;
+	}
+
+	public static String getCmdListYesterdayFail() {
+		return CMD_LIST_YESTERDAY_FAIL;
+	}
+
+	public static String getCmdListTodaySucceed() {
+		return CMD_LIST_TODAY_SUCCEED;
+	}
+
+	public static String getCmdListByDate() {
+		return CMD_LIST_BY_DATE;
+	}
+
+	public static String getCmdAbout() {
+		return CMD_ABOUT;
+	}
+
+	public static String getCmdClose() {
+		return CMD_CLOSE;
+	}
+
+	public static String getCmdTranslateMainToEn() {
+		return CMD_TRANSLATE_MAIN_TO_EN;
+	}
+
+	public static String getCmdTranslateEnToMain() {
+		return CMD_TRANSLATE_EN_TO_MAIN;
+	}
 
 
 	//////////////////////////////////////////////////////////////////////////////////////////////////////////////

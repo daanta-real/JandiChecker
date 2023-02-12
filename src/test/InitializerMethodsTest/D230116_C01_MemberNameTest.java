@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import java.util.Map;
 
-import static init.Initializer.props;
+import static init.Initializer.pr;
 
 @Slf4j
 public class D230116_C01_MemberNameTest {
@@ -20,17 +20,17 @@ public class D230116_C01_MemberNameTest {
 
     @Test
     public void getGitHubIDByMemberName() throws Exception {
-        log.debug("MEMBERS: {}", props.getMembers());
-        log.debug("준성: {}", props.getMembers().get("박준성"));
-        log.debug(props.getGitHubIDByMemberName("박준성"));
+        log.debug("MEMBERS: {}", pr.getMembers());
+        log.debug("준성: {}", pr.getMembers().get("박준성"));
+        log.debug(pr.getGitHubIDByMemberName("박준성"));
     }
 
     @Test
     public void findMemberPropsByDiscordTagID() {
-        log.debug("MEMBERS: {}", props.getMembers());
+        log.debug("MEMBERS: {}", pr.getMembers());
         String discordTagID = "rqqh35#2393";
         Map<String, String> result = null;
-        for(Map.Entry<String, Map<String, String>> entry: props.getMembers().entrySet()) {
+        for(Map.Entry<String, Map<String, String>> entry: pr.getMembers().entrySet()) {
             Map<String, String> memberProp = entry.getValue();
             log.debug("memberProp: {} => {}", entry.getKey(), memberProp);
             if(!memberProp.containsKey("discordTagID")) {
@@ -52,7 +52,7 @@ public class D230116_C01_MemberNameTest {
     @Test
     public void getMemberNameByDiscordTagID() throws Exception {
         String discordTagID = "rqqh35#2393";
-        String displayedName = props.getMemberNameByDiscordTagID(discordTagID);
+        String displayedName = pr.getMemberNameByDiscordTagID(discordTagID);
         log.debug("Found name: {}", displayedName);
     }
 

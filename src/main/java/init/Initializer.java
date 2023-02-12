@@ -9,7 +9,7 @@ import ui.UIMain;
 public class Initializer {
 
 	// 1. Fields
-	public static Props props = new Props();
+	public static Pr pr = new Pr();
 
 	// 2. Methods
 
@@ -28,41 +28,41 @@ public class Initializer {
 
 		// 2. Load language settings ((your language).yaml)
 		log.info("<<< CONFIGURATION 2. LOADING LANGUAGE FILE >>>");
-		props.loadLanguageInfoes();
-		log.info(props.lang("fin"));
+		pr.loadLanguageInfoes();
+		log.info(pr.l("fin"));
 		log.info("");
 
 		// 3. Load version & build settings (version.yaml)
-		log.info(props.lang("initializer_3_loadVersion"));
-		props.loadVersionInfoes();
-		log.info(props.lang("fin"));
+		log.info(pr.l("initializer_3_loadVersion"));
+		pr.loadVersionInfoes();
+		log.info(pr.l("fin"));
 		log.info("");
 
 		// 4. Load all UIs including Swing window instance, icon, tray, etc.
 		if(needSwingWindow) {
-			log.info(props.lang("initializer_4_loadSwingWindow"));
+			log.info(pr.l("initializer_4_loadSwingWindow"));
 			UIMain.getInstance().init();
 		} else {
-			log.info(props.lang("initializer_4_notLoadSwingWindow"));
+			log.info(pr.l("initializer_4_notLoadSwingWindow"));
 		}
-		log.info("{}", props.lang("fin"));
+		log.info("{}", pr.l("fin"));
 		log.info("");
 
 		// 5. Load Google Translate API (googleAPIKey.json)
-		log.info(props.lang("initializer_5_loadGoogleTranslate"));
+		log.info(pr.l("initializer_5_loadGoogleTranslate"));
 		TranslationService.init();
-		log.info(props.lang("fin"));
+		log.info(pr.l("fin"));
 		log.info("");
 
 		// 4. Load app info message
 		// Set info String
-		props.setInformation("""
+		pr.setInformation("""
 			```md
 			%s```
-			""".formatted(props.lang("appInfo"))
-				.formatted(props.getVersion(), props.getBuild()));
+			""".formatted(pr.l("appInfo"))
+				.formatted(pr.getVersion(), pr.getBuild()));
 		// Finished
-		log.info(props.lang("initializer_6_finishedLoading"));
+		log.info(pr.l("initializer_6_finishedLoading"));
 		log.info("");
 
 	}

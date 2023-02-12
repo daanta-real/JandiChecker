@@ -7,7 +7,7 @@ import scheduler.CronScheduler;
 
 import init.Initializer;
 
-import static init.Initializer.props;
+import static init.Initializer.pr;
 import static utils.CommonUtils.waitForEnter;
 
 @Slf4j
@@ -29,24 +29,24 @@ public class Main {
 
 
 					**********************************************
-					- JandiChecker {} Build {}
+					- {} {} Build {}
 					- {}
 					**********************************************
-					""", props.getVersion(), props.getBuild(), props.lang("main_description"));
+					""", pr.l("appName"), pr.getVersion(), pr.getBuild(), pr.l("main_description"));
 
 			// Load JDA
 			log.info("");
-			log.info("{}", props.lang("main_jdaLoad"));
+			log.info("{}", pr.l("main_jdaLoad"));
 			JDAController.init();
 
 			// Run scheduler
 			log.info("");
-			log.info("{}", props.lang("main_startScheduler"));
+			log.info("{}", pr.l("main_startScheduler"));
 			CronScheduler.run();
 
 			// Done!
 			log.info("");
-			log.info("{}", props.lang("main_execute"));
+			log.info("{}", pr.l("main_execute"));
 			log.info("");
 
 		} catch(Exception e) {
