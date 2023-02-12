@@ -5,28 +5,33 @@ import jda.JDAMsgService;
 import jda.menu.ButtonMenu;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
+import static init.Initializer.props;
+
 // 슬래시를 사용하지 않은 raw 메세지 발생에 따른 동작 실행
 public class MessageInteraction {
 
     public static void run(MessageReceivedEvent event) {
 
-        // 메세지 입수
+        // Get the message
         String message = event.getMessage().getContentRaw();
-
-        // 접수된 메세지가 비었을 경우 리턴.
         if(message.isEmpty()) return;
 
-        // 명령어에 따른 분기
-        // 1. "잔디야" 라고만 치면 메뉴판 호출 후 리턴
-        if(message.equals("잔디야")) {
+        // Branch prossesing by the command keyword
+
+        // 1. If message is exactly same as the command execution keyword, show the menu panel to the chatting channel
+        if(message.equals(props.lang("commandExecutionKeyword"))) {
             ButtonMenu.showButtonMenues(event);
         }
-        // 2. "잔디야 뭐뭐머뭐..." 이런 식으로 치면 뭐뭐머뭐... ← 이 부분이 질문이므로 AI의 답변을 회신
-        else if(message.startsWith("잔디야 ")) {
+        // 2. If message starts with the command execution keyword and has a space next to it,
+        //    it might be the direct order with some option.
+        //    Currently, the order like this type is only stands for the ChatGPT AI quick answer command.
+        //    So if the message is in this format, execute it.
+        else if(message.startsWith(props.lang("commandExecutionKeyword") + " ")) {
             String questionMain = message.substring(4);
             String answerMain = ChatService.getChatAnswer(questionMain);
-            String saysAdded = "\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 ChatGPT AI님 가라사대... \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93```" + answerMain + "```";
-            JDAMsgService.send(event, saysAdded); // 메세지를 바로 돌려준다
+            String saysAdded = "\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 %s \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93```%s```"
+                    .formatted(props.lang("chat_GPTSays"), answerMain);
+            JDAMsgService.send(event, saysAdded); // No additional executions, just directly show the answer message to the chat channel.
         }
 
     }

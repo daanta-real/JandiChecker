@@ -16,7 +16,7 @@ public class ButtonInteraction {
 
         // Get command and options
         String cmd = event.getComponentId(); // Command
-        log.debug("[[[ 버튼 누르기로 명령을 접수하였습니다. ]]] [{}]", cmd);
+        log.debug(props.lang("bi_receivedTheCommandByClickingButton"), cmd);
 
         String result = null;
         try {
@@ -24,35 +24,36 @@ public class ButtonInteraction {
             // Run each command
             switch(cmd) {
                 case JDAController.CMD_ME -> {
-                    // Interaction을 보내준 객체를 spinner로 바꾼다.
-                    // 여기에서 deferReply()로 하면, 답신이 메세지가 아닌 답글 형태로만 달리게 되고
-                    // "원본 메시지가 삭제되었어요"라는 꼬리표가 붙고 또 spinner도 없어지지 않는다.
-                    // deferEdit()를 사용해야 되는 것 같다.
+                    // Convert the instant got from Interaction to a spinner
+                    // I guess I should use .deferEdit() not .deferReply().
+                    // Because if I use .deferReply() the answer will be got as reply not the additional message.
+                    // After that the reply says "The message has deleted" attached bottom of the original message,
+                    // and the spinner cannot be deleted with no other ways.
                     event.deferEdit().queue();
-                    result = CmdService.getJandiMapStringOfMine(event.getUser()); // 내 잔디정보를 획득
+                    result = CmdService.getJandiMapStringOfMine(event.getUser()); // Get my Commit map info
                 }
-                case JDAController.CMD_JANDIYA -> ModalMenu.getChatAnswer(event); // 일반적인 질문에 답하는 AI
+                case JDAController.CMD_JANDIYA -> ModalMenu.getChatAnswer(event); // The AI answers for general questions
                 case JDAController.CMD_LIST_YESTERDAY_SUCCESS -> {
                     event.deferEdit().queue(); // Set defer
-                    result = CmdService.getDidCommitStringYesterday(); // 어제 잔디심기 한 그룹원 목록 출력
+                    result = CmdService.getDidCommitStringYesterday(); // Show the member list succeed to commit yesterday
                 }
                 case JDAController.CMD_LIST_TODAY_SUCCESS -> {
                     event.deferEdit().queue(); // Set defer
-                    result = CmdService.getDidCommitStringToday(); // 오늘 잔디심기 한 그룹원 목록 출력
+                    result = CmdService.getDidCommitStringToday(); // Show the member list succeed to commit today
                 }
-                case JDAController.CMD_NAME -> ModalMenu.showJandiMapByName(event); // 특정 이름의 그룹원의 종합 잔디정보 출력
-                case JDAController.CMD_ID -> ModalMenu.showJandiMapById(event); // 특정 Github ID의 종합 잔디정보 출력
+                case JDAController.CMD_NAME -> ModalMenu.showJandiMapByName(event); // Show the total commit info of the member by the specific name
+                case JDAController.CMD_ID -> ModalMenu.showJandiMapById(event); // Show the total commit info of the member by the GitHub ID
                 case JDAController.CMD_LIST_YESTERDAY_FAIL -> {
                     event.deferEdit().queue(); // Set defer
-                    result = CmdService.getNotCommittedStringYesterday(); // 어제 잔디심기 안 한 그룹원 목록 출력
+                    result = CmdService.getNotCommittedStringYesterday(); // Show the member list failed to commit yesterday
                 }
-                case JDAController.CMD_LIST_BY_DATE -> ModalMenu.showDidCommitSomeday(event); // 특정 날짜에 잔디를 심은 그룹원 목록 출력
+                case JDAController.CMD_LIST_BY_DATE -> ModalMenu.showDidCommitSomeday(event); // Show the member list succeed to commit in specific day
                 // 2 translation cmds below are available only in non-English mode
-                case JDAController.CMD_TRANSLATE_EN_TO_MAIN -> ModalMenu.showTranslate_EN_to_MAIN(event); // 영한 번역
-                case JDAController.CMD_TRANSLATE_MAIN_TO_EN -> ModalMenu.showTranslate_MAIN_to_EN(event); // 한영 번역
-                case JDAController.CMD_ABOUT -> {
+                case JDAController.CMD_TRANSLATE_EN_TO_MAIN -> ModalMenu.showTranslate_EN_to_MAIN(event); // English → Main language translation
+                case JDAController.CMD_TRANSLATE_MAIN_TO_EN -> ModalMenu.showTranslate_MAIN_to_EN(event); // Main language → English translation
+                case JDAController.CMD_ABOUT -> { // Introduce of JandiChecker
                     event.deferEdit().queue(); // Set defer
-                    result = props.getInformation(); // 소개말
+                    result = props.getInformation();
                 }
                 case JDAController.CMD_CLOSE -> {
                     event.getMessage().delete().queue();
@@ -62,11 +63,13 @@ public class ButtonInteraction {
             }
 
         } catch(Exception e) {
-            result = "정보 획득에 실패하였습니다.";
+            result = props.lang("err_failedToGetInfo");
         }
 
-        // 위의 switch문에서 모달 호출 없이 단순 String만 가져왔다면 여기가 실행된다.
-        // 반대로 모달 입력 등이 있다면 여기를 실행하지 않는다(result가 초기값인 null이므로).
+        // If you didn't call any modal and bring here just String,
+        // the switch block above won't be run. Code below runs instead of that.
+        // On the other hand, if you called the modal or something
+        // this block won't be executed. (because result is null as default value).
         if(!StringUtils.isEmpty(result)) {
 
             // Show result
@@ -76,7 +79,7 @@ public class ButtonInteraction {
             // Remove defer message and its button menu panel
             // event.getHook().sendMessage(result).queue();
             // event.getHook().editOriginal(result).queue();
-            event.getMessage().delete().queue(); // 메뉴+오리지널 메세지 지우기
+            event.getMessage().delete().queue(); // Remove all of the menu and the original messages
 
         }
 

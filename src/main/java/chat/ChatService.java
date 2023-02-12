@@ -61,7 +61,7 @@ public class ChatService {
             // 2. Mother language -> English
             String questionEng = TranslationService.translateMainToEng(question);
             String unescapedEng = CommonUtils.unescapeHTMLEntity(questionEng);
-            log.debug(props.lang("chat_queryTranslated"), unescapedEng, unescapedEng.length());
+            log.debug("Translated text to English(length = {}): {}", unescapedEng.length(), unescapedEng);
 
             String answerEng = requestChatGPT(unescapedEng);
 

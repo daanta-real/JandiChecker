@@ -46,14 +46,14 @@ public class Props {
         setBuild(versionMap.get("build"));
     }
 
-    // 그룹원명을 입력하면 깃헙 ID를 리턴
+    // Get a member's GitHub ID from name
     public String getGitHubIDByMemberName(String memberName) throws Exception {
         if(!getMembers().containsKey(memberName)) throw new Exception();
         Map<String, String> memberMap = member(memberName);
         return memberMap.get("gitHubID");
     }
 
-    // 디스코드 ID를 입력하면 멤버명을 리턴
+    // Get a member's nickname from the Discord ID
     public String getMemberNameByDiscordTagID(String discordTagID) throws Exception {
         for(Map.Entry<String, Map<String, String>> entry: getMembers().entrySet()) {
             Map<String, String> memberProps = entry.getValue();
@@ -66,7 +66,7 @@ public class Props {
         throw new Exception();
     }
 
-    // 디스코드 ID로 그룹원의 이름과 GitHub ID를 Map으로 리턴
+    // Get the Map including member's name GitHub ID from Discord ID
     public Map<String, String> getMemberInfoesByDiscordTagID(String discordTagID) throws Exception {
         for(Map.Entry<String, Map<String, String>> entry: members.entrySet()) {
             Map<String, String> memberProp = entry.getValue();

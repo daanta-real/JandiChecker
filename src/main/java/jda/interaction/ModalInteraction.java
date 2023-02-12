@@ -13,7 +13,7 @@ import java.util.Objects;
 
 import static init.Initializer.props;
 
-// 모달 관련된 각종 동작(UI 생성, 표시 및 이에 대한 사용자 입력에 따른 후속 동작까지)
+// All the execution methods about modal menus(making and showing UI, getting users' input, interactions after it..)
 @Slf4j
 public class ModalInteraction {
 
@@ -75,21 +75,23 @@ public class ModalInteraction {
                     // Prepare
                     String name = getDisplayedName(event);
                     String questionMain = getOptionTextValue(event);
-                    log.debug("그룹원 {}님의 질문: {}", name, questionMain);
+                    log.debug(props.lang("chat_theQueryByName"), name, questionMain);
 
                     // Compute
                     String answerMain = ChatService.getChatAnswer(questionMain);
-                    log.debug("답변: {}", answerMain);
+                    log.debug(props.lang("chat_theAnswer"), answerMain);
+                    String hisQuestion = props.lang("chat_questionByName").formatted(name);
                     result = """
-                        🤔 %s님의 질문... 🤔```md
+                        🤔 %s.. 🤔```md
                         %s
                         ```
-                        \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 ChatGPT AI님 가라사대... \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
+                        \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 %s \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
                         ```
                         %s
-                        📌 "잔디야 bla bla..." 이런 식으로 질문하시면 약간 더 긴 답변을 받을 수 있습니다.
+                        📌 %s
                         ```
-                        """.formatted(name, questionMain, answerMain);
+                        """.formatted(hisQuestion, questionMain, props.lang("chat_GPTSays"),
+                            answerMain, props.lang("tip_howToGetLongAnswer"));
 
                     // Show the result
                     event.getHook().sendMessage(result).queue();
@@ -113,20 +115,23 @@ public class ModalInteraction {
                     // Prepare
                     String name = getDisplayedName(event);
                     String questionEng = getOptionTextValue(event);
-                    log.debug("그룹원 {}님의 영한 번역 요청: {}", name, questionEng);
+                    log.debug("Translation request(English → {}) by {}: {}",
+                            TranslationService.mainLanguageLong, name, questionEng);
 
                     // Compute
                     String answerMain = TranslationService.translateEngToMain(questionEng);
-                    log.debug("번역된 문장: {}", answerMain);
+                    log.debug("Translated text to {}: {}", TranslationService.mainLanguageLong, answerMain);
+                    String inputByName = props.lang("transl_inputByName").formatted(name);
+
                     result = """
-                        🤔 %s님의 입력.. 🤔```md
+                        🤔 %s.. 🤔```md
                         %s
                         ```
-                        \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 Google신이 번역한 문장.. \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
+                        \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 %s.. \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
                         ```
                         %s
                         ```
-                        """.formatted(name, questionEng, answerMain);
+                        """.formatted(inputByName, questionEng, props.lang("transl_textByGoogle"), answerMain);
 
                     // Show the result
                     event.getHook().sendMessage(result).queue();
@@ -137,33 +142,36 @@ public class ModalInteraction {
                     // Prepare
                     String name = getDisplayedName(event);
                     String questionMain = getOptionTextValue(event);
-                    log.debug("그룹원 {}님의 한영 번역 요청: {}", name, questionMain);
+                    log.debug("Translation request({} → English) by {}: {}",
+                            TranslationService.mainLanguageLong, name, questionMain);
 
                     // Compute
                     String answerEng = TranslationService.translateMainToEng(questionMain);
-                    log.debug("번역된 문장: {}", answerEng);
+                    log.debug("Translated text to English: {}", answerEng);
+                    String inputByName = props.lang("transl_inputByName").formatted(name);
+
                     result = """
-                        🤔 %s님의 입력.. 🤔```md
+                        🤔 %s.. 🤔```md
                         %s
                         ```
-                        \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 Google신이 번역한 문장.. \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
+                        \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 %s.. \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
                         ```
                         %s
                         ```
-                        """.formatted(name, questionMain, answerEng);
+                        """.formatted(inputByName, questionMain, props.lang("transl_textByGoogle"), answerEng);
 
                     // Show the result
                     event.getHook().sendMessage(result).queue();
 
                 }
-                default -> result = "모듈 온 게 없는데요..";
+                default -> result = props.lang("err_failedToGetInfo");
             }
 
             // If the result is null or blank String then throw an AssertException
             assert !StringUtils.isEmpty(result);
 
         } catch(Exception e) {
-            result = "정확히 입력해 주세요.";
+            result = props.lang("err_incorrectInput");
             event.getHook().sendMessage(result).queue();
         }
 

@@ -14,7 +14,7 @@ import java.util.Objects;
 
 import static init.Initializer.props;
 
-// 슬래시 메뉴판을 사용한 커맨드 입력에 따른 동작 실행
+// All the execution methods about command inputs
 @Slf4j
 public class SlashInteraction {
 
@@ -39,27 +39,27 @@ public class SlashInteraction {
         String cmd = event.getName(); // Command
         OptionMapping o = event.getOption("option");
         String option = o != null ? o.getAsString() : ""; // Option string
-        log.debug("[[[ 슬래시 명령문 입력으로 명령을 접수하였습니다. ]]] [{}: '{}']", cmd, option);
+        log.debug("{} [{}: '{}']", props.lang("si_receivedTheCommandBySlashCommand"), cmd, option);
 
         // Make result
         String result;
         try {
             result = switch (cmd) {
-                case JDAController.CMD_ME                     -> CmdService.getJandiMapStringOfMine(event.getUser()); // 내 잔디정보를 출력
-                case JDAController.CMD_JANDIYA                -> makeChatAnswer(event, option); // 일반적인 질문에 답하는 AI
-                case JDAController.CMD_NAME                   -> CmdService.getJandiMapStringByName(option); // 특정 이름의 그룹원의 종합 잔디정보 출력
-                case JDAController.CMD_ID                     -> CmdService.getJandiMapStringById(option); // 특정 Github ID의 종합 잔디정보 출력
-                case JDAController.CMD_LIST_YESTERDAY_SUCCESS -> CmdService.getDidCommitStringYesterday(); // 어제 잔디심기 한 그룹원 목록 출력
-                case JDAController.CMD_LIST_YESTERDAY_FAIL    -> CmdService.getNotCommittedStringYesterday(); // 어제 잔디심기 안 한 그룹원 목록 출력
-                case JDAController.CMD_LIST_TODAY_SUCCESS     -> CmdService.getDidCommitStringToday(); // 오늘 잔디심기 한 그룹원 목록 출력
-                case JDAController.CMD_LIST_BY_DATE           -> CmdService.getDidCommitStringSomeday(option); // 특정 날짜에 잔디를 심은 그룹원 목록 출력
-                case JDAController.CMD_TRANSLATE_EN_TO_MAIN -> getTranslatedString_EN_to_MAIN(event, option); // 영한번역
-                case JDAController.CMD_TRANSLATE_MAIN_TO_EN -> getTranslatedString_MAIN_to_EN(event, option); // 한영번역
-                case JDAController.CMD_ABOUT                  -> props.getInformation(); // 소개말
+                case JDAController.CMD_ME                     -> CmdService.getJandiMapStringOfMine(event.getUser()); // Get my Commit map info
+                case JDAController.CMD_JANDIYA                -> makeChatAnswer(event, option); // The AI answers for general questions
+                case JDAController.CMD_NAME                   -> CmdService.getJandiMapStringByName(option); // Show the total commit info of the member by the specific name
+                case JDAController.CMD_ID                     -> CmdService.getJandiMapStringById(option); // Show the total commit info of the member by the GitHub ID
+                case JDAController.CMD_LIST_YESTERDAY_SUCCESS -> CmdService.getDidCommitStringYesterday(); // Show the member list succeed to commit yesterday
+                case JDAController.CMD_LIST_YESTERDAY_FAIL    -> CmdService.getNotCommittedStringYesterday(); // Show the member list failed to commit yesterday
+                case JDAController.CMD_LIST_TODAY_SUCCESS     -> CmdService.getDidCommitStringToday(); // Show the member list succeed to commit today
+                case JDAController.CMD_LIST_BY_DATE           -> CmdService.getDidCommitStringSomeday(option); // Show the member list succeed to commit in specific day
+                case JDAController.CMD_TRANSLATE_EN_TO_MAIN -> getTranslatedString_EN_to_MAIN(event, option); // English → Main language translation
+                case JDAController.CMD_TRANSLATE_MAIN_TO_EN -> getTranslatedString_MAIN_to_EN(event, option); // Main language → English translation
+                case JDAController.CMD_ABOUT                  -> props.getInformation(); // Introduce of JandiChecker
                 default -> throw new Exception();
             };
         } catch (Exception e) {
-            result = "정보 획득에 실패하였습니다.";
+            result = props.lang("err_failedToGetInfo");
         }
 
         // Send
@@ -72,18 +72,20 @@ public class SlashInteraction {
 
         String name = getDisplayedName(event);
         String answerMain = ChatService.getChatAnswer(questionMain);
+        String chatQuestionByName = props.lang("chat_questionByName").formatted(name);
 
         return """
-                🤔 %s님의 질문... 🤔```md
+                🤔 %s... 🤔```md
                 %s
                 ```
-                \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 ChatGPT AI님 가라사대... \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
+                \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 %s... \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
                 ```
                 %s
                 
-                📌 "잔디야 bla bla..." 이런 식으로 질문하시면 약간 더 긴 답변을 받을 수 있습니다.
+                📌 %s
                 ```
-                """.formatted(name, questionMain, answerMain);
+                """.formatted(chatQuestionByName, questionMain, props.lang("chat_GPTSays"),
+                answerMain, props.lang("tip_howToGetLongAnswer"));
 
     }
 
@@ -91,16 +93,17 @@ public class SlashInteraction {
 
         String name = getDisplayedName(event);
         String answerMain = TranslationService.translateEngToMain(questionMain);
+        String inputByName = props.lang("transl_inputByName").formatted(name);
 
         return """
-                🤔 %s님의 입력.. 🤔```md
+                🤔 %s.. 🤔```md
                 %s
                 ```
-                \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 Google신이 번역한 문장.. \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
+                \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 %s.. \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
                 ```
                 %s
                 ```
-                """.formatted(name, questionMain, answerMain);
+                """.formatted(inputByName, questionMain, props.lang("transl_textByGoogle"), answerMain);
 
     }
 
@@ -108,16 +111,17 @@ public class SlashInteraction {
 
         String name = getDisplayedName(event);
         String answerMain = TranslationService.translateMainToEng(questionMain);
+        String inputByName = props.lang("transl_inputByName").formatted(name);
 
         return """
-                🤔 %s님의 입력.. 🤔```md
+                🤔 %s.. 🤔```md
                 %s
                 ```
-                \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 Google신이 번역한 문장.. \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
+                \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 %s.. \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
                 ```
                 %s
                 ```
-                """.formatted(name, questionMain, answerMain);
+                """.formatted(inputByName, questionMain, props.lang("transl_textByGoogle"), answerMain);
 
     }
 
