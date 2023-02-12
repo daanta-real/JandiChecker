@@ -1,4 +1,5 @@
 # 공용
+commandExecutionKeyword: "잔디야"
 fin: "완료."
 period: "기간"
 err_incorrectInput: "정확히 입력해 주세요."
@@ -8,6 +9,7 @@ err_gitHubIDNotExists: "없는 GitHub ID입니다."
 err_noCommitMapInGitHubProfile: "프로필 페이지에 잔디밭이 없어 조회하지 못했습니다."
 err_failedToGetInfo: "정보 획득에 실패했습니다."
 pressTheEnterKey: "엔터 키를 누르십시오"
+tip_howToGetLongAnswer: "\"잔디야 bla bla...\" 이런 식으로 질문하시면 약간 더 긴 답변을 받을 수 있습니다."
 
 # 최초 로딩 시 필요한 문자열
 initializer_3_loadVersion: <<< 환경설정 3. 버전 정보 로드 >>>
@@ -54,12 +56,15 @@ main_jdaLoad: <<< 잔디체커 JDA 로드 >>>
 main_startScheduler: <<< 스케쥴러 시작 >>>
 main_execute: <<< 잔디체커 실행 완료 >>>
 
-# ChatService
+# ChatService and Chat
 chat_query: "접수된 원본 질문: <<<{}>>> (길이 {})"
-chat_queryTranslated: "영어로 번역된 질문: <<<{}>>> (길이 {})"
 chat_response: "응답 수신: <<<{}>>>"
 chat_originalAnswer: "답변: <<<{}>>>"
 chat_finalAnswer: "최종 답변: <<<{}>>>"
+chat_theQueryByName: "그룹원 {}님의 질문: {}"
+chat_questionByName: "%s님의 질문";
+chat_theAnswer: "답변: {}"
+chat_GPTSays: "ChatGPT AI님 가라사대..."
 
 # CmdService
 cmd_failedToFindGitHubID: "님의 GitHub ID를 찾는 데 실패했습니다."
@@ -100,6 +105,26 @@ gitHubMap_CommitMapOfRecent1Year: "최근 1년 간 잔디 상세"
 # UIMenu
 uiMenu_createdInstance: "인스턴스 생성 완료"
 uiMenu_trayCreationError: "트레이 아이콘 생성에 실패하였습니다."
-uiMenu_trayInitializationError: "트레이 초기화 중 기타 에러가 발생하셨습니다."
-uiMenu_createdTray: "트레이 생성 완료"
-uiMenu_trayDoubleClicked: "트레이 아이콘이 더블 클릭되었습니다."
+
+# Interaction
+bi_receivedTheCommandByClickingButton: "[[[ 버튼 누르기로 명령을 접수하였습니다. ]]] [{}]"
+si_receivedTheCommandBySlashCommand: "[[[ 슬래시 명령문 입력으로 명령을 접수하였습니다. ]]]"
+
+# Translation
+transl_inputByName: "%s님의 입력"
+transl_textByGoogle: "Google신이 번역한 문장"
+
+# MenuNames
+menu_me: "내 잔디 조회"
+menu_heyJandi: "AI에게 질문"
+menu_listYesterdaySucceed: "어제 잔디 심은 사람"
+menu_listTodaySucceed: "오늘 잔디 심은 사람"
+menu_mapByName: "이름으로 잔디 조회"
+menu_mapByID: "ID로 잔디 조회"
+menu_listYesterdayFail: "어제 잔디 건너뛴 사람"
+menu_listByDate: "특정일 잔디 심은 사람"
+menu_about: "대하여.."
+menu_close: "닫기"
+menu_jandiHereHowCanIHelpYou: "잔디 등장. 무엇을 도와드릴까요?"
+menu_ENToMain: "영어→한글"
+menu_MainToEN: "한글→영어"

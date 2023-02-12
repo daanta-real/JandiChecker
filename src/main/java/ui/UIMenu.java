@@ -51,7 +51,7 @@ public class UIMenu {
             throw e;
         }
 
-        log.info(props.lang("uiMenu_createdTray"));
+        log.info("FIINISHED TO CREATE THE TRAY.");
         
     }
 
@@ -74,7 +74,7 @@ public class UIMenu {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     if(e.getClickCount() == 2 && e.getButton() == MouseEvent.BUTTON1) {
-                        log.info(props.lang("uiMenu_trayDoubleClicked"));
+                        log.info("DOUBLE CLICKED THE TRAY ICON.");
                         uiMain.runGoActivate();
                     }
                 }
@@ -88,11 +88,11 @@ public class UIMenu {
             // }
 
         } catch (Exception e) { // etc.
-            log.error(props.lang("uiMenu_trayInitializationError"), e);
+            log.error("UNKNOWN ERROR HAS OCCURRED", e);
             throw e;
         }
 
-        log.info("트레이 초기화 완료.");
+        log.info("FINISHED TRAY INITIALIZATION.");
 
     }
 

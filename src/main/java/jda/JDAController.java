@@ -29,9 +29,9 @@ public class JDAController extends ListenerAdapter {
 	public static final String CMD_JANDIYA = "잔디야";
 	public static final String CMD_NAME = "정보";
 	public static final String CMD_ID = "id";
-	public static final String CMD_LIST_YESTERDAY_SUCCESS = "어제";
+	public static final String CMD_LIST_YESTERDAY_SUCCEED = "어제";
 	public static final String CMD_LIST_YESTERDAY_FAIL = "어제안함";
-	public static final String CMD_LIST_TODAY_SUCCESS = "오늘";
+	public static final String CMD_LIST_TODAY_SUCCEED = "오늘";
 	public static final String CMD_LIST_BY_DATE = "날짜";
 	public static final String CMD_ABOUT = "대하여";
 	public static final String CMD_CLOSE = "닫기";

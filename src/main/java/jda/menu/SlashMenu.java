@@ -19,8 +19,8 @@ public class SlashMenu {
         cmdList.add(Commands.slash(JDAController.CMD_JANDIYA, "잔디의 친구 ChatGPT AI에게 질문을 해봅니다.")
                 .addOption(OptionType.STRING, "option", "질문을 입력해 주세요.", true));
 
-        cmdList.add(Commands.slash(JDAController.CMD_LIST_YESTERDAY_SUCCESS, "어제 잔디를 심는데 성공한 그룹원 목록을 확인합니다."));
-        cmdList.add(Commands.slash(JDAController.CMD_LIST_TODAY_SUCCESS, "오늘 잔디를 심는데 성공한 그룹원 목록을 확인합니다."));
+        cmdList.add(Commands.slash(JDAController.CMD_LIST_YESTERDAY_SUCCEED, "어제 잔디를 심는데 성공한 그룹원 목록을 확인합니다."));
+        cmdList.add(Commands.slash(JDAController.CMD_LIST_TODAY_SUCCEED, "오늘 잔디를 심는데 성공한 그룹원 목록을 확인합니다."));
 
         cmdList.add(Commands.slash(JDAController.CMD_NAME, "그룹원의 이름을 입력하여 그룹원의 잔디 정보를 조회합니다.")
                 .addOption(OptionType.STRING, "option", "그룹원의 이름을 입력해 주세요.", true));

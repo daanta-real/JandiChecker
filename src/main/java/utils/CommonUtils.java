@@ -77,7 +77,7 @@ public class CommonUtils {
 
     }
 
-    // Unescape all of HTML Entity characters
+    // Unescape majors of HTML Entity character
     public static String unescapeHTMLEntity(String msg) {
 
         // Unescape the chars StringEscapeUtils supports

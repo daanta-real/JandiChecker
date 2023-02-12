@@ -33,11 +33,11 @@ public class ButtonInteraction {
                     result = CmdService.getJandiMapStringOfMine(event.getUser()); // Get my Commit map info
                 }
                 case JDAController.CMD_JANDIYA -> ModalMenu.getChatAnswer(event); // The AI answers for general questions
-                case JDAController.CMD_LIST_YESTERDAY_SUCCESS -> {
+                case JDAController.CMD_LIST_YESTERDAY_SUCCEED -> {
                     event.deferEdit().queue(); // Set defer
                     result = CmdService.getDidCommitStringYesterday(); // Show the member list succeed to commit yesterday
                 }
-                case JDAController.CMD_LIST_TODAY_SUCCESS -> {
+                case JDAController.CMD_LIST_TODAY_SUCCEED -> {
                     event.deferEdit().queue(); // Set defer
                     result = CmdService.getDidCommitStringToday(); // Show the member list succeed to commit today
                 }
@@ -79,7 +79,7 @@ public class ButtonInteraction {
             // Remove defer message and its button menu panel
             // event.getHook().sendMessage(result).queue();
             // event.getHook().editOriginal(result).queue();
-            event.getMessage().delete().queue(); // Remove all of the menu and the original messages
+            event.getMessage().delete().queue(); // Remove all the menu and the original messages
 
         }
 

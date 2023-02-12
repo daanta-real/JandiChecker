@@ -21,7 +21,7 @@ public class ModalMenu {
 
         TextInputStyle style = isParagraph ? TextInputStyle.PARAGRAPH : TextInputStyle.SHORT;
 
-        event.getMessage().delete().queue(); // 메뉴+오리지널 메세지 지우기
+        event.getMessage().delete().queue(); // Remove all the menu and the original messages
 
         TextInput name = TextInput.create("option", "잔디체커", style)
                 .setMinLength(minLength)

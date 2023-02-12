@@ -49,9 +49,9 @@ public class SlashInteraction {
                 case JDAController.CMD_JANDIYA                -> makeChatAnswer(event, option); // The AI answers for general questions
                 case JDAController.CMD_NAME                   -> CmdService.getJandiMapStringByName(option); // Show the total commit info of the member by the specific name
                 case JDAController.CMD_ID                     -> CmdService.getJandiMapStringById(option); // Show the total commit info of the member by the GitHub ID
-                case JDAController.CMD_LIST_YESTERDAY_SUCCESS -> CmdService.getDidCommitStringYesterday(); // Show the member list succeed to commit yesterday
+                case JDAController.CMD_LIST_YESTERDAY_SUCCEED -> CmdService.getDidCommitStringYesterday(); // Show the member list succeed to commit yesterday
                 case JDAController.CMD_LIST_YESTERDAY_FAIL    -> CmdService.getNotCommittedStringYesterday(); // Show the member list failed to commit yesterday
-                case JDAController.CMD_LIST_TODAY_SUCCESS     -> CmdService.getDidCommitStringToday(); // Show the member list succeed to commit today
+                case JDAController.CMD_LIST_TODAY_SUCCEED -> CmdService.getDidCommitStringToday(); // Show the member list succeed to commit today
                 case JDAController.CMD_LIST_BY_DATE           -> CmdService.getDidCommitStringSomeday(option); // Show the member list succeed to commit in specific day
                 case JDAController.CMD_TRANSLATE_EN_TO_MAIN -> getTranslatedString_EN_to_MAIN(event, option); // English → Main language translation
                 case JDAController.CMD_TRANSLATE_MAIN_TO_EN -> getTranslatedString_MAIN_to_EN(event, option); // Main language → English translation

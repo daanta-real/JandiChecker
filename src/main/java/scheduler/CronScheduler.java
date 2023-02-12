@@ -14,14 +14,14 @@ import org.quartz.impl.StdSchedulerFactory;
 
 public class CronScheduler {
 
-	// 스케쥴러 생성과 실행을 담당하는 메소드
+	// The method which creates the new Scheduler instance
 	public static void scheduleExecute(Class<? extends Job> jobClass, String cron) throws Exception {
 
-		// 스케쥴러 객체 생성: 팩토리와 인스턴스
+		// Get the Scheduler instance from factory
 		SchedulerFactory schedulerFactory = new StdSchedulerFactory();
 		Scheduler scheduler = schedulerFactory.getScheduler();
 
-		// 설정 객체 생성: 실행할 job 객체, 실행 주기 trigger 객체
+		// Create the Job and Trigger instance: the instance to execute and to trigger to apply
 		JobDetail job = newJob(jobClass)
 			.withIdentity("jobName", org.quartz.Scheduler.DEFAULT_GROUP)
 			.build();
@@ -30,15 +30,16 @@ public class CronScheduler {
 			.withSchedule(cronSchedule(cron))
 			.build();
 
-		// 위에서 생성한 설정 객체인 job 객체와 trigger 객체를 스케쥴러에 장전시킴
+		// Apply the Job and Trigger instances to the Scheduler instance
 		scheduler.scheduleJob(job, trigger);
 
-		// 발사명령. 이제 외부에서 CronScheduler.run() 외치면 여기까지 실행되고 스케쥴러가 실행된다.
+		// Start the scheduler.
+		// Now executing CronScheduler.run() outside runs this and scheduler actually starts
 		scheduler.start();
 
 	}
 
-	// 스케쥴러 실행
+	// Execute the scheduler
 	public static void run() throws Exception {
 		scheduleExecute(CronJob.class, props.getCronSchedule());
 	}

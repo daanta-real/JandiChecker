@@ -52,7 +52,7 @@ public class Main {
 		} catch(Exception e) {
 			waitForEnter();
 			System.exit(-1);
-			// 자동으로 return됨 = 강제종료
+			// Automatically return - exit
 		}
 
 	}
