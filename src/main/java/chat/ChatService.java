@@ -40,7 +40,7 @@ public class ChatService {
         // 3. Make clean the answer string
         String answer = sb.toString().replaceAll("\n\n", "\n");
         String answerEscaped = CommonUtils.unescapeHTMLEntity(answer);
-        log.debug(pr.l("chat_originalAnswer"), answerEscaped);
+        log.debug(pr.l("chat_theAnswer"), answerEscaped);
 
         return answerEscaped;
 
@@ -72,7 +72,7 @@ public class ChatService {
         else {
             answer = requestChatGPT(question);
         }
-        log.debug(pr.l("chat_finalAnswer"), answer);
+        log.debug(pr.l("chat_theAnswer"), answer);
 
         // 6. If the result have unintentional chars("? "), trim it
         if(answer.startsWith("? ")) {

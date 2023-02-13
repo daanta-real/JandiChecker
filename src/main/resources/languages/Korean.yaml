@@ -79,8 +79,6 @@ main_execute: <<< 잔디체커 실행 완료 >>>
 # ChatService and Chat
 chat_query: "접수된 원본 질문: <<<{}>>> (길이 {})"
 chat_response: "응답 수신: <<<{}>>>"
-chat_originalAnswer: "답변: <<<{}>>>"
-chat_finalAnswer: "최종 답변: <<<{}>>>"
 chat_theQueryByName: "그룹원 {}님의 질문: {}"
 chat_questionByName: "%s님의 질문";
 chat_theAnswer: "답변: {}"
@@ -153,11 +151,7 @@ menu_mapByName: "이름으로 잔디 조회"
 menu_mapByID: "ID로 잔디 조회"
 menu_listYesterdayFail: "어제 잔디 건너뛴 사람"
 menu_listByDate: "특정일 잔디 심은 사람"
-menu_about: "대하여.."
-menu_close: "닫기"
 menu_jandiHereHowCanIHelpYou: "잔디 등장. 무엇을 도와드릴까요?"
-menu_ENToMain: "영어→한글"
-menu_MainToEN: "한글→영어"
 
 # Menu description
 menu_desc_me: "내 잔디 정보를 조회합니다."

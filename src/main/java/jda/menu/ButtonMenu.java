@@ -29,8 +29,8 @@ public class ButtonMenu extends ListenerAdapter {
         Button.secondary(JDAController.instance.getCmdListYesterdayFail(), pr.l("menu_listYesterdayFail")).withEmoji(Emoji.fromUnicode("❕")),
         Button.secondary(JDAController.instance.getCmdListByDate(), pr.l("menu_listByDate")).withEmoji(Emoji.fromUnicode("\uD83D\uDDD3")),
 
-        Button.secondary(JDAController.instance.getCmdAbout(), pr.l("menu_about")).withEmoji(Emoji.fromUnicode("❔")),
-        Button.danger(JDAController.instance.getCmdClose(), pr.l("menu_close")).withEmoji(Emoji.fromUnicode("✖"))
+        Button.secondary(JDAController.instance.getCmdAbout(), pr.l("cmdName_about")).withEmoji(Emoji.fromUnicode("❔")),
+        Button.danger(JDAController.instance.getCmdClose(), pr.l("cmdName_close")).withEmoji(Emoji.fromUnicode("✖"))
     };
 
     public static void showButtonMenues(MessageReceivedEvent e) {
@@ -44,8 +44,8 @@ public class ButtonMenu extends ListenerAdapter {
                 .addActionRow(makeRow(btn[6], btn[7]));
 
         if (!TranslationService.mainLanguageLong.equals("English")) { // Non-English mode
-            Button enToMain = Button.secondary(JDAController.instance.getCmdTranslateEnToMain(), pr.l("menu_ENToMain")).withEmoji(Emoji.fromUnicode("\uD83C\uDDF0\uD83C\uDDF7"));
-            Button mainToEn = Button.secondary(JDAController.instance.getCmdTranslateMainToEn(), pr.l("menu_MainToEN")).withEmoji(Emoji.fromUnicode("\uD83C\uDDFA\uD83C\uDDF8"));
+            Button enToMain = Button.secondary(JDAController.instance.getCmdTranslateEnToMain(), pr.l("cmdName_ENToMain")).withEmoji(Emoji.fromUnicode("\uD83C\uDDF0\uD83C\uDDF7"));
+            Button mainToEn = Button.secondary(JDAController.instance.getCmdTranslateMainToEn(), pr.l("cmdName_MainToEN")).withEmoji(Emoji.fromUnicode("\uD83C\uDDFA\uD83C\uDDF8"));
             a.addActionRow(makeRow(enToMain, mainToEn, btn[8], btn[9]));
         } else { // English mode
             a.addActionRow(makeRow(btn[8], btn[9]));
