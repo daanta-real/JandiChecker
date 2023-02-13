@@ -17,30 +17,30 @@ public class SlashMenu {
 
         List<CommandData> cmdList = new ArrayList<>();
 
-        cmdList.add(Commands.slash(JDAController.CMD_ME, pr.l("menu_desc_me")));
-        cmdList.add(Commands.slash(JDAController.CMD_JANDIYA, pr.l("menu_desc_heyJandi"))
+        cmdList.add(Commands.slash(JDAController.instance.getCmdMe(), pr.l("menu_desc_me")));
+        cmdList.add(Commands.slash(JDAController.instance.getCmdJandiya(), pr.l("menu_desc_heyJandi"))
                 .addOption(OptionType.STRING, "option", pr.l("menu_pleaseInput_question"), true));
 
-        cmdList.add(Commands.slash(JDAController.CMD_LIST_YESTERDAY_SUCCEED, pr.l("menu_desc_listYesterdaySucceed")));
-        cmdList.add(Commands.slash(JDAController.CMD_LIST_TODAY_SUCCEED, pr.l("menu_desc_listTodaySucceed")));
+        cmdList.add(Commands.slash(JDAController.instance.getCmdListYesterdaySucceed(), pr.l("menu_desc_listYesterdaySucceed")));
+        cmdList.add(Commands.slash(JDAController.instance.getCmdListTodaySucceed(), pr.l("menu_desc_listTodaySucceed")));
 
-        cmdList.add(Commands.slash(JDAController.CMD_NAME, pr.l("menu_desc_mapByName"))
+        cmdList.add(Commands.slash(JDAController.instance.getCmdName(), pr.l("menu_desc_mapByName"))
                 .addOption(OptionType.STRING, "option", pr.l("menu_pleaseInput_name"), true));
-        cmdList.add(Commands.slash(JDAController.CMD_ID, pr.l("menu_desc_mapByID"))
+        cmdList.add(Commands.slash(JDAController.instance.getCmdId(), pr.l("menu_desc_mapByID"))
                 .addOption(OptionType.STRING, "option", pr.l("menu_pleaseInput_GitHubID"), true));
 
-        cmdList.add(Commands.slash(JDAController.CMD_LIST_YESTERDAY_FAIL, pr.l("menu_desc_listYesterdayFail")));
-        cmdList.add(Commands.slash(JDAController.CMD_LIST_BY_DATE, pr.l("menu_desc_listByDate"))
+        cmdList.add(Commands.slash(JDAController.instance.getCmdListYesterdayFail(), pr.l("menu_desc_listYesterdayFail")));
+        cmdList.add(Commands.slash(JDAController.instance.getCmdListByDate(), pr.l("menu_desc_listByDate"))
                 .addOption(OptionType.STRING, "option", pr.l("menu_pleaseInput_date"), true));
 
         if (!TranslationService.mainLanguageLong.equals("English")) {
-            cmdList.add(Commands.slash(JDAController.CMD_TRANSLATE_EN_TO_MAIN, pr.l("menu_desc_ENToMain"))
+            cmdList.add(Commands.slash(JDAController.instance.getCmdTranslateEnToMain(), pr.l("menu_desc_ENToMain"))
                         .addOption(OptionType.STRING, "option", pr.l("menu_pleaseInput_EngLang"), true));
-            cmdList.add(Commands.slash(JDAController.CMD_TRANSLATE_MAIN_TO_EN, pr.l("menu_desc_MainToEN"))
+            cmdList.add(Commands.slash(JDAController.instance.getCmdTranslateMainToEn(), pr.l("menu_desc_MainToEN"))
                     .addOption(OptionType.STRING, "option", pr.l("menu_pleaseInput_MainLang"), true));
         }
 
-        cmdList.add(Commands.slash(JDAController.CMD_ABOUT, pr.l("menu_desc_about")));
+        cmdList.add(Commands.slash(JDAController.instance.getCmdAbout(), pr.l("menu_desc_about")));
         return cmdList;
 
     }

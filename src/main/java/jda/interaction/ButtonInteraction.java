@@ -22,44 +22,46 @@ public class ButtonInteraction {
         try {
 
             // Run each command
-            switch(cmd) {
-                case JDAController.getCmdMe() -> {
-                    // Convert the instant got from Interaction to a spinner
-                    // I guess I should use .deferEdit() not .deferReply().
-                    // Because if I use .deferReply() the answer will be got as reply not the additional message.
-                    // After that the reply says "The message has deleted" attached bottom of the original message,
-                    // and the spinner cannot be deleted with no other ways.
-                    event.deferEdit().queue();
-                    result = CmdService.getJandiMapStringOfMine(event.getUser()); // Get my Commit map info
-                }
-                case JDAController.CMD_JANDIYA                -> ModalMenu.getChatAnswer(event); // The AI answers for general questions
-                case JDAController.CMD_LIST_YESTERDAY_SUCCEED -> {
-                    event.deferEdit().queue(); // Set defer
-                    result = CmdService.getDidCommitStringYesterday(); // Show the member list succeed to commit yesterday
-                }
-                case JDAController.CMD_LIST_TODAY_SUCCEED     -> {
-                    event.deferEdit().queue(); // Set defer
-                    result = CmdService.getDidCommitStringToday(); // Show the member list succeed to commit today
-                }
-                case JDAController.CMD_NAME -> ModalMenu.showJandiMapByName(event); // Show the total commit info of the member by the specific name
-                case JDAController.CMD_ID -> ModalMenu.showJandiMapById(event); // Show the total commit info of the member by the GitHub ID
-                case JDAController.CMD_LIST_YESTERDAY_FAIL    -> {
-                    event.deferEdit().queue(); // Set defer
-                    result = CmdService.getNotCommittedStringYesterday(); // Show the member list failed to commit yesterday
-                }
-                case JDAController.CMD_LIST_BY_DATE           -> ModalMenu.showDidCommitSomeday(event); // Show the member list succeed to commit in specific day
-                // 2 translation cmds below are available only in non-English mode
-                case JDAController.CMD_TRANSLATE_EN_TO_MAIN   -> ModalMenu.showTranslate_EN_to_MAIN(event); // English → Main language translation
-                case JDAController.CMD_TRANSLATE_MAIN_TO_EN   -> ModalMenu.showTranslate_MAIN_to_EN(event); // Main language → English translation
-                case JDAController.CMD_ABOUT -> { // Introduce of JandiChecker
-                    event.deferEdit().queue(); // Set defer
-                    result = pr.getInformation();
-                }
-                case JDAController.CMD_CLOSE -> {
-                    event.getMessage().delete().queue();
-                    return;
-                }
-                default -> throw new Exception();
+            if(StringUtils.equals(cmd, JDAController.instance.getCmdMe())) {
+                // Convert the instant got from Interaction to a spinner
+                // I guess I should use .deferEdit() not .deferReply().
+                // Because if I use .deferReply() the answer will be got as reply not the add itional message.
+                // After that the reply says "The message has deleted" attached bottom of the original message,
+                // and the spinner cannot be deleted with no other ways.
+                event.deferEdit().queue();
+                result = CmdService.getJandiMapStringOfMine(event.getUser()); // Get my Commit map info
+            } else if(StringUtils.equals(cmd, JDAController.instance.getCmdJandiya())) {
+                ModalMenu.getChatAnswer(event); // The AI answers for general questions
+            } else if(StringUtils.equals(cmd, JDAController.instance.getCmdListYesterdaySucceed())) {
+                event.deferEdit().queue(); // Set defer
+                result = CmdService.getDidCommitStringYesterday(); // Show the member list succeed to commit yesterday
+            } else if(StringUtils.equals(cmd, JDAController.instance.getCmdListTodaySucceed())) {
+                event.deferEdit().queue(); // Set defer
+                result = CmdService.getDidCommitStringToday(); // Show the member list succeed to commit today
+            } else if(StringUtils.equals(cmd, JDAController.instance.getCmdName())) {
+                ModalMenu.showJandiMapByName(event); // Show the total commit info of the member by the specific name
+            } else if(StringUtils.equals(cmd, JDAController.instance.getCmdId())) {
+                ModalMenu.showJandiMapById(event); // Show the total commit info of the member by the GitHub ID
+            } else if(StringUtils.equals(cmd, JDAController.instance.getCmdListYesterdayFail())) {
+                event.deferEdit().queue(); // Set defer
+                result = CmdService.getNotCommittedStringYesterday(); // Show the member list failed to commit yesterday
+            } else if(StringUtils.equals(cmd, JDAController.instance.getCmdListByDate())) {
+                ModalMenu.showDidCommitSomeday(event); // Show the member list succeed to commit in specific day
+            }
+            // 2 translation cmds below are available only in non-English mode
+            else if(StringUtils.equals(cmd, JDAController.instance.getCmdTranslateEnToMain())) {
+                ModalMenu.showTranslate_EN_to_MAIN(event); // English → Main language translation
+            } else if(StringUtils.equals(cmd, JDAController.instance.getCmdTranslateMainToEn())) {
+                ModalMenu.showTranslate_MAIN_to_EN(event); // Main language → English translation
+            } else if(StringUtils.equals(cmd, JDAController.instance.getCmdAbout())) {
+                // Introduce of JandiChecker
+                event.deferEdit().queue(); // Set defer
+                result = pr.getInformation();
+            } else if(StringUtils.equals(cmd, JDAController.instance.getCmdClose())) {
+                event.getMessage().delete().queue();
+                return;
+            } else {
+                throw new Exception();
             }
 
         } catch(Exception e) {

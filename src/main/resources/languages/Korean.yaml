@@ -1,6 +1,25 @@
 # 공용
+appName: "잔디체커"
 commandExecutionKeyword: "잔디야"
+icon: "아이콘"
+font: "폰트"
+
+instance: "인스턴스"
+window: "윈도우"
+tray: "트레이"
+
+request: "요청"
+start: "시작."
+initialization: "초기화"
+creation: "생성"
+activation: "활성화"
 fin: "완료."
+exit: "종료"
+
+button: "버튼"
+slash: "슬래시"
+command: "커맨드"
+
 period: "기간"
 err_incorrectInput: "정확히 입력해 주세요."
 err_dateStr: "형식에 맞지 않는 날짜 문자열을 입력하셨습니다."
@@ -8,6 +27,7 @@ err_dateValue: "날짜를 잘못 입력하셨습니다."
 err_gitHubIDNotExists: "없는 GitHub ID입니다."
 err_noCommitMapInGitHubProfile: "프로필 페이지에 잔디밭이 없어 조회하지 못했습니다."
 err_failedToGetInfo: "정보 획득에 실패했습니다."
+err_occurred: "오류가 발생했습니다"
 pressTheEnterKey: "엔터 키를 누르십시오"
 tip_howToGetLongAnswer: "\"잔디야 bla bla...\" 이런 식으로 질문하시면 약간 더 긴 답변을 받을 수 있습니다."
 
@@ -102,9 +122,8 @@ gitHubMap_CommittedInLast30: "최근 30일 간 잔디 심은 날"
 gitHubMap_count: "일 (1일 1잔디율"
 gitHubMap_CommitMapOfRecent1Year: "최근 1년 간 잔디 상세"
 
-# UIMenu
-uiMenu_createdInstance: "인스턴스 생성 완료"
-uiMenu_trayCreationError: "트레이 아이콘 생성에 실패하였습니다."
+# UIMain, UIMenu
+
 
 # Interaction
 bi_receivedTheCommandByClickingButton: "[[[ 버튼 누르기로 명령을 접수하였습니다. ]]] [{}]"
@@ -114,7 +133,18 @@ si_receivedTheCommandBySlashCommand: "[[[ 슬래시 명령문 입력으로 명�
 transl_inputByName: "%s님의 입력"
 transl_textByGoogle: "Google신이 번역한 문장"
 
-# MenuNames
+# Menu name
+cmdName_me: "나"
+cmdName_heyJandi: "잔디야"
+cmdName_name: "정보"
+cmdName_yesterday_succeed: "어제"
+cmdName_yesterday_fail: "어제안함"
+cmdName_today_succeed: "오늘"
+cmdName_list_by_date: "날짜"
+cmdName_about: "대하여"
+cmdName_close: "닫기"
+cmdName_MainToEN: "한영"
+cmdName_ENToMain: "영한"
 menu_me: "내 잔디 조회"
 menu_heyJandi: "AI에게 질문"
 menu_listYesterdaySucceed: "어제 잔디 심은 사람"
@@ -128,3 +158,40 @@ menu_close: "닫기"
 menu_jandiHereHowCanIHelpYou: "잔디 등장. 무엇을 도와드릴까요?"
 menu_ENToMain: "영어→한글"
 menu_MainToEN: "한글→영어"
+
+# Menu description
+menu_desc_me: "내 잔디 정보를 조회합니다."
+menu_desc_heyJandi: "잔디의 친구 ChatGPT AI에게 질문을 해봅니다."
+menu_desc_listYesterdaySucceed: "어제 잔디를 심는데 성공한 그룹원 목록을 확인합니다."
+menu_desc_listTodaySucceed: "오늘 잔디를 심는데 성공한 그룹원 목록을 확인합니다."
+menu_desc_mapByName: "그룹원의 이름을 입력하여 그룹원의 잔디 정보를 조회합니다."
+menu_desc_mapByID: "특정 ID의 잔디 정보를 조회합니다. 그룹원이 아닌 사람도 조회 가능합니다."
+menu_desc_listYesterdayFail: "어제 잔디 심기를 깜박한 그룹원 목록을 확인합니다."
+menu_desc_listByDate: "특정 날짜에 잔디를 심는데 성공한 그룹원 목록을 확인합니다."
+menu_desc_about: "이 봇에 대한 소개와 도움말을 출력합니다."
+menu_desc_ENToMain: "영어 문장을 한글로 번역합니다."
+menu_desc_MainToEN: "한글 문장을 영어로 번역합니다."
+menu_pleaseInput_question: "질문을 입력해 주세요."
+menu_pleaseInput_name: "그룹원의 이름을 입력해 주세요."
+menu_pleaseInput_GitHubID: "조회하고자 하는 사람의 id를 입력하세요."
+menu_pleaseInput_date: "날짜를 입력하세요. yyyyMMdd 형태로 입력하셔야 합니다."
+menu_pleaseInput_EngLang: "한글로 번역할 영어 문장을 입력하세요."
+menu_pleaseInput_MainLang: "영문으로 번역할 한글 내용을 입력하세요."
+
+# Modal
+modal_inputMemberName: "그룹원명 입력"
+modal_inputMemberName_description: "그룹원 이름"
+modal_maxLen10: "최대 10글자"
+modal_inputGitHubID: "GitHub 아이디 입력"
+modal_maxLen20: "최대 20글자"
+modal_inputTheQuestion: "질문 입력"
+modal_inputTheQuestion_description: "하고 싶은 질문"
+modal_inputTheQuestion_placeholder: "최대 300글자. 글자수 제한 없이 하려면 이 버튼 메뉴를 통하지 말고 채팅으로 직접 \"잔디야 [질문내용]\"이라고 타이핑해 주세요."
+modal_inputTheDate: "날짜 입력"
+modal_inputTheDate_description: "조회할 날짜"
+modal_inputTheDate_placeholder: "yyyyMMdd 형식"
+modal_inputTheEnglish: "한국어로 번역할 내용 입력"
+modal_inputTheEnglish_description: "영어 문장"
+modal_inputTheMainLang: "영어로 번역할 내용 입력"
+modal_inputTheMainLang_description: "한국 문장"
+modal_maybeLongerBeOk: "조금 길어도 괜찮을지도..?"

@@ -26,7 +26,7 @@ public class JDAMsgService {
 
 	// Send the message to specific text channel ID
 	public static void send(String channelId, String msg) {
-		TextChannel channel = JDAController.instance.getTextChannelById(channelId);
+		TextChannel channel = JDAController.instance.getJda().getTextChannelById(channelId);
 		log.info("Sending the message to channelId {} (channel exists: {})", channelId, channel != null);
 		if (channel != null) {
 			msg = msgTrim(msg);
