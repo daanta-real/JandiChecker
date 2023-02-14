@@ -16,7 +16,7 @@ public class ButtonInteraction {
 
         // Get command and options
         String cmd = event.getComponentId(); // Command
-        log.debug(pr.l("bi_receivedTheCommandByClickingButton"), cmd);
+        log.debug("[[[ COMMAND RECEIVED BY PUSHING BUTTON ]]]: [{}]", cmd);
 
         String result = null;
         try {

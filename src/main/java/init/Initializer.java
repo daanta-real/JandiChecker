@@ -33,23 +33,23 @@ public class Initializer {
 		log.info("");
 
 		// 3. Load version & build settings (version.yaml)
-		log.info(pr.l("initializer_3_loadVersion"));
+		log.info("<<< CONFIGURATION 3. LOAD VERSION INFO >>>");
 		pr.loadVersionInfoes();
 		log.info(pr.l("fin"));
 		log.info("");
 
 		// 4. Load all UIs including Swing window instance, icon, tray, etc.
 		if(needSwingWindow) {
-			log.info(pr.l("initializer_4_loadSwingWindow"));
+			log.info("<<< CONFIGURATION 4. LOADING SWING WINDOW CTRL >>>");
 			UIMain.getInstance().init();
 		} else {
-			log.info(pr.l("initializer_4_notLoadSwingWindow"));
+			log.info("<<< CONFIGURATION 4. 'NOT' LOADING SWING WINDOW CTRL >>>");
 		}
 		log.info("{}", pr.l("fin"));
 		log.info("");
 
 		// 5. Load Google Translate API (googleAPIKey.json)
-		log.info(pr.l("initializer_5_loadGoogleTranslate"));
+		log.info("<<< CONFIGURATION 5. LOADING GOOGLE TRANSLATE API >>>");
 		TranslationService.init();
 		log.info(pr.l("fin"));
 		log.info("");
@@ -62,6 +62,7 @@ public class Initializer {
 			""".formatted(pr.l("appInfo"))
 				.formatted(pr.getVersion(), pr.getBuild()));
 		// Finished
+		log.info("<<< CONFIGURATION 6. CONFIGURATION FINISHED >>>");
 		log.info(pr.l("initializer_6_finishedLoading"));
 		log.info("");
 

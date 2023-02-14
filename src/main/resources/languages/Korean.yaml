@@ -8,6 +8,12 @@ instance: "인스턴스"
 window: "윈도우"
 tray: "트레이"
 
+today: "오늘"
+yesterday: "어제"
+date: "날짜"
+period: "기간"
+
+
 request: "요청"
 start: "시작."
 initialization: "초기화"
@@ -20,7 +26,11 @@ button: "버튼"
 slash: "슬래시"
 command: "커맨드"
 
-period: "기간"
+me: "나"
+info: "정보"
+about: "대하여"
+close: "닫기"
+
 err_incorrectInput: "정확히 입력해 주세요."
 err_dateStr: "형식에 맞지 않는 날짜 문자열을 입력하셨습니다."
 err_dateValue: "날짜를 잘못 입력하셨습니다."
@@ -32,10 +42,6 @@ pressTheEnterKey: "엔터 키를 누르십시오"
 tip_howToGetLongAnswer: "\"잔디야 bla bla...\" 이런 식으로 질문하시면 약간 더 긴 답변을 받을 수 있습니다."
 
 # 최초 로딩 시 필요한 문자열
-initializer_3_loadVersion: <<< 환경설정 3. 버전 정보 로드 >>>
-initializer_4_loadSwingWindow: <<< 환경설정 4. Swing window 컨트롤 준비 >>>
-initializer_4_notLoadSwingWindow: <<< 환경설정 4. Swing 윈도 컨트롤을 준비하지 않습니다. >>>
-initializer_5_loadGoogleTranslate: <<< 환경설정 5. 구글 번역기 API 로드 >>>
 appInfo: |
   _**저는 매일 자정, 잔디를 심는 데 성공한 사람들을 찾아낼 것입니다.**_
   
@@ -70,11 +76,7 @@ appInfo: |
   * Blog  : http://blog.naver.com/daanta
   * e-mail: daanta@naver.com
 
-initializer_6_finishedLoading: <<< 환경설정 로드 완료 >>>
 main_description: Github 잔디 점검 프로그램
-main_jdaLoad: <<< 잔디체커 JDA 로드 >>>
-main_startScheduler: <<< 스케쥴러 시작 >>>
-main_execute: <<< 잔디체커 실행 완료 >>>
 
 # ChatService and Chat
 chat_query: "접수된 원본 질문: <<<{}>>> (길이 {})"
@@ -85,27 +87,15 @@ chat_theAnswer: "답변: {}"
 chat_GPTSays: "ChatGPT AI님 가라사대..."
 
 # CmdService
-cmd_failedToFindGitHubID: "님의 GitHub ID를 찾는 데 실패했습니다."
-cmd_getJandiMapStringById: "ID '{}'의 종합 잔디정보 호출을 명령받았습니다."
-cmd_getJandiMapStringByIdAndName: "'{}'님 (ID '{}')의 종합 잔디정보 호출을 명령받았습니다."
 cmd_needMemberName: "찾고자 하는 그룹원 이름을 입력해 주세요."
-cmd_getJandiMapStringByName: "그룹원 '{}' (ID '{}')의 종합 잔디정보 호출을 명령받았습니다."
 
 # Checker
-checker_getGithubCommittedByDay: "{}의 {} 날의 잔디를 확인합니다."
-checker_scoreOfDay: "{}일의 잔디심기 점수: {}"
-checker_getCommitListByDay: "잔디를 '{}' 확인합니다. 확인할 날짜: {}"
-checker_getNotCommittedYesterday: "어제 잔디를 심지 않은 사람의 목록을 회신 요청받았습니다."
 checker_getNotCommittedYesterday_result: "어제 잔디심기를 패스한 사람 %s명"
-checker_getDidCommitYesterday: "어제 잔디를 심은 사람의 목록을 회신 요청받았습니다."
 checker_getDidCommitYesterday_result: "어제 잔디 심기에 성공한 사람은 %s명...!"
-checker_getDidCommittedToday: "오늘 잔디를 심은 사람의 목록을 회신 요청받았습니다."
 checker_getDidCommittedToday_result_success: "오늘 잔디 심기에 성공한 사람은 %s명...!"
 checker_getDidCommittedToday_result_fail_title: "정보 획득에 실패하였습니다."
 checker_getDidCommittedToday_result_fail_md: "아직 오늘자의 커밋이 비회원 유저에게 공개되기 전이라면, 오늘자 잔디가 조회되지 않을 수도 있습니다."
 checker_getDidCommittedSomeday: "%s에 잔디심기에 성공한 사람 %s명"
-checker_he_DID_Commit: "심었는지"
-checker_he_DID_NOT_commit: "안 심었는지"
 
 # Crawler
 crawler_trimResultOne: "트림 결과: 총 {}개 ({} ~ {})"
@@ -120,27 +110,13 @@ gitHubMap_CommittedInLast30: "최근 30일 간 잔디 심은 날"
 gitHubMap_count: "일 (1일 1잔디율"
 gitHubMap_CommitMapOfRecent1Year: "최근 1년 간 잔디 상세"
 
-# UIMain, UIMenu
-
-
-# Interaction
-bi_receivedTheCommandByClickingButton: "[[[ 버튼 누르기로 명령을 접수하였습니다. ]]] [{}]"
-si_receivedTheCommandBySlashCommand: "[[[ 슬래시 명령문 입력으로 명령을 접수하였습니다. ]]]"
-
 # Translation
 transl_inputByName: "%s님의 입력"
 transl_textByGoogle: "Google신이 번역한 문장"
 
 # Menu name
-cmdName_me: "나"
 cmdName_heyJandi: "잔디야"
-cmdName_name: "정보"
-cmdName_yesterday_succeed: "어제"
 cmdName_yesterday_fail: "어제안함"
-cmdName_today_succeed: "오늘"
-cmdName_list_by_date: "날짜"
-cmdName_about: "대하여"
-cmdName_close: "닫기"
 cmdName_MainToEN: "한영"
 cmdName_ENToMain: "영한"
 menu_me: "내 잔디 조회"
@@ -175,8 +151,8 @@ menu_pleaseInput_MainLang: "영문으로 번역할 한글 내용을 입력하세
 # Modal
 modal_inputMemberName: "그룹원명 입력"
 modal_inputMemberName_description: "그룹원 이름"
-modal_maxLen10: "최대 10글자"
 modal_inputGitHubID: "GitHub 아이디 입력"
+modal_maxLen10: "최대 10글자"
 modal_maxLen20: "최대 20글자"
 modal_inputTheQuestion: "질문 입력"
 modal_inputTheQuestion_description: "하고 싶은 질문"
@@ -184,8 +160,8 @@ modal_inputTheQuestion_placeholder: "최대 300글자. 글자수 제한 없이 �
 modal_inputTheDate: "날짜 입력"
 modal_inputTheDate_description: "조회할 날짜"
 modal_inputTheDate_placeholder: "yyyyMMdd 형식"
-modal_inputTheEnglish: "한국어로 번역할 내용 입력"
-modal_inputTheEnglish_description: "영어 문장"
-modal_inputTheMainLang: "영어로 번역할 내용 입력"
 modal_inputTheMainLang_description: "한국 문장"
+modal_inputTheEnglish_description: "영어 문장"
+modal_inputTheEnglish: "한국어로 번역할 내용 입력"
+modal_inputTheMainLang: "영어로 번역할 내용 입력"
 modal_maybeLongerBeOk: "조금 길어도 괜찮을지도..?"

@@ -27,7 +27,7 @@ public class CmdService {
 		try {
 			memberInfo = pr.getMemberInfoesByDiscordTagID(discordTagID);
 		} catch(Exception e) {
-			throw new Exception(discordTagID + pr.l("cmd_failedToFindGitHubID"));
+			throw new Exception("Failed to find GitHub ID of %s".formatted(discordTagID));
 		}
 
 		// Return the total information
@@ -44,17 +44,17 @@ public class CmdService {
 		if (StringUtils.isEmpty(id)) {
 			return pr.l("err_incorrectInput");
 		}
-		log.info(pr.l("cmd_getJandiMapStringById"), id);
+		log.info("Received the request the commit map summary of ID {}", id);
 		return GithubMap.getGithubInfoString(id, id);
 	}
 
 	// Summary information by GitHub ID and specific member name
-	public static String getJandiMapStringByIdAndName(String name, String id) {
-		if(StringUtils.isEmpty(name) || StringUtils.isEmpty(id)) {
+	public static String getJandiMapStringByIdAndName(String name, String gitHubID) {
+		if(StringUtils.isEmpty(name) || StringUtils.isEmpty(gitHubID)) {
 			return pr.l("err_incorrectInput");
 		}
-		log.info(pr.l("cmd_getJandiMapStringByIdAndName"), name, id);
-		return GithubMap.getGithubInfoString(name, id);
+		log.info("Received the request the commit map summary of GitHub ID {}, NAME {}", gitHubID, name);
+		return GithubMap.getGithubInfoString(name, gitHubID);
 	}
 
 	// Summary information by member name
@@ -69,10 +69,10 @@ public class CmdService {
 			gitHubID = pr.getGitHubIDByMemberName(name);
 			if(StringUtils.isEmpty(gitHubID)) throw new Exception();
 		} catch(Exception e) {
-			return name + pr.l("cmd_failedToFindGitHubID");
+			return "Failed to find name: %s".formatted(name);
 		}
 
-		log.info(pr.l("cmd_getJandiMapStringByName"), name, gitHubID);
+		log.info("Received the request the commit map summary of GitHub ID {}, NAME {}", gitHubID, name);
 		return GithubMap.getGithubInfoString(name, gitHubID);
 
 	}
@@ -82,7 +82,7 @@ public class CmdService {
 	// 2. Get list of group members satisfied with specific conditions
 
 	public static String getNotCommittedStringYesterday() throws Exception {
-		return Checker.getNotCommittedYesterday();
+		return Checker.getDidNotCommitYesterday();
 	}
 
 	public static String getDidCommitStringYesterday() throws Exception {
@@ -90,11 +90,11 @@ public class CmdService {
 	}
 
 	public static String getDidCommitStringToday() {
-		return Checker.getDidCommittedToday();
+		return Checker.getDidCommitToday();
 	}
 
 	public static String getDidCommitStringSomeday(String date) throws Exception {
-		return Checker.getDidCommittedSomeday(date);
+		return Checker.getDidCommitSomeday(date);
 	}
 
 }

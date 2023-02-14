@@ -29,8 +29,8 @@ public class ButtonMenu extends ListenerAdapter {
         Button.secondary(JDAController.instance.getCmdListYesterdayFail(), pr.l("menu_listYesterdayFail")).withEmoji(Emoji.fromUnicode("❕")),
         Button.secondary(JDAController.instance.getCmdListByDate(), pr.l("menu_listByDate")).withEmoji(Emoji.fromUnicode("\uD83D\uDDD3")),
 
-        Button.secondary(JDAController.instance.getCmdAbout(), pr.l("cmdName_about")).withEmoji(Emoji.fromUnicode("❔")),
-        Button.danger(JDAController.instance.getCmdClose(), pr.l("cmdName_close")).withEmoji(Emoji.fromUnicode("✖"))
+        Button.secondary(JDAController.instance.getCmdAbout(), pr.l("about")).withEmoji(Emoji.fromUnicode("❔")),
+        Button.danger(JDAController.instance.getCmdClose(), pr.l("close")).withEmoji(Emoji.fromUnicode("✖"))
     };
 
     public static void showButtonMenues(MessageReceivedEvent e) {

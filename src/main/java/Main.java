@@ -36,17 +36,17 @@ public class Main {
 
 			// Load JDA
 			log.info("");
-			log.info("{}", pr.l("main_jdaLoad"));
+			log.info("<<< LOADING JandiChecker JDA >>>");
 			JDAController.init();
 
 			// Run scheduler
 			log.info("");
-			log.info("{}", pr.l("main_startScheduler"));
+			log.info("<<< STARTING SCHEDULER >>>");
 			CronScheduler.run();
 
 			// Done!
 			log.info("");
-			log.info("{}", pr.l("main_execute"));
+			log.info("<<< FINISHED executing JandiChecker >>>");
 			log.info("");
 
 		} catch(Exception e) {

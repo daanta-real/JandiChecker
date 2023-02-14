@@ -79,16 +79,16 @@ public class JDAController extends ListenerAdapter {
 				bot);
 
 		// Set props
-		instance.CMD_ME = pr.l("cmdName_me");
+		instance.CMD_ME = pr.l("me");
 		instance.CMD_JANDIYA = pr.l("cmdName_heyJandi");
-		instance.CMD_NAME = pr.l("cmdName_name");
+		instance.CMD_NAME = pr.l("info");
 		instance.CMD_ID = "id";
-		instance.CMD_LIST_YESTERDAY_SUCCEED = pr.l("cmdName_yesterday_succeed");
+		instance.CMD_LIST_YESTERDAY_SUCCEED = pr.l("yesterday");
 		instance.CMD_LIST_YESTERDAY_FAIL = pr.l("cmdName_yesterday_fail");
-		instance.CMD_LIST_TODAY_SUCCEED = pr.l("cmdName_today_succeed");
-		instance.CMD_LIST_BY_DATE = pr.l("cmdName_list_by_date");
-		instance.CMD_ABOUT = pr.l("cmdName_about");
-		instance.CMD_CLOSE = pr.l("cmdName_close");
+		instance.CMD_LIST_TODAY_SUCCEED = pr.l("today");
+		instance.CMD_LIST_BY_DATE = pr.l("date");
+		instance.CMD_ABOUT = pr.l("about");
+		instance.CMD_CLOSE = pr.l("close");
 		instance.CMD_TRANSLATE_MAIN_TO_EN = pr.l("cmdName_MainToEN");
 		instance.CMD_TRANSLATE_EN_TO_MAIN = pr.l("cmdName_ENToMain");
 

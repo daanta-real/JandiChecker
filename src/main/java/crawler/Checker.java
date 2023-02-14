@@ -17,10 +17,10 @@ import static init.Initializer.pr;
 public class Checker {
 
 	// Input the target GitHub ID and date(format: yyyy-MM-dd) and get a T/F where he committed or not
-	public static boolean getGitHubCommittedByDay(String id, String day) throws Exception {
+	public static boolean getGitHubDidCommitByDay(String id, String day) throws Exception {
 
 		// 1. Preparing
-		log.info(pr.l("checker_getGithubCommittedByDay"), id, day);
+		log.info("CHECK {}'s COMMIT. DATE: {}", id, day);
 
 		// 2. Get full HTML
 		String html_org;
@@ -38,23 +38,24 @@ public class Checker {
 		// If commit box is not found here throws an Exception
 		if(map.get(day) == null) throw new Exception();
 		boolean committed = map.get(day);
-		log.debug(pr.l("checker_scoreOfDay"), day, committed);
+		log.debug("DATE = {} → SCORE = {}", day, committed);
 
 		// 5. Return result
 		return committed;
 
 	}
 
-	// Check the all members and returns the count and the list who DID or DID NOT commited
+	// Check the all members and returns the count and the list who DID or DID NOT commit
+	// Returns raw String array, not for the chat
 	// * if findNegative is true then only find DID list
 	// * if findNegative is true then only find NOT DID list
-	public static String[] getCommitListByDay(String day, boolean findNegative) throws Exception {
+	public static String[] getDidCommitListByDay(String day, boolean findNegative) throws Exception {
 
 		log.info(
-				pr.l("checker_getCommitListByDay"),
+				"Check if he '{}' of the day: {}",
 				(findNegative
-						? pr.l("checker_he_DID_NOT_commit")
-						: pr.l("checker_he_DID_Commit")), day);
+						? "DIDN'T COMMIT"
+						: "DID COMMIT"), day);
 
 		// result values
 		StringBuilder sb = new StringBuilder(); // name list (one name by one line)
@@ -63,7 +64,7 @@ public class Checker {
 			Map<String, String> memberProps = entry.getValue();
 			String name = entry.getKey();
 			String gitHubID = memberProps.get("gitHubID");
-			boolean hasCommit = getGitHubCommittedByDay(gitHubID, day);
+			boolean hasCommit = getGitHubDidCommitByDay(gitHubID, day);
 			if(
 				(!findNegative && hasCommit)    // find only DID committed     and he DID commit
 				|| (findNegative && !hasCommit) // find only DID NOT committed and he DID NOT commit
@@ -77,15 +78,15 @@ public class Checker {
 	}
 
 	// Check the all members and returns the list who DID NOT commit yesterday
-	public static String getNotCommittedYesterday() throws Exception {
+	public static String getDidNotCommitYesterday() throws Exception {
 
-		log.info(pr.l("checker_getNotCommittedYesterday"));
+		log.info("Request: get list of NOT committed yesterday");
 
 		Calendar c = Calendar.getInstance();
 		c.add(Calendar.DATE, -1);
 		String day = CommonUtils.sdf_thin.format(c.getTime());
 
-		String[] list = getCommitListByDay(day, true);
+		String[] list = getDidCommitListByDay(day, true);
 		String date_notice = CommonUtils.sdf_dayweek.format(c.getTime());
 		String result = "```md\n[" + pr.l("checker_getNotCommittedYesterday_result") + "]: %s\n%s\n```";
 		return result.formatted(list[0], date_notice, list[1]);
@@ -95,13 +96,13 @@ public class Checker {
 	// Check the all members and returns the list who DID commit yesterday
 	public static String getDidCommitYesterday() throws Exception {
 
-		log.info(pr.l("checker_getDidCommitYesterday"));
+		log.info("Request: get list of DID committed yesterday");
 
 		Calendar c = Calendar.getInstance();
 		c.add(Calendar.DATE, -1);
 		String day = CommonUtils.sdf_thin.format(c.getTime());
 
-		String[] list = getCommitListByDay(day, false);
+		String[] list = getDidCommitListByDay(day, false);
 		String date_notice = CommonUtils.sdf_dayweek.format(c.getTime());
 		String result = "```md\n[" + pr.l("checker_getDidCommitYesterday_result") + "]: %s\n%s\n```";
 		return result.formatted(list[0], date_notice, list[1]);
@@ -110,16 +111,16 @@ public class Checker {
 
 	// Check the all members and returns the list who DID commit today
 	// maybe it gets an error before 6 o'clock
-	public static String getDidCommittedToday() {
+	public static String getDidCommitToday() {
 
-		log.info(pr.l("checker_getDidCommittedToday"));
+		log.info("Request: get list of DID commit TODAY");
 
 		try {
 			Calendar c = Calendar.getInstance();
 			String day = CommonUtils.sdf_thin.format(c.getTime());
 
 			String date_notice = CommonUtils.sdf_dayweek.format(new Date());
-			String[] list = getCommitListByDay(day, false);
+			String[] list = getDidCommitListByDay(day, false);
 			String result = "```md\n[" + pr.l("checker_getDidCommittedToday_result_success") + "]: %s\n%s\n```";
 			return result.formatted(list[0], date_notice, list[1]);
 		} catch(Exception e) {
@@ -132,7 +133,7 @@ public class Checker {
 	}
 
 	// Check the all members and returns the list who DID commit in specific day
-	public static String getDidCommittedSomeday(String date) throws Exception {
+	public static String getDidCommitSomeday(String date) throws Exception {
 
 		// chksum: null check, date String format
 		if (StringUtils.isEmpty(date)) {
@@ -154,7 +155,7 @@ public class Checker {
 		String day = CommonUtils.sdf_thin.format(c.getTime());
 
 		try {
-			String[] list = getCommitListByDay(day, false);
+			String[] list = getDidCommitListByDay(day, false);
 			String day_notice = CommonUtils.sdf_dayweek.format(c.getTime());
 			String result = "```md\n[" + pr.l("checker_getDidCommittedSomeday") + "]: %s\n%s```";
 			return result.formatted(day_notice, list[0], day_notice, list[1]);

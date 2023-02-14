@@ -40,7 +40,7 @@ public class SlashInteraction {
         String cmd = event.getName(); // Command
         OptionMapping o = event.getOption("option");
         String option = o != null ? o.getAsString() : ""; // Option string
-        log.debug("{} [{}: '{}']", pr.l("si_receivedTheCommandBySlashCommand"), cmd, option);
+        log.debug("[[[ COMMAND RECEIVED BY SLASH INPUT ]]]: [{}], [{}]", cmd, option);
 
         // Make result
         String result;
