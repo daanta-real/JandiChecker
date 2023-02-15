@@ -19,14 +19,14 @@ public class MessageInteraction {
         // Branch prossesing by the command keyword
 
         // 1. If message is exactly same as the command execution keyword, show the menu panel to the chatting channel
-        if(message.equals(pr.l("commandExecutionKeyword"))) {
+        if(message.toLowerCase().equals(pr.l("commandExecutionKeyword"))) {
             ButtonMenu.showButtonMenues(event);
         }
         // 2. If message starts with the command execution keyword and has a space next to it,
         //    it might be the direct order with some option.
         //    Currently, the order like this type is only stands for the ChatGPT AI quick answer command.
         //    So if the message is in this format, execute it.
-        else if(message.startsWith(pr.l("commandExecutionKeyword") + " ")) {
+        else if(message.toLowerCase().startsWith(pr.l("commandExecutionKeyword") + " ")) {
             String questionMain = message.substring(4);
             String answerMain = ChatService.getChatAnswer(questionMain);
             String saysAdded = "\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 %s \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93```%s```"

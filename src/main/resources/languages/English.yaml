@@ -1,0 +1,167 @@
+# 공용
+appName: "JandiChecker"
+commandExecutionKeyword: "hey jandi"
+icon: "icon"
+font: "font"
+
+instance: "instance"
+window: "window"
+tray: "tray"
+
+today: "today"
+yesterday: "yesterday"
+date: "date"
+period: "period"
+
+
+request: "request"
+start: "start"
+initialization: "initialization"
+creation: "creation"
+activation: "activation"
+fin: "complete"
+exit: "exit"
+
+button: "button"
+slash: "slash"
+command: "command"
+
+me: "me"
+info: "information"
+about: "about"
+close: "close"
+
+err_incorrectInput: "Please enter correctly."
+err_dateStr: "The entered a date string does not match the format."
+err_dateValue: "Wrong date value."
+err_gitHubIDNotExists: "GitHub ID does not exist."
+err_noCommitMapInGitHubProfile: "Failed to get info because there is no commit info on your profile page."
+err_failedToGetInfo: "Failed to get info."
+err_occurred: "An error occurred."
+pressTheEnterKey: "Hit the enter key."
+tip_howToGetLongAnswer: "\"잔디야 bla bla...\" 이런 식으로 질문하시면 약간 더 긴 답변을 받을 수 있습니다."
+
+# 최초 로딩 시 필요한 문자열
+appInfo: |
+  _**저는 매일 자정, 잔디를 심는 데 성공한 사람들을 찾아낼 것입니다.**_
+  
+  # 잔디체커의 사용법
+  잔디체커는 세 가지 방법으로 이용할 수 있습니다.
+  1. 채팅창에 '/'(슬래시)를 입력하면 사용 가능한 명령어들이 슬래시 메뉴로 표시됩니다. 원하는 것을 선택한 후, 추가적인 옵션 입력이 필요하면 옵션을 입력해 주세요.
+  2. 채팅창에 '잔디야'라고 입력하면 사용 가능한 명령들이 버튼 메뉴로 표시됩니다. 원하는 것을 누른 후, 추가적인 옵션 입력이 필요하면 옵션을 입력해 주세요.
+  3. '잔디야 [질문내용]'이라고 입력하면, 메뉴 호출 없이 AI에게 바로 질문할 수 있습니다.
+  
+  # 각 커맨드에 대한 상세 소개
+    /나: 나의 잔디정보를 출력합니다. 정보를 얻기 위해서는 그룹원에 소속되어 있어야 합니다.
+    /잔디야: 일반적인 질문에 답하는 ChatGPT AI에게 질문하여 답변을 얻습니다. 질문은 한국어로 입력하면 됩니다.
+    /정보 [이름]: 특정 그룹원의 종합 잔디정보를 출력합니다. 성이름 모두 입력해도 되고 이름만 입력해도 됩니다.
+    /id [ID]: 특정 Github ID의 종합 잔디정보를 출력합니다.
+    /어제: 어제 잔디심기에 성공한 그룹원의 목록을 출력합니다.
+    /어제안함: 어제 잔디심기를 패스한 사람의 목록을 출력합니다.
+    /날짜 [yyyyMMdd]: 특정 날짜에 잔디를 심은 사람의 목록을 출력합니다. 현재 이전 날짜에 대해서 검색이 가능합니다.
+    /대하여: 이 봇을 소개합니다.
+  
+  # 팁
+  AI에게 질문하실 때에는 최대한 구체적이고 자세하게 질문해 주세요.
+  질문을 정확하게 정의할수록 답변도 정확하게 돌아옵니다.
+  
+  # App information
+  [잔디체커(JandiChecker)] (%s Build %s)
+  * Stacks used: Java 17, Gradle, IntelliJ, JDA, Quartz, ChatGPT API, Google Cloud API(for translation), Swing, JUnit5, Logback
+  * Have taking an effort to comply with TDD.
+  
+  # Developer's informaiton
+  * Developed by 단타(박준성) / Daanta(Junsung Park)
+  * GitHub: http://github.com/daanta-real
+  * Blog  : http://blog.naver.com/daanta
+  * e-mail: daanta@naver.com
+
+main_description: Github 잔디 점검 프로그램
+
+# ChatService and Chat
+chat_query: "접수된 원본 질문: <<<{}>>> (길이 {})"
+chat_response: "응답 수신: <<<{}>>>"
+chat_theQueryByName: "그룹원 {}님의 질문: {}"
+chat_questionByName: "%s님의 질문";
+chat_theAnswer: "답변: {}"
+chat_GPTSays: "ChatGPT AI님 가라사대..."
+
+# CmdService
+cmd_needMemberName: "찾고자 하는 그룹원 이름을 입력해 주세요."
+
+# Checker
+checker_getNotCommittedYesterday_result: "어제 잔디심기를 패스한 사람 %s명"
+checker_getDidCommitYesterday_result: "어제 잔디 심기에 성공한 사람은 %s명...!"
+checker_getDidCommittedToday_result_success: "오늘 잔디 심기에 성공한 사람은 %s명...!"
+checker_getDidCommittedToday_result_fail_title: "정보 획득에 실패하였습니다."
+checker_getDidCommittedToday_result_fail_md: "아직 오늘자의 커밋이 비회원 유저에게 공개되기 전이라면, 오늘자 잔디가 조회되지 않을 수도 있습니다."
+checker_getDidCommittedSomeday: "%s에 잔디심기에 성공한 사람 %s명"
+
+# Crawler
+crawler_trimResultOne: "트림 결과: 총 {}개 ({} ~ {})"
+crawler_trimResultAll: "모든 트림 결과: {}"
+
+# GitHubMap
+gitHubMap_firstSunday: "일요일 날짜: {}일 전"
+gitHubMap_mapInfo: "맵 현황"
+gitHubMap_sirStr: "님"
+gitHubMap_mapOf: "의 최근 잔디 현황"
+gitHubMap_CommittedInLast30: "최근 30일 간 잔디 심은 날"
+gitHubMap_count: "일 (1일 1잔디율"
+gitHubMap_CommitMapOfRecent1Year: "최근 1년 간 잔디 상세"
+
+# Translation
+transl_inputByName: "%s님의 입력"
+transl_textByGoogle: "Google신이 번역한 문장"
+
+# Menu name
+cmdName_heyJandi: "잔디야"
+cmdName_yesterday_fail: "어제안함"
+cmdName_MainToEN: "한영"
+cmdName_ENToMain: "영한"
+menu_me: "내 잔디 조회"
+menu_heyJandi: "AI에게 질문"
+menu_listYesterdaySucceed: "어제 잔디 심은 사람"
+menu_listTodaySucceed: "오늘 잔디 심은 사람"
+menu_mapByName: "이름으로 잔디 조회"
+menu_mapByID: "ID로 잔디 조회"
+menu_listYesterdayFail: "어제 잔디 건너뛴 사람"
+menu_listByDate: "특정일 잔디 심은 사람"
+menu_jandiHereHowCanIHelpYou: "잔디 등장. 무엇을 도와드릴까요?"
+
+# Menu description
+menu_desc_me: "내 잔디 정보를 조회합니다."
+menu_desc_heyJandi: "잔디의 친구 ChatGPT AI에게 질문을 해봅니다."
+menu_desc_listYesterdaySucceed: "어제 잔디를 심는데 성공한 그룹원 목록을 확인합니다."
+menu_desc_listTodaySucceed: "오늘 잔디를 심는데 성공한 그룹원 목록을 확인합니다."
+menu_desc_mapByName: "그룹원의 이름을 입력하여 그룹원의 잔디 정보를 조회합니다."
+menu_desc_mapByID: "특정 ID의 잔디 정보를 조회합니다. 그룹원이 아닌 사람도 조회 가능합니다."
+menu_desc_listYesterdayFail: "어제 잔디 심기를 깜박한 그룹원 목록을 확인합니다."
+menu_desc_listByDate: "특정 날짜에 잔디를 심는데 성공한 그룹원 목록을 확인합니다."
+menu_desc_about: "이 봇에 대한 소개와 도움말을 출력합니다."
+menu_desc_ENToMain: "영어 문장을 한글로 번역합니다."
+menu_desc_MainToEN: "한글 문장을 영어로 번역합니다."
+menu_pleaseInput_question: "질문을 입력해 주세요."
+menu_pleaseInput_name: "그룹원의 이름을 입력해 주세요."
+menu_pleaseInput_GitHubID: "조회하고자 하는 사람의 id를 입력하세요."
+menu_pleaseInput_date: "날짜를 입력하세요. yyyyMMdd 형태로 입력하셔야 합니다."
+menu_pleaseInput_EngLang: "한글로 번역할 영어 문장을 입력하세요."
+menu_pleaseInput_MainLang: "영문으로 번역할 한글 내용을 입력하세요."
+
+# Modal
+modal_inputMemberName: "그룹원명 입력"
+modal_inputMemberName_description: "그룹원 이름"
+modal_inputGitHubID: "GitHub 아이디 입력"
+modal_maxLen10: "최대 10글자"
+modal_maxLen20: "최대 20글자"
+modal_inputTheQuestion: "질문 입력"
+modal_inputTheQuestion_description: "하고 싶은 질문"
+modal_inputTheQuestion_placeholder: "최대 300글자. 글자수 제한 없이 하려면 이 버튼 메뉴를 통하지 말고 채팅으로 직접 \"잔디야 [질문내용]\"이라고 타이핑해 주세요."
+modal_inputTheDate: "날짜 입력"
+modal_inputTheDate_description: "조회할 날짜"
+modal_inputTheDate_placeholder: "yyyyMMdd 형식"
+modal_inputTheMainLang_description: "한국 문장"
+modal_inputTheEnglish_description: "영어 문장"
+modal_inputTheEnglish: "한국어로 번역할 내용 입력"
+modal_inputTheMainLang: "영어로 번역할 내용 입력"
+modal_maybeLongerBeOk: "조금 길어도 괜찮을지도..?"
