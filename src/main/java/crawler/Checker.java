@@ -125,8 +125,8 @@ public class Checker {
 			return result.formatted(list[0], date_notice, list[1]);
 		} catch(Exception e) {
 			return "%s\n```md\n%s```".formatted(
-					pr.l("checker_getDidCommittedToday_result_fail_title"),
-					pr.l("checker_getDidCommittedToday_result_fail_md")
+					pr.l("err_failedToGetInfo"),
+					pr.l("checker_getDidCommittedToday_result_fail_description")
 			);
 		}
 
@@ -164,8 +164,8 @@ public class Checker {
 			String todayStr = CommonUtils.sdf_thin.format(todayCalendar.getTime());
 			if(todayStr.equals(date)) {
 				return "%s\n```md\n%s```".formatted(
-						pr.l("checker_getDidCommittedToday_result_fail_title"),
-						pr.l("checker_getDidCommittedToday_result_fail_md"));
+						pr.l("err_failedToGetInfo"),
+						pr.l("checker_getDidCommittedToday_result_fail_description"));
 			} else {
 				throw new Exception();
 			}

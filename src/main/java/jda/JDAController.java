@@ -80,7 +80,7 @@ public class JDAController extends ListenerAdapter {
 
 		// Set props
 		instance.CMD_ME = pr.l("me");
-		instance.CMD_JANDIYA = pr.l("cmdName_heyJandi");
+		instance.CMD_JANDIYA = pr.l("commandExecutionKeyword");
 		instance.CMD_NAME = pr.l("info");
 		instance.CMD_ID = "id";
 		instance.CMD_LIST_YESTERDAY_SUCCEED = pr.l("yesterday");
