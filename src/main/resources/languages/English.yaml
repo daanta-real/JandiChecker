@@ -1,6 +1,6 @@
 # Common
 appName: "JandiChecker"
-commandExecutionKeyword: "hey jandi"
+commandExecutionKeyword: "heyjandi"
 icon: "icon"
 font: "font"
 
@@ -38,9 +38,9 @@ err_noCommitMapInGitHubProfile: "Failed to get info because there is no commit i
 err_failedToGetInfo: "Failed to get info."
 err_occurred: "An error occurred."
 pressTheEnterKey: "Hit the enter key."
-tip_howToGetLongAnswer: "Asking a question like \"hey jandi bla bla...\" and you can get a longer answer."
+tip_howToGetLongAnswer: "Asking a question like \"heyjandi bla bla...\" and you can get a longer answer."
 
-appInfo: |
+appInfo1: |
   _**I will find people who succeed committing every night.**_
   
   # What is Jandi and JandiChecker?
@@ -49,12 +49,12 @@ appInfo: |
   # How to use JandiChecker
   The JandiChecker command can be called in three ways.
   1. Enter '/' (slash) in the chat window and the available commands are displayed as a slash menu. After selecting/typing the one you want, and enter the option if additional options are required.
-  2. Type 'Hey Jandi' in the chat window and the available commands are displayed as a button menu. After pressing the menu button one you want, and enter the option if additional options are required.
-  3. Just type 'Hey Jandi [question content]', you can ask the AI directly without calling the menu.
+  2. Type 'HeyJandi' in the chat window and the available commands are displayed as a button menu. After pressing the menu button one you want, and enter the option if additional options are required.
+  3. Just type 'HeyJandi [question content]', you can ask the AI directly without calling the menu.
 
   # Detailed introduction to each command 
     /me: Prints my commit info. You need to belong to a group member to run the command.
-    /hey jandi: Ask the ChatGPT AI to answer common questions and get answers. You can enter your questions in Korean.
+    /heyjandi: Ask the ChatGPT AI to answer common questions and get answers. You can enter your questions in Korean.
     /info [name]: Displays the general grass information of a specific group member. You can enter both your first and last name, or just your first name.
     /id [ID]: Outputs the general grass information of a specific Github ID.
     /yesterday: Prints a list of group members who succeeded in planting grass yesterday.
@@ -63,6 +63,8 @@ appInfo: |
     /date [yyyyMMdd]: Print a list of people who planted grass on a specific date. You can search for dates before the current date.
     /about: Introducing this bot.
 
+
+appInfo2: |
   # tips
   When asking AI questions, be as specific and detailed as possible.
   The more precisely you define your question, the more precise your answer will be.
@@ -156,7 +158,7 @@ modal_maxLen10: "up to 10 characters"
 modal_maxLen20: "up to 20 characters"
 modal_inputTheQuestion: "Enter your question"
 modal_inputTheQuestion_description: "Question you want to ask"
-modal_inputTheQuestion_placeholder: "Up to 300 characters. If you want to limit the number of characters, please type \"Hey Jandi [question content]\" directly into the chat instead of going through this button menu."
+modal_inputTheQuestion_placeholder: "Up to 300 characters. If you want to limit the number of characters, please type \"HeyJandi [question content]\" directly into the chat instead of going through this button menu."
 modal_inputTheDate: "Enter the date"
 modal_inputTheDate_description: "Date to look up"
 modal_inputTheDate_placeholder: "yyyyMMdd format"

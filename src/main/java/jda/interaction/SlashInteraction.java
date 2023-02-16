@@ -44,39 +44,50 @@ public class SlashInteraction {
 
         // Make result
         String result;
-        try {
-            if(StringUtils.equals(cmd, JDAController.instance.getCmdMe())) {
-                result = CmdService.getJandiMapStringOfMine(event.getUser()); // Get my Commit map info
-            } else if(StringUtils.equals(cmd, JDAController.instance.getCmdJandiya())) {
-                result = makeChatAnswer(event, option); // The ChatGPT answers for general questions
-            } else if(StringUtils.equals(cmd, JDAController.instance.getCmdName())) {
-                result = CmdService.getJandiMapStringByName(option); // Show the total commit info of the member by the specific name
-            } else if(StringUtils.equals(cmd, JDAController.instance.getCmdId())) {
-                result = CmdService.getJandiMapStringById(option); // Show the total commit info of the member by the GitHub ID
-            } else if(StringUtils.equals(cmd, JDAController.instance.getCmdListYesterdayFail())) {
-                result = CmdService.getDidCommitStringYesterday(); // Show the member list succeed to commit yesterday
-            } else if(StringUtils.equals(cmd, JDAController.instance.getCmdListYesterdayFail())) {
-                result = CmdService.getNotCommittedStringYesterday(); // Show the member list failed to commit yesterday
-            } else if(StringUtils.equals(cmd, JDAController.instance.getCmdListTodaySucceed())) {
-                result = CmdService.getDidCommitStringToday(); // Show the member list succeed to commit today
-            } else if(StringUtils.equals(cmd, JDAController.instance.getCmdListByDate())) {
-                result = CmdService.getDidCommitStringSomeday(option); // Show the member list succeed to commit in specific day
-            } else if(StringUtils.equals(cmd, JDAController.instance.getCmdTranslateEnToMain())) {
-                result = getTranslatedString_EN_to_MAIN(event, option); // English → Main language translation
-            } else if(StringUtils.equals(cmd, JDAController.instance.getCmdTranslateMainToEn())) {
-                result = getTranslatedString_MAIN_to_EN(event, option); // Main language → English translation
-            } else if(StringUtils.equals(cmd, JDAController.instance.getCmdAbout())) {
-                result = pr.getInformation(); // Introduce of JandiChecker
-            } else {
-                throw new Exception();
-            }
-        } catch (Exception e) {
-            result = pr.l("err_failedToGetInfo");
-        }
+        if(StringUtils.equals(cmd, JDAController.instance.getCmdAbout())) {
 
-        // Send
-        result = JDAMsgService.msgTrim(result);
-        event.getHook().sendMessage(result).queue();
+            // Introduce of JandiChecker (1/2)
+            result = pr.getInformation1();
+            event.getHook().sendMessage(result).queue();
+
+            // Introduce of JandiChecker (2/2)
+            result = pr.getInformation2();
+            event.getHook().sendMessage(result).queue();
+
+        } else {
+            try {
+                if(StringUtils.equals(cmd, JDAController.instance.getCmdMe())) {
+                    result = CmdService.getJandiMapStringOfMine(event.getUser()); // Get my Commit map info
+                } else if(StringUtils.equals(cmd, JDAController.instance.getCmdJandiya())) {
+                    result = makeChatAnswer(event, option); // The ChatGPT answers for general questions
+                } else if(StringUtils.equals(cmd, JDAController.instance.getCmdName())) {
+                    result = CmdService.getJandiMapStringByName(option); // Show the total commit info of the member by the specific name
+                } else if(StringUtils.equals(cmd, JDAController.instance.getCmdId())) {
+                    result = CmdService.getJandiMapStringById(option); // Show the total commit info of the member by the GitHub ID
+                } else if(StringUtils.equals(cmd, JDAController.instance.getCmdListYesterdayFail())) {
+                    result = CmdService.getDidCommitStringYesterday(); // Show the member list succeed to commit yesterday
+                } else if(StringUtils.equals(cmd, JDAController.instance.getCmdListYesterdayFail())) {
+                    result = CmdService.getNotCommittedStringYesterday(); // Show the member list failed to commit yesterday
+                } else if(StringUtils.equals(cmd, JDAController.instance.getCmdListTodaySucceed())) {
+                    result = CmdService.getDidCommitStringToday(); // Show the member list succeed to commit today
+                } else if(StringUtils.equals(cmd, JDAController.instance.getCmdListByDate())) {
+                    result = CmdService.getDidCommitStringSomeday(option); // Show the member list succeed to commit in specific day
+                } else if(StringUtils.equals(cmd, JDAController.instance.getCmdTranslateEnToMain())) {
+                    result = getTranslatedString_EN_to_MAIN(event, option); // English → Main language translation
+                } else if(StringUtils.equals(cmd, JDAController.instance.getCmdTranslateMainToEn())) {
+                    result = getTranslatedString_MAIN_to_EN(event, option); // Main language → English translation
+                } else {
+                    throw new Exception();
+                }
+            } catch (Exception e) {
+                result = pr.l("err_failedToGetInfo");
+            }
+
+            // Send
+            result = JDAMsgService.msgTrim(result);
+            event.getHook().sendMessage(result).queue();
+
+        }
 
     }
 

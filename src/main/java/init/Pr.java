@@ -17,7 +17,7 @@ public class Pr {
     private String version;
     private String build;
     private String language;
-    private String information;
+    private String information1, information2;
     private String cronSchedule;
     private String cronTargetChannelID;
     private String token_JDA;

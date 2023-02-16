@@ -55,10 +55,15 @@ public class Initializer {
 
 		// 4. Load app info message
 		// Set info String
-		pr.setInformation("""
+		pr.setInformation1("""
 			```md
 			%s```
-			""".formatted(pr.l("appInfo"))
+			""".formatted(pr.l("appInfo1"))
+				.formatted(pr.getVersion(), pr.getBuild()));
+		pr.setInformation2("""
+			```md
+			%s```
+			""".formatted(pr.l("appInfo2"))
 				.formatted(pr.getVersion(), pr.getBuild()));
 		// Finished
 		log.info("<<< CONFIGURATION 6. CONFIGURATION FINISHED >>>");
