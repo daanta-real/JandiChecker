@@ -144,7 +144,7 @@ menu_desc_MainToEN: ""
 menu_pleaseInput_question: "Please enter your question."
 menu_pleaseInput_name: "Please enter the name of the group member."
 menu_pleaseInput_GitHubID: "Enter the ID of the person you want to search."
-menu_pleaseInput_date: "Please enter a date. It must be entered in the format yyyyMMdd."
+menu_pleaseInput_date: "Please enter a date. The day must be entered in the format yyyyMMdd and only be in recent 1 year."
 menu_pleaseInput_EngLang: ""
 menu_pleaseInput_MainLang: ""
 

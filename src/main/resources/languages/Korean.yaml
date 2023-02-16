@@ -143,7 +143,7 @@ menu_desc_MainToEN: "한글 문장을 영어로 번역합니다."
 menu_pleaseInput_question: "질문을 입력해 주세요."
 menu_pleaseInput_name: "그룹원의 이름을 입력해 주세요."
 menu_pleaseInput_GitHubID: "조회하고자 하는 사람의 id를 입력하세요."
-menu_pleaseInput_date: "날짜를 입력하세요. yyyyMMdd 형태로 입력하셔야 합니다."
+menu_pleaseInput_date: "날짜를 입력하세요. 1년 이내의 날짜여야 하며 yyyyMMdd 형태로 입력하셔야 합니다."
 menu_pleaseInput_EngLang: "한글로 번역할 영어 문장을 입력하세요."
 menu_pleaseInput_MainLang: "영문으로 번역할 한글 내용을 입력하세요."
 
