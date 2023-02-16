@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.Map;
 
-import static init.Initializer.pr;
+import static init.Pr.pr;
 
 // JandiChecker's actual service execution from the user's order starts here.
 @Slf4j

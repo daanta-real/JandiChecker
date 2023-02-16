@@ -5,7 +5,7 @@ import jda.JDAMsgService;
 import jda.menu.ButtonMenu;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
-import static init.Initializer.pr;
+import static init.Pr.pr;
 
 // Listen the messages and take the action in response
 public class MessageInteraction {

@@ -8,7 +8,7 @@ import org.quartz.JobExecutionContext;
 import cmd.CmdService;
 import jda.JDAMsgService;
 
-import static init.Initializer.pr;
+import static init.Pr.pr;
 
 // JOB instance actually contains the codes for the job
 @Slf4j

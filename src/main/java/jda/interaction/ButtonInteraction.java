@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import org.apache.commons.lang3.StringUtils;
 
-import static init.Initializer.pr;
+import static init.Pr.pr;
 
 @Slf4j
 public class ButtonInteraction {

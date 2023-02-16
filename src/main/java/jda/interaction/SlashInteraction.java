@@ -13,7 +13,7 @@ import translate.TranslationService;
 
 import java.util.Objects;
 
-import static init.Initializer.pr;
+import static init.Pr.pr;
 
 // All the execution methods about command inputs
 @Slf4j

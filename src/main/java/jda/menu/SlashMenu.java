@@ -9,7 +9,7 @@ import translate.TranslationService;
 import java.util.ArrayList;
 import java.util.List;
 
-import static init.Initializer.pr;
+import static init.Pr.pr;
 
 public class SlashMenu {
 

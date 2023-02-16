@@ -8,7 +8,7 @@ import utils.CommonUtils;
 import java.nio.file.Paths;
 import java.util.Map;
 
-// The class handling all properties
+// The class holding and handling all the properties
 @Slf4j
 @Data
 public class Pr {
@@ -26,7 +26,8 @@ public class Pr {
     private Map<String, String> translation;
     private Map<String, Map<String, String>> members;
 
-    public Pr() {
+    public static final Pr pr = new Pr();
+    private Pr() {
         path = Paths.get("").toAbsolutePath().toString();
     }
 

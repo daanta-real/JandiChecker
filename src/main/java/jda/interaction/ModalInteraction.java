@@ -11,7 +11,7 @@ import translate.TranslationService;
 
 import java.util.Objects;
 
-import static init.Initializer.pr;
+import static init.Pr.pr;
 
 // All the execution methods about modal menus(making and showing UI, getting users' input, interactions after it..)
 @Slf4j

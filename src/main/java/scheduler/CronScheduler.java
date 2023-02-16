@@ -1,6 +1,6 @@
 package scheduler;
 
-import static init.Initializer.pr;
+import static init.Pr.pr;
 import static org.quartz.CronScheduleBuilder.cronSchedule;
 import static org.quartz.JobBuilder.newJob;
 import static org.quartz.TriggerBuilder.newTrigger;

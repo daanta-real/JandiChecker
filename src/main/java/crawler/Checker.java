@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import utils.CommonUtils;
 
-import static init.Initializer.pr;
+import static init.Pr.pr;
 
 // Check and get the list of the members who committed or not in specific day
 @Slf4j

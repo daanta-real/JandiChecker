@@ -8,25 +8,15 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Objects;
 
-import static init.Initializer.pr;
+import static init.Pr.pr;
 
 @Slf4j
 public final class UIMain extends JFrame {
 
     // 1. Fields
-    private static final UIMain INSTANCE;
+    private static UIMain uiMain;
     private static final JTextArea TEXTAREA = new JTextArea();
 
-    static {
-        try {
-            INSTANCE = new UIMain();
-        } catch (Exception e) {
-            log.info("UIMain - {} - {}",
-                    pr.l("instance"),
-                    pr.l("error_occurred"));
-            throw new RuntimeException(e);
-        }
-    }
 
     private final JPanel WINDOW;
     private final Image IMAGE;
@@ -86,31 +76,40 @@ public final class UIMain extends JFrame {
     }
 
     // 3. Initializer
-    public void init() {
+    public static void init() {
+
+        try {
+            uiMain = new UIMain();
+        } catch (Exception e) {
+            log.info("UIMain - {} - {}",
+                    pr.l("instance"),
+                    pr.l("error_occurred"));
+            throw new RuntimeException(e);
+        }
 
         try {
 
             // Font
-            setFont(FONT);
-            add(WINDOW);
+            uiMain.setFont(uiMain.FONT);
+            uiMain.add(uiMain.WINDOW);
 
             // Icon
-            setIconImage(IMAGE);
+            uiMain.setIconImage(uiMain.IMAGE);
 
             // Background Color
-            setBackground(Color.DARK_GRAY); // This Content area
+            uiMain.setBackground(Color.DARK_GRAY); // This Content area
 
             // Layout
-            setLayout(new BorderLayout());
-            setSize(1400, 800);
+            uiMain.setLayout(new BorderLayout());
+            uiMain.setSize(1400, 800);
 
             // Top box (= text box)
             TEXTAREA.setEditable(false);
             TEXTAREA.setForeground(new Color(169, 183, 198));
             TEXTAREA.setBackground(new Color(43, 43, 43));
-            TEXTAREA.setFont(FONT);
+            TEXTAREA.setFont(uiMain.FONT);
             TEXTAREA.setLineWrap(true);
-            add(TEXTAREA, BorderLayout.CENTER);
+            uiMain.add(TEXTAREA, BorderLayout.CENTER);
 
             // Scrollbar
             JScrollPane scroll = new JScrollPane(
@@ -118,22 +117,22 @@ public final class UIMain extends JFrame {
                     JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
                     JScrollPane.HORIZONTAL_SCROLLBAR_NEVER
             );
-            add(scroll);
+            uiMain.add(scroll);
 
             // Show
-            setVisible(true);
+            uiMain.setVisible(true);
 
             // Reserve exit button in main window
-            setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            uiMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
             // Initialize ui Menues
             UIMenu ui = UIMenu.getInstance();
             ui.initTray();
 
             // Reserve making tray action for clicking minimize button
-            addWindowStateListener(e -> {
+            uiMain.addWindowStateListener(e -> {
                 if ((e.getNewState() & Frame.ICONIFIED) == Frame.ICONIFIED){
-                    runGoTray();
+                    uiMain.runGoTray();
                 }
             });
 
@@ -147,8 +146,8 @@ public final class UIMain extends JFrame {
     }
 
     // 4. Getter
-    public static UIMain getInstance() {
-        return INSTANCE;
+    public static UIMain getUiMain() {
+        return uiMain;
     }
     public Image getImage() {
         return IMAGE;

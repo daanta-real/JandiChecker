@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import static init.Initializer.pr;
+import static init.Pr.pr;
 
 @Slf4j
 public class JDAController extends ListenerAdapter {

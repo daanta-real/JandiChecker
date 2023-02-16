@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import translate.TranslationService;
 import utils.CommonUtils;
 
-import static init.Initializer.pr;
+import static init.Pr.pr;
 
 // ChatGPT API related services
 @Slf4j

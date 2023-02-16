@@ -9,7 +9,7 @@ import utils.CommonUtils;
 
 import java.io.ByteArrayInputStream;
 
-import static init.Initializer.pr;
+import static init.Pr.pr;
 
 @Slf4j
 public class TranslationService {

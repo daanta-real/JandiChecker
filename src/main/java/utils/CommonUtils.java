@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 
-import static init.Initializer.pr;
+import static init.Pr.pr;
 
 @Slf4j
 public class CommonUtils {

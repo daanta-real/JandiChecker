@@ -8,7 +8,7 @@ import org.junit.Test;
 
 import java.util.Map;
 
-import static init.Initializer.pr;
+import static init.Pr.pr;
 
 @Slf4j
 public class D230116_C01_MemberNameTest {

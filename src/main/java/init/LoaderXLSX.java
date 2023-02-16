@@ -13,7 +13,7 @@ import java.io.FileInputStream;
 import java.util.HashMap;
 import java.util.Map;
 
-import static init.Initializer.pr;
+import static init.Pr.pr;
 
 @Slf4j
 public class LoaderXLSX {

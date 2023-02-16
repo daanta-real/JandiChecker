@@ -7,7 +7,7 @@ import scheduler.CronScheduler;
 
 import init.Initializer;
 
-import static init.Initializer.pr;
+import static init.Pr.pr;
 import static utils.CommonUtils.waitForEnter;
 
 @Slf4j

@@ -5,7 +5,7 @@ import utils.CommonUtils;
 
 import java.util.*;
 
-import static init.Initializer.pr;
+import static init.Pr.pr;
 
 // Core codes about GitHub scrapping
 @Slf4j

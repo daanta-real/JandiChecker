@@ -4,15 +4,14 @@ import lombok.extern.slf4j.Slf4j;
 import translate.TranslationService;
 import ui.UIMain;
 
-// This is used to loading and holding JandiChecker's all the properties like words, members and UI, etc.
+import static init.Pr.pr;
+
+// This is used to loading JandiChecker's all the properties like words, members and UI, etc.
 @Slf4j
 public class Initializer {
 
-	// 1. Fields
-	public static Pr pr = new Pr();
 
 	// 2. Methods
-
 	public static void ready(boolean needSwingWindow) throws Exception {
 
 		// Start
@@ -41,7 +40,7 @@ public class Initializer {
 		// 4. Load all UIs including Swing window instance, icon, tray, etc.
 		if(needSwingWindow) {
 			log.info("<<< CONFIGURATION 4. LOADING SWING WINDOW CTRL >>>");
-			UIMain.getInstance().init();
+			UIMain.init();
 		} else {
 			log.info("<<< CONFIGURATION 4. 'NOT' LOADING SWING WINDOW CTRL >>>");
 		}

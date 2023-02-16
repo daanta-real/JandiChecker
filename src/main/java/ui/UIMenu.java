@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import static init.Initializer.pr;
+import static init.Pr.pr;
 
 @Slf4j
 public class UIMenu {
@@ -47,8 +47,8 @@ public class UIMenu {
             MENU_EXIT.setLabel("Exit");
     
             // listeners
-            MENU_SHOW_WINDOW.addActionListener(e -> UIMain.getInstance().runGoActivate());
-            MENU_EXIT.addActionListener(e -> UIMain.getInstance().runExit());
+            MENU_SHOW_WINDOW.addActionListener(e -> UIMain.getUiMain().runGoActivate());
+            MENU_EXIT.addActionListener(e -> UIMain.getUiMain().runExit());
     
             // add all menues to popup
             POPUP.add(MENU_SHOW_WINDOW);
@@ -75,7 +75,7 @@ public class UIMenu {
     // Initialize tray
     public void initTray() {
 
-        UIMain uiMain = UIMain.getInstance();
+        UIMain uiMain = UIMain.getUiMain();
 
         try {
 
