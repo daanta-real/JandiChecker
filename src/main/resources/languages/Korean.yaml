@@ -71,19 +71,19 @@ appInfo: |
   * Stacks used: Java 17, Gradle, IntelliJ, JDA, Quartz, ChatGPT API, Google Cloud API(for translation), Swing, JUnit5, Logback
   * Have taking an effort to comply with TDD.
   
-  # Developer's informaiton
+  # Developer's information
   * Developed by 단타(박준성) / Daanta(Junsung Park)
   * GitHub: http://github.com/daanta-real
   * Blog  : http://blog.naver.com/daanta
   * e-mail: daanta@naver.com
 
-main_description: Github 잔디 점검 프로그램
+main_description: "Github 잔디 점검 프로그램"
 
 # ChatService and Chat
 chat_query: "접수된 원본 질문: <<<{}>>> (길이 {})"
 chat_response: "응답 수신: <<<{}>>>"
 chat_theQueryByName: "그룹원 {}님의 질문: {}"
-chat_questionByName: "%s님의 질문";
+chat_questionByName: "%s님의 질문"
 chat_theAnswer: "답변: {}"
 chat_GPTSays: "ChatGPT AI님 가라사대..."
 

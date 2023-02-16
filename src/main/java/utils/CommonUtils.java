@@ -99,10 +99,25 @@ public class CommonUtils {
 
     // Load a yaml file and return the prop
     public static HashMap<String, String> loadYaml(String filePath) throws Exception {
+
         ClassLoader loader = Initializer.class.getClassLoader();
         InputStream is = loader.getResourceAsStream(filePath);
+        if(is != null) {
+            log.debug("Found the language file.");
+        }
+
         HashMap<?, ?> loadedProps = new ObjectMapper(new YAMLFactory()).readValue(is, HashMap.class);
-        return convertHashMap(loadedProps);
+        if (loadedProps.size() > 0) {
+            log.debug("Read the language Map.");
+        }
+
+        HashMap<String, String> resultMap = convertHashMap(loadedProps);
+        if(resultMap.size() > 0) {
+            log.debug("resultMap = {}", resultMap);
+        }
+
+        return resultMap;
+
     }
 
     // HashMap<?, ?> to HashMap<String, Object>

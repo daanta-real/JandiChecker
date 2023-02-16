@@ -72,19 +72,19 @@ appInfo: |
   * Stacks used: Java 17, Gradle, IntelliJ, JDA, Quartz, ChatGPT API, Google Cloud API (for translation), Swing, JUnit5, Logback
   * Have taking an effort to comply with TDD.
   
-  # Developer's informaiton
+  # Developer's information
   * Developed by 단타(박준성) / Daanta(Junsung Park)
   * GitHub: http://github.com/daanta-real
   * Blog  : http://blog.naver.com/daanta
   * e-mail: daanta@naver.com
 
-main_description: Github commit checker
+main_description: "Github commit checker"
 
 # ChatService and Chat
 chat_query: "Original question received: <<<{}>>> (length {})"
 chat_response: "Answer received: <<<{}>>>"
 chat_theQueryByName: "Member {}'s question: {}"
-chat_questionByName: "%s's question";
+chat_questionByName: "%s's question"
 chat_theAnswer: "Answer: {}"
 chat_GPTSays: "ChatGPT AI says..."
 

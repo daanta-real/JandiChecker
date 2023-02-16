@@ -1,6 +1,7 @@
 package init;
 
 import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import utils.CommonUtils;
 
@@ -8,6 +9,7 @@ import java.nio.file.Paths;
 import java.util.Map;
 
 // The class handling all properties
+@Slf4j
 @Data
 public class Pr {
 
@@ -39,6 +41,7 @@ public class Pr {
 
     public void loadLanguageInfoes() throws Exception {
         String languageSettingsPath = "languages/" + language + ".yaml";
+        log.debug("Loading language files..: {}", languageSettingsPath);
         translation = CommonUtils.loadYaml(languageSettingsPath); // Language props loaded
     }
 

@@ -50,6 +50,7 @@ public class Main {
 			log.info("");
 
 		} catch(Exception e) {
+			e.printStackTrace();
 			waitForEnter();
 			System.exit(-1);
 			// Automatically return - exit
