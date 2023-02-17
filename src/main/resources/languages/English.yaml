@@ -53,7 +53,7 @@ appInfo1: |
   3. Just type 'HeyJandi [question content]', you can ask the AI directly without calling the menu.
 
   # Detailed introduction to each command 
-    /me: Prints my commit info. You need to belong to a group member to run the command.
+    /me: Shows my commit info. You need to registered as a group member to run the command.
     /heyjandi: Ask the ChatGPT AI to answer common questions and get answers. You can enter your questions in Korean.
     /info [name]: Displays the general grass information of a specific group member. You can enter both your first and last name, or just your first name.
     /id [ID]: Outputs the general grass information of a specific Github ID.
@@ -62,7 +62,6 @@ appInfo1: |
     /today: Prints a list of people who passed planting today. If today's commit information is not public, you may not be able to view it.
     /date [yyyyMMdd]: Print a list of people who planted grass on a specific date. You can search for dates before the current date.
     /about: Introducing this bot.
-
 
 appInfo2: |
   # tips
@@ -137,7 +136,7 @@ menu_desc_heyJandi: "Ask a question to ChatGPT AI, a friend of Jandi."
 menu_desc_listYesterdaySucceed: "Check the list of group members who succeeded in committing yesterday."
 menu_desc_listTodaySucceed: "Check out the list of group members who were successful in committing today."
 menu_desc_mapByName: "Enter the name of a group member to search the commit info of a group member."
-menu_desc_mapByID: "Search commit info of a specific ID. People who are not members of the group are also OK."
+menu_desc_mapByID: "Search commit info of a specific ID. It's also okay for people who are not members of the group."
 menu_desc_listYesterdayFail: "Check the list of group members who forgot to commit yesterday."
 menu_desc_listByDate: "View a list of group members who succeeded in committing on a specific day."
 menu_desc_about: "Prints an introduction and help for this bot."
