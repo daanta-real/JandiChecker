@@ -21,6 +21,7 @@ public class CronJob implements Job {
 	public void execute(JobExecutionContext context) {
 		try {
 			String yesterdayCommitedString = CmdService.getDidCommitStringYesterday();
+			log.info("Collected the string of yesterday's commit. total length: {}", yesterdayCommitedString.length());
 			JDAMsgService.send(pr.l("cronTargetChannelID"), yesterdayCommitedString);
 		} catch (Exception e) {
 			JDAMsgService.send(pr.l("cronTargetChannelID"), pr.l("err_failedToGetInfo"));

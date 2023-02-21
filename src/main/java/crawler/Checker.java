@@ -2,9 +2,7 @@ package crawler;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -49,7 +47,7 @@ public class Checker {
 	// Returns raw String array, not for the chat
 	// * if findNegative is true then only find DID list
 	// * if findNegative is true then only find NOT DID list
-	public static String[] getDidCommitListByDay(String day, boolean findNegative) throws Exception {
+	public static String[] getCommitListByDay(String day, boolean findNegative) throws Exception {
 
 		log.info(
 				"Check if he '{}' of the day: {}",
@@ -59,22 +57,32 @@ public class Checker {
 
 		// result values
 		StringBuilder sb = new StringBuilder(); // name list (one name by one line)
-		int count = 0; // person totalCount of DID or DID NOT
-		for(Map.Entry<String, Map<String, String>> entry: pr.getMembers().entrySet()) {
-			Map<String, String> memberProps = entry.getValue();
-			String name = entry.getKey();
+
+		Map<String, Map<String, String>> members = pr.getMembers();
+
+		List<String> keyList = new ArrayList<>(members.keySet());
+		int countTotal = keyList.size();
+		int countCase = 0;
+
+		for(int i = 0; i < keyList.size(); i++) {
+
+			String name = keyList.get(i);
+			Map<String, String> memberProps = members.get(name);
+
 			String gitHubID = memberProps.get("gitHubID");
 			boolean hasCommit = getGitHubDidCommitByDay(gitHubID, day);
+			log.info("checking {} / {}, in case: {})", i, countTotal, countCase);
 			if(
 				(!findNegative && hasCommit)    // find only DID committed     and he DID commit
 				|| (findNegative && !hasCommit) // find only DID NOT committed and he DID NOT commit
 				) {
-					count++;
+					countCase++;
 					sb.append(name);
 					sb.append("\n");
 			}
 		}
-		return new String[] { String.valueOf(count), sb.toString() };
+		return new String[] { String.valueOf(countCase), sb.toString() };
+
 	}
 
 	// Check the all members and returns the list who DID NOT commit yesterday
@@ -86,7 +94,7 @@ public class Checker {
 		c.add(Calendar.DATE, -1);
 		String day = CommonUtils.sdf_thin.format(c.getTime());
 
-		String[] list = getDidCommitListByDay(day, true);
+		String[] list = getCommitListByDay(day, true);
 		String date_notice = CommonUtils.sdf_dayweek.format(c.getTime());
 		String result = "```md\n[" + pr.l("checker_getNotCommittedYesterday_result") + "]: %s\n%s\n```";
 		return result.formatted(list[0], date_notice, list[1]);
@@ -102,7 +110,7 @@ public class Checker {
 		c.add(Calendar.DATE, -1);
 		String day = CommonUtils.sdf_thin.format(c.getTime());
 
-		String[] list = getDidCommitListByDay(day, false);
+		String[] list = getCommitListByDay(day, false);
 		String date_notice = CommonUtils.sdf_dayweek.format(c.getTime());
 		String result = "```md\n[" + pr.l("checker_getDidCommitYesterday_result") + "]: %s\n%s\n```";
 		return result.formatted(list[0], date_notice, list[1]);
@@ -120,7 +128,7 @@ public class Checker {
 			String day = CommonUtils.sdf_thin.format(c.getTime());
 
 			String date_notice = CommonUtils.sdf_dayweek.format(new Date());
-			String[] list = getDidCommitListByDay(day, false);
+			String[] list = getCommitListByDay(day, false);
 			String result = "```md\n[" + pr.l("checker_getDidCommittedToday_result_success") + "]: %s\n%s\n```";
 			return result.formatted(list[0], date_notice, list[1]);
 		} catch(Exception e) {
@@ -155,7 +163,7 @@ public class Checker {
 		String day = CommonUtils.sdf_thin.format(c.getTime());
 
 		try {
-			String[] list = getDidCommitListByDay(day, false);
+			String[] list = getCommitListByDay(day, false);
 			String day_notice = CommonUtils.sdf_dayweek.format(c.getTime());
 			String result = "```md\n[" + pr.l("checker_getDidCommittedSomeday") + "]: %s\n%s```";
 			return result.formatted(day_notice, list[0], day_notice, list[1]);

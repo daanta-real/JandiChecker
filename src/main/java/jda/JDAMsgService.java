@@ -26,8 +26,10 @@ public class JDAMsgService {
 
 	// Send the message to specific text channel ID
 	public static void send(String channelId, String msg) {
+		log.info("MSG SEND START(Channel ID: {})", channelId);
+		log.info("Sending the message to channelID {} (channel exists: {})", channelId, StringUtils.isNotBlank(channelId));
 		TextChannel channel = JDAController.instance.getJda().getTextChannelById(channelId);
-		log.info("Sending the message to channelId {} (channel exists: {})", channelId, channel != null);
+		log.info("Channel exists: {}", channel != null);
 		if (channel != null) {
 			msg = msgTrim(msg);
 			msg = CommonUtils.unescapeHTMLEntity(msg);
