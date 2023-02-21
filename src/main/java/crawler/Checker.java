@@ -62,7 +62,7 @@ public class Checker {
 
 		List<String> keyList = new ArrayList<>(members.keySet());
 		int countTotal = keyList.size();
-		int countCase = 0;
+		int countMeet = 0;
 
 		for(int i = 0; i < keyList.size(); i++) {
 
@@ -71,17 +71,17 @@ public class Checker {
 
 			String gitHubID = memberProps.get("gitHubID");
 			boolean hasCommit = getGitHubDidCommitByDay(gitHubID, day);
-			log.info("checking {} / {}, in case: {})", i, countTotal, countCase);
+			log.info("checking {} / {} (case met: {})", i, countTotal, countMeet);
 			if(
 				(!findNegative && hasCommit)    // find only DID committed     and he DID commit
 				|| (findNegative && !hasCommit) // find only DID NOT committed and he DID NOT commit
 				) {
-					countCase++;
+					countMeet++;
 					sb.append(name);
 					sb.append("\n");
 			}
 		}
-		return new String[] { String.valueOf(countCase), sb.toString() };
+		return new String[] { String.valueOf(countMeet), sb.toString() };
 
 	}
 

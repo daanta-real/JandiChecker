@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static init.Pr.pr;
+import static utils.CommonUtils.getPrettyJSON;
 
 @Slf4j
 public class LoaderXLSX {
@@ -63,20 +64,18 @@ public class LoaderXLSX {
     }
 
     private static void getPropsInfo(XSSFSheet sheet) {
-        pr.setVersion(getStringFromAddr(sheet, 2, 6));
-        pr.setBuild(getStringFromAddr(sheet, 3, 6));
-        pr.setLanguage(getStringFromAddr(sheet, 6, 6));
-        pr.setCronSchedule(getStringFromAddr(sheet, 9, 6));
-        pr.setCronTargetChannelID(getStringFromAddr(sheet, 10, 6));
-        pr.setToken_JDA(getStringFromAddr(sheet, 13, 6));
-        pr.setToken_ChatGPT(getStringFromAddr(sheet, 14, 6));
+        pr.setLanguage(getStringFromAddr(sheet, 2, 6));
+        pr.setCronSchedule(getStringFromAddr(sheet, 5, 6));
+        pr.setCronTargetChannelID(getStringFromAddr(sheet, 6, 6));
+        pr.setToken_JDA(getStringFromAddr(sheet, 9, 6));
+        pr.setToken_ChatGPT(getStringFromAddr(sheet, 10, 6));
         StringBuilder sb = new StringBuilder();
-        for(int i = 15; i <= 26; i++) {
+        for(int i = 11; i <= 22; i++) {
             sb.append(getStringFromAddr(sheet, i, 6));
-            if(i != 26) sb.append("\n");
+            if(i != 22) sb.append("\n");
         }
         pr.setToken_GoogleCloud(sb.toString());
-        log.debug("FINISHED PROPS LOADING! {}", pr);
+        log.debug("FINISHED PROPS LOADING!\n\nPROPS:\n{}\n", getPrettyJSON(pr));
     }
 
     public static void loadXLSXSettings() throws Exception {

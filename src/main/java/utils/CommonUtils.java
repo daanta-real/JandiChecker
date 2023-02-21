@@ -3,6 +3,7 @@ package utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.google.gson.GsonBuilder;
 import init.Initializer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.text.StringEscapeUtils;
@@ -129,6 +130,10 @@ public class CommonUtils {
             map.put(keyStr, value);
         }
         return map;
+    }
+
+    public static String getPrettyJSON(Object o) {
+        return new GsonBuilder().setPrettyPrinting().create().toJson(o);
     }
 
 }

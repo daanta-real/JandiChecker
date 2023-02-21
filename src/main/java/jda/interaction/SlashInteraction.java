@@ -64,7 +64,7 @@ public class SlashInteraction {
                     result = CmdService.getJandiMapStringByName(option); // Show the total commit info of the member by the specific name
                 } else if(StringUtils.equals(cmd, JDAController.instance.getCmdId())) {
                     result = CmdService.getJandiMapStringById(option); // Show the total commit info of the member by the GitHub ID
-                } else if(StringUtils.equals(cmd, JDAController.instance.getCmdListYesterdayFail())) {
+                } else if(StringUtils.equals(cmd, JDAController.instance.getCmdListYesterdaySucceed())) {
                     result = CmdService.getDidCommitStringYesterday(); // Show the member list succeed to commit yesterday
                 } else if(StringUtils.equals(cmd, JDAController.instance.getCmdListYesterdayFail())) {
                     result = CmdService.getNotCommittedStringYesterday(); // Show the member list failed to commit yesterday
