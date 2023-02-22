@@ -89,6 +89,8 @@ public class ButtonInteraction {
             // this block won't be executed. (because result is null as default value).
             if (!StringUtils.isEmpty(result)) {
 
+                log.info("RESULT MEESAGE: {}", result);
+
                 // Show result
                 event.getChannel().sendMessage(result).queue();
 

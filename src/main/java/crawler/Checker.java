@@ -165,7 +165,9 @@ public class Checker {
 		try {
 			String[] list = getCommitListByDay(day, false);
 			String day_notice = CommonUtils.sdf_dayweek.format(c.getTime());
-			String result = "```md\n[" + pr.l("checker_getDidCommittedSomeday") + "]: %s\n%s```";
+			String result = "```md" +
+					"[" + pr.l("checker_getDidCommittedSomeday") + "]: %s" +
+					"%s```";
 			return result.formatted(day_notice, list[0], day_notice, list[1]);
 		} catch(Exception e) {
 			Calendar todayCalendar = Calendar.getInstance();

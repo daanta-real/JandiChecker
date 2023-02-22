@@ -130,8 +130,10 @@ public class GithubMap {
 		log.info("Committed rate in 30 days: {}" + perc);
 		result.add(
 				"# %s: %s%s %s%%)".formatted(
-						pr.l("gitHubMap_CommittedInLast30"), count,
-						pr.l("gitHubMap_count"), perc)
+						pr.l("gitHubMap_CommittedInLast30"),
+						count,
+						pr.l("gitHubMap_count"),
+						perc)
 		);
 
 		result.add("# " + pr.l("gitHubMap_CommitMapOfRecent1Year"));
