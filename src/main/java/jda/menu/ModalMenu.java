@@ -25,6 +25,14 @@ public class ModalMenu {
 
         event.getMessage().delete().queue(); // Remove all the menu and the original messages
 
+        System.out.println("id: {}" + id);
+        System.out.println("mainTitle: {}" + mainTitle);
+        System.out.println("labelTitle: {}" + labelTitle);
+        System.out.println("valuePlaceholder: {}" + valuePlaceholder);
+        System.out.println("minLength: {}" + minLength);
+        System.out.println("maxLength: {}" + maxLength);
+        System.out.println("isParagraph: {}" + isParagraph);
+
         TextInput name = TextInput.create("option", pr.l("appName"), style)
                 .setMinLength(minLength)
                 .setMaxLength(maxLength)
@@ -34,7 +42,7 @@ public class ModalMenu {
                 .build();
 
         Modal modal = Modal.create(id , mainTitle)
-                .addActionRows(ActionRow.of(name))
+                .addComponents(ActionRow.of(name))
                 .build();
 
         event.replyModal(modal).queue();

@@ -49,7 +49,7 @@ public class ButtonInteraction {
                     // and the spinner cannot be deleted with no other ways.
                     event.deferEdit().queue();
                     result = CmdService.getJandiMapStringOfMine(event.getUser()); // Get my Commit map info
-                } else if (StringUtils.equals(cmd, JDAController.instance.getCmdJandiya())) {
+                } else if (StringUtils.equals(cmd, JDAController.instance.getCmdHeyJandi())) {
                     ModalMenu.getChatAnswer(event); // The AI answers for general questions
                 } else if (StringUtils.equals(cmd, JDAController.instance.getCmdListYesterdaySucceed())) {
                     event.deferEdit().queue(); // Set defer
@@ -80,6 +80,7 @@ public class ButtonInteraction {
                 }
 
             } catch (Exception e) {
+                e.printStackTrace();
                 result = pr.l("err_failedToGetInfo");
             }
 

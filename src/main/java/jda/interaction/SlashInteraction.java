@@ -14,7 +14,6 @@ import translate.TranslationService;
 import java.util.Objects;
 
 import static init.Pr.pr;
-import static utils.CommonUtils.getPrettyJSON;
 
 // All the execution methods about command inputs
 @Slf4j
@@ -59,7 +58,7 @@ public class SlashInteraction {
             try {
                 if(StringUtils.equals(cmd, JDAController.instance.getCmdMe())) {
                     result = CmdService.getJandiMapStringOfMine(event.getUser()); // Get my Commit map info
-                } else if(StringUtils.equals(cmd, JDAController.instance.getCmdJandiya())) {
+                } else if(StringUtils.equals(cmd, JDAController.instance.getCmdHeyJandi())) {
                     result = makeChatAnswer(event, option); // The ChatGPT answers for general questions
                 } else if(StringUtils.equals(cmd, JDAController.instance.getCmdName())) {
                     result = CmdService.getJandiMapStringByName(option); // Show the total commit info of the member by the specific name

@@ -18,7 +18,7 @@ public class SlashMenu {
         List<CommandData> cmdList = new ArrayList<>();
 
         cmdList.add(Commands.slash(JDAController.instance.getCmdMe(), pr.l("menu_desc_me")));
-        cmdList.add(Commands.slash(JDAController.instance.getCmdJandiya(), pr.l("menu_desc_heyJandi"))
+        cmdList.add(Commands.slash(JDAController.instance.getCmdHeyJandi(), pr.l("menu_desc_heyJandi"))
                 .addOption(OptionType.STRING, "option", pr.l("menu_pleaseInput_question"), true));
 
         cmdList.add(Commands.slash(JDAController.instance.getCmdListYesterdaySucceed(), pr.l("menu_desc_listYesterdaySucceed")));

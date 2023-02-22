@@ -18,7 +18,7 @@ public class ButtonMenu extends ListenerAdapter {
 
     private static final Button[] btn = new Button[] {
         Button.success(JDAController.instance.getCmdMe(), pr.l("menu_me")).withEmoji(Emoji.fromUnicode("📊")),
-        Button.success(JDAController.instance.getCmdJandiya(), pr.l("menu_heyJandi")).withEmoji(Emoji.fromUnicode("\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93")),
+        Button.success(JDAController.instance.getCmdHeyJandi(), pr.l("menu_heyJandi")).withEmoji(Emoji.fromUnicode("\uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93")),
 
         Button.primary(JDAController.instance.getCmdListYesterdaySucceed(), pr.l("menu_listYesterdaySucceed")).withEmoji(Emoji.fromUnicode("\uD83D\uDCAF")),
         Button.primary(JDAController.instance.getCmdListTodaySucceed(), pr.l("menu_listTodaySucceed")).withEmoji(Emoji.fromUnicode("\uD83D\uDCAF")),
