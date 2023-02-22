@@ -29,7 +29,7 @@ public class SlashMenu {
         cmdList.add(Commands.slash(JDAController.instance.getCmdId(), pr.l("menu_desc_mapByID"))
                 .addOption(OptionType.STRING, "option", pr.l("menu_pleaseInput_GitHubID"), true));
 
-        cmdList.add(Commands.slash(JDAController.instance.getCmdListYesterdayFail(), pr.l("menu_desc_listYesterdayFail")));
+        cmdList.add(Commands.slash(JDAController.instance.getCmdListYesterdayFailed(), pr.l("menu_desc_listYesterdayFail")));
         cmdList.add(Commands.slash(JDAController.instance.getCmdListByDate(), pr.l("menu_desc_listByDate"))
                 .addOption(OptionType.STRING, "option", pr.l("menu_pleaseInput_date"), true));
 

@@ -113,9 +113,6 @@ public class CommonUtils {
         }
 
         HashMap<String, String> resultMap = convertHashMap(loadedProps);
-        if(resultMap.size() > 0) {
-            log.debug("resultMap = {}", resultMap);
-        }
 
         return resultMap;
 

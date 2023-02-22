@@ -139,7 +139,7 @@ public class JDAController extends ListenerAdapter {
 		return CMD_LIST_YESTERDAY_SUCCEED;
 	}
 
-	public String getCmdListYesterdayFail() {
+	public String getCmdListYesterdayFailed() {
 		return CMD_LIST_YESTERDAY_FAIL;
 	}
 

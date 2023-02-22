@@ -75,7 +75,7 @@ public class LoaderXLSX {
             if(i != 22) sb.append("\n");
         }
         pr.setToken_GoogleCloud(sb.toString());
-        log.debug("FINISHED PROPS LOADING!\n\nPROPS:\n{}\n", getPrettyJSON(pr));
+        log.debug("FINISHED LOADING PROPS!\n\nPROPS:\n{}\n", getPrettyJSON(pr));
     }
 
     public static void loadXLSXSettings() throws Exception {

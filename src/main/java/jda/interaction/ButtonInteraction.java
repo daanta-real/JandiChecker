@@ -61,7 +61,7 @@ public class ButtonInteraction {
                     ModalMenu.showJandiMapByName(event); // Show the total commit info of the member by the specific name
                 } else if (StringUtils.equals(cmd, JDAController.instance.getCmdId())) {
                     ModalMenu.showJandiMapById(event); // Show the total commit info of the member by the GitHub ID
-                } else if (StringUtils.equals(cmd, JDAController.instance.getCmdListYesterdayFail())) {
+                } else if (StringUtils.equals(cmd, JDAController.instance.getCmdListYesterdayFailed())) {
                     event.deferEdit().queue(); // Set defer
                     result = CmdService.getNotCommittedStringYesterday(); // Show the member list failed to commit yesterday
                 } else if (StringUtils.equals(cmd, JDAController.instance.getCmdListByDate())) {

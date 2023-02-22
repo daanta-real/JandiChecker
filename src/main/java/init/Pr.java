@@ -8,6 +8,8 @@ import utils.CommonUtils;
 import java.nio.file.Paths;
 import java.util.Map;
 
+import static utils.CommonUtils.getPrettyJSON;
+
 // The class holding and handling all the properties
 @Slf4j
 @Data
@@ -42,8 +44,9 @@ public class Pr {
 
     public void loadLanguageInfoes() throws Exception {
         String languageSettingsPath = "languages/" + language + ".yaml";
-        log.debug("Loading language files..: {}", languageSettingsPath);
+        log.info("Loading language files..: {}", languageSettingsPath);
         translation = CommonUtils.loadYaml(languageSettingsPath); // Language props loaded
+        log.info("FINISHED LOADING LANGUAGES!\n\nLANGUAGES:\n{}\n", getPrettyJSON(translation));
     }
 
     public void loadVersionInfoes() throws Exception {

@@ -64,7 +64,6 @@ public class D230115_C01_xlsOpenAgain {
             if(i != 23) sb.append("\n");
         }
         props.put("GoogleCloudToken", sb.toString());
-        log.debug("FINISHED PROPS LOADING! {}", props);
     }
 
     public static void getMembersInfo_new(XSSFSheet sheet) {

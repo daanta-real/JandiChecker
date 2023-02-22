@@ -14,6 +14,7 @@ import translate.TranslationService;
 import java.util.Objects;
 
 import static init.Pr.pr;
+import static utils.CommonUtils.getPrettyJSON;
 
 // All the execution methods about command inputs
 @Slf4j
@@ -66,7 +67,7 @@ public class SlashInteraction {
                     result = CmdService.getJandiMapStringById(option); // Show the total commit info of the member by the GitHub ID
                 } else if(StringUtils.equals(cmd, JDAController.instance.getCmdListYesterdaySucceed())) {
                     result = CmdService.getDidCommitStringYesterday(); // Show the member list succeed to commit yesterday
-                } else if(StringUtils.equals(cmd, JDAController.instance.getCmdListYesterdayFail())) {
+                } else if(StringUtils.equals(cmd, JDAController.instance.getCmdListYesterdayFailed())) {
                     result = CmdService.getNotCommittedStringYesterday(); // Show the member list failed to commit yesterday
                 } else if(StringUtils.equals(cmd, JDAController.instance.getCmdListTodaySucceed())) {
                     result = CmdService.getDidCommitStringToday(); // Show the member list succeed to commit today
