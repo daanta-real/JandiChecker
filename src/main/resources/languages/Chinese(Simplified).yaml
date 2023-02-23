@@ -1,0 +1,170 @@
+# Common
+appName: "ジャンディチェッカー"
+commandExecutionKeyword: "jandi"
+icon: "アイコン"
+font: "フォント"
+
+instance: "インスタンス"
+window: "ウィンドウ"
+tray: "トレイ"
+
+today: "今日"
+yesterday: "昨日"
+date: "日付"
+period: "期間"
+
+request: "リクエスト"
+start: "スタート"
+initialization: "初期化"
+creation: "生成"
+activation: "アクティブ化"
+fin: "完了。"
+exit: "終了"
+
+button: "ボタン"
+slash: "スラッシュ"
+command: "コマンド"
+
+me: "私"
+info: "情報"
+about: "紹介"
+close: "閉じる"
+
+err_incorrectInput: "正確に入力してください。"
+err_dateStr: "形式に合わない日付文字列を入力しました。"
+err_dateValue: "日付を間違って入力しました。"
+err_gitHubIDNotExists: "存在しない GitHub ID。"
+err_noCommitMapInGitHubProfile: "プロフィールページに芝生がないため、検索に失敗しました。"
+err_failedToGetInfo: "情報の取得に失敗しました。"
+err_occurred: "エラーが発生しました"
+pressTheEnterKey: "Enterキーを押してください"
+tip_howToGetLongAnswer: "\"ジャン 何とかかんとか…\" このように質問すると、少し長い答えを得ることができます。"
+
+appInfo1: |
+  _**僕は毎日深夜にコミットを植えることに成功した人々を見つけるでしょう。**_
+  
+  # Jandi と JandiChecker とは?
+  「Jandi」は、GitHubにコミットする行為を指す用語です。GitHubにコミットすると、GitHubコミットマップの緑色が草を植えているように見えることから（韓国語で「Jandiジャンディ」）、韓国の開発者がよく使うようになった用語です。JandiChecker は、コミットを定期的にチェックして、あなたとあなたのグループの毎日のコミットの習慣をより健康にするためのユーティリティ ボットです。
+  
+  #JandiCheckerの使い方
+  JandiCheckerコマンドは、3つの方法で呼び出すことができます。
+  1.チャットウィンドウで「/」（スラッシュ）を入力すると、使用可能なコマンドがスラッシュメニューとして表示されます。必要なものを選択/入力した後、追加のオプションが必要な場合はオプションを入力します。
+  2.チャットウィンドウに「HeyJandi」と入力すると、使用可能なコマンドがボタンメニューとして表示されます。必要なメニューボタンを押した後、追加オプションが必要な場合はオプションを入力します。
+  3.「jandi 【質問内容】」と入力するだけで、メニューを呼び出さずに直接AIに質問できます。この時、「jandi」の後の空白は常に半角文字でなければならないことをぜひ気にしてください。
+  
+  ＃各コマンドの詳細紹介
+  /私：私のコミット情報を出力します。情報を取得するにはグループメンバーに登録されている必要があります。
+  /jandi：一般的な質問に答えるChatGPT AIに質問して答えを取得します。質問を日本語で入力するだけです。
+  /情報 【名前】：名前を入力すると、そのグループメンバーの総合芝情報を出力します。コマンド後の空白は常に半角文字でなければならないことをぜひ気にしてください。
+  /id 【ID】：特定のGithub IDの総合草情報を出力します。グループメンバー以外の人も検索できます。コマンド後の空白は常に半角文字でなければならないことをぜひ気にしてください。
+  /昨日：昨日コミットに成功したグループメンバーのリストを出力します。
+  /昨日ない：昨日コミットしていない人のリストを出力します。
+  /今日：今日コミットしていない人のリストを出力します。今日のコミット情報が公開前であれば、照会できない可能性があります。
+  /日付 【yyyyMMdd】：特定の日にコミットに成功した人のリストを出力します。現在から1年以内の期間について検索が可能です。
+  /日英：日本語の文章を入力すると英語に翻訳してくれます。
+  /英日：英語の文章を入力すると日本語に翻訳してくれます。
+  /紹介：このボットを紹介します。
+
+appInfo2: |
+  # ヒント
+  AIに質問するときは、できるだけ具体的で詳しく質問してください。
+  質問を正確に定義するほど、回答の精度が高くなります。
+  
+  # App information
+  【ジャンディチェッカー（JandiChecker）】（%s Build %s）
+  * Stacks used: Java 17, Gradle, IntelliJ, JDA, Quartz, ChatGPT API, Google Cloud API(for translation), Swing, JUnit5, Logback
+  * Have taking an effort to comply with TDD.
+  
+  # Developer's information
+  * Developed by 단타（박준성） / Daanta（Junsung Park）
+  * GitHub: http://github.com/daanta-real
+  * Blog  : http://blog.naver.com/daanta
+  * e-mail: daanta@naver.com
+
+main_description: "Githubコミットチェックプログラム"
+
+#ChatService and Chat
+chat_query: "受け取った元の質問：<<<{}>>>（長さ{}）"
+chat_response: "応答を受け取る：<<<{}>>>"
+chat_theQueryByName: "グループメンバー{}さんの質問：{}"
+chat_questionByName: "%sさんの質問"
+chat_theAnswer: "回答：{}"
+chat_GPTSays: "ChatGPT AIさまは言われた…"
+
+#CmdService
+cmd_needMemberName: "検索したいグループのメンバーの名前を入力してください。"
+
+# Checker
+checker_getNotCommittedYesterday_result: "昨日コミットを忘れた%s人"
+checker_getDidCommitYesterday_result: "昨日コミットに成功した人は%s人…！"
+checker_getDidCommittedToday_result_success: "今日のコミットに成功した人は%s人…！"
+checker_getDidCommittedToday_result_fail_description: "まだ今日のコミットが非会員ユーザーに公開される前であれば、今日のコミットが表示されない可能性があります。"
+checker_getDidCommittedSomeday: "%sにコミットに成功した%s人"
+
+# Crawler
+crawler_trimResultOne: "トリム結果：合計{}個（{} ~ {}）"
+crawler_trimResultAll: "すべてのトリム結果：{}"
+
+#GitHubMap
+gitHubMap_firstSunday: "日曜日の日付：{}日前"
+gitHubMap_mapInfo: "マップの状況"
+gitHubMap_sirStr: "さん"
+gitHubMap_mapOf: "の最近の草の状況"
+gitHubMap_CommittedInLast30: "最近30日間コミットを植えた日"
+gitHubMap_count: "日(1日1コミット率"
+gitHubMap_CommitMapOfRecent1Year: "最近1年間のコミット詳細"
+
+# Translation
+transl_inputByName: "%sの入力"
+transl_textByGoogle: "Google神が翻訳した文章"
+
+# Menu name
+cmdName_yesterday_fail: "昨日ない"
+cmdName_MainToEN: "日英"
+cmdName_ENToMain: "英日"
+menu_me: "私のコミットを見る"
+menu_heyJandi: "AIに質問"
+menu_listYesterdaySucceed: "昨日コミットした人"
+menu_listTodaySucceed: "今日コミットを植えた人"
+menu_mapByName: "名前でコミットを見る"
+menu_mapByID: "IDでコミットを見る"
+menu_listYesterdayFail: "昨日コミットを忘れた人"
+menu_listByDate: "特定の日にコミットした人"
+menu_jandiHereHowCanIHelpYou: "ジャンディの登場。何なにを手伝てつだいましょうか。"
+
+# Menu description
+menu_desc_me: "私のコミット情報を見します。"
+menu_desc_heyJandi: "コミットの友達ChatGPT AIに質問をします。"
+menu_desc_listYesterdaySucceed: "昨日、コミットを植えるのに成功したグループメンバーのリストを確認してください。"
+menu_desc_listTodaySucceed: "今日のコミットに成功したグループメンバーのリストを確認してください。"
+menu_desc_mapByName: "グループメンバーの名前を入力して、グループメンバーのコミット情報を見します。"
+menu_desc_mapByID: "特定のIDのコミット情報を見ます。グループメンバー以外の人も検索できます。"
+menu_desc_listYesterdayFail: "昨日コミットすることを忘れたグループメンバーのリストを確認してください。"
+menu_desc_listByDate: "特定の日にコミットに成功したグループメンバーのリストを確認します。"
+menu_desc_about: "このボットの紹介とヘルプを出力します。"
+menu_desc_ENToMain: "英語の文章を日本語に翻訳します。"
+menu_desc_MainToEN: "日本語の文章を英語に翻訳します。"
+menu_pleaseInput_question: "質問を入力してください。"
+menu_pleaseInput_name: "グループメンバーの名前を入力してください。"
+menu_pleaseInput_GitHubID: "検索したい人のIDを入力してください。"
+menu_pleaseInput_date:  "日付を入力してください。1年以内の日付で、yyyyMMddの形式で入力する必要があります。"
+menu_pleaseInput_EngLang: "日本語に翻訳する英語の文章を入力してください。"
+menu_pleaseInput_MainLang: "英語に翻訳する日本語の内容を入力してください。"
+
+# Modal
+modal_inputMemberName: "グループメンバーの名を入力"
+modal_inputMemberName_description: "グループメンバーの名"
+modal_inputGitHubID: "GitHub IDを入力"
+modal_maxLen10: "最大10文字"
+modal_maxLen20: "最大20文字"
+modal_inputTheQuestion: "質問を入力"
+modal_inputTheQuestion_description: "やりたい質問"
+modal_inputTheQuestion_placeholder: "最大300文字。文字数制限なしにするには、このボタンメニューを通さずにチャットで直接\"日付 【yyyyMMdd】\"とタイプしてください。"
+modal_inputTheDate: "日付入力"
+modal_inputTheDate_description: "検索したい日付"
+modal_inputTheDate_placeholder: "yyyyMMdd形式"
+modal_inputTheMainLang_description: "日本語の文章"
+modal_inputTheEnglish_description: "英語の文章"
+modal_inputTheEnglish: "日本語に翻訳する内容を入力"
+modal_inputTheMainLang: "英語に翻訳する内容を入力"
+modal_maybeLongerBeOk: "少し長くても大丈夫かもしれない…？"
