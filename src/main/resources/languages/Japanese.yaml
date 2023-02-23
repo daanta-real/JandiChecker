@@ -41,7 +41,7 @@ pressTheEnterKey: "Enterキーを押してください"
 tip_howToGetLongAnswer: "\"ジャン 何とかかんとか…\" このように質問すると、少し長い答えを得ることができます。"
 
 appInfo1: |
-  _** 僕は毎日深夜にコミットを植えることに成功した人々を見つけるでしょう。 **_
+  _**僕は毎日深夜にコミットを植えることに成功した人々を見つけるでしょう。**_
   
   # Jandi と JandiChecker とは?
   「Jandi」は、GitHubにコミットする行為を指す用語です。GitHubにコミットすると、GitHubコミットマップの緑色が草を植えているように見えることから（韓国語で「Jandiジャンディ」）、韓国の開発者がよく使うようになった用語です。JandiChecker は、コミットを定期的にチェックして、あなたとあなたのグループの毎日のコミットの習慣をより健康にするためのユーティリティ ボットです。
@@ -87,7 +87,7 @@ main_description: "Githubコミットチェックプログラム"
 chat_query: "受け取った元の質問：<<<{}>>>（長さ{}）"
 chat_response: "応答を受け取る：<<<{}>>>"
 chat_theQueryByName: "グループメンバー{}さんの質問：{}"
-chat_questionByName: "％sさんの質問"
+chat_questionByName: "%sさんの質問"
 chat_theAnswer: "回答：{}"
 chat_GPTSays: "ChatGPT AIさまは言われた…"
 
@@ -96,8 +96,8 @@ cmd_needMemberName: "検索したいグループのメンバーの名前を入�
 
 # Checker
 checker_getNotCommittedYesterday_result: "昨日コミットを忘れた%s人"
-checker_getDidCommitYesterday_result: "昨日コミットに成功した人は％s人…！"
-checker_getDidCommittedToday_result_success: "今日のコミットに成功した人は％s人…！"
+checker_getDidCommitYesterday_result: "昨日コミットに成功した人は%s人…！"
+checker_getDidCommittedToday_result_success: "今日のコミットに成功した人は%s人…！"
 checker_getDidCommittedToday_result_fail_description: "まだ今日のコミットが非会員ユーザーに公開される前であれば、今日のコミットが表示されない可能性があります。"
 checker_getDidCommittedSomeday: "%sにコミットに成功した%s人"
 
@@ -115,7 +115,7 @@ gitHubMap_count: "日(1日1コミット率"
 gitHubMap_CommitMapOfRecent1Year: "最近1年間のコミット詳細"
 
 # Translation
-transl_inputByName: "％sの入力"
+transl_inputByName: "%sの入力"
 transl_textByGoogle: "Google神が翻訳した文章"
 
 # Menu name
