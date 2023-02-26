@@ -49,29 +49,29 @@ appInfo1: |
   如何使用#JandiChecker
   可以通过三种方式调用JandiChecker命令。
   1. 在聊天窗口中键入"/"（正斜杠）以将可用命令显示为斜杠菜单。 选择/输入所需内容后，如果需要其他选项，请输入选项。
-  2. 在聊天窗口中键入"HeyJandi"，您将看到可用的命令作为按钮菜单。 按下所需的菜单按钮后，如果需要其他选项，请输入选项。
+  2. 在聊天窗口中键入"heyjandi"，您将看到可用的命令作为按钮菜单。 按下所需的菜单按钮后，如果需要其他选项，请输入选项。
   3. 无需调用菜单，只需输入"jandi [问题]"即可直接向AI提问。 请记住，"jandi"之后的空格必须始终是半角字符。
   
   # 每个命令的详细介绍
-  /me: 打印我的提交信息。 您必须注册为群组成员才能获取信息。
-  /jandi: 从回答常见问题的 ChatGPT AI 询问并获得答案。 只需用日语输入您的问题。
-  /Information [Name]: 如果输入名称，将输出该组成员的一般地盘信息。 请记住，命令后的空格必须始终是单字节字符。
+  /我: 打印我的提交信息。 您必须注册为群组成员才能获取信息。
+  /heyjandi: 从回答常见问题的 ChatGPT AI 询问并获得答案。 只需用中文输入您的问题。
+  /信息 [Name]: 如果输入名称，将输出该组成员的一般地盘信息。 请记住，命令后的空格必须始终是单字节字符。
   /id [ID]: 输出特定Github ID的综合草地信息。 您还可以搜索不是群组成员的人。 请记住，命令后的空格必须始终是单字节字符。
-  /yesterday: 打印昨天成功提交的组成员列表。
-  /not yesterday: 打印昨天没有提交的人的列表。
-  /today: 打印今天没有提交的人的列表。 如果今天的commit信息还没有发布，可能无法查询到。
-  /date [yyyyMMdd]: 输出在特定日期成功提交的人员列表。 您可以在从现在起一年内搜索。
-  /中英: 如果您输入一个日语句子，它将被翻译成英语。
-  /英中: 当您输入英文句子时，它会被翻译成日文。
-  /推荐: 介绍这个机器人。
+  /昨天: 打印昨天成功提交的组成员列表。
+  /不是昨天: 打印昨天没有提交的人的列表。
+  /今天: 打印今天没有提交的人的列表。 如果今天的commit信息还没有发布，可能无法查询到。
+  /日期 [yyyyMMdd]: 输出在特定日期成功提交的人员列表。 您可以在从现在起一年内搜索。
+  /中英: 将中文句子翻译成英文。
+  /英中: 将英文句子翻译成中文。
+  /关于: 介绍这个机器人。
 
 appInfo2: |
-  # ヒント
-  AIに質問するときは、できるだけ具体的で詳しく質問してください。
-  質問を正確に定義するほど、回答の精度が高くなります。
+  ＃ 尖端
+  询问 AI 问题时，请尽可能具体和详细。
+  您对问题的定义越准确，您的答案就会越准确。
   
   # App information
-  【ジャンディチェッカー（JandiChecker）】（%s Build %s）
+  【JandiChecker】（%s Build %s）
   * Stacks used: Java 17, Gradle, IntelliJ, JDA, Quartz, ChatGPT API, Google Cloud API(for translation), Swing, JUnit5, Logback
   * Have taking an effort to comply with TDD.
   
@@ -81,25 +81,25 @@ appInfo2: |
   * Blog  : http://blog.naver.com/daanta
   * e-mail: daanta@naver.com
 
-main_description: "Githubコミットチェックプログラム"
+main_description: "Github 提交检查器"
 
 #ChatService and Chat
-chat_query: "受け取った元の質問: <<<{}>>>（長さ{}）"
-chat_response: "応答を受け取る: <<<{}>>>"
-chat_theQueryByName: "グループメンバー{}さんの質問: {}"
-chat_questionByName: "%sさんの質問"
-chat_theAnswer: "回答: {}"
-chat_GPTSays: "ChatGPT AIさまは言われた…"
+chat_query: "收到的原始问题: <<<{}>>>（长度{}）"
+chat_response: "接收响应: <<<{}>>>"
+chat_theQueryByName: "来自群组成员{}的问题: {}"
+chat_questionByName: "%s的问题"
+chat_theAnswer: "答案: {}"
+chat_GPTSays: "ChatGPT AI侠客…"
 
 #CmdService
-cmd_needMemberName: "検索したいグループのメンバーの名前を入力してください。"
+cmd_needMemberName: "输入您要查找的群组成员的姓名。"
 
 # Checker
-checker_getNotCommittedYesterday_result: "昨日コミットを忘れた%s人"
-checker_getDidCommitYesterday_result: "昨日コミットに成功した人は%s人…！"
-checker_getDidCommittedToday_result_success: "今日のコミットに成功した人は%s人…！"
-checker_getDidCommittedToday_result_fail_description: "まだ今日のコミットが非会員ユーザーに公開される前であれば、今日のコミットが表示されない可能性があります。"
-checker_getDidCommittedSomeday: "%sにコミットに成功した%s人"
+checker_getNotCommittedYesterday_result: "%s人昨天忘记提交了"
+checker_getDidCommitYesterday_result: "%s人昨天成功提交...！"
+checker_getDidCommittedToday_result_success: "%s人今天已成功提交...！"
+checker_getDidCommittedToday_result_fail_description: "如果今天的提交还没有发布给非会员用户，今天的提交可能不可见。"
+checker_getDidCommittedSomeday: "%s人成功提交给%s"
 
 # Crawler
 crawler_trimResultOne: "トリム結果: 合計{}個（{} ~ {}）"
@@ -119,7 +119,7 @@ transl_inputByName: "%sの入力"
 transl_textByGoogle: "Google神が翻訳した文章"
 
 # Menu name
-cmdName_yesterday_fail: "昨日ない"
+cmdName_yesterday_fail: "不是昨天"
 cmdName_MainToEN: "日英"
 cmdName_ENToMain: "英日"
 menu_me: "私のコミットを見る"
