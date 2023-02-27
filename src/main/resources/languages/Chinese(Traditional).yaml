@@ -38,23 +38,23 @@ err_noCommitMapInGitHubProfile: "搜索失败，因为个人资料页面没有�
 err_failedToGetInfo: "获取信息失败。"
 err_occurred: "发生错误"
 pressTheEnterKey: "按回车键"
-tip_howToGetLongAnswer: "\"Jean what the hell...\" 你可以通过问这样的问题得到稍微长一点的答案。"
+tip_howToGetLongAnswer: "\"heyjandi 啦啦啦...\" 如果你问这样的问题，你可能会得到稍微长一点的答案。"
 
 appInfo1: |
-  _**我会在每个午夜找到成功植入提交的人。**_
+  _**每天午夜，我都会寻找成功种植草坪的人。**_
   
   # 什么是Jandi和JandiChecker？
-  "Jandi"是一个术语，指的是提交到 GitHub 的行为。 这是韩国开发人员经常使用的一个术语，因为当他们提交到GitHub时，GitHub 提交图的绿色看起来就像他们在种草（韩语中的"Jandi"）。 JandiChecker是一个实用程序机器人，可以定期检查您的提交，让您和您的团队的日常提交习惯更健康。
+  "Jandi"是一个术语，指的是提交(commit)到GitHub的行为。 这是韩国开发人员经常使用的一个术语，因为当他们提交到GitHub时，GitHub 提交图的绿色看起来就像他们在种草（韩语中的"Jandi"）。 JandiChecker是一个实用程序机器人，可以定期检查您的提交，让您和您的团队的日常提交习惯更健康。
   
   如何使用#JandiChecker
   可以通过三种方式调用JandiChecker命令。
   1. 在聊天窗口中键入"/"（正斜杠）以将可用命令显示为斜杠菜单。 选择/输入所需内容后，如果需要其他选项，请输入选项。
   2. 在聊天窗口中键入"heyjandi"，您将看到可用的命令作为按钮菜单。 按下所需的菜单按钮后，如果需要其他选项，请输入选项。
-  3. 无需调用菜单，只需输入"jandi [问题]"即可直接向AI提问。 请记住，"jandi"之后的空格必须始终是半角字符。
+  3. 无需调用菜单，只需输入"heyjandi [问题]"即可直接向AI提问。 请记住，"heyjandi"之后的空格必须始终是半角字符。
   
   # 每个命令的详细介绍
   /我: 打印我的提交信息。 您必须注册为群组成员才能获取信息。
-  /heyjandi: 从回答常见问题的 ChatGPT AI 询问并获得答案。 只需用中文输入您的问题。
+  /heyjandi: 从回答常见问题的ChatGPT AI询问并获得答案。 只需用中文输入您的问题。
   /信息 [Name]: 如果输入名称，将输出该组成员的一般地盘信息。 请记住，命令后的空格必须始终是单字节字符。
   /id [ID]: 输出特定Github ID的综合草地信息。 您还可以搜索不是群组成员的人。 请记住，命令后的空格必须始终是单字节字符。
   /昨天: 打印昨天成功提交的组成员列表。
@@ -102,8 +102,8 @@ checker_getDidCommittedToday_result_fail_description: "如果今天的提交还�
 checker_getDidCommittedSomeday: "%s人成功提交给%s"
 
 # Crawler
-crawler_trimResultOne: "トリム結果: 合計{}個（{} ~ {}）"
-crawler_trimResultAll: "すべてのトリム結果: {}"
+crawler_trimResultOne: "修剪结果: 合计{}个（{} ~ {}）"
+crawler_trimResultAll: "没有修剪结果：{}"
 
 #GitHubMap
 gitHubMap_firstSunday: "日曜日の日付: {}日前"
