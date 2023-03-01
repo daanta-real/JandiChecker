@@ -128,6 +128,7 @@ menu_mapByID: "ID로 잔디 조회"
 menu_listYesterdayFail: "어제 잔디 건너뛴 사람"
 menu_listByDate: "특정일 잔디 심은 사람"
 menu_jandiHereHowCanIHelpYou: "잔디 등장. 무엇을 도와드릴까요?"
+menu_mainLangEmoji: "🇰🇷"
 
 # Menu description
 menu_desc_me: "내 잔디 정보를 조회합니다."

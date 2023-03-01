@@ -38,29 +38,29 @@ err_noCommitMapInGitHubProfile: "搜索失敗，因爲個人資料頁面沒有�
 err_failedToGetInfo: "獲取信息失敗。"
 err_occurred: "發生錯誤"
 pressTheEnterKey: "按回車鍵"
-tip_howToGetLongAnswer: "\"heyjandi 啦啦啦...\" 如果你問這樣的問題，你可能會得到稍微長一點的答案。"
+tip_howToGetLongAnswer: "\"heyjandi 啦啦啦...\"如果你問這樣的問題，你可能會得到稍微長一點的答案。"
 
 appInfo1: |
   _**每天午夜，我都會尋找成功種植草坪的人。**_
   
   # 什麼是Jandi和JandiChecker？
-  "Jandi"是一個術語，指的是提交(commit)到GitHub的行爲。 這是韓國開發人員經常使用的一個術語，因爲當他們提交到GitHub時，GitHub提交圖的綠色看起來就像他們在種草（韓語中的"Jandi"）。 JandiChecker是一個實用程序機器人，可以定期檢查您的提交，讓您和您的團隊的日常提交習慣更健康。
+  "Jandi"是一個術語，指的是提交(commit)到GitHub的行爲。這是韓國開發人員經常使用的一個術語，因爲當他們提交到GitHub時，GitHub提交圖的綠色看起來就像他們在種草（韓語中的"Jandi"）。JandiChecker是一個實用程序機器人，可以定期檢查您的提交，讓您和您的團隊的日常提交習慣更健康。
   
   如何使用#JandiChecker
   可以通過三種方式調用JandiChecker命令。
-  1. 在聊天窗口中鍵入"/"（正斜槓）以將可用命令顯示爲斜槓菜單。 選擇/輸入所需內容後，如果需要其他選項，請輸入選項。
-  2. 在聊天窗口中鍵入"heyjandi"，您將看到可用的命令作爲按鈕菜單。 按下所需的菜單按鈕後，如果需要其他選項，請輸入選項。
-  3. 無需調用菜單，只需輸入"heyjandi [問題]"即可直接向AI提問。 請記住，"heyjandi"之後的空格必須始終是半角字符。
+  1. 在聊天窗口中鍵入"/"（正斜槓）以將可用命令顯示爲斜槓菜單。選擇/輸入所需內容後，如果需要其他選項，請輸入選項。
+  2. 在聊天窗口中鍵入"heyjandi"，您將看到可用的命令作爲按鈕菜單。按下所需的菜單按鈕後，如果需要其他選項，請輸入選項。
+  3. 無需調用菜單，只需輸入"heyjandi[問題]"即可直接向AI提問。請記住，"heyjandi"之後的空格必須始終是半角字符。
   
   # 每個命令的詳細介紹
-  /我：打印我的提交信息。 您必須註冊爲羣組成員才能獲取信息。
-  /heyjandi：從回答常見問題的ChatGPT AI詢問並獲得答案。 只需用中文輸入您的問題。
-  /信息 [Name]：如果輸入名稱，將輸出該組成員的一般地盤信息。 請記住，命令後的空格必須始終是單字節字符。
-  /id [ID]：輸出特定Github ID的綜合草地信息。 您還可以搜索不是羣組成員的人。 請記住，命令後的空格必須始終是單字節字符。
+  /我：打印我的提交信息。您必須註冊爲羣組成員才能獲取信息。
+  /heyjandi：從回答常見問題的ChatGPT AI詢問並獲得答案。只需用中文輸入您的問題。
+  /信息 [Name]：如果輸入名稱，將輸出該組成員的一般地盤信息。請記住，命令後的空格必須始終是單字節字符。
+  /id [ID]：輸出特定Github ID的綜合草地信息。您還可以搜索不是羣組成員的人。請記住，命令後的空格必須始終是單字節字符。
   /昨天：打印昨天成功提交的組成員列表。
   /不是昨天：打印昨天沒有提交的人的列表。
-  /今天：打印今天沒有提交的人的列表。 如果今天的commit信息還沒有發佈，可能無法查詢到。
-  /日期 [yyyyMMdd]：輸出在特定日期成功提交的人員列表。 您可以在從現在起一年內搜索。
+  /今天：打印今天沒有提交的人的列表。如果今天的commit信息還沒有發佈，可能無法查詢到。
+  /日期 [yyyyMMdd]：輸出在特定日期成功提交的人員列表。您可以在從現在起一年內搜索。
   /中英：將中文句子翻譯成英文。
   /英中：將英文句子翻譯成中文。
   /關於：介紹這個機器人。
@@ -106,7 +106,7 @@ crawler_trimResultOne: "修剪結果：合計{}個（{} ~ {}）"
 crawler_trimResultAll: "沒有修剪結果：{}"
 
 #GitHubMap
-gitHubMap_firstSunday: "星期日日期：{} 天前"
+gitHubMap_firstSunday: "星期日日期：{}天前"
 gitHubMap_mapInfo: "地圖狀態"
 gitHubMap_sirStr: "俠客。"
 gitHubMap_mapOf: "最近提交情況"
@@ -125,12 +125,13 @@ cmdName_ENToMain: "英中"
 menu_me: "我的提交"
 menu_heyJandi: "問AI俠客"
 menu_listYesterdaySucceed: "昨天提交的人"
-menu_listTodaySucceed: "今天種植的人提交"
+menu_listTodaySucceed: "今天提交的人"
 menu_mapByName: "按名稱查看提交"
 menu_mapByID: "按ID查看提交"
 menu_listYesterdayFail: "昨天忘記提交的人"
 menu_listByDate: "按日期提交"
 menu_jandiHereHowCanIHelpYou: "這裡是Jandi。我能幫你什麼？"
+menu_mainLangEmoji: "🇹🇼"
 
 # Menu description
 menu_desc_me: "查看我的提交信息。"

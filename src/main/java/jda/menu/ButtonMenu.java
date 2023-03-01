@@ -44,7 +44,7 @@ public class ButtonMenu extends ListenerAdapter {
                 .addActionRow(makeRow(btn[6], btn[7]));
 
         if (!TranslationService.mainLanguageLong.equals("English")) { // Non-English mode
-            Button enToMain = Button.secondary(JDAController.instance.getCmdTranslateEnToMain(), pr.l("cmdName_ENToMain")).withEmoji(Emoji.fromUnicode("\uD83C\uDDF0\uD83C\uDDF7"));
+            Button enToMain = Button.secondary(JDAController.instance.getCmdTranslateEnToMain(), pr.l("cmdName_ENToMain")).withEmoji(Emoji.fromUnicode(pr.l("menu_mainLangEmoji")));
             Button mainToEn = Button.secondary(JDAController.instance.getCmdTranslateMainToEn(), pr.l("cmdName_MainToEN")).withEmoji(Emoji.fromUnicode("\uD83C\uDDFA\uD83C\uDDF8"));
             a.addActionRow(makeRow(enToMain, mainToEn, btn[8], btn[9]));
         } else { // English mode
