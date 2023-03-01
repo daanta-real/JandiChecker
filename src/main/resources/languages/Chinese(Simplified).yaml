@@ -1,77 +1,77 @@
 # Common
 appName: "JandiChecker"
 commandExecutionKeyword: "heyjandi"
-icon: "アイコン"
-font: "フォント"
+icon: "图标"
+font: "字体"
 
-instance: "インスタンス"
-window: "ウィンドウ"
-tray: "トレイ"
+instance: "实例"
+window: "窗口"
+tray: "托盘"
 
-today: "今日"
-yesterday: "昨日"
-date: "日付"
-period: "期間"
+today: "今天"
+yesterday: "昨天"
+date: "日期"
+period: "期间"
 
-request: "リクエスト"
-start: "スタート"
-initialization: "初期化"
-creation: "生成"
-activation: "アクティブ化"
-fin: "完了。"
-exit: "終了"
+request: "请求"
+start: "开始"
+initialization: "初始化"
+creation: "创造"
+activation: "激活"
+fin: "完成了。"
+exit: "退出"
 
-button: "ボタン"
-slash: "スラッシュ"
-command: "コマンド"
+button: "按钮"
+slash: "斜线"
+command: "命令"
 
-me: "私"
-info: "情報"
-about: "紹介"
-close: "閉じる"
+me: "我"
+info: "信息"
+about: "关于"
+close: "关闭"
 
-err_incorrectInput: "正確に入力してください。"
-err_dateStr: "形式に合わない日付文字列を入力しました。"
-err_dateValue: "日付を間違って入力しました。"
-err_gitHubIDNotExists: "存在しない GitHub ID。"
-err_noCommitMapInGitHubProfile: "プロフィールページに芝生がないため、検索に失敗しました。"
-err_failedToGetInfo: "情報の取得に失敗しました。"
-err_occurred: "エラーが発生しました"
-pressTheEnterKey: "Enterキーを押してください"
-tip_howToGetLongAnswer: "\"ジャン 何とかかんとか…\" このように質問すると、少し長い答えを得ることができます。"
+err_incorrectInput: "请正确输入。"
+err_dateStr: "您输入了无效的日期字符串。"
+err_dateValue: "您输入的日期不正确。"
+err_gitHubIDNotExists: "不存在的GitHub ID。"
+err_noCommitMapInGitHubProfile: "搜索失败，因为个人资料页面没有草。"
+err_failedToGetInfo: "获取信息失败。"
+err_occurred: "发生错误"
+pressTheEnterKey: "按回车键"
+tip_howToGetLongAnswer: "\"heyjandi 啦啦啦...\" 如果你问这样的问题，你可能会得到稍微长一点的答案。"
 
 appInfo1: |
-  _**僕は毎日深夜にコミットを植えることに成功した人々を見つけるでしょう。**_
+  _**每天午夜，我都会寻找成功种植草坪的人。**_
   
-  # Jandi と JandiChecker とは?
-  「Jandi」は、GitHubにコミットする行為を指す用語です。GitHubにコミットすると、GitHubコミットマップの緑色が草を植えているように見えることから（韓国語で「Jandiジャンディ」）、韓国の開発者がよく使うようになった用語です。JandiChecker は、コミットを定期的にチェックして、あなたとあなたのグループの毎日のコミットの習慣をより健康にするためのユーティリティ ボットです。
+  # 什么是Jandi和JandiChecker？
+  "Jandi"是一个术语，指的是提交(commit)到GitHub的行为。 这是韩国开发人员经常使用的一个术语，因为当他们提交到GitHub时，GitHub提交图的绿色看起来就像他们在种草（韩语中的"Jandi"）。 JandiChecker是一个实用程序机器人，可以定期检查您的提交，让您和您的团队的日常提交习惯更健康。
   
-  #JandiCheckerの使い方
-  JandiCheckerコマンドは、3つの方法で呼び出すことができます。
-  1.チャットウィンドウで「/」（スラッシュ）を入力すると、使用可能なコマンドがスラッシュメニューとして表示されます。必要なものを選択/入力した後、追加のオプションが必要な場合はオプションを入力します。
-  2.チャットウィンドウに「HeyJandi」と入力すると、使用可能なコマンドがボタンメニューとして表示されます。必要なメニューボタンを押した後、追加オプションが必要な場合はオプションを入力します。
-  3.「jandi 【質問内容】」と入力するだけで、メニューを呼び出さずに直接AIに質問できます。この時、「jandi」の後の空白は常に半角文字でなければならないことをぜひ気にしてください。
+  如何使用#JandiChecker
+  可以通过三种方式调用JandiChecker命令。
+  1. 在聊天窗口中键入"/"（正斜杠）以将可用命令显示为斜杠菜单。 选择/输入所需内容后，如果需要其他选项，请输入选项。
+  2. 在聊天窗口中键入"heyjandi"，您将看到可用的命令作为按钮菜单。 按下所需的菜单按钮后，如果需要其他选项，请输入选项。
+  3. 无需调用菜单，只需输入"heyjandi [问题]"即可直接向AI提问。 请记住，"heyjandi"之后的空格必须始终是半角字符。
   
-  ＃各コマンドの詳細紹介
-  /私：私のコミット情報を出力します。情報を取得するにはグループメンバーに登録されている必要があります。
-  /jandi：一般的な質問に答えるChatGPT AIに質問して答えを取得します。質問を日本語で入力するだけです。
-  /情報 【名前】：名前を入力すると、そのグループメンバーの総合芝情報を出力します。コマンド後の空白は常に半角文字でなければならないことをぜひ気にしてください。
-  /id 【ID】：特定のGithub IDの総合草情報を出力します。グループメンバー以外の人も検索できます。コマンド後の空白は常に半角文字でなければならないことをぜひ気にしてください。
-  /昨日：昨日コミットに成功したグループメンバーのリストを出力します。
-  /昨日ない：昨日コミットしていない人のリストを出力します。
-  /今日：今日コミットしていない人のリストを出力します。今日のコミット情報が公開前であれば、照会できない可能性があります。
-  /日付 【yyyyMMdd】：特定の日にコミットに成功した人のリストを出力します。現在から1年以内の期間について検索が可能です。
-  /日英：日本語の文章を入力すると英語に翻訳してくれます。
-  /英日：英語の文章を入力すると日本語に翻訳してくれます。
-  /紹介：このボットを紹介します。
+  # 每个命令的详细介绍
+  /我：打印我的提交信息。 您必须注册为群组成员才能获取信息。
+  /heyjandi：从回答常见问题的ChatGPT AI询问并获得答案。 只需用中文输入您的问题。
+  /信息 [Name]：如果输入名称，将输出该组成员的一般地盘信息。 请记住，命令后的空格必须始终是单字节字符。
+  /id [ID]：输出特定Github ID的综合草地信息。 您还可以搜索不是群组成员的人。 请记住，命令后的空格必须始终是单字节字符。
+  /昨天：打印昨天成功提交的组成员列表。
+  /不是昨天：打印昨天没有提交的人的列表。
+  /今天：打印今天没有提交的人的列表。 如果今天的commit信息还没有发布，可能无法查询到。
+  /日期 [yyyyMMdd]：输出在特定日期成功提交的人员列表。 您可以在从现在起一年内搜索。
+  /中英：将中文句子翻译成英文。
+  /英中：将英文句子翻译成中文。
+  /关于：介绍这个机器人。
 
 appInfo2: |
-  # ヒント
-  AIに質問するときは、できるだけ具体的で詳しく質問してください。
-  質問を正確に定義するほど、回答の精度が高くなります。
+  ＃ 尖端
+  询问AI问题时，请尽可能具体和详细。
+  您对问题的定义越准确，您的答案就会越准确。
   
   # App information
-  【ジャンディチェッカー（JandiChecker）】（%s Build %s）
+  【JandiChecker】（%s Build %s）
   * Stacks used: Java 17, Gradle, IntelliJ, JDA, Quartz, ChatGPT API, Google Cloud API(for translation), Swing, JUnit5, Logback
   * Have taking an effort to comply with TDD.
   
@@ -81,90 +81,90 @@ appInfo2: |
   * Blog  : http://blog.naver.com/daanta
   * e-mail: daanta@naver.com
 
-main_description: "Githubコミットチェックプログラム"
+main_description: "Github提交检查器"
 
 #ChatService and Chat
-chat_query: "受け取った元の質問：<<<{}>>>（長さ{}）"
-chat_response: "応答を受け取る：<<<{}>>>"
-chat_theQueryByName: "グループメンバー{}さんの質問：{}"
-chat_questionByName: "%sさんの質問"
-chat_theAnswer: "回答：{}"
-chat_GPTSays: "ChatGPT AIさまは言われた…"
+chat_query: "收到的原始问题：<<<{}>>>（长度{}）"
+chat_response: "接收响应：<<<{}>>>"
+chat_theQueryByName: "来自群组成员{}的问题：{}"
+chat_questionByName: "%s的问题"
+chat_theAnswer: "答案：{}"
+chat_GPTSays: "ChatGPT AI侠客…"
 
 #CmdService
-cmd_needMemberName: "検索したいグループのメンバーの名前を入力してください。"
+cmd_needMemberName: "输入您要查找的群组成员的姓名。"
 
 # Checker
-checker_getNotCommittedYesterday_result: "昨日コミットを忘れた%s人"
-checker_getDidCommitYesterday_result: "昨日コミットに成功した人は%s人…！"
-checker_getDidCommittedToday_result_success: "今日のコミットに成功した人は%s人…！"
-checker_getDidCommittedToday_result_fail_description: "まだ今日のコミットが非会員ユーザーに公開される前であれば、今日のコミットが表示されない可能性があります。"
-checker_getDidCommittedSomeday: "%sにコミットに成功した%s人"
+checker_getNotCommittedYesterday_result: "%s人昨天忘记提交了"
+checker_getDidCommitYesterday_result: "%s人昨天成功提交...！"
+checker_getDidCommittedToday_result_success: "%s人今天已成功提交...！"
+checker_getDidCommittedToday_result_fail_description: "如果今天的提交还没有发布给非会员用户，今天的提交可能不可见。"
+checker_getDidCommittedSomeday: "%s人成功提交给%s"
 
 # Crawler
-crawler_trimResultOne: "トリム結果：合計{}個（{} ~ {}）"
-crawler_trimResultAll: "すべてのトリム結果：{}"
+crawler_trimResultOne: "修剪结果：合计{}个（{} ~ {}）"
+crawler_trimResultAll: "没有修剪结果：{}"
 
 #GitHubMap
-gitHubMap_firstSunday: "日曜日の日付：{}日前"
-gitHubMap_mapInfo: "マップの状況"
-gitHubMap_sirStr: "さん"
-gitHubMap_mapOf: "の最近の草の状況"
-gitHubMap_CommittedInLast30: "最近30日間コミットを植えた日"
-gitHubMap_count: "日(1日1コミット率"
-gitHubMap_CommitMapOfRecent1Year: "最近1年間のコミット詳細"
+gitHubMap_firstSunday: "星期日日期：{} 天前"
+gitHubMap_mapInfo: "地图状态"
+gitHubMap_sirStr: "侠客。"
+gitHubMap_mapOf: "最近提交情况"
+gitHubMap_CommittedInLast30: "种植提交的最后30天"
+gitHubMap_count: "天数（每天1次提交率"
+gitHubMap_CommitMapOfRecent1Year: "去年的提交细节"
 
 # Translation
-transl_inputByName: "%sの入力"
-transl_textByGoogle: "Google神が翻訳した文章"
+transl_inputByName: "%s的入力"
+transl_textByGoogle: "Google侠客的翻译的句子"
 
 # Menu name
-cmdName_yesterday_fail: "昨日ない"
-cmdName_MainToEN: "日英"
-cmdName_ENToMain: "英日"
-menu_me: "私のコミットを見る"
-menu_heyJandi: "AIに質問"
-menu_listYesterdaySucceed: "昨日コミットした人"
-menu_listTodaySucceed: "今日コミットを植えた人"
-menu_mapByName: "名前でコミットを見る"
-menu_mapByID: "IDでコミットを見る"
-menu_listYesterdayFail: "昨日コミットを忘れた人"
-menu_listByDate: "特定の日にコミットした人"
-menu_jandiHereHowCanIHelpYou: "ジャンディの登場。何なにを手伝てつだいましょうか。"
+cmdName_yesterday_fail: "昨天失败"
+cmdName_MainToEN: "中英"
+cmdName_ENToMain: "英中"
+menu_me: "我的提交"
+menu_heyJandi: "问AI侠客"
+menu_listYesterdaySucceed: "昨天提交的人"
+menu_listTodaySucceed: "今天种植的人提交"
+menu_mapByName: "按名称查看提交"
+menu_mapByID: "按ID查看提交"
+menu_listYesterdayFail: "昨天忘记提交的人"
+menu_listByDate: "按日期提交"
+menu_jandiHereHowCanIHelpYou: "这里是Jandi。我能帮你什么？"
 
 # Menu description
-menu_desc_me: "私のコミット情報を見します。"
-menu_desc_heyJandi: "コミットの友達ChatGPT AIに質問をします。"
-menu_desc_listYesterdaySucceed: "昨日、コミットを植えるのに成功したグループメンバーのリストを確認してください。"
-menu_desc_listTodaySucceed: "今日のコミットに成功したグループメンバーのリストを確認してください。"
-menu_desc_mapByName: "グループメンバーの名前を入力して、グループメンバーのコミット情報を見します。"
-menu_desc_mapByID: "特定のIDのコミット情報を見ます。グループメンバー以外の人も検索できます。"
-menu_desc_listYesterdayFail: "昨日コミットすることを忘れたグループメンバーのリストを確認してください。"
-menu_desc_listByDate: "特定の日にコミットに成功したグループメンバーのリストを確認します。"
-menu_desc_about: "このボットの紹介とヘルプを出力します。"
-menu_desc_ENToMain: "英語の文章を日本語に翻訳します。"
-menu_desc_MainToEN: "日本語の文章を英語に翻訳します。"
-menu_pleaseInput_question: "質問を入力してください。"
-menu_pleaseInput_name: "グループメンバーの名前を入力してください。"
-menu_pleaseInput_GitHubID: "検索したい人のIDを入力してください。"
-menu_pleaseInput_date:  "日付を入力してください。1年以内の日付で、yyyyMMddの形式で入力する必要があります。"
-menu_pleaseInput_EngLang: "日本語に翻訳する英語の文章を入力してください。"
-menu_pleaseInput_MainLang: "英語に翻訳する日本語の内容を入力してください。"
+menu_desc_me: "查看我的提交信息。"
+menu_desc_heyJandi: "问ChatGPT AI。"
+menu_desc_listYesterdaySucceed: "昨天提交成功的组成员列表。"
+menu_desc_listTodaySucceed: "今天提交成功的组成员列表。"
+menu_desc_mapByName: "输入群组成员的姓名以查看群组成员的提交信息。"
+menu_desc_mapByID: "特定ID的提交信息。您还可以搜索不属于您的群组的人。"
+menu_desc_listYesterdayFail: "昨天忘记提交的组成员列表。"
+menu_desc_listByDate: "特定日提交成功的组成员列表。"
+menu_desc_about: "打印此机器人的介绍和帮助。"
+menu_desc_ENToMain: "将英文文本翻译成中文。"
+menu_desc_MainToEN: "将中语文本翻译成英语。"
+menu_pleaseInput_question: "请输入您的问题。"
+menu_pleaseInput_name: "请输入群组成员的姓名。"
+menu_pleaseInput_GitHubID: "请输入您要搜索的人的ID。"
+menu_pleaseInput_date: "请输入一个日期。必须小于一年，格式为yyyyMMdd。"
+menu_pleaseInput_EngLang: "请输入要翻译成中文的英文文本。"
+menu_pleaseInput_MainLang: "请输入要翻译成英文的中文内容。"
 
 # Modal
-modal_inputMemberName: "グループメンバーの名を入力"
-modal_inputMemberName_description: "グループメンバーの名"
-modal_inputGitHubID: "GitHub IDを入力"
-modal_maxLen10: "最大10文字"
-modal_maxLen20: "最大20文字"
-modal_inputTheQuestion: "質問を入力"
-modal_inputTheQuestion_description: "やりたい質問"
-modal_inputTheQuestion_placeholder: "最大300文字。文字数制限なしにするには、このボタンメニューを通さずにチャットで直接\"日付 【yyyyMMdd】\"とタイプしてください。"
-modal_inputTheDate: "日付入力"
-modal_inputTheDate_description: "検索したい日付"
-modal_inputTheDate_placeholder: "yyyyMMdd形式"
-modal_inputTheMainLang_description: "日本語の文章"
-modal_inputTheEnglish_description: "英語の文章"
-modal_inputTheEnglish: "日本語に翻訳する内容を入力"
-modal_inputTheMainLang: "英語に翻訳する内容を入力"
-modal_maybeLongerBeOk: "少し長くても大丈夫かもしれない…？"
+modal_inputMemberName: "输入组成员名"
+modal_inputMemberName_description: "组成员名"
+modal_inputGitHubID: "输入GitHub ID"
+modal_maxLen10: "最长10个字符"
+modal_maxLen20: "最长20个字符"
+modal_inputTheQuestion: "输入问题"
+modal_inputTheQuestion_description: "你想问的问题"
+modal_inputTheQuestion_placeholder: "最长300个字符。为避免字符限制，请直接在聊天中输入\"Date [yyyyMMdd]\"，而无需通过此按钮菜单。"
+modal_inputTheDate: "输入日期"
+modal_inputTheDate_description: "你要搜索的日期"
+modal_inputTheDate_placeholder: "yyyyMMdd格式"
+modal_inputTheMainLang_description: "中文文本"
+modal_inputTheEnglish_description: "英文文本"
+modal_inputTheEnglish: "输入要翻译成中文的内容"
+modal_inputTheMainLang: "输入要翻译成英文的内容"
+modal_maybeLongerBeOk: "时间长一点可能没问题…？"

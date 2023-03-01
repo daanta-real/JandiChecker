@@ -1,170 +1,170 @@
 # Common
 appName: "JandiChecker"
 commandExecutionKeyword: "heyjandi"
-icon: "图标"
-font: "字体"
+icon: "圖標"
+font: "字體"
 
-instance: "实例"
+instance: "實例"
 window: "窗口"
-tray: "托盘"
+tray: "托盤"
 
 today: "今天"
 yesterday: "昨天"
 date: "日期"
-period: "期间"
+period: "期間"
 
-request: "请求"
-start: "开始"
+request: "請求"
+start: "開始"
 initialization: "初始化"
-creation: "创造"
+creation: "創造"
 activation: "激活"
 fin: "完成了。"
 exit: "退出"
 
-button: "按钮"
-slash: "斜线"
+button: "按鈕"
+slash: "斜線"
 command: "命令"
 
 me: "我"
 info: "信息"
-about: "关于"
-close: "关闭"
+about: "關於"
+close: "關閉"
 
-err_incorrectInput: "请正确输入。"
-err_dateStr: "您输入了无效的日期字符串。"
-err_dateValue: "您输入的日期不正确。"
+err_incorrectInput: "請正確輸入。"
+err_dateStr: "您輸入了無效的日期字符串。"
+err_dateValue: "您輸入的日期不正確。"
 err_gitHubIDNotExists: "不存在的GitHub ID。"
-err_noCommitMapInGitHubProfile: "搜索失败，因为个人资料页面没有草。"
-err_failedToGetInfo: "获取信息失败。"
-err_occurred: "发生错误"
-pressTheEnterKey: "按回车键"
-tip_howToGetLongAnswer: "\"heyjandi 啦啦啦...\" 如果你问这样的问题，你可能会得到稍微长一点的答案。"
+err_noCommitMapInGitHubProfile: "搜索失敗，因爲個人資料頁面沒有草。"
+err_failedToGetInfo: "獲取信息失敗。"
+err_occurred: "發生錯誤"
+pressTheEnterKey: "按回車鍵"
+tip_howToGetLongAnswer: "\"heyjandi 啦啦啦...\" 如果你問這樣的問題，你可能會得到稍微長一點的答案。"
 
 appInfo1: |
-  _**每天午夜，我都会寻找成功种植草坪的人。**_
+  _**每天午夜，我都會尋找成功種植草坪的人。**_
   
-  # 什么是Jandi和JandiChecker？
-  "Jandi"是一个术语，指的是提交(commit)到GitHub的行为。 这是韩国开发人员经常使用的一个术语，因为当他们提交到GitHub时，GitHub提交图的绿色看起来就像他们在种草（韩语中的"Jandi"）。 JandiChecker是一个实用程序机器人，可以定期检查您的提交，让您和您的团队的日常提交习惯更健康。
+  # 什麼是Jandi和JandiChecker？
+  "Jandi"是一個術語，指的是提交(commit)到GitHub的行爲。 這是韓國開發人員經常使用的一個術語，因爲當他們提交到GitHub時，GitHub提交圖的綠色看起來就像他們在種草（韓語中的"Jandi"）。 JandiChecker是一個實用程序機器人，可以定期檢查您的提交，讓您和您的團隊的日常提交習慣更健康。
   
   如何使用#JandiChecker
-  可以通过三种方式调用JandiChecker命令。
-  1. 在聊天窗口中键入"/"（正斜杠）以将可用命令显示为斜杠菜单。 选择/输入所需内容后，如果需要其他选项，请输入选项。
-  2. 在聊天窗口中键入"heyjandi"，您将看到可用的命令作为按钮菜单。 按下所需的菜单按钮后，如果需要其他选项，请输入选项。
-  3. 无需调用菜单，只需输入"heyjandi [问题]"即可直接向AI提问。 请记住，"heyjandi"之后的空格必须始终是半角字符。
+  可以通過三種方式調用JandiChecker命令。
+  1. 在聊天窗口中鍵入"/"（正斜槓）以將可用命令顯示爲斜槓菜單。 選擇/輸入所需內容後，如果需要其他選項，請輸入選項。
+  2. 在聊天窗口中鍵入"heyjandi"，您將看到可用的命令作爲按鈕菜單。 按下所需的菜單按鈕後，如果需要其他選項，請輸入選項。
+  3. 無需調用菜單，只需輸入"heyjandi [問題]"即可直接向AI提問。 請記住，"heyjandi"之後的空格必須始終是半角字符。
   
-  # 每个命令的详细介绍
-  /我：打印我的提交信息。 您必须注册为群组成员才能获取信息。
-  /heyjandi：从回答常见问题的ChatGPT AI询问并获得答案。 只需用中文输入您的问题。
-  /信息 [Name]：如果输入名称，将输出该组成员的一般地盘信息。 请记住，命令后的空格必须始终是单字节字符。
-  /id [ID]：输出特定Github ID的综合草地信息。 您还可以搜索不是群组成员的人。 请记住，命令后的空格必须始终是单字节字符。
-  /昨天：打印昨天成功提交的组成员列表。
-  /不是昨天：打印昨天没有提交的人的列表。
-  /今天：打印今天没有提交的人的列表。 如果今天的commit信息还没有发布，可能无法查询到。
-  /日期 [yyyyMMdd]：输出在特定日期成功提交的人员列表。 您可以在从现在起一年内搜索。
-  /中英：将中文句子翻译成英文。
-  /英中：将英文句子翻译成中文。
-  /关于：介绍这个机器人。
+  # 每個命令的詳細介紹
+  /我：打印我的提交信息。 您必須註冊爲羣組成員才能獲取信息。
+  /heyjandi：從回答常見問題的ChatGPT AI詢問並獲得答案。 只需用中文輸入您的問題。
+  /信息 [Name]：如果輸入名稱，將輸出該組成員的一般地盤信息。 請記住，命令後的空格必須始終是單字節字符。
+  /id [ID]：輸出特定Github ID的綜合草地信息。 您還可以搜索不是羣組成員的人。 請記住，命令後的空格必須始終是單字節字符。
+  /昨天：打印昨天成功提交的組成員列表。
+  /不是昨天：打印昨天沒有提交的人的列表。
+  /今天：打印今天沒有提交的人的列表。 如果今天的commit信息還沒有發佈，可能無法查詢到。
+  /日期 [yyyyMMdd]：輸出在特定日期成功提交的人員列表。 您可以在從現在起一年內搜索。
+  /中英：將中文句子翻譯成英文。
+  /英中：將英文句子翻譯成中文。
+  /關於：介紹這個機器人。
 
 appInfo2: |
   ＃ 尖端
-  询问AI问题时，请尽可能具体和详细。
-  您对问题的定义越准确，您的答案就会越准确。
+  詢問AI問題時，請儘可能具體和詳細。
+  您對問題的定義越準確，您的答案就會越準確。
   
   # App information
   【JandiChecker】（%s Build %s）
-  * Stacks used: Java 17, Gradle, IntelliJ, JDA, Quartz, ChatGPT API, Google Cloud API(for translation), Swing, JUnit5, Logback
+  * Stacks used：Java 17, Gradle, IntelliJ, JDA, Quartz, ChatGPT API, Google Cloud API(for translation), Swing, JUnit5, Logback
   * Have taking an effort to comply with TDD.
   
   # Developer's information
   * Developed by 단타（박준성） / Daanta（Junsung Park）
-  * GitHub: http://github.com/daanta-real
-  * Blog  : http://blog.naver.com/daanta
-  * e-mail: daanta@naver.com
+  * GitHub：http://github.com/daanta-real
+  * Blog  ：http://blog.naver.com/daanta
+  * e-mail：daanta@naver.com
 
-main_description: "Github提交检查器"
+main_description: "Github提交檢查器"
 
 #ChatService and Chat
-chat_query: "收到的原始问题：<<<{}>>>（长度{}）"
-chat_response: "接收响应：<<<{}>>>"
-chat_theQueryByName: "来自群组成员{}的问题：{}"
-chat_questionByName: "%s的问题"
+chat_query: "收到的原始問題：<<<{}>>>（長度{}）"
+chat_response: "接收響應：<<<{}>>>"
+chat_theQueryByName: "來自羣組成員{}的問題：{}"
+chat_questionByName: "%s的問題"
 chat_theAnswer: "答案：{}"
-chat_GPTSays: "ChatGPT AI侠客…"
+chat_GPTSays: "ChatGPT AI俠客…"
 
 #CmdService
-cmd_needMemberName: "输入您要查找的群组成员的姓名。"
+cmd_needMemberName: "輸入您要查找的羣組成員的姓名。"
 
 # Checker
-checker_getNotCommittedYesterday_result: "%s人昨天忘记提交了"
+checker_getNotCommittedYesterday_result: "%s人昨天忘記提交了"
 checker_getDidCommitYesterday_result: "%s人昨天成功提交...！"
 checker_getDidCommittedToday_result_success: "%s人今天已成功提交...！"
-checker_getDidCommittedToday_result_fail_description: "如果今天的提交还没有发布给非会员用户，今天的提交可能不可见。"
-checker_getDidCommittedSomeday: "%s人成功提交给%s"
+checker_getDidCommittedToday_result_fail_description: "如果今天的提交還沒有發佈給非會員用戶，今天的提交可能不可見。"
+checker_getDidCommittedSomeday: "%s人成功提交給%s"
 
 # Crawler
-crawler_trimResultOne: "修剪结果：合计{}个（{} ~ {}）"
-crawler_trimResultAll: "没有修剪结果：{}"
+crawler_trimResultOne: "修剪結果：合計{}個（{} ~ {}）"
+crawler_trimResultAll: "沒有修剪結果：{}"
 
 #GitHubMap
 gitHubMap_firstSunday: "星期日日期：{} 天前"
-gitHubMap_mapInfo: "地图状态"
-gitHubMap_sirStr: "侠客。"
-gitHubMap_mapOf: "最近提交情况"
-gitHubMap_CommittedInLast30: "种植提交的最后30天"
-gitHubMap_count: "天数（每天1次提交率"
-gitHubMap_CommitMapOfRecent1Year: "去年的提交细节"
+gitHubMap_mapInfo: "地圖狀態"
+gitHubMap_sirStr: "俠客。"
+gitHubMap_mapOf: "最近提交情況"
+gitHubMap_CommittedInLast30: "種植提交的最後30天"
+gitHubMap_count: "天數（每天1次提交率"
+gitHubMap_CommitMapOfRecent1Year: "去年的提交細節"
 
 # Translation
 transl_inputByName: "%s的入力"
-transl_textByGoogle: "Google侠客的翻译的句子"
+transl_textByGoogle: "Google俠客的翻譯的句子"
 
 # Menu name
-cmdName_yesterday_fail: "不是昨天"
-cmdName_MainToEN: "日英"
-cmdName_ENToMain: "英日"
-menu_me: "私のコミットを見る"
-menu_heyJandi: "AIに質問"
-menu_listYesterdaySucceed: "昨日コミットした人"
-menu_listTodaySucceed: "今日コミットを植えた人"
-menu_mapByName: "名前でコミットを見る"
-menu_mapByID: "IDでコミットを見る"
-menu_listYesterdayFail: "昨日コミットを忘れた人"
-menu_listByDate: "特定の日にコミットした人"
-menu_jandiHereHowCanIHelpYou: "ジャンディの登場。何なにを手伝てつだいましょうか。"
+cmdName_yesterday_fail: "昨天失敗"
+cmdName_MainToEN: "中英"
+cmdName_ENToMain: "英中"
+menu_me: "我的提交"
+menu_heyJandi: "問AI俠客"
+menu_listYesterdaySucceed: "昨天提交的人"
+menu_listTodaySucceed: "今天種植的人提交"
+menu_mapByName: "按名稱查看提交"
+menu_mapByID: "按ID查看提交"
+menu_listYesterdayFail: "昨天忘記提交的人"
+menu_listByDate: "按日期提交"
+menu_jandiHereHowCanIHelpYou: "這裡是Jandi。我能幫你什麼？"
 
 # Menu description
 menu_desc_me: "查看我的提交信息。"
-menu_desc_heyJandi: "问ChatGPT AI。"
-menu_desc_listYesterdaySucceed: "昨天提交成功的组成员列表。"
-menu_desc_listTodaySucceed: "今天提交成功的组成员列表。"
-menu_desc_mapByName: "输入群组成员的姓名以查看群组成员的提交信息。"
-menu_desc_mapByID: "特定ID的提交信息。您还可以搜索不属于您的群组的人。"
-menu_desc_listYesterdayFail: "昨天忘记提交的组成员列表。"
-menu_desc_listByDate: "特定日提交成功的组成员列表。"
-menu_desc_about: "打印此机器人的介绍和帮助。"
-menu_desc_ENToMain: "将英文文本翻译成中文。"
-menu_desc_MainToEN: "将中语文本翻译成英语。"
-menu_pleaseInput_question: "请输入您的问题。"
-menu_pleaseInput_name: "请输入群组成员的姓名。"
-menu_pleaseInput_GitHubID: "请输入您要搜索的人的ID。"
-menu_pleaseInput_date: "请输入一个日期。必须小于一年，格式为yyyyMMdd。"
-menu_pleaseInput_EngLang: "请输入要翻译成中文的英文文本。"
-menu_pleaseInput_MainLang: "请输入要翻译成英文的中文内容。"
+menu_desc_heyJandi: "問ChatGPT AI。"
+menu_desc_listYesterdaySucceed: "昨天提交成功的組成員列表。"
+menu_desc_listTodaySucceed: "今天提交成功的組成員列表。"
+menu_desc_mapByName: "輸入羣組成員的姓名以查看羣組成員的提交信息。"
+menu_desc_mapByID: "特定ID的提交信息。您還可以搜索不屬於您的羣組的人。"
+menu_desc_listYesterdayFail: "昨天忘記提交的組成員列表。"
+menu_desc_listByDate: "特定日提交成功的組成員列表。"
+menu_desc_about: "打印此機器人的介紹和幫助。"
+menu_desc_ENToMain: "將英文文本翻譯成中文。"
+menu_desc_MainToEN: "將中語文本翻譯成英語。"
+menu_pleaseInput_question: "請輸入您的問題。"
+menu_pleaseInput_name: "請輸入羣組成員的姓名。"
+menu_pleaseInput_GitHubID: "請輸入您要搜索的人的ID。"
+menu_pleaseInput_date: "請輸入一個日期。必須小於一年，格式爲yyyyMMdd。"
+menu_pleaseInput_EngLang: "請輸入要翻譯成中文的英文文本。"
+menu_pleaseInput_MainLang: "請輸入要翻譯成英文的中文內容。"
 
 # Modal
-modal_inputMemberName: "输入组成员名"
-modal_inputMemberName_description: "组成员名"
-modal_inputGitHubID: "输入GitHub ID"
-modal_maxLen10: "最长10个字符"
-modal_maxLen20: "最长20个字符"
-modal_inputTheQuestion: "输入问题"
-modal_inputTheQuestion_description: "你想问的问题"
-modal_inputTheQuestion_placeholder: "最长300个字符。为避免字符限制，请直接在聊天中输入\"Date [yyyyMMdd]\"，而无需通过此按钮菜单。"
-modal_inputTheDate: "输入日期"
+modal_inputMemberName: "輸入組成員名"
+modal_inputMemberName_description: "組成員名"
+modal_inputGitHubID: "輸入GitHub ID"
+modal_maxLen10: "最長10個字符"
+modal_maxLen20: "最長20個字符"
+modal_inputTheQuestion: "輸入問題"
+modal_inputTheQuestion_description: "你想問的問題"
+modal_inputTheQuestion_placeholder: "最長300個字符。爲避免字符限制，請直接在聊天中輸入\"Date [yyyyMMdd]\"，而無需通過此按鈕菜單。"
+modal_inputTheDate: "輸入日期"
 modal_inputTheDate_description: "你要搜索的日期"
 modal_inputTheDate_placeholder: "yyyyMMdd格式"
 modal_inputTheMainLang_description: "中文文本"
 modal_inputTheEnglish_description: "英文文本"
-modal_inputTheEnglish: "输入要翻译成中文的内容"
-modal_inputTheMainLang: "输入要翻译成英文的内容"
-modal_maybeLongerBeOk: "时间长一点可能没问题…？"
+modal_inputTheEnglish: "輸入要翻譯成中文的內容"
+modal_inputTheMainLang: "輸入要翻譯成英文的內容"
+modal_maybeLongerBeOk: "時間長一點可能沒問題…？"
