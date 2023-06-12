@@ -39,6 +39,7 @@ err_failedToGetInfo: "获取信息失败。"
 err_occurred: "发生错误"
 pressTheEnterKey: "按回车键"
 tip_howToGetLongAnswer: "\"heyjandi 啦啦啦...\"如果你问这样的问题，你可能会得到稍微长一点的答案。"
+err_fromAPI: "API有问题，目前不可用。"
 
 appInfo1: |
   _**每天午夜，我都会寻找成功种植草坪的人。**_

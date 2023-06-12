@@ -39,6 +39,7 @@ err_failedToGetInfo: "Failed to get info."
 err_occurred: "An error occurred."
 pressTheEnterKey: "Hit the enter key."
 tip_howToGetLongAnswer: "Asking a question like \"heyjandi bla bla...\" and you can get a longer answer."
+err_fromAPI: "There is a problem with the API so it is currently unavailable."
 
 appInfo1: |
   _**I will find people who succeed committing every night.**_

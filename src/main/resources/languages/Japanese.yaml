@@ -39,6 +39,7 @@ err_failedToGetInfo: "情報の取得に失敗しました。"
 err_occurred: "エラーが発生しました"
 pressTheEnterKey: "Enterキーを押してください"
 tip_howToGetLongAnswer: "\"heyjandi 何とかかんとか…\" このように質問すると、少し長い答えを得ることができます。"
+err_fromAPI: "API側に問題があり、現在利用できません。"
 
 appInfo1: |
   _**僕は毎日深夜にコミットを植えることに成功した人々を見つけるでしょう。**_

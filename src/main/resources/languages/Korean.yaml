@@ -39,6 +39,7 @@ err_failedToGetInfo: "정보 획득에 실패했습니다."
 err_occurred: "오류가 발생했습니다"
 pressTheEnterKey: "엔터 키를 누르십시오"
 tip_howToGetLongAnswer: "\"잔디야 bla bla...\" 이런 식으로 질문하시면 약간 더 긴 답변을 받을 수 있습니다."
+err_fromAPI: "API측에 문제가 있어 현재 이용할 수 없습니다."
 
 appInfo1: |
   _**저는 매일 자정, 잔디를 심는 데 성공한 사람들을 찾아낼 것입니다.**_
