@@ -3,6 +3,7 @@ package utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import init.Initializer;
 import lombok.extern.slf4j.Slf4j;
@@ -112,9 +113,7 @@ public class CommonUtils {
             log.debug("Read the language Map.");
         }
 
-        HashMap<String, String> resultMap = convertHashMap(loadedProps);
-
-        return resultMap;
+        return convertHashMap(loadedProps);
 
     }
 
@@ -130,7 +129,8 @@ public class CommonUtils {
     }
 
     public static String getPrettyJSON(Object o) {
-        return new GsonBuilder().setPrettyPrinting().create().toJson(o);
+        Gson gson = new GsonBuilder().setLenient().setPrettyPrinting().create();
+        return gson.toJson(o);
     }
 
 }

@@ -113,26 +113,37 @@ public class ModalInteraction {
                 // 2 translation cmds below are available only in non-English mode
                 case "showTranslate_EN_to_MAIN" -> {
 
-                    // Prepare
-                    String name = getDisplayedName(event);
-                    String questionEng = getOptionTextValue(event);
-                    log.debug("Translation request(English → {}) by {}: {}",
-                            TranslationService.mainLanguageLong, name, questionEng);
+                    try {
+                        // Prepare
+                        String name = getDisplayedName(event);
+                        String questionEng = getOptionTextValue(event);
+                        log.debug("Translation request(English → {}) by {}: {}",
+                                TranslationService.mainLanguageLong, name, questionEng);
 
-                    // Compute
-                    String answerMain = TranslationService.translateEngToMain(questionEng);
-                    log.debug("Translated text to {}: {}", TranslationService.mainLanguageLong, answerMain);
-                    String inputByName = pr.l("transl_inputByName").formatted(name);
+                        // Compute
+                        String answerMain = TranslationService.translateEngToMain(questionEng);
+                        log.debug("Translated text to {}: {}", TranslationService.mainLanguageLong, answerMain);
+                        String inputByName = pr.l("transl_inputByName").formatted(name);
 
-                    result = """
-                        🤔 %s.. 🤔```md
-                        %s
-                        ```
-                        \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 %s.. \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
-                        ```
-                        %s
-                        ```
-                        """.formatted(inputByName, questionEng, pr.l("transl_textByGoogle"), answerMain);
+                        result = """
+                            🤔 %s.. 🤔```md
+                            %s
+                            ```
+                            \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 %s.. \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
+                            ```
+                            %s
+                            ```
+                            """.formatted(inputByName, questionEng, pr.l("transl_textByGoogle"), answerMain);
+                    } catch(TranslateException e) {
+                        log.debug("\n==========\n\n");
+                        log.debug("TRANSLATE ERROR: {}", e.getReason());
+                        log.debug(e.getMessage());
+                        log.debug("\n\n==========\n");
+                        result = pr.l("err_fromAPI");
+                    } catch(Exception e) {
+                        log.debug("Etc error has occured.");
+                        result = pr.l("err_fromAPI");
+                    }
 
                     // Show the result
                     event.getHook().sendMessage(result).queue();

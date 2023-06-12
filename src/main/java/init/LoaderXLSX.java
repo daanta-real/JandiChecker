@@ -14,7 +14,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static init.Pr.pr;
-import static utils.CommonUtils.getPrettyJSON;
 
 @Slf4j
 public class LoaderXLSX {
@@ -70,12 +69,16 @@ public class LoaderXLSX {
         pr.setToken_JDA(getStringFromAddr(sheet, 9, 6));
         pr.setToken_ChatGPT(getStringFromAddr(sheet, 10, 6));
         StringBuilder sb = new StringBuilder();
-        for(int i = 11; i <= 22; i++) {
-            sb.append(getStringFromAddr(sheet, i, 6));
-            if(i != 22) sb.append("\n");
+        for(int i = 11; i <= 23; i++) {
+            try {
+                sb.append(getStringFromAddr(sheet, i, 6));
+                if(i != 23) sb.append("\n");
+            } catch(Exception e) {
+                // Has posibility to come here when failed to read cell value from setting.xls file
+            }
         }
         pr.setToken_GoogleCloud(sb.toString());
-        log.debug("FINISHED LOADING PROPS!\n\nPROPS:\n{}\n", getPrettyJSON(pr));
+        log.debug("FINISHED LOADING PROPS!\n\nPROPS:\n{}\n", utils.CommonUtils.getPrettyJSON(pr));
     }
 
     public static void loadXLSXSettings() throws Exception {

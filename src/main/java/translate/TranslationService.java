@@ -41,6 +41,7 @@ public class TranslationService {
                         new ByteArrayInputStream(pr.getToken_GoogleCloud().getBytes())
                 )
         ).build().getService();
+
     }
 
     // Core translate method

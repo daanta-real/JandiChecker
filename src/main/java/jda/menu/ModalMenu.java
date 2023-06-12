@@ -25,13 +25,13 @@ public class ModalMenu {
 
         event.getMessage().delete().queue(); // Remove all the menu and the original messages
 
-        System.out.println("id: {}" + id);
-        System.out.println("mainTitle: {}" + mainTitle);
-        System.out.println("labelTitle: {}" + labelTitle);
-        System.out.println("valuePlaceholder: {}" + valuePlaceholder);
-        System.out.println("minLength: {}" + minLength);
-        System.out.println("maxLength: {}" + maxLength);
-        System.out.println("isParagraph: {}" + isParagraph);
+        System.out.println("id: " + id);
+        System.out.println("mainTitle: " + mainTitle);
+        System.out.println("labelTitle: " + labelTitle);
+        System.out.println("valuePlaceholder: " + valuePlaceholder);
+        System.out.println("minLength: " + minLength);
+        System.out.println("maxLength: " + maxLength);
+        System.out.println("isParagraph: " + isParagraph);
 
         TextInput name = TextInput.create("option", pr.l("appName"), style)
                 .setMinLength(minLength)
