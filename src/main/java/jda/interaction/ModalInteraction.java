@@ -2,6 +2,7 @@ package jda.interaction;
 
 import chat.ChatService;
 import cmd.CmdService;
+import com.google.cloud.translate.TranslateException;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
@@ -139,26 +140,37 @@ public class ModalInteraction {
                 }
                 case "showTranslate_MAIN_to_EN" -> {
 
-                    // Prepare
-                    String name = getDisplayedName(event);
-                    String questionMain = getOptionTextValue(event);
-                    log.debug("Translation request({} → English) by {}: {}",
-                            TranslationService.mainLanguageLong, name, questionMain);
+                    try {
+                        // Prepare
+                        String name = getDisplayedName(event);
+                        String questionMain = getOptionTextValue(event);
+                        log.debug("Translation request({} → English) by {}: {}",
+                                TranslationService.mainLanguageLong, name, questionMain);
 
-                    // Compute
-                    String answerEng = TranslationService.translateMainToEng(questionMain);
-                    log.debug("Translated text to English: {}", answerEng);
-                    String inputByName = pr.l("transl_inputByName").formatted(name);
+                        // Compute
+                        String answerEng = TranslationService.translateMainToEng(questionMain);
+                        log.debug("Translated text to English: {}", answerEng);
+                        String inputByName = pr.l("transl_inputByName").formatted(name);
 
-                    result = """
-                        🤔 %s.. 🤔```md
-                        %s
-                        ```
-                        \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 %s.. \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
-                        ```
-                        %s
-                        ```
-                        """.formatted(inputByName, questionMain, pr.l("transl_textByGoogle"), answerEng);
+                        result = """
+                                🤔 %s.. 🤔```md
+                                %s
+                                ```
+                                \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 %s.. \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
+                                ```
+                                %s
+                                ```
+                                """.formatted(inputByName, questionMain, pr.l("transl_textByGoogle"), answerEng);
+                    } catch(TranslateException e) {
+                        log.debug("\n==========\n\n");
+                        log.debug("TRANSLATE ERROR: {}", e.getReason());
+                        log.debug(e.getMessage());
+                        log.debug("\n\n==========\n");
+                        result = pr.l("err_fromAPI");
+                    } catch(Exception e) {
+                        log.debug("Etc error has occured.");
+                        result = pr.l("err_fromAPI");
+                    }
 
                     // Show the result
                     event.getHook().sendMessage(result).queue();

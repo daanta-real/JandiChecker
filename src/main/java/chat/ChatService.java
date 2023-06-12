@@ -1,5 +1,6 @@
 package chat;
 
+import com.google.cloud.translate.TranslateException;
 import com.theokanning.openai.OpenAiService;
 import com.theokanning.openai.completion.CompletionRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -58,14 +59,25 @@ public class ChatService {
         String answer;
         if(!TranslationService.mainLanguageLong.equals("English")) {
 
-            // 2. Mother language -> English
-            String questionEng = TranslationService.translateMainToEng(question);
-            String unescapedEng = CommonUtils.unescapeHTMLEntity(questionEng);
-            log.debug("Translated text to English(length = {}): {}", unescapedEng.length(), unescapedEng);
+            try {
+                // 2. Mother language -> English
+                String questionEng = TranslationService.translateMainToEng(question);
+                String unescapedEng = CommonUtils.unescapeHTMLEntity(questionEng);
+                log.debug("Translated text to English(length = {}): {}", unescapedEng.length(), unescapedEng);
 
-            String answerEng = requestChatGPT(unescapedEng);
+                String answerEng = requestChatGPT(unescapedEng);
 
-            answer = TranslationService.translateEngToMain(answerEng);
+                answer = TranslationService.translateEngToMain(answerEng);
+            } catch(TranslateException e) {
+                log.debug("\n==========\n\n");
+                log.debug("TRANSLATE ERROR: {}", e.getReason());
+                log.debug(e.getMessage());
+                log.debug("\n\n==========\n");
+                return pr.l("err_fromAPI");
+            } catch(Exception e) {
+                log.debug("Etc error has occured.");
+                return pr.l("err_fromAPI");
+            }
 
         }
         // 2-2. If mother language is set as English, just translate it

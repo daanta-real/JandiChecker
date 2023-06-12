@@ -2,6 +2,7 @@ package jda.interaction;
 
 import chat.ChatService;
 import cmd.CmdService;
+import com.google.cloud.translate.TranslateException;
 import jda.JDAController;
 import jda.JDAMsgService;
 import lombok.extern.slf4j.Slf4j;
@@ -114,37 +115,59 @@ public class SlashInteraction {
 
     private static String getTranslatedString_EN_to_MAIN(SlashCommandInteractionEvent event, String questionMain) {
 
-        String name = getDisplayedName(event);
-        String answerMain = TranslationService.translateEngToMain(questionMain);
-        String inputByName = pr.l("transl_inputByName").formatted(name);
+        try {
+            String name = getDisplayedName(event);
+            String answerMain = TranslationService.translateEngToMain(questionMain);
+            String inputByName = pr.l("transl_inputByName").formatted(name);
 
-        return """
-                🤔 %s.. 🤔```md
-                %s
-                ```
-                \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 %s.. \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
-                ```
-                %s
-                ```
-                """.formatted(inputByName, questionMain, pr.l("transl_textByGoogle"), answerMain);
+            return """
+                    🤔 %s.. 🤔```md
+                    %s
+                    ```
+                    \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 %s.. \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
+                    ```
+                    %s
+                    ```
+                    """.formatted(inputByName, questionMain, pr.l("transl_textByGoogle"), answerMain);
+        } catch(TranslateException e) {
+            log.debug("\n==========\n\n");
+            log.debug("TRANSLATE ERROR: {}", e.getReason());
+            log.debug(e.getMessage());
+            log.debug("\n\n==========\n");
+            return pr.l("err_fromAPI");
+        } catch(Exception e) {
+            log.debug("Etc error has occured.");
+            return pr.l("err_fromAPI");
+        }
 
     }
 
     private static String getTranslatedString_MAIN_to_EN(SlashCommandInteractionEvent event, String questionMain) {
 
-        String name = getDisplayedName(event);
-        String answerMain = TranslationService.translateMainToEng(questionMain);
-        String inputByName = pr.l("transl_inputByName").formatted(name);
+        try {
+            String name = getDisplayedName(event);
+            String answerMain = TranslationService.translateMainToEng(questionMain);
+            String inputByName = pr.l("transl_inputByName").formatted(name);
 
-        return """
-                🤔 %s.. 🤔```md
-                %s
-                ```
-                \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 %s.. \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
-                ```
-                %s
-                ```
-                """.formatted(inputByName, questionMain, pr.l("transl_textByGoogle"), answerMain);
+            return """
+                    🤔 %s.. 🤔```md
+                    %s
+                    ```
+                    \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93 %s.. \uD83D\uDC69\uD83C\uDFFB\u200D\uD83C\uDF93
+                    ```
+                    %s
+                    ```
+                    """.formatted(inputByName, questionMain, pr.l("transl_textByGoogle"), answerMain);
+        } catch(TranslateException e) {
+            log.debug("\n==========\n\n");
+            log.debug("TRANSLATE ERROR: {}", e.getReason());
+            log.debug(e.getMessage());
+            log.debug("\n\n==========\n");
+            return pr.l("err_fromAPI");
+        } catch(Exception e) {
+            log.debug("Etc error has occured.");
+            return pr.l("err_fromAPI");
+        }
 
     }
 

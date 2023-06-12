@@ -2,7 +2,6 @@ package translate;
 
 import com.google.auth.oauth2.ServiceAccountCredentials;
 import com.google.cloud.translate.Translate;
-import com.google.cloud.translate.TranslateException;
 import com.google.cloud.translate.TranslateOptions;
 import com.google.cloud.translate.Translation;
 import lombok.extern.slf4j.Slf4j;
@@ -46,23 +45,12 @@ public class TranslationService {
 
     // Core translate method
     private static String executeTranslate(String source, String target, String text) {
-        try {
-            Translation translation = translate.translate(
-                    text,
-                    Translate.TranslateOption.sourceLanguage(source),
-                    Translate.TranslateOption.targetLanguage(target)
-            );
-            return translation.getTranslatedText();
-        } catch(TranslateException e) {
-            log.debug("\n==========\n\n");
-            log.debug("TRANSLATE ERROR: {}", e.getReason());
-            log.debug(e.getMessage());
-            log.debug("\n\n==========\n");
-            return null;
-        } catch(Exception e) {
-            log.debug("Etc error has occured.");
-            return null;
-        }
+        Translation translation = translate.translate(
+                text,
+                Translate.TranslateOption.sourceLanguage(source),
+                Translate.TranslateOption.targetLanguage(target)
+        );
+        return translation.getTranslatedText();
     }
 
     // Translation method: Main to Eng
