@@ -11,9 +11,71 @@ This is a Discord Bot for digging and showing a list of who has succeeded to com
 
 
 
+# Example
+
+
+
+1. Info. Introducing all the features
+
+![image](https://github.com/daanta-real/JandiChecker/assets/84055731/c04a288a-2c6b-4fb6-93da-f7a58e6b262b)
+
+![image](https://github.com/daanta-real/JandiChecker/assets/84055731/473ec268-fffa-4c8b-9685-0c30e4ec12f8)
+
+![image](https://github.com/daanta-real/JandiChecker/assets/84055731/ed112b50-9b59-482e-a7d3-95155003baf4)
+
+
+
+2. Run from 'modal menu'
+
+![image](https://github.com/daanta-real/JandiChecker/assets/84055731/2c737439-e753-498f-9955-4a43e3a58901)
+
+![image](https://github.com/daanta-real/JandiChecker/assets/84055731/0ba34b34-4bcd-4f2d-97b0-41d7e121805e)
+
+![image](https://github.com/daanta-real/JandiChecker/assets/84055731/5606fc77-6261-41a7-b618-732a9c79a5f6)
+
+
+
+3. Run from 'direct command'
+   
+   ※ Example below shows the force call command aside from daily auto cheking
+
+![image](https://github.com/daanta-real/JandiChecker/assets/84055731/a44e19ac-0996-4220-80e4-7a55fcd1362a)
+
+![image](https://github.com/daanta-real/JandiChecker/assets/84055731/b0d11bdd-c82f-49c8-b21f-711dd0c037c0)
+
+
+
+4. Google Translation Feature
+   
+   ※ Only available in non-english mode (Korean, Japanese, Chinese-Simplified, Chinese-traditional)
+
+![image](https://github.com/daanta-real/JandiChecker/assets/84055731/9d7cce29-1576-4e33-ba15-2ae7d3c52e04)
+
+
+
+5. ChatGPT call by command Feature
+
+![image](https://github.com/daanta-real/JandiChecker/assets/84055731/1ee9d843-339f-43a5-a6dc-05915da049e7)
+
+![image](https://github.com/daanta-real/JandiChecker/assets/84055731/3f20e630-0d42-4a30-95b3-6fed3f32a0c9)
+
+
+
+6. ChatGPT call by direct Feature
+
+![image](https://github.com/daanta-real/JandiChecker/assets/84055731/544da066-1780-4fde-9169-0f00c22c947f)
+
+
+
 # How to Use 사용법
 
-## 1. Setting Props
+## 1. Requirements
+
+You need to know how to executing and managing bots on Discord to use JandiChecker. JRE 17 or higher should be installed before use this app.
+
+잔디체커를 사용하기 위해서는, 디스코드에서 봇을 실행하고 관리하는 방법을 알고 계셔야 합니다. 또한, JRE 17 버전 이상이 설치되어 있어야 합니다.
+
+## 2. Setting Props
 
 Fill in settings.xls file with your own setting values. After saving locate it in same folder as .jar/exe is located.
 
@@ -27,13 +89,9 @@ JandiChecker.jar 혹은 JandiChecker.exe 파일을 실행해 주시면 봇 서�
 
 ![image](https://github.com/daanta-real/JandiChecker/assets/84055731/5bdd52d4-f634-4b33-84aa-a74f709144dc)
 
-※ You need to know how to executing and managing bots on Discord to use JandiChecker.
-
-※ 잔디체커를 사용하기 위해서는, 디스코드에서 봇을 실행하고 관리하는 방법을 알고 계셔야 합니다.
 
 
-
-## 2. Commamding
+## 3. Commamding
 
 JandiChecker command can be called in three ways. 잔디체커는 세 가지 방법으로 이용할 수 있습니다.
 
@@ -96,75 +154,11 @@ Just type 'HeyJandi [question content]', you can ask the AI directly without cal
 
 
 
-# Example
-
-
-
-
-1. Info. Introducing all the features
-
-![image](https://github.com/daanta-real/JandiChecker/assets/84055731/c04a288a-2c6b-4fb6-93da-f7a58e6b262b)
-
-![image](https://github.com/daanta-real/JandiChecker/assets/84055731/473ec268-fffa-4c8b-9685-0c30e4ec12f8)
-
-![image](https://github.com/daanta-real/JandiChecker/assets/84055731/ed112b50-9b59-482e-a7d3-95155003baf4)
-
-
-
-
-
-2. Run from 'modal menu'
-
-![image](https://github.com/daanta-real/JandiChecker/assets/84055731/2c737439-e753-498f-9955-4a43e3a58901)
-
-![image](https://github.com/daanta-real/JandiChecker/assets/84055731/0ba34b34-4bcd-4f2d-97b0-41d7e121805e)
-
-![image](https://github.com/daanta-real/JandiChecker/assets/84055731/5606fc77-6261-41a7-b618-732a9c79a5f6)
-
-
-
-
-3. Run from 'direct command'
-   
-   ※ Example below shows the force call command aside from daily auto cheking
-
-![image](https://github.com/daanta-real/JandiChecker/assets/84055731/a44e19ac-0996-4220-80e4-7a55fcd1362a)
-
-![image](https://github.com/daanta-real/JandiChecker/assets/84055731/b0d11bdd-c82f-49c8-b21f-711dd0c037c0)
-
-
-
-
-
-4. Google Translation Feature
-   
-   ※ Only available in non-english mode (Korean, Japanese, Chinese-Simplified, Chinese-traditional)
-
-![image](https://github.com/daanta-real/JandiChecker/assets/84055731/9d7cce29-1576-4e33-ba15-2ae7d3c52e04)
-
-
-
-
-5. ChatGPT call by command Feature
-
-![image](https://github.com/daanta-real/JandiChecker/assets/84055731/1ee9d843-339f-43a5-a6dc-05915da049e7)
-
-![image](https://github.com/daanta-real/JandiChecker/assets/84055731/3f20e630-0d42-4a30-95b3-6fed3f32a0c9)
-
-
-6. ChatGPT call by direct Feature
-
-![image](https://github.com/daanta-real/JandiChecker/assets/84055731/544da066-1780-4fde-9169-0f00c22c947f)
-
-
-
-
 # Development Environments
 
 Main: Java 17, Gradle 7.6, JDA 5.0.0 Beta1
 
 Sub: Quartz 2.3.2, Logback 1.4.5
-
 
 
 
