@@ -1,5 +1,7 @@
 ![img](https://user-images.githubusercontent.com/84055731/135766694-09a6cfb2-4cc5-4bb4-bc4a-d8d89102bd19.png)
 
+
+
 # JandiChecker
 _**"저는 매일 자정, 잔디를 심는 데 성공한 사람들을 찾아낼 것입니다."**_
 
@@ -13,9 +15,15 @@ This is a Discord Bot for digging and showing a list of who has succeeded to com
 
 ## 1. Setting Props
 
-Edit the settings.xls file by on your own before use it. After saving you can run JandiChecker.jar or JandiChecker.exe to run JandiChecker bot.
+Fill in settings.xls file with your own setting values. After saving locate it in same folder as .jar/exe is located.
 
-사용 전에 settings.XLS 파일을 작성해 주세요. 이후 JandiChecker.jar 혹은 JandiChecker.exe 파일을 실행해 주시면 봇 서버가 작동하기 시작합니다.
+사용 전에 settings.xls 파일을 작성한 뒤 .jar/.exe 파일과 같은 폴더에 위치시켜 주세요.
+
+![image](https://github.com/daanta-real/JandiChecker/assets/84055731/78649922-1e0e-4ac4-af26-5b487ab47c82)
+
+After it you can run JandiChecker.jar or JandiChecker.exe to run JandiChecker bot.
+
+JandiChecker.jar 혹은 JandiChecker.exe 파일을 실행해 주시면 봇 서버가 작동하기 시작합니다.
 
 ![image](https://github.com/daanta-real/JandiChecker/assets/84055731/5bdd52d4-f634-4b33-84aa-a74f709144dc)
 
