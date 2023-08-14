@@ -2,7 +2,10 @@
 
 
 
-# JandiChecker
+# JandiChecker 잔디체커
+
+_**I will find people who succeed committing every night.**_
+
 _**"저는 매일 자정, 잔디를 심는 데 성공한 사람들을 찾아낼 것입니다."**_
 
 This is a Discord Bot for digging and showing a list of who has succeeded to commit to GitHub yesterday in your Discord study group.
@@ -11,11 +14,11 @@ This is a Discord Bot for digging and showing a list of who has succeeded to com
 
 
 
-# Example
+# Example 작동예제
 
 
 
-1. Info. Introducing all the features
+1. Info. Introducing all the features 기능 소개
 
 ![image](https://github.com/daanta-real/JandiChecker/assets/84055731/c04a288a-2c6b-4fb6-93da-f7a58e6b262b)
 
@@ -25,7 +28,7 @@ This is a Discord Bot for digging and showing a list of who has succeeded to com
 
 
 
-2. Run from 'modal menu'
+2. Run from 'modal menu' 모달 메뉴로 명령 실행
 
 ![image](https://github.com/daanta-real/JandiChecker/assets/84055731/2c737439-e753-498f-9955-4a43e3a58901)
 
@@ -35,7 +38,7 @@ This is a Discord Bot for digging and showing a list of who has succeeded to com
 
 
 
-3. Run from 'direct command'
+3. Run from 'direct command' 커맨드 입력으로 명령 실행
    
    ※ Example below shows the force call command aside from daily auto cheking
 
@@ -45,7 +48,7 @@ This is a Discord Bot for digging and showing a list of who has succeeded to com
 
 
 
-4. Google Translation Feature
+4. Google Translation Feature 구글 번역 기능
    
    ※ Only available in non-english mode (Korean, Japanese, Chinese-Simplified, Chinese-traditional)
 
@@ -53,7 +56,7 @@ This is a Discord Bot for digging and showing a list of who has succeeded to com
 
 
 
-5. ChatGPT call by command Feature
+5. ChatGPT call by command Feature 명령어 입력으로 ChatGPT 호출
 
 ![image](https://github.com/daanta-real/JandiChecker/assets/84055731/1ee9d843-339f-43a5-a6dc-05915da049e7)
 
@@ -61,7 +64,7 @@ This is a Discord Bot for digging and showing a list of who has succeeded to com
 
 
 
-6. ChatGPT call by direct Feature
+6. ChatGPT call by direct Feature 단축어로 ChatGPT 호출
 
 ![image](https://github.com/daanta-real/JandiChecker/assets/84055731/544da066-1780-4fde-9169-0f00c22c947f)
 
@@ -158,7 +161,7 @@ Just type 'HeyJandi [question content]', you can ask the AI directly without cal
 
 Main: Java 17, Gradle 7.6, JDA 5.0.0 Beta1
 
-Sub: Quartz 2.3.2, Logback 1.4.5
+Sub: Quartz 2.3.2, Logback 1.4.11
 
 
 
