@@ -1,7 +1,7 @@
 package chat;
 
 import com.google.cloud.translate.TranslateException;
-import com.theokanning.openai.OpenAiService;
+import com.theokanning.openai.service.OpenAiService;
 import com.theokanning.openai.completion.CompletionRequest;
 import lombok.extern.slf4j.Slf4j;
 import translate.TranslationService;
