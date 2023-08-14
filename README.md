@@ -99,6 +99,9 @@ Just type 'HeyJandi [question content]', you can ask the AI directly without cal
 
 ![image](https://github.com/daanta-real/JandiChecker/assets/84055731/473ec268-fffa-4c8b-9685-0c30e4ec12f8)
 
+![image](https://github.com/daanta-real/JandiChecker/assets/84055731/ed112b50-9b59-482e-a7d3-95155003baf4)
+
+
 
 
 
@@ -118,6 +121,9 @@ Just type 'HeyJandi [question content]', you can ask the AI directly without cal
    ※ Example below shows the force call command aside from daily auto cheking
 
 ![image](https://github.com/daanta-real/JandiChecker/assets/84055731/a44e19ac-0996-4220-80e4-7a55fcd1362a)
+
+![image](https://github.com/daanta-real/JandiChecker/assets/84055731/b0d11bdd-c82f-49c8-b21f-711dd0c037c0)
+
 
 
 
