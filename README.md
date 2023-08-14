@@ -11,17 +11,33 @@ This is a Discord Bot for digging and showing a list of who has succeeded to com
 
 # How to Use 사용법
 
+## 1. Setting Props
+
+Edit the settings.xls file by on your own before use it. After saving you can run JandiChecker.jar or JandiChecker.exe to run JandiChecker bot.
+
+사용 전에 settings.XLS 파일을 작성해 주세요. 이후 JandiChecker.jar 혹은 JandiChecker.exe 파일을 실행해 주시면 봇 서버가 작동하기 시작합니다.
+
+![image](https://github.com/daanta-real/JandiChecker/assets/84055731/5bdd52d4-f634-4b33-84aa-a74f709144dc)
+
+※ You need to know how to executing and managing bots on Discord to use JandiChecker.
+
+※ 잔디체커를 사용하기 위해서는, 디스코드에서 봇을 실행하고 관리하는 방법을 알고 계셔야 합니다.
+
+
+
+## 2. Commamding
+
 JandiChecker command can be called in three ways. 잔디체커는 세 가지 방법으로 이용할 수 있습니다.
 
-1. Slash
+1. Slash - type slash and input the command
 
 enter '/' (slash) in the chat window and the available commands are displayed as a slash menu. After selecting/typing the one you want, and enter the option if additional options are required. 채팅창에 '/'(슬래시)를 입력하면 사용 가능한 명령어들이 슬래시 메뉴로 표시됩니다. 원하는 것을 선택한 후, 추가적인 옵션 입력이 필요하면 옵션을 입력해 주세요.
 
-2. Hey Jandi
+2. Hey Jandi - just type 'Hey Jandi'
 
 Type 'HeyJandi' in the chat window and the available commands are displayed as a button menu. After pressing the menu button one you want, and enter the option if additional options are required. 채팅창에 '잔디야'라고 입력하면 사용 가능한 명령들이 버튼 메뉴로 표시됩니다. 원하는 것을 누른 후, 추가적인 옵션 입력이 필요하면 옵션을 입력해 주세요.
 
-3. Direct call
+3. ChatGPT Direct call - just type 'hey Jandi blabla'
 
 Just type 'HeyJandi [question content]', you can ask the AI directly without calling the menu. '잔디야 [질문내용]'이라고 입력하면, 메뉴 호출 없이 AI에게 바로 질문할 수 있습니다.
 
@@ -79,6 +95,8 @@ Just type 'HeyJandi [question content]', you can ask the AI directly without cal
 
 1. Info. Introducing all the features
 
+![image](https://github.com/daanta-real/JandiChecker/assets/84055731/c04a288a-2c6b-4fb6-93da-f7a58e6b262b)
+
 ![image](https://github.com/daanta-real/JandiChecker/assets/84055731/473ec268-fffa-4c8b-9685-0c30e4ec12f8)
 
 
@@ -113,12 +131,17 @@ Just type 'HeyJandi [question content]', you can ask the AI directly without cal
 
 
 
-5. ChatGPT direct call Feature
+5. ChatGPT call by command Feature
 
 ![image](https://github.com/daanta-real/JandiChecker/assets/84055731/1ee9d843-339f-43a5-a6dc-05915da049e7)
 
-
 ![image](https://github.com/daanta-real/JandiChecker/assets/84055731/3f20e630-0d42-4a30-95b3-6fed3f32a0c9)
+
+
+6. ChatGPT call by direct Feature
+
+![image](https://github.com/daanta-real/JandiChecker/assets/84055731/544da066-1780-4fde-9169-0f00c22c947f)
+
 
 
 
