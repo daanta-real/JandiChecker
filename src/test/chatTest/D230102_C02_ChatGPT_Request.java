@@ -1,20 +1,35 @@
 package chatTest;
 
-import com.theokanning.openai.OpenAiService;
+import com.theokanning.openai.service.OpenAiService;
 import com.theokanning.openai.completion.CompletionRequest;
+import init.Pr;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import init.Initializer;
 @Slf4j
 class D230102_C02_ChatGPT_Request {
 
+    static Pr pr;
+
+    @BeforeAll
+    public static void init() throws Exception {
+
+        // Load all preferences
+        log.info("<<< INITIALIZING JandiChecker >>>");
+        Initializer.ready(true);
+
+        pr = init.Pr.pr;
+
+    }
+
     @Test
     public void chatTest() throws Exception {
 
         // 1. Declare
         Initializer.ready(false);
-        String inputTxt = "";
+        String inputTxt;
 
         // 2. Input
 //        try(BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
@@ -25,7 +40,7 @@ class D230102_C02_ChatGPT_Request {
 //        inputTxt = "대한민국의 올해 경제정책에 대해서 설명하시오";
         inputTxt = "Please explain Korean economic policy this year.";
 
-        OpenAiService service = new OpenAiService(props.get("ChatGPTToken"));
+        OpenAiService service = new OpenAiService(pr.getToken_ChatGPT());
         CompletionRequest completionRequest = CompletionRequest.builder()
                 .prompt(inputTxt) // The question
                 .model("text-davinci-001")   // Strongest AI (has very high risk of timeout)

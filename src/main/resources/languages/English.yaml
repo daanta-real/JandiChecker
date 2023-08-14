@@ -48,7 +48,7 @@ appInfo1: |
   'Jandi' is a term used to refer to the act of committing to GitHub. When you commit on GitHub, the green color on the GitHub commit map looks like planting grass ('jandi' in Korean), so it's a term that Korean developers have come to use a lot. JandiChecker is the utility bot to check the commit periodically to make you and your group's daily commit habit more healthier.
 
   # How to use JandiChecker
-  The JandiChecker command can be called in three ways.
+  JandiChecker command can be called in three ways.
   1. Enter '/' (slash) in the chat window and the available commands are displayed as a slash menu. After selecting/typing the one you want, and enter the option if additional options are required.
   2. Type 'HeyJandi' in the chat window and the available commands are displayed as a button menu. After pressing the menu button one you want, and enter the option if additional options are required.
   3. Just type 'HeyJandi [question content]', you can ask the AI directly without calling the menu.

@@ -1,6 +1,7 @@
 package crawler;
 
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 import utils.CommonUtils;
 
 import java.util.*;
@@ -68,7 +69,8 @@ public class Crawler {
 	}
 
 	// Gets a GitHub ID and returns his annual commit map
-	public static TreeMap<String, Boolean> getGithubMap(String id) throws Exception {
+	@NotNull
+	public static TreeMap<String, Boolean> getGithubMap(@NotNull String id) throws Exception {
 
 		String html;
 		try {

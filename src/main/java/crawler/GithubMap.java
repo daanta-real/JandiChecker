@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
 
 import static init.Pr.pr;
 import static utils.CommonUtils.getCalendar;
@@ -15,7 +16,8 @@ import static utils.CommonUtils.getCalendar;
 public class GithubMap {
 
 	// Returns date Strings of given day
-	private static Calendar getDate(String dateStr) {
+	@NotNull
+	private static Calendar getDate(@NotNull String dateStr) {
 		String y = dateStr.substring(0, 4);
 		String m = String.valueOf(Integer.parseInt(dateStr.substring(4, 6)) - 1);
 		String d = dateStr.substring(6, 8);
@@ -23,6 +25,7 @@ public class GithubMap {
 	}
 
 	// Get total commit information as Map by GitHub ID
+	@NotNull
 	public static TreeMap<String, Object> getGithubMapInfo(String id) throws Exception {
 
 		// 1. Definitions
@@ -127,7 +130,7 @@ public class GithubMap {
 		String perc = new DecimalFormat("#.##").format(percOrg);
 		log.info("Committed days in recent 30 days: {}", count);
 		log.info("Total days count in 30 days: {}", total);
-		log.info("Committed rate in 30 days: {}" + perc);
+		log.info("Committed rate in 30 days: {}", perc);
 		result.add(
 				"# %s: %s%s %s%%)".formatted(
 						pr.l("gitHubMap_CommittedInLast30"),
