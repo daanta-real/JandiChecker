@@ -1,5 +1,6 @@
 
-> ⚠️ Today the final version has been released. Thank you for your interest so far
+> ⚠️ Today the final version has been released. Thank you for your interest so far.
+> 
 > ⚠️ 금일 최종버전이 릴리즈되었습니다. 지금까지의 성원에 감사드립니다.
 
 
