@@ -8,6 +8,20 @@ import org.junit.Test;
 public class D230113_C02_GetGithubMapTest {
 
     @Test
+    public void getGiHubMapTest() {
+        String id = "daanta-real";
+
+        try {
+            String result = GithubMap.getGithubInfoString(id, id);
+            log.debug("result: {}", result);
+        } catch(Exception e) {
+            log.error("내가 모르는 에러가 발생하였다. 자세히 살펴봐야 한다");
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
     public void caseNoMapInProfilePage() {
 
         String id = "nullable";

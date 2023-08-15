@@ -3,6 +3,8 @@ package gitHubScrappingTest;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
+import java.util.Arrays;
+
 @Slf4j
 public class D230109_C03_ParseDateStrToNumber {
 
@@ -10,10 +12,16 @@ public class D230109_C03_ParseDateStrToNumber {
     public void test1() {
 
         String[] arr = new String[]{"2022-06-08", "2022-06-09", "2022-12-13", "2022-12-12", "2022-12-11", "2022-12-10"};
+        String[] newArr = Arrays.stream(arr)
+                .map(s -> s.replace("-", ""))
+                .toArray(String[]::new);
 //        Arrays.sort(arr, (x, y) -> {
 //            y > x
 //        });
-        log.debug("{}", Integer.parseInt(arr[0]));
+        log.debug("newArr: {}", Arrays.toString(newArr));
+        String dat = newArr[0];
+        log.debug("{}", Integer.parseInt(dat));
+
     }
 
     @Test
