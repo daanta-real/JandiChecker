@@ -30,7 +30,7 @@ public class D230113_C02_GetGithubMapTest {
     }
 
     @Test
-    void getGiHubMapTest() {
+    void getGitHubMapTest() {
         String id = "daanta-real";
 
         try {
