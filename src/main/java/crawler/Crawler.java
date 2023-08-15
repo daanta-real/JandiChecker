@@ -13,7 +13,8 @@ import static init.Pr.pr;
 public class Crawler {
 
 	// Return the GitHub profile page of someone
-	public static String getHTMLByID(String id) throws Exception {
+	@NotNull
+	public static String getHTMLByID(@NotNull String id) throws Exception {
 		try {
 			return CommonUtils.httpRequestUrl_GET("https://github.com/" + id);
 		} catch(Exception e) {
@@ -25,7 +26,8 @@ public class Crawler {
 	}
 
 	// Trimmed HTML to commit score by date
-	public static TreeMap<String, Boolean> makeMapFromTrimmed(String html) throws Exception {
+	@NotNull
+	public static TreeMap<String, Boolean> makeMapFromTrimmed(@NotNull String html) throws Exception {
 
 		String[] htmlArr = html.split("\n");
 
@@ -34,23 +36,28 @@ public class Crawler {
 		for(String oneLine: htmlArr) {
 
 			// Target only the lines including the rect tag
-			if(!oneLine.contains("<rect width")) { // All lines which have commit data start with <rect
+			if(!oneLine.contains("<td tabindex=")) { // All lines which have commit data start with <rect
 				continue;
 			}
 			int idx_date = oneLine.indexOf("data-date");
-			if(idx_date < 0) continue; // While some lines don't have "data-date" attribute but start with <rect
+
+			// v1.9(230814)~: Deprecated. The HTML structure has been changed from some day.
+//			// While some lines don't have "data-date" attribute but start with <rect
+//			if(idx_date < 0) {
+//				continue;
+//			}
 
 			// Date extraction
-			int idx_date_start = idx_date + 11;
+			int idxDate_Start = idx_date + 11;
 			String date
-					= oneLine.substring(idx_date_start, idx_date_start + 4)
-					+ oneLine.substring(idx_date_start + 5, idx_date_start + 7)
-					+ oneLine.substring(idx_date_start + 8, idx_date_start + 10);
+					= oneLine.substring(idxDate_Start    , idxDate_Start + 4)
+					+ oneLine.substring(idxDate_Start + 5, idxDate_Start + 7)
+					+ oneLine.substring(idxDate_Start + 8, idxDate_Start + 10);
 
 			// Data extraction
 			int idx_data = oneLine.indexOf("data-level");
-			String data = oneLine.substring(idx_data + 12, idx_data + 13);
-			boolean hasCommitted = Integer.parseInt(data) > 0;
+			String grassScore = oneLine.substring(idx_data + 12, idx_data + 13);
+			boolean hasCommitted = Integer.parseInt(grassScore) > 0;
 
 //			log.debug("makeMapFromTrimmed > {} -> committed? {}", date, hasCommitted);
 			m.put(date, hasCommitted);

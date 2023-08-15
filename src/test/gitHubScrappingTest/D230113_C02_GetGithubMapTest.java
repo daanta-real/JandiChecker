@@ -1,14 +1,36 @@
 package gitHubScrappingTest;
 
+import crawler.Crawler;
 import crawler.GithubMap;
+import init.Initializer;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
+
+import java.util.TreeMap;
 
 @Slf4j
 public class D230113_C02_GetGithubMapTest {
 
+    @BeforeEach
+    void init() throws Exception {
+
+        // Load all preferences
+        log.info("<<< INITIALIZING JandiChecker >>>");
+        Initializer.ready(true);
+
+    }
+
     @Test
-    public void getGiHubMapTest() {
+    void makeMapFromTrimmedTest() throws Exception {
+        String id = "daanta-real";
+        String html = Crawler.getHTMLByID(id);
+        TreeMap<String, Boolean> map = Crawler.makeMapFromTrimmed(html);
+        log.debug("result:\n{}", map);
+    }
+
+    @Test
+    void getGiHubMapTest() {
         String id = "daanta-real";
 
         try {
@@ -22,7 +44,7 @@ public class D230113_C02_GetGithubMapTest {
     }
 
     @Test
-    public void caseNoMapInProfilePage() {
+    void caseNoMapInProfilePage() {
 
         String id = "nullable";
 
@@ -38,7 +60,7 @@ public class D230113_C02_GetGithubMapTest {
     }
 
     @Test
-    public void case404() {
+    void case404() {
 
         String id = "asfdgasdgagragwr";
 
