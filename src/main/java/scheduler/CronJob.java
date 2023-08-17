@@ -1,11 +1,12 @@
 package scheduler;
 
+import crawler.Checker;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 
-import cmd.CmdService;
 import jda.JDAMsgService;
 
 import static init.Pr.pr;
@@ -20,7 +21,10 @@ public class CronJob implements Job {
 	@Override
 	public void execute(JobExecutionContext context) {
 		try {
-			String yesterdayCommitedString = CmdService.getDidCommitStringYesterday();
+			String yesterdayCommitedString = Checker.getDidCommitYesterday_onlyIfAny();
+			if(StringUtils.equals(yesterdayCommitedString, "")) {
+				return;
+			}
 			log.info("Collected the string of yesterday's commit. total length: {}", yesterdayCommitedString.length());
 			JDAMsgService.send(pr.getCronTargetChannelID(), yesterdayCommitedString);
 		} catch (Exception e) {

@@ -117,6 +117,28 @@ public class Checker {
 
 	}
 
+	// 1. Check the all members' commit status.
+	// 2. Returns the list who DID commit yesterday "ONLY IF ANY"
+	//    Otherwise return the empty String (not null.)
+	public static String getDidCommitYesterday_onlyIfAny() throws Exception {
+
+		log.info("Request: get list of DID committed yesterday");
+
+		Calendar c = Calendar.getInstance();
+		c.add(Calendar.DATE, -1);
+		String day = CommonUtils.sdf_thin.format(c.getTime());
+
+		String[] list = getCommitListByDay(day, false);
+		String date_notice = CommonUtils.sdf_dayweek.format(c.getTime());
+		if(list.length == 0) {
+			return "";
+		} else {
+			String result = "```md\n[" + pr.l("checker_getDidCommitYesterday_result") + "]: %s\n%s\n```";
+			return result.formatted(list[0], date_notice, list[1]);
+		}
+
+	}
+
 	// Check the all members and returns the list who DID commit today
 	// maybe it gets an error before 6 o'clock
 	public static String getDidCommitToday() {
