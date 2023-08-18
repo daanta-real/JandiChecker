@@ -78,13 +78,13 @@ This is a Discord Bot for digging and showing a list of who has succeeded to com
 
 # How to Use 사용법
 
-## 1. Requirements
+## 1. Requirements 요구사항
 
 You need to know how to executing and managing bots on Discord to use JandiChecker. JRE 17 or higher should be installed before use this app.
 
 잔디체커를 사용하기 위해서는, 디스코드에서 봇을 실행하고 관리하는 방법을 알고 계셔야 합니다. 또한, JRE 17 버전 이상이 설치되어 있어야 합니다.
 
-## 2. Setting Props
+## 2. Setting Props 엑셀파일 셋팅값 설정
 
 Fill in settings.xls file with your own setting values. After saving locate it in same folder as .jar/exe is located.
 
@@ -102,19 +102,27 @@ JandiChecker.jar 혹은 JandiChecker.exe 파일을 실행해 주시면 봇 서�
 
 ## 3. Commamding
 
-JandiChecker command can be called in three ways. 잔디체커는 세 가지 방법으로 이용할 수 있습니다.
+JandiChecker command can be called in three ways.
 
-1. Slash - type slash and input the command
+잔디체커는 세 가지 방법으로 이용할 수 있습니다.
 
-enter '/' (slash) in the chat window and the available commands are displayed as a slash menu. After selecting/typing the one you want, and enter the option if additional options are required. 채팅창에 '/'(슬래시)를 입력하면 사용 가능한 명령어들이 슬래시 메뉴로 표시됩니다. 원하는 것을 선택한 후, 추가적인 옵션 입력이 필요하면 옵션을 입력해 주세요.
+1. Slash - type slash and input the command 슬래시로 시작하는 커맨드 입력
 
-2. Hey Jandi - just type 'Hey Jandi'
+enter '/' (slash) in the chat window and the available commands are displayed as a slash menu. After selecting/typing the one you want, and enter the option if additional options are required.
 
-Type 'HeyJandi' in the chat window and the available commands are displayed as a button menu. After pressing the menu button one you want, and enter the option if additional options are required. 채팅창에 '잔디야'라고 입력하면 사용 가능한 명령들이 버튼 메뉴로 표시됩니다. 원하는 것을 누른 후, 추가적인 옵션 입력이 필요하면 옵션을 입력해 주세요.
+채팅창에 '/'(슬래시)를 입력하면 사용 가능한 명령어들이 슬래시 메뉴로 표시됩니다. 원하는 것을 선택한 후, 추가적인 옵션 입력이 필요하면 옵션을 입력해 주세요.
 
-3. ChatGPT Direct call - just type 'hey Jandi blabla'
+2. Hey Jandi - just type 'Hey Jandi' "잔디야"로 메뉴 호출
 
-Just type 'HeyJandi [question content]', you can ask the AI directly without calling the menu. '잔디야 [질문내용]'이라고 입력하면, 메뉴 호출 없이 AI에게 바로 질문할 수 있습니다.
+Type 'HeyJandi' in the chat window and the available commands are displayed as a button menu. After pressing the menu button one you want, and enter the option if additional options are required.
+
+채팅창에 '잔디야'라고 입력하면 사용 가능한 명령들이 버튼 메뉴로 표시됩니다. 원하는 것을 누른 후, 추가적인 옵션 입력이 필요하면 옵션을 입력해 주세요.
+
+3. ChatGPT Direct call - just type 'hey Jandi blabla' "잔디야" 호칭 직입력
+
+Just type 'HeyJandi [question content]', you can ask the AI directly without calling the menu.
+
+'잔디야 [질문내용]'이라고 입력하면, 메뉴 호출 없이 AI에게 바로 질문할 수 있습니다.
 
 
 
