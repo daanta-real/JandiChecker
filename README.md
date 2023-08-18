@@ -1,7 +1,7 @@
 
-> ⚠️ Today the final version has been released. Thank you for your interest so far.
+> ⚠️ Finally the final version has been released. Thank you for your interest so far.
 > 
-> ⚠️ 금일 최종버전이 릴리즈되었습니다. 지금까지의 성원에 감사드립니다.
+> ⚠️ 마침내 최종버전이 릴리즈되었습니다. 지금까지의 성원에 감사드립니다.
 
 
 ![img](https://user-images.githubusercontent.com/84055731/135766694-09a6cfb2-4cc5-4bb4-bc4a-d8d89102bd19.png)
