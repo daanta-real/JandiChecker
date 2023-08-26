@@ -187,4 +187,4 @@ Sub: Quartz 2.3.2, Logback 1.4.11
 
 e-mail: daanta@naver.com
 
-Github: http://github.com/daanta-real
+GitHub: http://github.com/daanta-real
