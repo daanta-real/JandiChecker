@@ -127,6 +127,7 @@ Just type 'HeyJandi [question content]', you can ask the AI directly without cal
 
 
 # Detailed introduction to each command 각 커맨드에 대한 상세 소개
+
 ※※※ This application is available not only in Korean and English, but also in Japanese (日本語), simplified Chinese (中文简体字), and traditional Chinese (中文繁体字). ※※※
 
 /me: Shows my commit info. You need to registered as a group member to run the command.
@@ -168,6 +169,26 @@ Just type 'HeyJandi [question content]', you can ask the AI directly without cal
 /영한: 영어 문장을 한국어로 번역합니다. 
 
 /대하여: 이 봇을 소개합니다.
+
+
+
+# Bonus: Only for administration 운영자 전용 기능
+
+<img src="https://github.com/daanta-real/JandiChecker/assets/84055731/5f5d87c7-a398-467f-b014-7332a1cd15b0">
+
+<img src="https://github.com/daanta-real/JandiChecker/assets/84055731/e8dfeb66-3dc5-4327-bc55-a4aaac03c6be">
+
+This app uses not the conventional console but the custom JFrame UI and JTextAppender logging interface.
+
+이 앱은 일반적인 콘솔이 아닌 커스텀 JFrame UI와 커스텀 JTextAppender 인터페이스가 적용되어 있습니다.
+
+Logs are displayed on a special window, which supports tray iconization.
+
+로그 또한 별도의 창에 표시되며, 트레이 축소 확대 기능을 지원합니다.
+
+This feature has been made just only for myself.
+
+이 기능은 이 앱을 쓰는 저 스스로가 쓰기 편하자고 만들었습니다.
 
 
 
