@@ -1,4 +1,4 @@
-package PropsLoadingTest.XLS_Reader_POI_Test;
+package propsLoading.XLS_Reader_POI_Test;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

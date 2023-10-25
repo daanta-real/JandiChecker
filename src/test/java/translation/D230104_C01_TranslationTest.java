@@ -1,4 +1,4 @@
-package translationTest;
+package translation;
 
 import com.google.auth.oauth2.ServiceAccountCredentials;
 import com.google.cloud.translate.Translate;

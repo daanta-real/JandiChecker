@@ -1,4 +1,4 @@
-package chatTest;
+package chat;
 
 import com.theokanning.openai.service.OpenAiService;
 import com.theokanning.openai.completion.CompletionRequest;

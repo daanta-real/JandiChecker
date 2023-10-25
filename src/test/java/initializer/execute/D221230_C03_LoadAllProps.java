@@ -1,4 +1,4 @@
-package InitializerExecuteTest;
+package initializer.execute;
 
 import init.Initializer;
 import lombok.extern.slf4j.Slf4j;

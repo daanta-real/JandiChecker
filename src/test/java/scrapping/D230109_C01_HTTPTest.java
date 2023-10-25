@@ -1,4 +1,4 @@
-package gitHubScrappingTest;
+package scrapping;
 
 import crawler.Crawler;
 import lombok.extern.slf4j.Slf4j;

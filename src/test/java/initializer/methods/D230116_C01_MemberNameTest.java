@@ -1,4 +1,4 @@
-package InitializerMethodsTest;
+package initializer.methods;
 
 import init.Initializer;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package PropsLoadingTest.yamlTest;
+package propsLoading.yamlTest;
 
 import init.Initializer;
 import lombok.extern.slf4j.Slf4j;

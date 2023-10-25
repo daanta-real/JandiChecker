@@ -1,4 +1,4 @@
-package translationTest;
+package translation;
 // Imports the Google Cloud Translation library.
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
