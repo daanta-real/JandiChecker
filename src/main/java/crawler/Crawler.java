@@ -35,8 +35,9 @@ public class Crawler {
 		// log.debug("ORIGINAL WHOLE HTML:\n{}", html);
 		for(String oneLine: htmlArr) {
 
-			// Target only the lines including the rect tag
-			if(!oneLine.contains("<td tabindex=")) { // All lines which have commit data start with <rect
+			// Target only the lines including the td tag starting with ContributionCalendar-day,
+			// which have each commit data of the day
+			if(!oneLine.contains("ContributionCalendar-day")) {
 				continue;
 			}
 			int idx_date = oneLine.indexOf("data-date");
@@ -63,7 +64,7 @@ public class Crawler {
 			m.put(date, hasCommitted);
 
 		}
-		if(m.size() == 0) {
+		if(m.isEmpty()) { // = size 0
 			throw new Exception(pr.l("err_noCommitMapInGitHubProfile"));
 		}
 

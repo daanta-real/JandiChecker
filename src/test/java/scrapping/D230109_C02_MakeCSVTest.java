@@ -18,23 +18,22 @@ public class D230109_C02_MakeCSVTest {
 //    }
 //
     private static final String target = """
-        <g transform="translate(15, 20)" data-hydro-click="{&quot;event_type&quot;:&quot;user_profile.click&quot;,&quot;payload&quot;:{&quot;profile_user_id&quot;:80992630,&quot;target&quot;:&quot;CONTRIBUTION_CALENDAR_SQUARE&quot;,&quot;user_id&quot;:null,&quot;originating_url&quot;:&quot;https://github.com/sdsss&quot;}}" data-hydro-click-hmac="d86f1f18dd2ec339a1fc17cf686016e3f041fd44960bfe7df57799c826d7b96d">
+        <tr style="height: 10px">
+          <td class="ContributionCalendar-label" style="position: relative">
+            <span class="sr-only">Sunday</span>
+            <span aria-hidden="true" style="clip-path: Circle(0); position: absolute; bottom: -3px">
+              Sun
+            </span>
+          </td>
 
-              <g transform="translate(0, 0)">
-                  <rect width="11" height="11" x="16" y="0" class="ContributionCalendar-day" data-date="2022-01-09" data-level="1" rx="2" ry="2">6 contributions on January 9, 2022</rect>
-                  <rect width="11" height="11" x="16" y="90" class="ContributionCalendar-day" data-date="2022-01-15" data-level="3" rx="2" ry="2">17 contributions on January 15, 2022</rect>
-              </g>""";
-//
-//    private static String[] org2 = new String[] {
-//            "<g transform=\"translate(0, 0)\">\n",
-//            "                      <rect width=\"11\" height=\"11\" x=\"16\" y=\"0\" class=\"ContributionCalendar-day\" data-date=\"2022-01-09\" data-level=\"1\" rx=\"2\" ry=\"2\">6 contributions on January 9, 2022</rect>\n",
-//            "                      <rect width=\"11\" height=\"11\" x=\"16\" y=\"90\" class=\"ContributionCalendar-day\" data-date=\"2022-01-15\" data-level=\"3\" rx=\"2\" ry=\"2\">17 contributions on January 15, 2022</rect>\n",
-//            "                  </g>"
-//    };
-//    private static String tx = org2[1];
+              <td class="ContributionCalendar-day" tabindex="0" data-ix="0" aria-selected="false" aria-describedby="contribution-graph-legend-level-1" style="width: 10px" data-date="2022-10-23" data-level="1"><span class="sr-only">1 contribution on October 23rd.</span></td>
+              <td class="ContributionCalendar-day" tabindex="0" data-ix="1" aria-selected="false" aria-describedby="contribution-graph-legend-level-1" style="width: 10px" data-date="2022-10-30" data-level="1"><span class="sr-only">1 contribution on October 30th.</span></td>
+              <td class="ContributionCalendar-day" tabindex="0" data-ix="2" aria-selected="false" aria-describedby="contribution-graph-legend-level-1" style="width: 10px" data-date="2022-11-06" data-level="1"><span class="sr-only">1 contribution on November 6th.</span></td>
+              <td class="ContributionCalendar-day" tabindex="0" data-ix="3" aria-selected="false" aria-describedby="contribution-graph-legend-level-1" style="width: 10px" data-date="2022-11-13" data-level="1"><span class="sr-only">1 contribution on November 13th.</span></td>
+""";
 
     @Test
-    public void main() {
+    public void test() {
 
 
         //log.debug(makeDataCSV(org));
@@ -48,7 +47,11 @@ public class D230109_C02_MakeCSVTest {
         for(String oneline: htmlArr) {
 
             // Target only the lines including the rect tag
-            if(!oneline.contains("<rect")) continue;
+            if(!oneline.contains("ContributionCalendar-day")) {
+                continue;
+            } else {
+                log.debug("▶ I found the contribution history tag!");
+            }
 
             // Date extraction
             int idx_date = oneline.indexOf("data-date");
