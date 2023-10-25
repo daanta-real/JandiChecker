@@ -47,10 +47,8 @@ public class D230109_C02_MakeCSVTest {
         for(String oneline: htmlArr) {
 
             // Target only the lines including the rect tag
-            if(!oneline.contains("ContributionCalendar-day")) {
+            if(!oneline.contains("<td class=\"ContributionCalendar-day\"")) {
                 continue;
-            } else {
-                log.debug("▶ I found the contribution history tag!");
             }
 
             // Date extraction

@@ -30,7 +30,7 @@ public class Checker {
 
 		// 3. HTML to Map
 		Map<String, Boolean> map = Crawler.makeMapFromTrimmed(html_org);
-		if(map.size() == 0) throw new Exception();
+		if(map.isEmpty()) throw new Exception();
 
 		// 4. Check jandi result.
 		// If commit box is not found here throws an Exception

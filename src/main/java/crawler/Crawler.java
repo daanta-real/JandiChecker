@@ -37,7 +37,7 @@ public class Crawler {
 
 			// Target only the lines including the td tag starting with ContributionCalendar-day,
 			// which have each commit data of the day
-			if(!oneLine.contains("ContributionCalendar-day")) {
+			if(!oneLine.contains("<td class=\"ContributionCalendar-day\"")) {
 				continue;
 			}
 			int idx_date = oneLine.indexOf("data-date");
