@@ -202,7 +202,7 @@ Sub: Quartz 2.3.2, Logback 1.4.11
 
 # Developer's Info
 
-잔디체커(JandiChecker) v1.9.2
+잔디체커(JandiChecker) v1.9.3
 
 제작 by 단타(daanta)
 
