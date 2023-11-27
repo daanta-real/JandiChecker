@@ -26,20 +26,20 @@ public class D230116_C01_MemberNameTest {
     }
 
     @Test
-    public void findMemberPropsByDiscordTagID() {
+    public void findMemberPropsByDiscordName() {
         log.debug("MEMBERS: {}", pr.getMembers());
-        String discordTagID = "rqqh35#2393";
+        String discordName = "rqqh35#2393";
         Map<String, String> result = null;
         for(Map.Entry<String, Map<String, String>> entry: pr.getMembers().entrySet()) {
             Map<String, String> memberProp = entry.getValue();
             log.debug("memberProp: {} => {}", entry.getKey(), memberProp);
-            if(!memberProp.containsKey("discordTagID")) {
+            if(!memberProp.containsKey("discordName")) {
                 log.debug("못찾음");
                 continue;
             }
-            String foundDiscordTagID = memberProp.get("discordTagID");
-            log.debug("찾음. discordTagID: {}", foundDiscordTagID);
-            if(!StringUtils.isEmpty(foundDiscordTagID) && foundDiscordTagID.equals(discordTagID)) {
+            String foundDiscordName = memberProp.get("discordName");
+            log.debug("찾음. discordName: {}", foundDiscordName);
+            if(!StringUtils.isEmpty(foundDiscordName) && foundDiscordName.equals(discordName)) {
                 log.debug("찾았다! {}", memberProp);
                 result = memberProp;
             } else {
@@ -50,9 +50,9 @@ public class D230116_C01_MemberNameTest {
     }
 
     @Test
-    public void getMemberNameByDiscordTagID() throws Exception {
-        String discordTagID = "rqqh35#2393";
-        String displayedName = pr.getMemberNameByDiscordTagID(discordTagID);
+    public void getMemberNameByDiscordName() throws Exception {
+        String discordName = "rqqh35#2393";
+        String displayedName = pr.getMemberNameByDiscordName(discordName);
         log.debug("Found name: {}", displayedName);
     }
 

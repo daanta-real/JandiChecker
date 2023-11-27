@@ -20,7 +20,7 @@ import java.util.*;
 public class D220302_C02_xlsOpen_apply {
 
 	@Test
-	public void main() {
+	public void test() {
 
 		// 시트 데이터 불러오기
 		// 현재 경로 따기
@@ -95,7 +95,7 @@ public class D220302_C02_xlsOpen_apply {
 
 			// 이름 목록 준비
 			String studentName = null;
-			String githubId = null;
+			String gitHubId = null;
 
 			// 열 루프
 			for(Cell cell: row) {
@@ -111,14 +111,14 @@ public class D220302_C02_xlsOpen_apply {
 				int columnIndex = cell.getColumnIndex();
 				String value = cell.getStringCellValue();
 				if(columnIndex == 0) studentName = value; // 0번째 열은 학생명 칸이다
-				else if(columnIndex == 1) githubId = value; // 1번 열은 Github ID 칸이다
+				else if(columnIndex == 1) gitHubId = value; // 1번 열은 Github ID 칸이다
 
 			}
 
-			// 여기까지 오면 이름과 github ID 둘 다를 얻었을 것.
+			// 여기까지 오면 이름과 gitHub ID 둘 다를 얻었을 것.
 			// 둘 다 얻은 게 맞다면 Map에 추가한다.
-			if(StringUtils.isEmpty(studentName) || StringUtils.isEmpty(githubId)) continue;
-			m.put(studentName, githubId);
+			if(StringUtils.isEmpty(studentName) || StringUtils.isEmpty(gitHubId)) continue;
+			m.put(studentName, gitHubId);
 
 		}
 

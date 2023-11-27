@@ -51,6 +51,10 @@ dependencies {
     // https://mvnrepository.com/artifact/org.apache.commons/commons-text
     implementation 'org.apache.commons:commons-text:latest.integration'
 
+    // HTML 파싱이 하도 자주 바뀌어서 빠른 대응을 위해 갖고온 JSoup
+    // https://mvnrepository.com/artifact/org.jsoup/jsoup
+    implementation 'org.jsoup:jsoup:latest.integration'
+
     // YAML 설정파일을 읽어오기 위해 import한 JACKSON-YAML 라이브러리
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-yaml:latest.integration'
@@ -117,6 +121,10 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:latest.integration'
     // https://mvnrepository.com/artifact/org.junit.vintage/junit-vintage-engine
     testImplementation 'org.junit.vintage:junit-vintage-engine:latest.integration'
+
+    // JSON을 확인하기 위한 Gson. Only for debugging purpose
+    // https://mvnrepository.com/artifact/com.google.code.gson/gson
+    testImplementation 'com.google.code.gson:gson:latest.integration'
 
 }
 

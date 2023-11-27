@@ -20,14 +20,16 @@ import static init.Pr.pr;
 @Slf4j
 public class SlashInteraction {
 
+    private SlashInteraction() {}
+
     private static String getDisplayedName(SlashCommandInteractionEvent event) {
         User user = Objects.requireNonNull(event.getMember()).getUser();
-        String discordTag = user.getAsTag();
+        String discordName = user.getName();
         String displayedName;
         try {
-            displayedName = pr.getMemberNameByDiscordTagID(discordTag);
+            displayedName = pr.getMemberNameByDiscordName(discordName);
         } catch(Exception e) {
-            displayedName = discordTag;
+            displayedName = discordName;
         }
         return displayedName;
     }

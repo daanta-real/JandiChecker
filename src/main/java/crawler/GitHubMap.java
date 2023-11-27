@@ -1,32 +1,25 @@
 package crawler;
 
+import lombok.extern.slf4j.Slf4j;
+import org.jetbrains.annotations.NotNull;
+import utils.CommonUtils;
+
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
-
 import static init.Pr.pr;
-import static utils.CommonUtils.getCalendar;
 
 
 // Extract specific data gathered with Crawler, or return info about some member's GitHub repo
 @Slf4j
-public class GithubMap {
+public class GitHubMap {
 
-	// Returns date Strings of given day
-	@NotNull
-	private static Calendar getDate(@NotNull String dateStr) {
-		String y = dateStr.substring(0, 4);
-		String m = String.valueOf(Integer.parseInt(dateStr.substring(4, 6)) - 1);
-		String d = dateStr.substring(6, 8);
-		return getCalendar(y, m, d);
-	}
+	private GitHubMap() {}
 
 	// Get total commit information as Map by GitHub ID
 	@NotNull
-	public static TreeMap<String, Object> getGithubMapInfo(String id) throws Exception {
+	public static TreeMap<String, Object> getGitHubMapInfo(String id) throws Exception {
 
 		// 1. Definitions
 		SimpleDateFormat sdf = new SimpleDateFormat("yy/MM/dd (EEEE)");
@@ -36,14 +29,14 @@ public class GithubMap {
 		// 2. Get whole commit map
 		TreeMap<String, Boolean> map;
 		try {
-			map = Crawler.getGithubMap(id);
+			map = Crawler.getGitHubMap(id);
 		} catch(Exception e) {
 			throw new Exception(e.getMessage());
 		}
 
 		// 3. Calc first and last day of the map
-		Calendar firstDay = getDate(Collections.min(map.keySet()));
-		Calendar lastDay  = getDate(Collections.max(map.keySet()));
+		Calendar firstDay = CommonUtils.getDate(Collections.min(map.keySet()));
+		Calendar lastDay  = CommonUtils.getDate(Collections.max(map.keySet()));
 		String periodStr = pr.l("period") + ": {} ~ {}";
 		log.info(periodStr, sdf.format(firstDay.getTime()), sdf.format(lastDay.getTime()));
 
@@ -62,7 +55,7 @@ public class GithubMap {
 
 			// Definitions
 			String k = entry.getKey();
-			cal = getDate(k);
+			cal = CommonUtils.getDate(k);
 			int weekday = count % 7;
 
 			// Record
@@ -110,7 +103,7 @@ public class GithubMap {
 
 		TreeMap<String, Object> map;
 		try {
-			map = getGithubMapInfo(id);
+			map = getGitHubMapInfo(id);
 		} catch(Exception e) {
 			log.error(e.getMessage());
 			return e.getMessage();

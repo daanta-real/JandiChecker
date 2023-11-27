@@ -1,6 +1,5 @@
 package scrapping;
 
-import crawler.Crawler;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
@@ -17,14 +16,14 @@ public class D230109_C01_HTTPTest {
     private static final String id = "daanta-real";
 
     @Test
-    public void main() throws Exception {
+    public void test() throws Exception {
         log.debug("HTTP REQUEST가 잘 작동하는지 테스트합니다.");
         String url = "https://github.com/" + id;
         log.debug(url);
         String result = httpRequestUrl_GET(url);
         log.debug("HTML을 받아왔습니다. RESULT: {}", result);
-        String result2 = Crawler.getHTMLByID(id);
-        log.debug("결과: {}", result2);
+//        String result2 = Crawler.getHTMLByID(id);
+//        log.debug("결과: {}", result2);
     }
 
     // Send GET request just only by url

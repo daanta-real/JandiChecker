@@ -14,22 +14,16 @@ import static init.Pr.pr;
 @Slf4j
 public class Checker {
 
+	private Checker() {}
+
 	// Input the target GitHub ID and date(format: yyyy-MM-dd) and get a T/F where he committed or not
 	public static boolean getGitHubDidCommitByDay(String id, String day) throws Exception {
 
 		// 1. Preparing
 		log.info("CHECK {}'s COMMIT. DATE: {}", id, day);
 
-		// 2. Get full HTML
-		String html_org;
-		try {
-			html_org = Crawler.getHTMLByID(id);
-		} catch(Exception e) {
-			throw new Exception(e.getMessage());
-		}
-
-		// 3. HTML to Map
-		Map<String, Boolean> map = Crawler.makeMapFromTrimmed(html_org);
+		// 2. Get Map
+		Map<String, Boolean> map = Crawler.getGitHubMap(id);
 		if(map.isEmpty()) throw new Exception();
 
 		// 4. Check jandi result.

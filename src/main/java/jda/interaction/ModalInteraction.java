@@ -18,15 +18,17 @@ import static init.Pr.pr;
 @Slf4j
 public class ModalInteraction {
 
-    // Get displayed name from event. If fails it'll return discord name(tagname) as alt
+    private ModalInteraction() {}
+
+    // Get displayed name from event. If fails it'll return discord name as alt
     private static String getDisplayedName(ModalInteractionEvent event) {
         User user = Objects.requireNonNull(event.getMember()).getUser();
-        String discordTagID = user.getAsTag();
+        String discordName = user.getName();
         String displayedName;
         try {
-            displayedName = pr.getMemberNameByDiscordTagID(discordTagID);
+            displayedName = pr.getMemberNameByDiscordName(discordName);
         } catch(Exception e) {
-            displayedName = discordTagID;
+            displayedName = discordName;
         }
         return displayedName;
     }

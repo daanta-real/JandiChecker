@@ -18,6 +18,8 @@ import static init.Pr.pr;
 @Slf4j
 public class LoaderXLSX {
 
+    private LoaderXLSX() {}
+
     private static String getStringFromAddr(XSSFSheet sheet, int rowIndex, int colIndex) {
         Row row = CellUtil.getRow(rowIndex, sheet);
         return CellUtil.getCell(row, colIndex).getStringCellValue();
@@ -45,10 +47,10 @@ public class LoaderXLSX {
             String gitHubID = cellGitHubID.getStringCellValue();
             memberParam.put("gitHubID", gitHubID);
 
-            Cell cellDiscordTagID = CellUtil.getCell(row, 3);
-            if(cellDiscordTagID.getCellType() != CellType.BLANK) {
-                String discordTagID = cellDiscordTagID.getStringCellValue(); // Discord ID is optional
-                memberParam.put("discordTagID", discordTagID);
+            Cell cellDiscordName = CellUtil.getCell(row, 3);
+            if(cellDiscordName.getCellType() != CellType.BLANK) {
+                String discordName = cellDiscordName.getStringCellValue(); // Discord ID is optional
+                memberParam.put("discordName", discordName);
             }
 
             log.debug("MEMBERS '{}' FOUND: {}", name, memberParam);

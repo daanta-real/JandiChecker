@@ -61,12 +61,12 @@ public class Pr {
     }
 
     // Get a member's nickname from the Discord ID
-    public String getMemberNameByDiscordTagID(String discordTagID) throws Exception {
+    public String getMemberNameByDiscordName(String discordName) throws Exception {
         for(Map.Entry<String, Map<String, String>> entry: getMembers().entrySet()) {
             Map<String, String> memberProps = entry.getValue();
-            if(!memberProps.containsKey("discordTagID")) continue;
-            String foundDiscordTagID = memberProps.get("discordTagID");
-            if(!StringUtils.isEmpty(foundDiscordTagID) && foundDiscordTagID.equals(discordTagID)) {
+            if(!memberProps.containsKey("discordName")) continue;
+            String foundDiscordName = memberProps.get("discordName");
+            if(!StringUtils.isEmpty(foundDiscordName) && foundDiscordName.equals(discordName)) {
                 return memberProps.get("name");
             }
         }
@@ -74,12 +74,12 @@ public class Pr {
     }
 
     // Get the Map including member's name GitHub ID from Discord ID
-    public Map<String, String> getMemberInfoesByDiscordTagID(String discordTagID) throws Exception {
+    public Map<String, String> getMemberInfoesByDiscordName(String discordName) throws Exception {
         for(Map.Entry<String, Map<String, String>> entry: members.entrySet()) {
             Map<String, String> memberProp = entry.getValue();
-            if(!memberProp.containsKey("discordTagID")) continue; // TODO test
-            String foundDiscordTagID = memberProp.get("discordTagID");
-            if(!StringUtils.isEmpty(foundDiscordTagID) && foundDiscordTagID.equals(discordTagID)) {
+            if(!memberProp.containsKey("discordName")) continue; // TODO test
+            String foundDiscordName = memberProp.get("discordName");
+            if(!StringUtils.isEmpty(foundDiscordName) && foundDiscordName.equals(discordName)) {
                 return memberProp;
             }
         }

@@ -1,7 +1,7 @@
 package cmd;
 
 import crawler.Checker;
-import crawler.GithubMap;
+import crawler.GitHubMap;
 import lombok.extern.slf4j.Slf4j;
 import net.dv8tion.jda.api.entities.User;
 import org.apache.commons.lang3.StringUtils;
@@ -14,20 +14,22 @@ import static init.Pr.pr;
 @Slf4j
 public class CmdService {
 
+	private CmdService() {}
+
 	// 1. Summary services
 
 	// Shows the commit summary information of the requested member himself.
 	public static String getJandiMapStringOfMine(User user) throws Exception {
 
-		// Get discord tag ID
-		String discordTagID = user.getAsTag();
+		// Get discord name
+		String discordName = user.getName();
 
-		// Find info of the member by discord tag ID
+		// Find info of the member by discord name
 		Map<String, String> memberInfo;
 		try {
-			memberInfo = pr.getMemberInfoesByDiscordTagID(discordTagID);
+			memberInfo = pr.getMemberInfoesByDiscordName(discordName);
 		} catch(Exception e) {
-			throw new Exception("Failed to find GitHub ID of %s".formatted(discordTagID));
+			throw new Exception("Failed to find GitHub ID of %s".formatted(discordName));
 		}
 
 		// Return the total information
@@ -45,7 +47,7 @@ public class CmdService {
 			return pr.l("err_incorrectInput");
 		}
 		log.info("Received the request the commit map summary of ID {}", id);
-		return GithubMap.getGithubInfoString(id, id);
+		return GitHubMap.getGithubInfoString(id, id);
 	}
 
 	// Summary information by GitHub ID and specific member name
@@ -54,7 +56,7 @@ public class CmdService {
 			return pr.l("err_incorrectInput");
 		}
 		log.info("Received the request the commit map summary of GitHub ID {}, NAME {}", gitHubID, name);
-		return GithubMap.getGithubInfoString(name, gitHubID);
+		return GitHubMap.getGithubInfoString(name, gitHubID);
 	}
 
 	// Summary information by member name
@@ -73,7 +75,7 @@ public class CmdService {
 		}
 
 		log.info("Received the request the commit map summary of GitHub ID {}, NAME {}", gitHubID, name);
-		return GithubMap.getGithubInfoString(name, gitHubID);
+		return GitHubMap.getGithubInfoString(name, gitHubID);
 
 	}
 

@@ -1,6 +1,5 @@
 package scrapping;
 
-import crawler.Crawler;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 
@@ -19,7 +18,8 @@ public class D230110_C01_HTMLTrimTest {
 
     @Test
     public void run() throws Exception {
-        Map<String, Boolean> result = Crawler.makeMapFromTrimmed(html);
+//        Map<String, Boolean> result = Crawler.makeMapFromTrimmed(html);
+        Map<String, Boolean> result = null;
         log.debug("{}", result);
     }
 

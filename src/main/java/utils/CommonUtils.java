@@ -8,6 +8,7 @@ import com.google.gson.GsonBuilder;
 import init.Initializer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.text.StringEscapeUtils;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -21,6 +22,8 @@ import static init.Pr.pr;
 
 @Slf4j
 public class CommonUtils {
+
+    private CommonUtils() {}
 
     // Date String formatters
     public static final SimpleDateFormat sdf_thin = new SimpleDateFormat("yyyyMMdd");
@@ -43,6 +46,15 @@ public class CommonUtils {
         Calendar c = Calendar.getInstance();
         c.set(y, m, d);
         return c;
+    }
+
+    // Returns date Strings of given day str as "xxxx-xx-xx"
+    @NotNull
+    public static Calendar getDate(@NotNull String dateStr) {
+        String y = dateStr.substring(0, 4);
+        String m = String.valueOf(Integer.parseInt(dateStr.substring(4, 6)) - 1);
+        String d = dateStr.substring(6, 8);
+        return getCalendar(y, m, d);
     }
 
     // pause in console
@@ -120,11 +132,11 @@ public class CommonUtils {
     // HashMap<?, ?> to HashMap<String, Object>
     private static HashMap<String, String> convertHashMap(HashMap<?, ?> org) {
         HashMap<String, String> map = new HashMap<>();
-        for(Object key: org.keySet()) {
+        org.keySet().forEach(key -> {
             String keyStr = String.valueOf(key);
             String value = String.valueOf(org.get(key));
             map.put(keyStr, value);
-        }
+        });
         return map;
     }
 

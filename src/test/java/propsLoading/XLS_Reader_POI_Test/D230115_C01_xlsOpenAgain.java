@@ -87,10 +87,10 @@ public class D230115_C01_xlsOpenAgain {
             String gitHubID = cellGitHubID.getStringCellValue();
             memberParam.put("gitHubID", gitHubID);
 
-            Cell cellDiscordTagID = CellUtil.getCell(row, 3);
-            if(cellDiscordTagID.getCellType() != CellType.BLANK) {
-                String discordTagID = cellDiscordTagID.getStringCellValue(); // Discord ID is optional
-                memberParam.put("discordTagID", discordTagID);
+            Cell cellDiscordName = CellUtil.getCell(row, 3);
+            if(cellDiscordName.getCellType() != CellType.BLANK) {
+                String discordName = cellDiscordName.getStringCellValue(); // Discord ID is optional
+                memberParam.put("discordName", discordName);
             }
 
             membersInfo.put(name, memberParam);
@@ -117,7 +117,7 @@ public class D230115_C01_xlsOpenAgain {
 
             // Target values
             Map<String, String> member = new HashMap<>();
-            String name, gitHubID, discordTagID;
+            String name, gitHubID, discordName;
 
             // Get row's cell iterator
             Row row = rowIterator.next();
@@ -146,15 +146,15 @@ public class D230115_C01_xlsOpenAgain {
             gitHubID = cellGitHubID.getStringCellValue();
             member.put("gitHubID", gitHubID);
 
-            // Go 4th column: D cell, member's Discord Tag ID
+            // Go 4th column: D cell, member's Discord name
             // OPTIONAL
-            Cell cellDiscordTagID = cellIterator.next(); // 4th cell (Address 'D?')
+            Cell cellDiscordName = cellIterator.next(); // 4th cell (Address 'D?')
             // If meets a blank in D cell, don't
-            if(cellDiscordTagID.getCellType() == CellType.BLANK) {
-                log.info("Member's name is found but no Discord Tag ID ({})", cellDiscordTagID.getAddress());
+            if(cellDiscordName.getCellType() == CellType.BLANK) {
+                log.info("Member's name is found but no Discord name ({})", cellDiscordName.getAddress());
             } else { // Put the value only cell is not blank cause this is optional
-                discordTagID = cellDiscordTagID.getStringCellValue();
-                member.put("discordTagID", discordTagID);
+                discordName = cellDiscordName.getStringCellValue();
+                member.put("discordName", discordName);
             }
 
             membersInfo.add(member);
