@@ -194,15 +194,15 @@ This feature has been made just only for myself.
 
 # Development Environments
 
-Main: Java 17, Gradle 7.6, JDA 5.0.0 Beta1
+Main: Java 17, Gradle 7.6, JDA 5.0.0 Beta18
 
-Sub: Quartz 2.3.2, Logback 1.4.11
+Sub: Quartz 2.5.0-rc1, Logback 1.4.14
 
 
 
 # Developer's Info
 
-잔디체커(JandiChecker) v1.9.3
+잔디체커(JandiChecker) v1.9.4 build 240215_0134
 
 제작 by 단타(daanta)
 
