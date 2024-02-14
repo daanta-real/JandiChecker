@@ -15,9 +15,9 @@ import static init.Pr.pr;
 @Slf4j
 public class CronJob implements Job {
 
-	// In the Job class, it is supposed to after overriding the .execute() method and write the codes of the job.
-	// This override method is executed following the CRON scheduler settings.
-	// Originally it is needed to attach throwing of JobExecutionException, but this seems to be changed as not throw.
+	// In the Job class, it is supposed to override the .execute() method and write the codes of the job.
+	// This overridden method is executed following the CRON scheduler settings.
+	// Formally it seemed that throwing JobExecutionException was required, but seems not anymore.
 	@Override
 	public void execute(JobExecutionContext context) {
 		try {

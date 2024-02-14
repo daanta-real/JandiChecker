@@ -65,7 +65,7 @@ public class GitHubMap {
 			commitTFs[count] = commitSuccess; // detailed T/F
 
 			// Clean
-			log.info("FOUND DATE ({}th, %7 = {}): {} > {}", count, weekday, sdf.format(cal.getTime()), map.get(k));
+//			log.info("FOUND DATE ({}th, %7 = {}): {} > {}", count, weekday, sdf.format(cal.getTime()), map.get(k));
 			count++;
 
 		}
@@ -87,7 +87,7 @@ public class GitHubMap {
 		int recentCount = 0, recentTotal = 0;
 		for(int i = count - 30; i < count; i++) {
 			recentTotal++;
-			log.info("DAY {} -> commit T/F: {}", i, commitTFs[i]);
+//			log.info("DAY {} -> commit T/F: {}", i, commitTFs[i]);
 			recentCount += commitTFs[i] ? 1 : 0;
 		}
 		result.put("recentTotal", recentTotal);

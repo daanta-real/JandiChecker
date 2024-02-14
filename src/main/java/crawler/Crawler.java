@@ -36,7 +36,7 @@ public class Crawler {
 
 			// Extract jandi map from HTML
 			for (Element td : tbody) {
-				log.debug("TD:{}", td.toString());
+//				log.debug("TD:{}", td.toString());
 				String keyStr = td.attr("data-date");
 				String valStr = td.attr("data-level");
 				if (StringUtils.isNumeric(valStr)) {
