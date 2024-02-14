@@ -124,7 +124,7 @@ public class Checker {
 
 		String[] list = getCommitListByDay(day, false);
 		String date_notice = CommonUtils.sdf_dayweek.format(c.getTime());
-		if(list.length == 0) {
+		if(list.length == 0 || StringUtils.equals(list[0], "0")) {
 			return "";
 		} else {
 			String result = "```md\n[" + pr.l("checker_getDidCommitYesterday_result") + "]: %s\n%s\n```";
