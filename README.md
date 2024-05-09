@@ -1,9 +1,4 @@
 
-> ⚠️ Finally the final version has been released. Thank you for your interest so far.
-> 
-> ⚠️ 마침내 최종버전이 릴리즈되었습니다. 지금까지의 성원에 감사드립니다.
-
-
 ![img](https://user-images.githubusercontent.com/84055731/135766694-09a6cfb2-4cc5-4bb4-bc4a-d8d89102bd19.png)
 
 
@@ -174,9 +169,9 @@ Just type 'HeyJandi [question content]', you can ask the AI directly without cal
 
 # Bonus: Only for administration 운영자 전용 기능
 
-<img src="https://github.com/daanta-real/JandiChecker/assets/84055731/5f5d87c7-a398-467f-b014-7332a1cd15b0">
+<img src="https://github.com/daanta-real/JandiChecker/assets/84055731/5f5d87c7-a398-467f-b014-7332a1cd15b0" alt="">
 
-<img src="https://github.com/daanta-real/JandiChecker/assets/84055731/e8dfeb66-3dc5-4327-bc55-a4aaac03c6be">
+<img src="https://github.com/daanta-real/JandiChecker/assets/84055731/e8dfeb66-3dc5-4327-bc55-a4aaac03c6be" alt="">
 
 This app uses not the conventional console but the custom JFrame UI and JTextAppender logging interface.
 
@@ -194,15 +189,15 @@ This feature has been made just only for myself.
 
 # Development Environments
 
-Main: Java 17, Gradle 7.6, JDA 5.0.0 Beta18
+Main: Java 21, Gradle 8.7, JDA 5.0.0 Beta23
 
-Sub: Quartz 2.5.0-rc1, Logback 1.4.14
+Sub: Quartz 2.5.0-rc1, Logback 1.5.6
 
 
 
 # Developer's Info
 
-잔디체커(JandiChecker) v1.9.4 build 240215_0134
+잔디체커(JandiChecker) v1.95 build 240510_0100
 
 제작 by 단타(daanta)
 
