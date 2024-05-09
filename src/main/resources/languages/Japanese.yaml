@@ -73,7 +73,7 @@ appInfo2: |
   
   # App information
   【ジャンディチェッカー（JandiChecker）】（%s Build %s）
-  * Stacks used: Java 17, Gradle, IntelliJ, JDA, Quartz, ChatGPT API, Google Cloud API(for translation), Swing, JUnit5, Logback
+  * Stacks used: Java 21, Gradle, IntelliJ, JDA, Quartz, ChatGPT API, Google Cloud API(for translation), Swing, JUnit5, Logback
   * Have taking an effort to comply with TDD.
   
   # Developer's information
