@@ -31,6 +31,24 @@ public class D230109_C02_MakeCSVTest {
               <td class="ContributionCalendar-day" tabindex="0" data-ix="2" aria-selected="false" aria-describedby="contribution-graph-legend-level-1" style="width: 10px" data-date="2022-11-06" data-level="1"><span class="sr-only">1 contribution on November 6th.</span></td>
               <td class="ContributionCalendar-day" tabindex="0" data-ix="3" aria-selected="false" aria-describedby="contribution-graph-legend-level-1" style="width: 10px" data-date="2022-11-13" data-level="1"><span class="sr-only">1 contribution on November 13th.</span></td>
 """;
+    /*
+     240403 새로운 HTML을 긁어옴 - 실패
+     1) el selector all 쿼리: table.ContributionCalendar-grid td.ContributionCalendar-day
+     2) 일자: data-date속성값
+     3) 커밋여부: data-level속성값 !== 0
+        var dataNodeList = document.querySelectorAll("table.ContributionCalendar-grid td.ContributionCalendar-day");
+        var dataList = Array.prototype.slice.call(dataNodeList);
+        dataList.reduce((acc, el) => {
+            try {
+                const date = el.getAttribute("data-date");
+                const isCommitted = el.getAttribute("data-level") !== "0";
+                acc[date] = isCommitted;
+                return acc;
+            } catch(e) {
+                console.log(e, "\n", el, "\n", el.getAttribute("data-date"), el.getAttribute("data-level") !== "0");
+            }
+        }, {});
+     */
 
     @Test
     public void test() {

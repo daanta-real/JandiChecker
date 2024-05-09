@@ -7,6 +7,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 
@@ -28,7 +29,7 @@ public class D230109_C01_HTTPTest {
 
     // Send GET request just only by url
     public static String httpRequestUrl_GET(String url) throws Exception {
-        URL finalUrl = new URL(url);
+        URL finalUrl = new URI(url).toURL();
         HttpURLConnection conn = (HttpURLConnection)finalUrl.openConnection();
         return httpRequest(conn);
     }
@@ -39,7 +40,9 @@ public class D230109_C01_HTTPTest {
         // Save response values as StringBuilder
         Reader in = new BufferedReader(new InputStreamReader(conn.getInputStream(), StandardCharsets.UTF_8));
         StringBuilder sb = new StringBuilder();
-        for (int c; (c = in.read()) >= 0;) sb.append((char)c);
+        for (int c; (c = in.read()) >= 0; ) {
+            sb.append((char)c);
+        }
 
         // return result
         return sb.toString();
