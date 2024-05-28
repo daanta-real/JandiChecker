@@ -13,23 +13,30 @@ import java.util.concurrent.Flow;
 @Slf4j
 public class D240526_C01_Ollama_Request {
 
+
     public static void sendOllamaRequest(String model, String prompt) throws Exception {
         HttpClient client = HttpClient.newHttpClient();
 
         String payload = "{ \"model\": \"" + model + "\", \"prompt\": \"" + prompt + "\" }";
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(new URI("http://localhost:11434/api/generate"))
+                .uri(new URI("http://localhost:3000/api/generate"))
                 .header("Content-Type", "application/json")
                 .POST(HttpRequest.BodyPublishers.ofString(payload))
                 .build();
 
-        HttpResponse<Void> response = client.sendAsync(request, HttpResponse.BodyHandlers.fromLineSubscriber(new LineSubscriber()))
-                .join();
-
-        if (response.statusCode() != 200) {
-            System.out.println("Request failed: " + response.statusCode());
-        }
+        client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenAccept(response -> {
+                    if (response.statusCode() == 200) {
+                        System.out.println(response.body());
+                    } else {
+                        System.out.println("요청 실패: " + response.statusCode());
+                    }
+                })
+                .exceptionally(e -> {
+                    e.printStackTrace();
+                    return null;
+                }).join();
     }
 
     public static void main(String[] args) {
@@ -40,33 +47,6 @@ public class D240526_C01_Ollama_Request {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-}
-
-class LineSubscriber implements Flow.Subscriber<ByteBuffer> {
-    private Flow.Subscription subscription;
-
-    @Override
-    public void onSubscribe(Flow.Subscription subscription) {
-        this.subscription = subscription;
-        subscription.request(1); // Request the first item
-    }
-
-    @Override
-    public void onNext(ByteBuffer item) {
-        String response = StandardCharsets.UTF_8.decode(item).toString();
-        System.out.println(response);
-        subscription.request(1); // Request the next item
-    }
-
-    @Override
-    public void onError(Throwable throwable) {
-        throwable.printStackTrace();
-    }
-
-    @Override
-    public void onComplete() {
-        System.out.println("Response processing complete");
     }
 
 }
